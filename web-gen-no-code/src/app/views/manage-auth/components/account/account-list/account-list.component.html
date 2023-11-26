@@ -12,17 +12,20 @@
         <c-card-body>
           <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
             [striped]="true" align="middle" cTable class="mb-0 border">
-            <thead cTableColor="light">
-              <tr>
-                <th class="text-center">
-                  <!-- <svg cIcon name="cilCaretBottom"></svg> -->
-                </th>
-                <th>Tên tài khoản</th>
-                <th>Lịch sử thay đổi</th>
-                <th></th>
-                <th class="text-center">Trạng thái</th>
-              </tr>
-            </thead>
+            <app-not-found *ngIf="viewModel.status !== 200 || viewModel?.data?.length == 0"></app-not-found>
+
+            <thead cTableColor="light" *ngIf="viewModel.status ==200 && viewModel?.data?.length !== 0">
+              <thead cTableColor="light">
+                <tr>
+                  <th class="text-center">
+                    <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+                  </th>
+                  <th>Tên tài khoản</th>
+                  <th>Lịch sử thay đổi</th>
+                  <th></th>
+                  <th class="text-center">Trạng thái</th>
+                </tr>
+              </thead>
             <tbody>
               <tr *ngFor="let account of viewModel.data; index as i" style="cursor: pointer;"
                 (click)="this.onUpdate(account)">

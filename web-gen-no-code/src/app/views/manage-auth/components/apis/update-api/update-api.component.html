@@ -1,9 +1,13 @@
 <c-modal-header>
-  <h5 cModalTitle>Cập nhật API {{this.api.api_path}}</h5>
+  <h5 cModalTitle>Thông tin API {{this.api.api_path}}</h5>
 </c-modal-header>
 <c-modal-body>
+  <h5>Ví dụ gọi api bằng Javascript:</h5>
+  <c-card>
+    <pre><code [highlight]="code"></code></pre>
+  </c-card>
+
 </c-modal-body>
 <c-modal-footer>
-  <button cButton color="secondary" (click)="onClose()">Thoát</button>
-  <button cButton color="primary" type="submit" (click)="this.onSubmit()">Lưu thay đổi</button>
+  <button cButton color="primary" (click)="onClose()">OK! Tôi đã hiểu </button>
 </c-modal-footer>

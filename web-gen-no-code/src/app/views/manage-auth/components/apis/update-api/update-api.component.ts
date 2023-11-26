@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { GeneratedAPI } from '../../../interfaces/response/generated-api.interface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DisplayCodeBuilder } from './display-code-builder';
 
 @Component({
   selector: 'app-update-api',
@@ -10,10 +11,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class UpdateApiComponent implements OnInit {
   @Input() api!: GeneratedAPI;
   private activeModal = inject(NgbActiveModal);
+  code = 'console.log("hello")';
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.api);
+    this.code = DisplayCodeBuilder.getCode(this.api);
   }
 
   onSubmit() {
@@ -23,4 +27,5 @@ export class UpdateApiComponent implements OnInit {
   onClose() {
     this.activeModal.close();
   }
+
 }

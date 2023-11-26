@@ -38,6 +38,7 @@
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
     "chart.js": "^3.9.1",
     "lodash-es": "^4.17.21",
+    "ngx-highlightjs": "^10.0.0",
     "ngx-scrollbar": "^13.0.3",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",

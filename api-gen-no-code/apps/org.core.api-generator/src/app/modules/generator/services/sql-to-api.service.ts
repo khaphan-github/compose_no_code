@@ -34,7 +34,7 @@ export class SQLToAPIService implements OnApplicationBootstrap {
       ]);
 
       const { type, database, host, password, port, username } = connection;
-      this.logger.debug(`Get config database.sql and connection.json success!`);
+      this.logger.debug(`Get config database.sql and connection success!`);
 
       await this.commandBus.execute(
         new CreateWorkspaceCommand(
@@ -92,7 +92,7 @@ export class SQLToAPIService implements OnApplicationBootstrap {
       }
     } catch (error) {
       //
-      console.log(error);
+      console.error(error);
     }
   }
   //#endregion api to sql

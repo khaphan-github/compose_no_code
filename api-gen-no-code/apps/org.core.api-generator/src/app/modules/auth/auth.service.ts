@@ -129,7 +129,7 @@ export class AuthService {
       selects: ['id', 'metadata']
     }, {});
 
-    const arrayRoleDefautlWhenLogin = _.filter(roles, (role) => role.metadata?.defaultWhenRegister == true);
+    const arrayRoleDefautlWhenLogin = _.filter(roles, (role) => role?.metadata?.defaultWhenRegister == true);
 
     const saveUserResult = await this.crudService.insert(appId, '_core_account',
       [{

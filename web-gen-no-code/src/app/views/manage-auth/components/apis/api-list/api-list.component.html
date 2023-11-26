@@ -11,7 +11,9 @@
         <c-card-body>
           <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
             [striped]="true" align="middle" cTable class="mb-0 border">
-            <thead cTableColor="light">
+            <app-not-found *ngIf="viewModel.status !== 200"></app-not-found>
+
+            <thead cTableColor="light" *ngIf="viewModel.status === 200">
               <tr>
                 <th class="text-center">
                   <!-- <svg cIcon name="cilCaretBottom"></svg> -->

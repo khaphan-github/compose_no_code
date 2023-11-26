@@ -10,8 +10,8 @@ export interface GeneratedAPI {
   headers: Headers
   request_params: RequestParams
   request_body_type: any
-  request_body: RequestBody
-  response_attributes: ResponseAttributes
+  request_body: Array<RequestBody>
+  response_attributes: Array<ResponseAttributes>
   enable: boolean
   created_at: string
   updated_at: string
@@ -29,6 +29,6 @@ export interface RequestParams {
   selectes: string
 }
 
-export interface RequestBody {}
+export interface RequestBody { }
 
-export interface ResponseAttributes {}
+export interface ResponseAttributes { }

@@ -6,6 +6,7 @@ import { ErrorStatusCode } from '../../../infrastructure/format/status-code';
 import { WorkspaceConnectionShouldNotBeEmpty } from '../../shared/errors/workspace-connection-empty.error';
 import NodeCache from 'node-cache';
 import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
 
 // #region error
 export class WorkspaceConnectionNotFound extends Error implements ErrorStatusCode {
@@ -29,6 +30,7 @@ export class GetWorkspaceConnectionQueryHandler
     private readonly configService: ConfigService,
   ) {
   }
+  private readonly logger = new Logger(GetWorkspaceConnectionQueryHandler.name);
   // TODO: In future need to chage way to get this connetions/ get from sheet... same same,
   // DONE
   // @return database connection of workspace
@@ -71,7 +73,7 @@ export class GetWorkspaceConnectionQueryHandler
       password: this.configService.get<string>('relationaldb.password') as any,
       database: this.configService.get<string>('relationaldb.schema') as any,
     };
-    console.log(databaseConfig);
+    this.logger.verbose(`\nConnect to database: ${JSON.stringify(databaseConfig)}`)
     return databaseConfig;
   }
 }

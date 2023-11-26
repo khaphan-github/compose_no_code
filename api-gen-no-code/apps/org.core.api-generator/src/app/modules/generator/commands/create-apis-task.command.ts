@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions, QueryFailedError } from 'typeorm';
 import { AST } from 'node-sql-parser';
 import { RelationalDBQueryBuilder } from '../../../core/pgsql/pg.relationaldb.query-builder';
 import { GeneratedApiModel } from '../../../core/models/generated-api.model';
@@ -11,10 +11,9 @@ export class TaskGenerateAPIsCommand {
     public readonly workspaceConnections: DataSourceOptions,
     public readonly ownerId: string,
     public readonly appId: number,
-    public readonly tableInfo: AST | AST[],
+    public readonly tableInfo: AST | AST[] | any,
   ) { }
 }
-
 @CommandHandler(TaskGenerateAPIsCommand)
 export class TaskGenerateAPIsCommandHandler
   implements ICommandHandler<TaskGenerateAPIsCommand>
@@ -32,20 +31,31 @@ export class TaskGenerateAPIsCommandHandler
   }
 
   async execute(command: TaskGenerateAPIsCommand) {
-    const { appId, tableInfo, workspaceConnections } = command;
+    const { appId, workspaceConnections } = command;
 
-    const apis = this.generatedApiModel.extractApisFromTableInfo(appId, 'secret_kkey', tableInfo);
-    const { params, queryString } = this.queryBuilder.insertMany(apis, ['id']);
+    const tableInfoQueryBuilder = new RelationalDBQueryBuilder('information_schema.columns', ['table_name', 'column_name', 'table_schema']);
+    const { params, queryString } = tableInfoQueryBuilder.getByQuery({
+      conditions: {
+        table_schema: 'public'
+      }
+    }, ['table_name', 'column_name']);
 
     let workspaceTypeormDataSource: DataSource;
     try {
       workspaceTypeormDataSource = await new DataSource(workspaceConnections).initialize();
       const queryResult = await workspaceTypeormDataSource.query(queryString, params);
+      const apis = this.generatedApiModel.extractApisFromTableInfo(appId, '_', queryResult);
+      const inserApis = this.queryBuilder.insertMany(apis, ['id']);
 
+      const result = await workspaceTypeormDataSource.query(inserApis.queryString, inserApis.params);
       await workspaceTypeormDataSource?.destroy();
-      return queryResult;
+      return result;
     } catch (error) {
       await workspaceTypeormDataSource?.destroy();
+      if (error instanceof QueryFailedError) {
+        this.logger.verbose(`Apis generated not be insert again: ${error}`);
+        return false;
+      }
       this.logger.error(error);
       return false;
     }

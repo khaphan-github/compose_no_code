@@ -1,6 +1,3 @@
-import _ from "lodash";
-import { AST, Create } from "node-sql-parser";
-
 export enum EGeneratedApisTableColumns {
   ID = 'id',
   APP_ID = 'app_id',
@@ -59,64 +56,51 @@ export interface IGeneratedApi {
 }
 
 export class GeneratedApiModel {
-  extractApisFromTableInfo = (appId: number, secretKey: string, tableInfo: AST | AST[]): object[] => {
+  extractApisFromTableInfo = (appId: number, secretKey: string, tableInfo: { table_name: string, column_name: string }[]): any => {
     const apis: object[] = [];
 
-    try {
-      if (_.isArray(tableInfo)) {
-        _.forEach(tableInfo, (_info: Create) => {
-          if (_info.type == 'create' && _info.keyword == 'table') {
-            const api = this.mapASTToAPI(appId, secretKey, _info)
-            apis.push(api.insert);
-            apis.push(api.update);
-            apis.push(api.delete);
-            apis.push(api.query);
-          }
-        });
-        return apis;
-      } else {
-        if (tableInfo?.type == 'create' && tableInfo?.keyword == 'table') {
-          const api = this.mapASTToAPI(appId, secretKey, tableInfo as Create);
-          apis.push(api.insert);
-          apis.push(api.update);
-          apis.push(api.delete);
-          apis.push(api.query);
-        }
+    const groupedData = tableInfo.reduce((result, { table_name, column_name }) => {
+      if (!result[table_name]) {
+        result[table_name] = { table_name, column_names: [] };
       }
-    } catch (error) {
-      console.error(error);
+      result[table_name].column_names.push(column_name);
+      return result;
+    }, {});
+    const finalResult = Object.values(groupedData);
+
+    let id = 1;
+    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications'];
+    for (let index = 0; index < finalResult.length; index++) {
+      const element = finalResult[index] as { table_name: string, column_names: string[] };
+      if(whiteList.includes(element.table_name)) {
+        continue;
+      }
+
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET, secretKey));
+      id += 1;
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.POST, secretKey));
+      id += 1;
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.PUT, secretKey));
+      id += 1;
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.DELETE, secretKey));
+      id += 1;
     }
 
     return apis;
   }
 
-  mapASTToAPI = (appId: number, secretKey: string, _info: Create) => {
-    const query = this.getApiConfig(appId, _info, RestFulMethod.GET, secretKey);
-    const insert = this.getApiConfig(appId, _info, RestFulMethod.POST, secretKey);
-    const update = this.getApiConfig(appId, _info, RestFulMethod.PUT, secretKey);
-    const _delete = this.getApiConfig(appId, _info, RestFulMethod.DELETE, secretKey);
-
-    return {
-      insert: insert,
-      update: update,
-      delete: _delete,
-      query: query
-    };
-  }
-
-  getApiConfig = (appId: number, _info: Create, typeApi: RestFulMethod, secretKey: string) => {
+  getApiConfig = (index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod, secretKey: string) => {
     const apiRecord = {};
+    function convertArrayToObject(columnNames: string[], exampleData: object | string | number) {
+      return columnNames.reduce((result, columnName) => {
+        result[columnName] = exampleData;
+        return result;
+      }, {});
+    }
+    const requestBody = convertArrayToObject(columns, `put_your_data_`);
 
-    const requestBody = {};
-    _info?.create_definitions?.forEach(item => {
-      if (item.column) {
-        const columnName = item?.column?.column?.toLocaleLowerCase();
-        requestBody[columnName] = 'example_data';
-      }
-    });
-
-    const tableName = (_info?.table[0]?.table as string)?.toLocaleLowerCase() ?? '';
-    const apiPath = `/schema/${tableName}`;
+    const tableName = table ?? '';
+    const apiPath = `/${tableName}`;
 
     const { ACTION, API_PATH, APP_ID, AUTHENTICATION, CREATED_AT, ENABLE, HEADERS, HTTP_METHOD,
       REQUEST_BODY, RESPONSE_ATTRIBUTES, TABLE_NAME, UPDATED_AT, REQUEST_PARAMS } = EGeneratedApisTableColumns;
@@ -144,6 +128,8 @@ export class GeneratedApiModel {
           sort: 'DESC/ASC',
           selectes: 'idExample',
         };
+        apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
+        apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
         apiRecord[HTTP_METHOD] = RestFulMethod.GET;
         apiRecord[ACTION] = ApiAction.QUERY;
 
@@ -175,7 +161,7 @@ export class GeneratedApiModel {
         apiRecord[ACTION] = ApiAction.DELETE;
         break;
     }
-    return apiRecord;
+    return { ...apiRecord, id: index };
   }
 }
 

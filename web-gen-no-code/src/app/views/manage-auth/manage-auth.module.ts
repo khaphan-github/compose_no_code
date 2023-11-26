@@ -21,6 +21,7 @@ import { UpdateAccountComponent } from './components/account/update-account/upda
 import { ApiListComponent } from './components/apis/api-list/api-list.component';
 import { UpdateApiComponent } from './components/apis/update-api/update-api.component';
 import { SettingComponent } from './components/account/setting/setting.component';
+import { HighlightModule } from 'ngx-highlightjs';
 
 const UI_MODULES = [
   IconModule,
@@ -37,6 +38,7 @@ const UI_MODULES = [
   NotFoundComponent,
   WaitingToLoadComponent,
 
+  HighlightModule,
 ]
 
 const MODULE_COMPONENTS = [

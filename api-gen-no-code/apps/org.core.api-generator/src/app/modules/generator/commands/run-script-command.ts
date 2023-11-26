@@ -30,7 +30,6 @@ export class RunScriptCommandHandler
     try {
       typeormDataSource = await new DataSource(workspaceConnections).initialize();
       const queryResult = await typeormDataSource.query(script);
-      console.log(queryResult);
       await typeormDataSource?.destroy();
       return queryResult;
     } catch (error) {

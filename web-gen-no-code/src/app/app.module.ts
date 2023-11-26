@@ -43,6 +43,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientInterceptor } from './core/web-api/interceptor';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
+import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -98,6 +99,13 @@ const INTERATED_MODULE = [
       useClass: HttpClientInterceptor,
       multi: true,
     },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js')
+      }
+    },
+
     IconSetService,
     Title
   ],

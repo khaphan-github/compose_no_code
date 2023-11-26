@@ -42,23 +42,17 @@ export class ManageApiService {
   }
 
   apiList() {
-    if (this.apiListCache !== null) {
-      return of(this.apiListCache);
-    }
-
     return this.httpClient.post<SResponse<Array<GeneratedAPI>>>(apiPathBuilder('/_core_generated_apis/query'), {}).pipe(
       map((response) => {
-        const modifiedData = response.data.map((el) => {
+        const modifiedData = response?.data?.map((el) => {
           return {
             ...el,
             api_path: el.api_path.replace('/api/v1/app/9999/schema', '')
           }
         });
         return { ...response, data: modifiedData };
+
       }),
-      tap((res) => {
-        this.apiListCache = res;
-      })
     );
   }
 

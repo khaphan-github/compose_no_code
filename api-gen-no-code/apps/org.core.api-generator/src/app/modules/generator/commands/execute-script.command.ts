@@ -47,13 +47,7 @@ export class ExecuteScriptCommandHandler
     if (_.isNil(workspaceConnections)) throw new NullAttributeError('workspaceConnections');
 
     // #region init necessary static data
-
     // Docs: https://www.npmjs.com/package/node-sql-parser
-    // TODO: Database type:
-    const parserOptions: Option = {
-      database: 'Postgresql',
-    }
-
     // #endregion init necessary static data
     let workspaceTypeormDataSource: DataSource;
 
@@ -64,18 +58,6 @@ export class ExecuteScriptCommandHandler
       return Promise.reject(new CanNotExecuteQueryError(appId, '', error.message));
     }
 
-    // let scriptTableRenamed: string;
-    let renamedParser: AST | AST[];
-    let createDBSCriptParser: AST | AST[];
-
-    try {
-      // createDBSCriptParser = this.queryParser.astify(script.script, parserOptions);
-      // renamedParser = this.dbQueryDomain.convertTableNameByAppId(appId, createDBSCriptParser);
-      // ERROR: INT4 - INT(4)
-      // scriptTableRenamed = this.queryParser.sqlify(renamedParser, parserOptions);
-    } catch (error) {
-      this.logger.error(error);
-    }
     const executeScriptTransaction = script.script;
 
     let executeGenrateDBResult: unknown;
@@ -93,7 +75,7 @@ export class ExecuteScriptCommandHandler
         .set({
           [EAppTableColumns.CREATE_DB_SCRIPT]: script.script,
           [EAppTableColumns.UPDATED_AT]: new Date(),
-          [EAppTableColumns.TABLES_INFO]: JSON.stringify(renamedParser),
+          [EAppTableColumns.TABLES_INFO]: JSON.stringify({}),
         })
         .where(`${APPLICATIONS_TABLE_NAME}.id = :id`, { id: appId })
         .execute();
@@ -105,7 +87,7 @@ export class ExecuteScriptCommandHandler
     }
 
     this.eventBus.publish(
-      new ExecutedSQLScriptEvent(workspaceConnections, ownerId, appId, createDBSCriptParser)
+      new ExecutedSQLScriptEvent(workspaceConnections, ownerId, appId, [])
     );
 
     return {
