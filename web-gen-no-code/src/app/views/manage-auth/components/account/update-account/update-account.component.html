@@ -1,0 +1,50 @@
+<c-modal-header>
+  <h5 cModalTitle>Cập nhật tài khoản <strong>{{this.account.username}}</strong></h5>
+</c-modal-header>
+<c-modal-body>
+  <p>Bạn có thể gán quyền cho tài khoản tại đây</p>
+  <div>
+    <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
+      [striped]="true" align="middle" cTable class="mb-0 border">
+      <app-not-found *ngIf="viewModel.data.length ===0 "></app-not-found>
+
+      <thead cTableColor="light" *ngIf="viewModel.data.length !==0 ">
+        <tr>
+          <th class="text-center">
+            <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+          </th>
+          <th style="width: 55%;">Tên hiển thị</th>
+          <th class="text-center">Trạng thái</th>
+          <th class="text-center"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of viewModel.data; index as i" style="cursor: pointer;" (click)="this.onClickRow(role)">
+          <td class="text-center">
+            {{ i + 1 }}
+          </td>
+          <td>
+            <div><strong>{{ role.display_name }}</strong></div>
+          </td>
+          <td class="text-center">
+            <c-badge *ngIf="this.checkBoxHelper.checkedThisItem(role)" color="success">Đang kích hoạt</c-badge>
+            <c-badge *ngIf="!this.checkBoxHelper.checkedThisItem(role)" color="dark">Chưa kích hoạt</c-badge>
+          </td>
+          <td class="text-center">
+            <button cButton class="p-0" color="transparent">
+              <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #showNotFoundContent>
+      <app-waiting-to-load [show]="true"></app-waiting-to-load>
+    </ng-template>
+  </div>
+
+</c-modal-body>
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Thoát</button>
+  <button cButton color="primary" type="submit" (click)="this.onSubmit()">Lưu thay đổi</button>
+</c-modal-footer>

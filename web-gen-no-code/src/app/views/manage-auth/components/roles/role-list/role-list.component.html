@@ -1,0 +1,70 @@
+<h2 id="getting-started">Danh sách nhóm quyền trong hệ thống</h2>
+<p>Nhóm quyền bao gồm các quyền mạc định, bạn không thể sửa đổi các quyền mạc định này.</p>
+
+<div>
+  <c-row class="fade show">
+    <c-col xs>
+      <c-card class="mb-4">
+        <c-card-header>
+          <div [align]="'right'">
+            <button cButton color="primary" (click)="onCreate()">
+              Thêm nhóm quyền
+            </button>
+          </div>
+
+        </c-card-header>
+        <c-card-body>
+          <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
+            [striped]="true" align="middle" cTable class="mb-0 border">
+            <app-not-found *ngIf="viewModel.data.length ===0 "></app-not-found>
+
+            <thead cTableColor="light" *ngIf="viewModel.data.length !==0 ">
+              <tr>
+                <th class="text-center">
+                  <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+                </th>
+                <th style="width: 55%;">Tên hiển thị</th>
+                <th>Lịch sử thay đổi</th>
+                <th></th>
+                <th class="text-center">Trạng thái</th>
+                <th class="text-center"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let role of viewModel.data; index as i" style="cursor: pointer;">
+                <td class="text-center">
+                  {{ i + 1 }}
+                </td>
+                <td (click)="this.onUpdate(role)">
+                  <div><strong>{{ role.display_name }}</strong></div>
+                  <div class="small text-medium-emphasis">Mô tả: {{role.description}}</div>
+                </td>
+                <td (click)="this.onUpdate(role)">
+                  <div class="small text-medium-emphasis">Ngày tạo</div>
+                  <div class="fw-semibold text-nowrap">{{ role.created_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
+                </td>
+
+                <td (click)="this.onUpdate(role)">
+                  <div class="small text-medium-emphasis">Cập nhật lần cuối</div>
+                  <div class="fw-semibold text-nowrap">{{ role.updated_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
+                </td>
+                <td class="text-center" (click)="this.onUpdate(role)">
+                  <c-badge *ngIf="role.enable" color="success" shape="rounded-pill">Đang hoạt động</c-badge>
+                  <c-badge *ngIf="!role.enable" color="dark" shape="rounded-pill">Dừng hoạt động</c-badge>
+                </td>
+                <td class="text-center" (click)="onAddApi(role)">
+                  <button cButton class="p-0" color="transparent">
+                    <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #showNotFoundContent>
+            <app-waiting-to-load [show]="true"></app-waiting-to-load>
+          </ng-template>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>

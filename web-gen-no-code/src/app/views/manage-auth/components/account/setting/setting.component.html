@@ -1,0 +1,14 @@
+<c-modal-header>
+  <h5 cModalTitle>Cài đặt chung</h5>
+</c-modal-header>
+<c-modal-body>
+  <h5>Quyền mạc định khi đăng ký tài khoản:</h5>
+  <select aria-label="Default select example" [(ngModel)]="selectedRoleId" (change)="onRoleSelect()" cSelect
+    class="mb-3" *ngIf="this.roleList$ | async as roleViewModel;">
+    <option *ngFor="let role of roleViewModel.data" [value]="role.id">{{role.display_name}}</option>
+  </select>
+</c-modal-body>
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Thoát</button>
+  <button cButton color="primary" type="submit" (click)="this.onSubmit()">Lưu thay đổi</button>
+</c-modal-footer>

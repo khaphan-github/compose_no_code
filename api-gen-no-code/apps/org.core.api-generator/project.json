@@ -1,0 +1,74 @@
+{
+  "name": "org.core.api-generator",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/org.core.api-generator/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/org.core.api-generator",
+        "main": "apps/org.core.api-generator/src/main.ts",
+        "tsConfig": "apps/org.core.api-generator/tsconfig.app.json",
+        "assets": [
+          "apps/org.core.api-generator/src/assets"
+        ],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/org.core.api-generator/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "org.core.api-generator:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "org.core.api-generator:build:development"
+        },
+        "production": {
+          "buildTarget": "org.core.api-generator:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/org.core.api-generator/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/org.core.api-generator/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

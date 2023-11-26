@@ -1,0 +1,32 @@
+<c-modal-header>
+  <h5 cModalTitle>Cập nhật nhóm quyền</h5>
+</c-modal-header>
+<c-modal-body>
+  <!-- your.component.html -->
+  <div [formGroup]="form" class="row g-3" (ngSubmit)="onSubmit()">
+    <c-col [md]="6">
+      <label cLabel for="displayName">Tên hiển thị</label>
+      <input cFormControl formControlName="displayName" type="text" />
+      <div *ngIf="form.get('displayName')?.hasError('minlength') && form.get('displayName')?.touched" class="text-danger">
+        Tên hiển thị phải có ít nhất 5 ký tự.
+      </div>
+    </c-col>
+    <c-col [xs]="12">
+      <label cLabel for="inputAddress">Mô tả</label>
+      <textarea cFormControl formControlName="description" placeholder="Nhập mô tả cụ thể nhóm quyền"></textarea>
+    </c-col>
+    <c-col [md]="12">
+      <label cLabel for="activateCheckbox">Kích hoạt ngay khi tạo</label>
+      <c-form-check>
+        <input cFormCheckInput formControlName="activateOnCreate" id="activateCheckbox" type="checkbox" />
+        <label cFormCheckLabel for="activateCheckbox">Kích hoạt</label>
+      </c-form-check>
+    </c-col>
+  </div>
+
+</c-modal-body>
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Thoát</button>
+  <button cButton color="warning" (click)="this.onDelete()">Xóa vĩnh viễn</button>
+  <button cButton color="primary" type="submit" [disabled]="!form.valid" (click)="this.onSubmit()">Lưu thay đổi</button>
+</c-modal-footer>

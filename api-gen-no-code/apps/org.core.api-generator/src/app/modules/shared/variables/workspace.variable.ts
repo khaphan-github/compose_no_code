@@ -1,0 +1,6 @@
+export const WORKSPACE_VARIABLE = {
+  WORKSPACE_ID: 2024,
+  APP_NAME: 'MY_API_APP',
+  APP_ID: 2024,
+  OWNER_ID: 'CLIENT_'
+}
