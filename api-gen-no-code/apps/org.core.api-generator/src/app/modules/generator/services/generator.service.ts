@@ -56,7 +56,7 @@ export class GeneratorService {
   }
 
   createApp(ownerId: string, createAppDto: CreateApplicationDto) {
-    return this.commandBus.execute(new CreateApplicationCommand(ownerId, createAppDto));
+    return this.commandBus.execute(new CreateApplicationCommand({} as any,ownerId, createAppDto));
   }
 
   async getAppsByWorkspaceId(ownerId: string, workspaceId: number,) {
@@ -105,4 +105,4 @@ export class GeneratorService {
     return viewModel.getApiDocsDisplay(apis);
   }
 
-} 
+}

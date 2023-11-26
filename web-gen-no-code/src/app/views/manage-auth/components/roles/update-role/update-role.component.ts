@@ -27,18 +27,21 @@ export class UpdateRoleComponent implements OnInit {
       displayName: [this.role.display_name, [Validators.required, Validators.minLength(5)]],
       description: [this.role.description],
       activateOnCreate: [this.role.enable],
+      defaultRoleWhenRegister: [this.role.metadata?.defaultWhenRegister ?? false]
     });
   }
 
   onSubmit() {
     // Handle form submission
     if (this.form.valid) {
-      const { displayName, description, activateOnCreate } = this.form.value;
+      const { displayName, description, activateOnCreate, defaultRoleWhenRegister } = this.form.value;
+      const metadata = { ...this.role.metadata, defaultWhenRegister: defaultRoleWhenRegister }
       const roleToCreate: IUpdateRole = {
         ...this.role,
         display_name: displayName,
         description: description,
         enable: activateOnCreate,
+        metadata: metadata,
       };
 
       this.service.updateRole(roleToCreate).subscribe({

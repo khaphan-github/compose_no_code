@@ -116,7 +116,8 @@ export class ManageApiService {
   updateAccount(account: IUpdateAccount) {
     return this.httpClient.put<SResponse<Account>>(apiPathBuilder(`/_core_account/${account.id}?id_column=id`),
       {
-        metadata: account.metadata
+        metadata: account.metadata,
+        enable: account.enable
       });
   }
   deleteAccount(id: number) {

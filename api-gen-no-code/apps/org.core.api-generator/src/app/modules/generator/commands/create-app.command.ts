@@ -9,6 +9,7 @@ import { APPLICATIONS_TABLE_AVAILABLE_COLUMS, APPLICATIONS_TABLE_NAME } from '..
 
 export class CreateApplicationCommand {
   constructor(
+    public readonly workspaceConnections: DataSourceOptions,
     public readonly ownerId: string,
     public readonly CreateApplicationDto: CreateApplicationDto,
     public readonly appid?: string | number,
@@ -36,10 +37,10 @@ export class CreateApplicationCommandHandler
 
     try {
       // Get config workspace datbase
-      const workspaceDbConfig = this.jsonIO.readJsonFile<DataSourceOptions>(`connection.json`);
+      // const workspaceDbConfig = this.jsonIO.readJsonFile<DataSourceOptions>(`connection.json`);
 
-      if (workspaceDbConfig) {
-        const typeormDataSource = await new DataSource(workspaceDbConfig).initialize();
+      if (command.workspaceConnections) {
+        const typeormDataSource = await new DataSource(command.workspaceConnections).initialize();
 
         const isExistedAppIdQuery = this.queryBuilder.getByQuery({
           conditions: {
@@ -63,7 +64,7 @@ export class CreateApplicationCommandHandler
             workspace_id: workspaceId,
             enable: true,
             use_default_db: true,
-            database_config: workspaceDbConfig,
+            database_config: command.workspaceConnections,
           }, responseColumns);
 
           query = queryString;

@@ -25,13 +25,15 @@ export class UpdateAccountComponent implements OnInit {
 
   public list$!: Observable<SResponse<Array<Role>>>;
   public checkBoxHelper = new ComponentCheckBoxHelper<Role>('id');
+  public enableAcocunt: boolean = false;
 
 
   ngOnInit(): void {
     _.forEach(this.account?.metadata?.roleIds, (value) => {
-      this.checkBoxHelper.handleOneChecked(true, { id: value });
+      this.checkBoxHelper.handleOneChecked(true, { id: +value });
     });
 
+    this.enableAcocunt = this.account.enable;
     this.list$ = this.service.roleList();
   }
 
@@ -40,16 +42,20 @@ export class UpdateAccountComponent implements OnInit {
     this.checkBoxHelper.handleOneChecked(!this.checkBoxHelper.selectedItems.has(api.id), api);
   }
 
+  changeStatus(event: any) {
+    this.enableAcocunt = event;
+  }
+
   onSubmit() {
     const listRoles = this.checkBoxHelper.getArraySelected().map((value) => value.id);
     const metadata: IAccountMetadata = {
       roleIds: listRoles,
     }
     const updateAccount: IUpdateAccount = {
-      ...this.account, metadata: metadata
+      ...this.account,
+      metadata: metadata,
+      enable: this.enableAcocunt,
     }
-
-    console.log(updateAccount);
 
     this.service.updateAccount(updateAccount).subscribe({
       next: (value) => {

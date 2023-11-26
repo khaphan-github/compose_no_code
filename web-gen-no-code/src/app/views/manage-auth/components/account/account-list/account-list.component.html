@@ -7,9 +7,6 @@
       <c-card class="mb-4">
         <c-card-header>
           <div [align]="'right'">
-            <button cButton color="primary" (click)="onSetting()">
-              Cài đặt
-            </button>
           </div>
         </c-card-header>
         <c-card-body>
@@ -48,7 +45,7 @@
                 </td>
                 <td class="text-center">
                   <c-badge *ngIf="account.enable" color="success" shape="rounded-pill">Đang hoạt động</c-badge>
-                  <c-badge *ngIf="!account.enable" color="dark" shape="rounded-pill">Dừng hoạt động</c-badge>
+                  <c-badge *ngIf="!account.enable" color="dark" shape="rounded-pill">Đang bị khóa</c-badge>
                 </td>
               </tr>
             </tbody>

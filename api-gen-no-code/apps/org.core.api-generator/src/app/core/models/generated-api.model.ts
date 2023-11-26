@@ -75,7 +75,7 @@ export class GeneratedApiModel {
         });
         return apis;
       } else {
-        if (tableInfo.type == 'create' && tableInfo.keyword == 'table') {
+        if (tableInfo?.type == 'create' && tableInfo?.keyword == 'table') {
           const api = this.mapASTToAPI(appId, secretKey, tableInfo as Create);
           apis.push(api.insert);
           apis.push(api.update);

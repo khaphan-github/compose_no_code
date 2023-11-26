@@ -5,21 +5,28 @@
   <!-- your.component.html -->
   <div [formGroup]="form" class="row g-3" (ngSubmit)="onSubmit()">
     <c-col [md]="6">
-      <label cLabel for="displayName">Tên hiển thị</label>
+      <label cLabel for="displayName">1. Tên hiển thị</label>
       <input cFormControl formControlName="displayName" type="text" />
       <div *ngIf="form.get('displayName')?.hasError('minlength') && form.get('displayName')?.touched" class="text-danger">
         Tên hiển thị phải có ít nhất 5 ký tự.
       </div>
     </c-col>
     <c-col [xs]="12">
-      <label cLabel for="inputAddress">Mô tả</label>
+      <label cLabel for="inputAddress">2. Mô tả</label>
       <textarea cFormControl formControlName="description" placeholder="Nhập mô tả cụ thể nhóm quyền"></textarea>
     </c-col>
     <c-col [md]="12">
-      <label cLabel for="activateCheckbox">Kích hoạt ngay khi tạo</label>
+      <label cLabel for="activateCheckbox">3. Cho phép hoạt động</label>
       <c-form-check>
         <input cFormCheckInput formControlName="activateOnCreate" id="activateCheckbox" type="checkbox" />
-        <label cFormCheckLabel for="activateCheckbox">Kích hoạt</label>
+        <label cFormCheckLabel for="activateCheckbox"> {{ this.form.get('activateOnCreate')?.value ? 'Đang hoạt động' : 'Chưa cho phép hoạt động'}}</label>
+      </c-form-check>
+    </c-col>
+    <c-col [md]="12">
+      <label cLabel for="activateCheckbox">4. Cài làm quyền mạc định khi người dùng tạo tài khoản</label>
+      <c-form-check>
+        <input cFormCheckInput formControlName="defaultRoleWhenRegister" id="defaultWhenRegister" type="checkbox" />
+        <label cFormCheckLabel for="defaultWhenRegister">{{ this.form.get('defaultRoleWhenRegister')?.value  ? 'Đang kích hoạt': 'Chưa kích hoạt'}}</label>
       </c-form-check>
     </c-col>
   </div>

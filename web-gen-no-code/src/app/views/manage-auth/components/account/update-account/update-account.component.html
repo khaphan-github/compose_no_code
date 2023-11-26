@@ -1,8 +1,14 @@
 <c-modal-header>
-  <h5 cModalTitle>Cập nhật tài khoản <strong>{{this.account.username}}</strong></h5>
+  <h5 cModalTitle>Cập nhật tài khoản <strong>{{this.account.username}}</strong>[ID: {{this.account.id}}]</h5>
 </c-modal-header>
 <c-modal-body>
-  <p>Bạn có thể gán quyền cho tài khoản tại đây</p>
+  <h6>1. Trạng thái tài khoản: </h6>
+  <c-form-check>
+    <input cFormCheckInput id="status" type="checkbox" [(ngModel)]="this.enableAcocunt" (ngModelChange)="this.changeStatus($event)"/>
+    <label cFormCheckLabel for="status">{{ this.enableAcocunt ? 'Đang hoạt động' : 'Đang tạm khóa'}}</label>
+  </c-form-check>
+  <br>
+  <h6>2. Bạn có thể gán quyền cho tài khoản tại đây</h6>
   <div>
     <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
       [striped]="true" align="middle" cTable class="mb-0 border">
@@ -13,7 +19,7 @@
           <th class="text-center">
             <!-- <svg cIcon name="cilCaretBottom"></svg> -->
           </th>
-          <th style="width: 55%;">Tên hiển thị</th>
+          <th style="width: 55%;">Thông tin quyền</th>
           <th class="text-center">Trạng thái</th>
           <th class="text-center"></th>
         </tr>
@@ -24,7 +30,9 @@
             {{ i + 1 }}
           </td>
           <td>
-            <div><strong>{{ role.display_name }}</strong></div>
+            <div><strong>{{ role.display_name }}</strong> <br>
+              <i>Mô tả: {{role.description ? role.description: 'Chưa có mô tả'}}</i>
+            </div>
           </td>
           <td class="text-center">
             <c-badge *ngIf="this.checkBoxHelper.checkedThisItem(role)" color="success">Đang kích hoạt</c-badge>

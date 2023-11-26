@@ -69,7 +69,7 @@ export class ExecuteScriptCommandHandler
     let createDBSCriptParser: AST | AST[];
 
     try {
-      createDBSCriptParser = this.queryParser.astify(script.script, parserOptions);
+      // createDBSCriptParser = this.queryParser.astify(script.script, parserOptions);
       // renamedParser = this.dbQueryDomain.convertTableNameByAppId(appId, createDBSCriptParser);
       // ERROR: INT4 - INT(4)
       // scriptTableRenamed = this.queryParser.sqlify(renamedParser, parserOptions);

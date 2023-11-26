@@ -1,0 +1,66 @@
+version: '3.3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin@111
+      POSTGRES_PASSWORD: admin@111
+      POSTGRES_DB: maindb
+    ports:
+      - "5432:5432"
+    networks:
+      - main-network
+
+  api:
+    container_name: api
+    image: node:18.16.0
+    depends_on:
+      - postgres
+    command: 
+      - sh 
+      - -c 
+      - "cd /usr/src/api && npm install && npx nx run interated:serve:development"
+    env_file:
+      - ./api-gen-no-code/.env
+    environment:
+      - PATH=/usr/src/api/node_modules/.bin:$PATH
+      - DATABASE_HOST_NAME=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=admin@111
+      - DATABASE_PASSWORD=admin@111
+      - DATABASE_SCHEMA=maindb
+      - DATABASE_TYPE=postgres
+
+    volumes:
+      - ./api-gen-no-code:/usr/src/api
+      - ./api-gen-no-code/node_modules:/usr/src/api/node_modules
+
+    ports:
+      - 3000:3000
+
+    networks:
+      - main-network
+
+  web:
+    container_name: web
+    image: node:18.16.0
+    environment:
+      - PATH=/usr/src/web/node_modules/.bin:$PATH
+    command: 
+      - sh 
+      - -c 
+      - "cd /usr/src/web && npm install && ng serve --host 0.0.0.0 --port 4200"
+    volumes:
+      - ./web-gen-no-code:/usr/src/web
+      - ./web-gen-no-code/node_modules:/usr/src/web/node_modules
+    ports:
+      - 4200:4200
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    driver: overlay
+    attachable: true

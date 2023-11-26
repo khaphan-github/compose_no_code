@@ -19,6 +19,7 @@ import NodeCache from 'node-cache';
 import { AUTH_CACHE_KEY } from './variables/cache.const';
 import { PolicyModel } from './model/policy.model';
 import { Request } from 'express';
+import _ from 'lodash';
 
 @Injectable()
 export class AuthService {
@@ -121,17 +122,14 @@ export class AuthService {
     const appId = WORKSPACE_VARIABLE.APP_ID.toString();
 
     const passwordHashed = await this.bscriptService.hashPassword(password);
-    const workspaceConfig = await this.crudService.query({
+    const roles = await this.crudService.query({
       appid: appId,
-      schema: '_core_workspace_config'
+      schema: '_core_role'
     }, {
-      selects: ['id', 'genneral_config']
-    }, {
-      id: WORKSPACE_VARIABLE.WORKSPACE_ID.toString()
-    });
+      selects: ['id', 'metadata']
+    }, {});
 
-    const foundWorkspace = workspaceConfig[0];
-    const defaultRoleOfAccountWhenRegister = foundWorkspace.genneral_config.defaultRoleOfAccountWhenRegister;
+    const arrayRoleDefautlWhenLogin = _.filter(roles, (role) => role.metadata?.defaultWhenRegister == true);
 
     const saveUserResult = await this.crudService.insert(appId, '_core_account',
       [{
@@ -139,11 +137,10 @@ export class AuthService {
         password: passwordHashed,
         metadata: {
           info: info,
-          roleIds: defaultRoleOfAccountWhenRegister
+          roleIds: arrayRoleDefautlWhenLogin.map((role) => role.id)
         },
         enable: true,
       }]);
-
 
     const registerResult: IRegister = {
       id: saveUserResult[0].id,

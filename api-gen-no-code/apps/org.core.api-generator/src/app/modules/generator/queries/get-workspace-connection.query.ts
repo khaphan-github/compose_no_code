@@ -50,7 +50,6 @@ export class GetWorkspaceConnectionQueryHandler
     try {
       // TODO: Get from env;
       workspaceDBConfig = this.getDatabaseConfig();
-
       this.nodeCache.set(workspaceId, workspaceDBConfig);
     } catch (error) {
       return Promise.reject(new Error(error.message));
@@ -70,8 +69,9 @@ export class GetWorkspaceConnectionQueryHandler
       port: this.configService.get<number>('relationaldb.port') as any,
       username: this.configService.get<string>('relationaldb.username'),
       password: this.configService.get<string>('relationaldb.password') as any,
-      database: this.configService.get<string>('relationaldb.database') as any,
+      database: this.configService.get<string>('relationaldb.schema') as any,
     };
+    console.log(databaseConfig);
     return databaseConfig;
   }
 }
