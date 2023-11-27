@@ -10,6 +10,7 @@ import { ICreateRole } from '../interfaces/roles/create-role.interface';
 import { IUpdateRole } from '../interfaces/roles/update-role.interface';
 import { Account } from '../interfaces/account/account.interface';
 import { IUpdateAccount } from '../interfaces/account/update-account.interface';
+import { ICreateAccount } from '../interfaces/account/create-account.interface';
 @Injectable()
 export class ManageApiService {
   constructor(
@@ -105,7 +106,10 @@ export class ManageApiService {
     return this.httpClient.post<SResponse<Array<Account>>>(apiPathBuilder('/_core_account/query'), {});
   }
 
-  createAccount() { }
+  createAccount(createAccount: ICreateAccount) {
+    const requestBody = [createAccount]
+    return this.httpClient.post<SResponse<Array<Account>>>(apiPathBuilder('/_core_account'), requestBody);
+  }
 
   updateAccount(account: IUpdateAccount) {
     return this.httpClient.put<SResponse<Account>>(apiPathBuilder(`/_core_account/${account.id}?id_column=id`),
@@ -120,15 +124,5 @@ export class ManageApiService {
   // #endregion
 
   // #region worksspace
-  updateWorspaceGeneralConfig(id: number) {
-
-    return this.httpClient.put<SResponse<Account>>(apiPathBuilder(`/_core_workspace_config/2024?id_column=id`), {
-      genneral_config: {
-        defaultRoleOfAccountWhenRegister: [id]
-      }
-    });
-
-  }
-
   // #region connect to manage:
 }

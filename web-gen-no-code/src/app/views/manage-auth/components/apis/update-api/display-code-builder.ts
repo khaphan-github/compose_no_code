@@ -6,6 +6,9 @@ export class DisplayCodeBuilder {
 
   public static getCode(api: GeneratedAPI) {
     const domain = localStorage.getItem(STORAGED_KEY.modules.manageApi.connection.hostName);
+    const authHeader = `
+const headers = ${JSON.stringify(api?.headers, null, 2)}
+`
     const conditionType = `
 // Khai báo định dạng của điều kiện:
 export interface ConditionObject {
@@ -21,6 +24,7 @@ ${conditionType}
 import axios from 'axios'; // Link: https://axios-http.com/vi/docs/intro
 
 const apiUrl = "${domain}/api/v1/app/2024/schema${api.api_path}";
+
 const params = {
   // Điền các thuộc tính bạn muốn lấy tại đây - mạc định lấy hết những cột có trong bảng
   selects: [${Object.keys(api?.request_body[0]).map((key) => `'${key}'`)}],
@@ -34,8 +38,8 @@ const params = {
 const conditionObject: ConditionObject = {
   or: [{ ${Object.keys(api?.request_body[0])[0]}: 1 }, { ${Object.keys(api?.request_body[0])[1]}: 'Example value' }],
 };
-
-axios.post(apiUrl, conditionObject,{ params })
+${api.authentication == 'NEED_AUTH' ? authHeader : ''}
+axios.post(apiUrl, conditionObject, { params, ${api.authentication == 'NEED_AUTH' ? 'headers' : ''} })
   .then((response) => {
     console.log('Response:', response.data);
   })
@@ -60,10 +64,10 @@ axios.post(apiUrl, conditionObject,{ params })
         const insert = `
 import axios from 'axios';
 const apiUrl = "${domain}/api/v1/app/2024/schema${api.api_path}";
-
+${api.authentication == 'NEED_AUTH' ? authHeader : ''}
 const requestBody = [${JSON.stringify(api?.request_body[0], null, 2)}];
 
-axios.post(apiUrl, requestBody)
+axios.post(apiUrl, requestBody, { ${api.authentication == 'NEED_AUTH' ? 'headers' : ''} })
   .then((response) => {
     console.log('Product created successfully:', response.data);
   })
@@ -78,10 +82,11 @@ axios.post(apiUrl, requestBody)
 import axios from 'axios';
 
 const id = 1; // This is the ID of the product you want to delete
+${api.authentication == 'NEED_AUTH' ? authHeader : ''}
 const url =
   '${domain}/api/v1/app/2024/schema${api.api_path}/' + id' + '?id_column=id';
 
-axios.delete(url)
+axios.delete(url, { ${api.authentication == 'NEED_AUTH' ? 'headers' : ''} })
   .then((response) => {
     console.log('Product deleted successfully');
   })
@@ -98,12 +103,13 @@ axios.delete(url)
     return `
 import axios from 'axios';
 
+${api.authentication == 'NEED_AUTH' ? authHeader : ''}
 const url =
     '${domain}/api/v1/app/2024/schema${api.api_path}/' + id' + '?id_column=id';
 
 const data = ${JSON.stringify(api?.request_body[0], null, 2)}
 
-axios.put(url, data)
+axios.put(url, data, { ${api.authentication == 'NEED_AUTH' ? 'headers' : ''} })
   .then((response) => {
     console.log('Product updated successfully');
   })

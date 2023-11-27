@@ -22,6 +22,7 @@ export class AuthorizationMiddleware implements NestMiddleware {
         'message': 'User can not exec this api',
       }, 403)
     }
+
     return next();
   }
 }

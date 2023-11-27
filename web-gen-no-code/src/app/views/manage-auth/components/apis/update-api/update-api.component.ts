@@ -16,7 +16,6 @@ export class UpdateApiComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.api);
     this.code = DisplayCodeBuilder.getCode(this.api);
   }
 

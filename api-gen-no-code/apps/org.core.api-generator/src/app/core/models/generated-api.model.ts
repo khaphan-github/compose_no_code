@@ -69,27 +69,27 @@ export class GeneratedApiModel {
     const finalResult = Object.values(groupedData);
 
     let id = 1;
-    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications'];
+    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role'];
     for (let index = 0; index < finalResult.length; index++) {
       const element = finalResult[index] as { table_name: string, column_names: string[] };
       if(whiteList.includes(element.table_name)) {
         continue;
       }
 
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET, secretKey));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET, ));
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.POST, secretKey));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.POST, ));
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.PUT, secretKey));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.PUT, ));
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.DELETE, secretKey));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.DELETE, ));
       id += 1;
     }
 
     return apis;
   }
 
-  getApiConfig = (index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod, secretKey: string) => {
+  getApiConfig = (index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod) => {
     const apiRecord = {};
     function convertArrayToObject(columnNames: string[], exampleData: object | string | number) {
       return columnNames.reduce((result, columnName) => {
@@ -108,9 +108,10 @@ export class GeneratedApiModel {
     apiRecord[APP_ID] = appId;
     apiRecord[TABLE_NAME] = tableName;
     apiRecord[HEADERS] = JSON.stringify({
-      AppClientSecretKey: secretKey
+      Authenticate: 'eyJhbGciO...',
+      'Content-Type': 'application/json'
     });
-    apiRecord[AUTHENTICATION] = Authenticate.NO_AUTH;
+    apiRecord[AUTHENTICATION] = Authenticate.NEED_AUTH;
 
     apiRecord[ENABLE] = true;
     apiRecord[CREATED_AT] = new Date();
@@ -124,9 +125,9 @@ export class GeneratedApiModel {
         apiRecord[REQUEST_PARAMS] = {
           page: 0,
           size: 10,
-          orderby: 'idExample',
+          orderby: 'id',
           sort: 'DESC/ASC',
-          selectes: 'idExample',
+          selectes: 'id',
         };
         apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);

@@ -12,6 +12,7 @@ import { CrudModule } from 'apps/org.core.api-generator/src/app/modules/crud-pg/
 import { ManageApiModule } from 'apps/org.core.api-generator/src/app/modules/manage/manage-api.module';
 import { AuthModule } from 'apps/org.core.api-generator/src/app/modules/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { PolicyMiddleware } from '../infrastructure/middlewares/policy.middleware';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ export class InteratedAppModule implements NestModule {
       .apply(
         AuthenticateMiddleware,
         AuthorizationMiddleware,
+        PolicyMiddleware,
         CustomizeInputMiddleware,
         ValidateInputMiddleware
       )

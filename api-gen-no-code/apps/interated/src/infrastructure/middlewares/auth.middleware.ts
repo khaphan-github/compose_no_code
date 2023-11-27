@@ -38,8 +38,12 @@ export class AuthenticateMiddleware implements NestMiddleware {
       req['token_payload'] = verify;
       return next();
     } catch (error) {
+      const protocol = req.secure ? 'https' : 'http';
+      const domain = `${protocol}://${req.headers.host}/api/v1/login`;
       throw new HttpException({
-        'message': 'Invalid access token',
+        code: 401,
+        message: 'Invalid access token,',
+        auth_endpoint: domain
       }, 401)
     }
   }

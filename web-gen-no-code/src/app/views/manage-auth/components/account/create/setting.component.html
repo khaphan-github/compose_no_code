@@ -1,0 +1,35 @@
+<c-modal-header>
+  <h5 cModalTitle>Tạo tài khoản</h5>
+</c-modal-header>
+<c-modal-body>
+  <div class="row g-3" [formGroup]="this.createAccountForm">
+    <c-col [md]="6">
+      <label cLabel for="displayName">Tên đăng nhập:</label>
+      <input cFormControl type="text" formControlName="username" />
+      <span class="text-danger" *ngIf="serverErrorMessage">
+         {{ serverErrorMessage }}
+      </span>
+      <span class="text-danger" *ngIf="createAccountForm.get('username')?.invalid && createAccountForm.get('username')?.touched">
+        {{ getErrorMessage('username')  }}
+      </span>
+    </c-col>
+    <c-col [xs]="6">
+      <label cLabel for="displayName">Mật khẩu:</label>
+      <input cFormControl type="password" formControlName="password" />
+      <span class="text-danger"*ngIf="createAccountForm.get('password')?.invalid && createAccountForm.get('password')?.touched ">
+        {{ getErrorMessage('password') }}
+      </span>
+    </c-col>
+    <c-col [md]="12">
+      <label cLabel for="activateCheckbox">Kích hoạt ngay khi tạo</label>
+      <c-form-check>
+        <input cFormCheckInput id="activateCheckbox" type="checkbox" formControlName="activate" />
+        <label cFormCheckLabel for="activateCheckbox">Kích hoạt</label>
+      </c-form-check>
+    </c-col>
+  </div>
+</c-modal-body>
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Thoát</button>
+  <button cButton color="primary" type="submit" (click)="this.onSubmit()" [disabled]="this.createAccountForm.invalid">Lưu thay đổi</button>
+</c-modal-footer>

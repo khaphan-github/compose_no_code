@@ -6,7 +6,7 @@ import { Account } from '../../../interfaces/account/account.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateAccountComponent } from '../update-account/update-account.component';
 import { EVENT } from '../../../event/const';
-import { SettingComponent } from '../setting/setting.component';
+import { CreateAccountComponent } from '../create/setting.component';
 
 @Component({
   selector: 'ngx-account-list',
@@ -18,6 +18,8 @@ export class AccountListComponent implements OnInit {
   private modal = inject(NgbModal);
 
   constructor() { }
+
+  public newAccountId: number = 0;
 
   public list$!: Observable<SResponse<Array<Account>>>;
 
@@ -45,8 +47,8 @@ export class AccountListComponent implements OnInit {
   }
 
 
-  onSetting() {
-    const setting = this.modal.open(SettingComponent, {
+  onCreate() {
+    const setting = this.modal.open(CreateAccountComponent, {
       backdrop: 'static',
       keyboard: false,
       size: 'lg',
@@ -55,7 +57,10 @@ export class AccountListComponent implements OnInit {
 
     setting.closed.subscribe({
       next: (value) => {
-        if (value == EVENT.CREATE_SUCCESS) {
+        const { event, data } = value;
+        if (event == EVENT.CREATE_SUCCESS) {
+          console.log(data);
+          this.newAccountId = data.id;
           this.list$ = this.service.accountList();
         }
       },

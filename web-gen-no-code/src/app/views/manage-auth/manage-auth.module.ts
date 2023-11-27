@@ -20,7 +20,7 @@ import { NotFoundComponent } from '../shared/not-found/not-found.component';
 import { UpdateAccountComponent } from './components/account/update-account/update-account.component';
 import { ApiListComponent } from './components/apis/api-list/api-list.component';
 import { UpdateApiComponent } from './components/apis/update-api/update-api.component';
-import { SettingComponent } from './components/account/setting/setting.component';
+import { CreateAccountComponent } from './components/account/create/setting.component';
 import { HighlightModule } from 'ngx-highlightjs';
 
 const UI_MODULES = [
@@ -46,7 +46,7 @@ const MODULE_COMPONENTS = [
 
   ApiListComponent,
   UpdateApiComponent,
-  SettingComponent,
+  CreateAccountComponent,
 
   AccountListComponent,
   UpdateAccountComponent,

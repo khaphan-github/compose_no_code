@@ -37,12 +37,28 @@ export class AuthService {
     return this.jwtService.verify(token);
   }
 
-  async canExecThisAPI(token: any, request: Request) {
-    const userId = token.userId;
-    const { method, baseUrl } = request;
+  executeTaskFollowPrivatePolicy(request: Request) {
+    // Invalid cache policy
+    const policyTableList = ['_core_account', '_core_role'];
+    if (policyTableList.includes(this.extractTableName(request)) && request.method !== 'GET') {
+      this.nodeCache.flushAll();
+      this.logger.verbose(`Invalid policy cache when update role`);
+    }
+
+    // TODO: implement other logic
+    // PUblic api
+    //
+  }
+
+  extractTableName(request: Request) {
+    const { baseUrl } = request;
 
     const match = baseUrl.replace(`/api/v1/app/${WORKSPACE_VARIABLE.APP_ID}/schema/`, '');
-    const tableName = match.split('/')[0];
+    return match.split('/')[0];
+  }
+
+  async canExecThisAPI(token: any, request: Request) {
+    const userId = token.userId;
 
     const cacheKey = PolicyModel.getKeyCachePolicyByUser(AUTH_CACHE_KEY.POLICY, userId);
 
@@ -50,12 +66,18 @@ export class AuthService {
 
     if (!policySet) {
       this.logger.verbose(`\n Cache miss: ${cacheKey}`)
+
       await this.getAuthorizeInfoInDB(userId);
       policySet = this.nodeCache.get(cacheKey) as Set<string>;
+
       this.logger.verbose(`\n Input cache succces: ${cacheKey}`)
     }
-    const policyKey = PolicyModel.getKeyCachePolicyAPI(userId, tableName, method);
+
+    const tableName = this.extractTableName(request);
+    const policyKey = PolicyModel.getKeyCachePolicyAPI(userId, tableName, request.method);
+
     this.logger.log(`\nUser ${userId} just exec api with role: ${policyKey}`)
+
     return policySet.has(policyKey) ?? false;
   }
 
@@ -160,12 +182,16 @@ export class AuthService {
       this.crudService.query({
         appid: appId,
         schema: '_core_role'
-      }, {} as any, {} as any),
+      }, {} as any, {
+        enable: 'true'
+      }),
 
       this.crudService.query({
         appid: appId,
         schema: '_core_generated_apis'
-      }, {} as any, {} as any),
+      }, {} as any, {
+        enable: 'true'
+      }),
 
       this.crudService.query({
         appid: appId,

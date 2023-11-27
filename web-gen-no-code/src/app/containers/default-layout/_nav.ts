@@ -37,5 +37,13 @@ export const navItems: INavData[] = [
       color: 'success',
       text: 'UPDATE-LATER'
     }
+  },{
+    name: 'Health Check',
+    url: '/manage-api/database',
+    iconComponent: { name: 'cil-speedometer' },
+    badge: {
+      color: 'success',
+      text: 'process'
+    }
   },
 ];

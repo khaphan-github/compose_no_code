@@ -46,4 +46,8 @@ export class ApiListComponent implements OnInit {
   onSetting() {
 
   }
+
+  onViewDetail(api: GeneratedAPI) {
+
+  }
 }

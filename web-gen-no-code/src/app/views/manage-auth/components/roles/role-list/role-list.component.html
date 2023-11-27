@@ -23,9 +23,9 @@
                 <th class="text-center">
                   <!-- <svg cIcon name="cilCaretBottom"></svg> -->
                 </th>
-                <th style="width: 55%;">Tên hiển thị</th>
+                <th style="width: 45%;">Tên hiển thị</th>
+                <th class="text-center" style="width: 8%;">APIs</th>
                 <th>Lịch sử thay đổi</th>
-                <th></th>
                 <th class="text-center">Trạng thái</th>
                 <th class="text-center"></th>
               </tr>
@@ -36,13 +36,21 @@
                   {{ i + 1 }}
                 </td>
                 <td (click)="this.onUpdate(role)">
-                  <div><strong>{{ role.display_name }}</strong></div>
+                  <div><strong>{{ role.display_name }} </strong>
+                    <c-badge *ngIf="role?.metadata?.defaultWhenRegister" color="dark" shape="rounded-pill">Mạc định khi tạo tài
+                      khoản</c-badge>
+                  </div>
                   <div class="small text-medium-emphasis">Mô tả: {{role.description}}</div>
                 </td>
-                <td (click)="this.onUpdate(role)">
+                <td class="text-center" (click)="this.onUpdate(role)">
+                  <strong>
+                    {{ this.role?.metadata?.apis?.length ?? 0}}
+                  </strong>
+                </td>
+                <!-- <td (click)="this.onUpdate(role)">
                   <div class="small text-medium-emphasis">Ngày tạo</div>
                   <div class="fw-semibold text-nowrap">{{ role.created_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
-                </td>
+                </td> -->
 
                 <td (click)="this.onUpdate(role)">
                   <div class="small text-medium-emphasis">Cập nhật lần cuối</div>

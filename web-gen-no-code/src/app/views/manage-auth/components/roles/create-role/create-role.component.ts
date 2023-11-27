@@ -45,8 +45,6 @@ export class CreateRoleComponent implements OnInit {
         },
       });
 
-      console.log('Form submitted:', this.form.value);
-      // You can send the form data to your backend or perform other actions here
     }
   }
 

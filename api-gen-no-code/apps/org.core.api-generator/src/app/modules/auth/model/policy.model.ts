@@ -14,7 +14,9 @@ export class PolicyModel {
     const uniqueSet = new Set([]); // <-- Nếu user có quyền vô api thì sẽ nằm trong nàuy
     const apiMap = Object.fromEntries(this.apis.map((api) => [api.id.toString(), api]));
     const roleMap = Object.fromEntries(this.roles.map((role) => ['_role_' + role.id.toString(), role]));
+
     const roleIdOfAccount = this.account?.metadata?.roleIds as string[];
+
     for (let index = 0; index < roleIdOfAccount?.length; index++) {
       const roleId = '_role_' + roleIdOfAccount[index].toString();
       const roleInfo = roleMap[roleId]; // Array of role of this account.

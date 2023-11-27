@@ -7,6 +7,7 @@
       <c-card class="mb-4">
         <c-card-header>
           <div [align]="'right'">
+            <button cButton color="primary" (click)="this.onCreate()">Thêm tài khoản</button>
           </div>
         </c-card-header>
         <c-card-body>
@@ -14,18 +15,17 @@
             [striped]="true" align="middle" cTable class="mb-0 border">
             <app-not-found *ngIf="viewModel.status !== 200 || viewModel?.data?.length == 0"></app-not-found>
 
-            <thead cTableColor="light" *ngIf="viewModel.status ==200 && viewModel?.data?.length !== 0">
-              <thead cTableColor="light">
-                <tr>
-                  <th class="text-center">
-                    <!-- <svg cIcon name="cilCaretBottom"></svg> -->
-                  </th>
-                  <th>Tên tài khoản</th>
-                  <th>Lịch sử thay đổi</th>
-                  <th></th>
-                  <th class="text-center">Trạng thái</th>
-                </tr>
-              </thead>
+            <thead cTableColor="light" *ngIf="viewModel.status == 200 && viewModel?.data?.length !== 0">
+              <tr>
+                <th class="text-center">
+                  <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+                </th>
+                <th>Tên tài khoản</th>
+                <th>Lịch sử thay đổi</th>
+                <th></th>
+                <th class="text-center">Trạng thái</th>
+              </tr>
+            </thead>
             <tbody>
               <tr *ngFor="let account of viewModel.data; index as i" style="cursor: pointer;"
                 (click)="this.onUpdate(account)">
@@ -33,7 +33,9 @@
                   {{ i + 1 }}
                 </td>
                 <td>
-                  <div><strong>{{ account.username }}</strong></div>
+                  <div><strong>{{ account.username }}</strong>
+                    <c-badge *ngIf="account.id == this.newAccountId" color="info" size="sm" shape="rounded-pill">NEW</c-badge>
+                  </div>
                   <div class="small text-medium-emphasis text-nowrap">
                   </div>
                 </td>
