@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { STORAGED_KEY } from '../../../core/config/storage-key/localstorage.const';
-import { apiPathBuilder } from '../../../core/config/http-client/helper';
+import { apiPathBuilder, getHostName } from '../../../core/config/http-client/helper';
 import { SResponse } from '../../../core/config/http-client/response-base';
 import { Injectable } from '@angular/core';
 import { map, of, tap } from 'rxjs';
@@ -10,7 +10,7 @@ import { ICreateRole } from '../interfaces/roles/create-role.interface';
 import { IUpdateRole } from '../interfaces/roles/update-role.interface';
 import { Account } from '../interfaces/account/account.interface';
 import { IUpdateAccount } from '../interfaces/account/update-account.interface';
-import { ICreateAccount } from '../interfaces/account/create-account.interface';
+import { ICreateAccount, ICreateAccountResponse } from '../interfaces/account/create-account.interface';
 @Injectable()
 export class ManageApiService {
   constructor(
@@ -107,8 +107,8 @@ export class ManageApiService {
   }
 
   createAccount(createAccount: ICreateAccount) {
-    const requestBody = [createAccount]
-    return this.httpClient.post<SResponse<Array<Account>>>(apiPathBuilder('/_core_account'), requestBody);
+    const requestBody = createAccount;
+    return this.httpClient.post<SResponse<ICreateAccountResponse>>(`${getHostName()}/api/v1/register`, requestBody);
   }
 
   updateAccount(account: IUpdateAccount) {

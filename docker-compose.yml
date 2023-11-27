@@ -32,6 +32,7 @@ services:
       - DATABASE_PASSWORD=admin@111
       - DATABASE_SCHEMA=maindb
       - DATABASE_TYPE=postgres
+      - SERVER_SECRET_KEY=kqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCS9
 
     volumes:
       - ./api-gen-no-code:/usr/src/api

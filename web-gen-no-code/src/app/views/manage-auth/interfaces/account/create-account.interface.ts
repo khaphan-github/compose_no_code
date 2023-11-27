@@ -7,3 +7,15 @@ export interface ICreateAccount {
   enable: boolean
 }
 
+export interface ICreateAccountResponse {
+  id: number
+  metadata: Metadata
+  created_at: string
+  username: string
+  enable: boolean
+}
+
+export interface Metadata {
+  info: object,
+  roleIds: number[]
+}

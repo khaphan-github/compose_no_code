@@ -52,15 +52,18 @@ export class CreateAccountComponent implements OnInit {
         username: username,
       }).subscribe({
         next: (value) => {
-          if(value.status == 201) {
+          if (value.status == 200) {
             this.activeModal.close({
               event: EVENT.CREATE_SUCCESS,
-              data: value.data[0],
+              data: value.data,
             });
           }
-          if(value.status == 613) {
+          if (value.status == 613) {
             this.serverErrorMessage = 'Tài khoản này đã tồn tại';
           }
+        },
+        error: (err) => {
+          this.serverErrorMessage = 'Tài khoản này đã tồn tại';
         },
       })
     }
