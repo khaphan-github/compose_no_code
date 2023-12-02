@@ -1,0 +1,34 @@
+<c-modal-header>
+  <h5 cModalTitle>Cập nhật API {{ this.api.api_path}}</h5>
+</c-modal-header>
+<c-modal-body>
+  <form [formGroup]="this.updateApiForm" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <c-col [md]="12">
+        <label cLabel for="accessScope"><strong>1. Phạm vi truy cập:</strong></label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="public" value="public" formControlName="accessScope">
+          <label class="form-check-label" for="public">Public <i>(Không cần đăng nhập vẫn truy cập được)</i></label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="private" value="private" formControlName="accessScope">
+          <label class="form-check-label" for="private">Private <i>(Cần đăng nhập mới truy cập được)</i></label>
+        </div>
+      </c-col>
+      <c-col [md]="12">
+        <label cLabel for="isActive"><strong>2. Trạng thái hoạt động</strong></label>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="isActive" formControlName="isActive">
+          <label class="form-check-label" for="isActive">
+            {{this.updateApiForm.get('isActive')?.value == true ? 'Đang hoạt động': 'Dừng hoạt động'}}</label>
+        </div>
+      </c-col>
+    </div>
+  </form>
+</c-modal-body>
+
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Thoát</button>
+  <button cButton color="primary" type="submit" [disabled]="this.updateApiForm.invalid" (click)="this.onSubmit()">Lưu
+    thay đổi</button>
+</c-modal-footer>

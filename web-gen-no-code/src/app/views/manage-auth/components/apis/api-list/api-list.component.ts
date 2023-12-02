@@ -4,8 +4,9 @@ import { SResponse } from 'src/app/core/config/http-client/response-base';
 import { GeneratedAPI } from '../../../interfaces/response/generated-api.interface';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UpdateApiComponent } from '../docs/update-api.component';
 import { EVENT } from '../../../event/const';
+import { ApiDocsComponent } from '../docs/api-docs.component';
+import { UpdateApiComponent } from '../update-api/update-api.component';
 
 @Component({
   selector: 'ngx-api-list',
@@ -26,15 +27,15 @@ export class ApiListComponent implements OnInit {
   }
 
   onViewDocs(api: GeneratedAPI) {
-    const updateModal = this.modal.open(UpdateApiComponent, {
+    const viewDocsModal = this.modal.open(ApiDocsComponent, {
       backdrop: 'static',
       keyboard: false,
       size: 'lg',
     });
 
-    updateModal.componentInstance.api = api;
+    viewDocsModal.componentInstance.api = api;
 
-    updateModal.closed.subscribe({
+    viewDocsModal.closed.subscribe({
       next: (value) => {
         if (value == EVENT.CREATE_SUCCESS) {
           this.list$ = this.service.apiList();
@@ -47,7 +48,20 @@ export class ApiListComponent implements OnInit {
 
   }
 
-  onViewDetail(api: GeneratedAPI) {
+  onUpdateApi(api: GeneratedAPI) {
+    const updateModal = this.modal.open(UpdateApiComponent, {
+      backdrop: 'static',
+      keyboard: false,
+    });
 
+    updateModal.componentInstance.api = api;
+
+    updateModal.closed.subscribe({
+      next: (value) => {
+        if (value == EVENT.CREATE_SUCCESS) {
+          this.list$ = this.service.apiList();
+        }
+      },
+    })
   }
 }

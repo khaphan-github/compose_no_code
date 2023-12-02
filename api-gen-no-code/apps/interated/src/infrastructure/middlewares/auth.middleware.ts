@@ -1,7 +1,6 @@
 import { HttpException, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import _ from 'lodash';
-import { API_WHITE_LIST, TokenPayload } from './middlewares.variable';
+import { TokenPayload } from './middlewares.variable';
 import { ManageApiService } from 'apps/org.core.api-generator/src/app/modules/manage/services/manage-api.service';
 import { AuthService } from 'apps/org.core.api-generator/src/app/modules/auth/auth.service';
 
@@ -13,7 +12,8 @@ export class AuthenticateMiddleware implements NestMiddleware {
   ) { }
 
   async use(req: Request, res: Response, next: NextFunction) {
-    if (_.includes(API_WHITE_LIST, req.baseUrl)) {
+    // Kiểm tra request try cập vô có phải public hay không. nếu có thì pass all
+    if(await this.authService.isRequestRequireResourceInWhiteList(req)) {
       req['is_white_list'] = true;
       return next();
     }

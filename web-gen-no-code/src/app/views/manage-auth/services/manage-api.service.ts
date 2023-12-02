@@ -42,20 +42,21 @@ export class ManageApiService {
     return this.httpClient.get<SResponse<[{ count: number }]>>(apiPathBuilder('/_core_account/count'));
   }
 
+  // #region apis
   apiList() {
-    return this.httpClient.post<SResponse<Array<GeneratedAPI>>>(apiPathBuilder('/_core_generated_apis/query'), {}).pipe(
-      map((response) => {
-        const modifiedData = response?.data?.map((el) => {
-          return {
-            ...el,
-            api_path: el.api_path.replace('/api/v1/app/9999/schema', '')
-          }
-        });
-        return { ...response, data: modifiedData };
-
-      }),
-    );
+    return this.httpClient.post<SResponse<Array<GeneratedAPI>>>(apiPathBuilder('/_core_generated_apis/query'), {});
   }
+
+  updateApi = (id: number,scope: string, enable: boolean) => {
+    const requestBody = {
+      authentication: scope == 'public' ? 'NO_AUTH' : 'NEED_AUTH',
+      enable: enable,
+    }
+    return this.httpClient.put<SResponse<GeneratedAPI>>(apiPathBuilder(`/_core_generated_apis/${id}?id_column=id`), requestBody);
+
+  }
+
+  // #endregion apisvs
 
   // #region roles
   roleList() {

@@ -64,14 +64,14 @@
                   <c-badge *ngIf="api.enable" color="success" shape="rounded-pill">Đang hoạt động</c-badge>
                   <c-badge *ngIf="!api.enable" color="dark" shape="rounded-pill">Dừng hoạt động</c-badge>
                 </td>
-                <td class="text-center" (click)="this.onViewDetail(api)">
+                <td class="text-center">
                   <c-dropdown alignment="end" variant="btn-group">
                     <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
                       <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
                     </button>
                     <ul cDropdownMenu>
                       <li (click)="this.onViewDocs(api)"><a cDropdownItem>Xem hướng dẫn</a></li>
-                      <li><a cDropdownItem>Cập nhật thông tin</a></li>
+                      <li  (click)="this.onUpdateApi(api)"><a cDropdownItem>Cập nhật thông tin</a></li>
                     </ul>
                   </c-dropdown>
                 </td>

@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Request } from 'express';
+import { WORKSPACE_VARIABLE } from '../../shared/variables/workspace.variable';
+
 export class PolicyModel {
+  public static readonly API_WHITE_LIST = [
+    '/api/v1/login',
+    '/api/v1/register',
+  ];
+
   private account!: any;
   constructor(
     public readonly roles: Array<any>,
@@ -25,8 +33,8 @@ export class PolicyModel {
         const apis = roleInfo?.metadata?.apis as any[]; // api
         for (let index = 0; index < apis.length; index++) {
           const apiId = apis[index]; // api id.
-          const { table_name , http_method} = apiMap[apiId];
-          const setKey = PolicyModel.getKeyCachePolicyAPI(this.account.id, table_name, http_method);
+          const { table_name, action } = apiMap[apiId];
+          const setKey = PolicyModel.getKeyCachePolicyAPI(this.account.id, table_name, action);
           uniqueSet.add(setKey);
         }
       }
@@ -34,11 +42,31 @@ export class PolicyModel {
     return uniqueSet;
   }
 
-  public static getKeyCachePolicyAPI(userId: string, tableName: string, method: string) {
-    return `user_id_${userId}_exec_table_${tableName}_with_method_${method}`
+  public static getKeyCachePolicyAPI(userId: string, tableName: string, action: string) {
+    return `user::${userId}::can:${action.toLowerCase()}::with:${tableName}`
+  }
+
+  public static getKeyCachePublicAPI(tableName: string, action: string) {
+    return `request:can:${action.toLowerCase()}::table:${tableName}::cause:public`;
   }
 
   public static getKeyCachePolicyByUser(authCache: string, userId: string) {
     return `policy_${authCache}_of_user_id_${userId}`;
+  }
+
+  public static extractTableName(request: Request) {
+    const { baseUrl } = request;
+    const match = baseUrl.replace(`/api/v1/app/${WORKSPACE_VARIABLE.APP_ID}/schema/`, '');
+    return match.split('/')[0];
+  }
+
+  // SHOULD Be return UPDATE QUERY INSERT DELETE
+  public static getActionFromRequest(request: Request) {
+    if (request.method == 'DELETE') { return 'DELETE' }
+    if (request.method == 'PUT') { return 'UPDATE' }
+    if (request.method == 'POST' && request.baseUrl.includes('query')) {
+      return 'QUERY'
+    }
+    return 'INSERT';
   }
 }

@@ -19,10 +19,11 @@ import { IconModule } from '@coreui/icons-angular';
 import { NotFoundComponent } from '../shared/not-found/not-found.component';
 import { UpdateAccountComponent } from './components/account/update-account/update-account.component';
 import { ApiListComponent } from './components/apis/api-list/api-list.component';
-import { UpdateApiComponent } from './components/apis/docs/update-api.component';
 import { CreateAccountComponent } from './components/account/create/setting.component';
 import { HighlightModule } from 'ngx-highlightjs';
 import { ExecuteScriptComponent } from './components/database/execute-script/execute-script.component';
+import { ApiDocsComponent } from './components/apis/docs/api-docs.component';
+import { UpdateApiComponent } from './components/apis/update-api/update-api.component';
 
 const UI_MODULES = [
   IconModule,
@@ -46,6 +47,7 @@ const MODULE_COMPONENTS = [
   ManageAuthComponent,
 
   ApiListComponent,
+  ApiDocsComponent,
   UpdateApiComponent,
   CreateAccountComponent,
 

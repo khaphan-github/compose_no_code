@@ -37,24 +37,36 @@ export class AuthService {
     return this.jwtService.verify(token);
   }
 
+  // Nếu có api nào truy cập thuọc điều kiện bên dưới -> Invalid cache cập nhật lại quyền cho đúng
   executeTaskFollowPrivatePolicy(request: Request) {
     // Invalid cache policy
-    const policyTableList = ['_core_account', '_core_role'];
-    if (policyTableList.includes(this.extractTableName(request)) && request.method !== 'GET') {
-      this.nodeCache.flushAll();
+    const policyTableList = ['_core_account', '_core_role', '_core_generated_apis'];
+    if (
+      policyTableList.includes(PolicyModel.extractTableName(request))
+      && (request.method !== 'GET' && !request.baseUrl.includes('query'))
+    ) {
+      this.nodeCache.flushAll(); // <-- Xóa hết khỏi nghỉ nhiều
       this.logger.verbose(`Invalid policy cache when update role`);
     }
 
-    // TODO: implement other logic
-    // PUblic api
-    //
   }
 
-  extractTableName(request: Request) {
-    const { baseUrl } = request;
-
-    const match = baseUrl.replace(`/api/v1/app/${WORKSPACE_VARIABLE.APP_ID}/schema/`, '');
-    return match.split('/')[0];
+  isRequestRequireResourceInWhiteList = async (request: Request) => {
+    this.logger.verbose(`1. Check is this request contain in white list or public apis`)
+    if (_.includes(PolicyModel.API_WHITE_LIST, request.baseUrl)) {
+      return true;
+    }
+    try {
+      const publicApiSet = await this.getPublicApis() as Set<string>;
+      const tableName = PolicyModel.extractTableName(request);
+      const key = PolicyModel.getKeyCachePublicAPI(tableName, PolicyModel.getActionFromRequest(request));
+      const right = publicApiSet.has(key) ?? false;
+      this.logger.log(`Current request ${right ? 'have' : 'do not have'} role: ${key}`);
+      return right;
+    } catch (error) {
+      this.logger.error(`Error: isRequestRequireResourceInWhiteList ${error.message}`)
+      return false;
+    }
   }
 
   async canExecThisAPI(token: any, request: Request) {
@@ -73,8 +85,8 @@ export class AuthService {
       this.logger.verbose(`\n Input cache succces: ${cacheKey}`)
     }
 
-    const tableName = this.extractTableName(request);
-    const policyKey = PolicyModel.getKeyCachePolicyAPI(userId, tableName, request.method);
+    const tableName = PolicyModel.extractTableName(request);
+    const policyKey = PolicyModel.getKeyCachePolicyAPI(userId, tableName, PolicyModel.getActionFromRequest(request));
 
     this.logger.log(`\nUser ${userId} just exec api with role: ${policyKey}`)
 
@@ -209,4 +221,37 @@ export class AuthService {
   }
 
 
+  // Lấy danh sách public api để cache để khỏi validate (white list)
+  private getPublicApis = async () => {
+    const publicApisInCache = this.nodeCache.get(AUTH_CACHE_KEY.PUBLIC_APIs);
+
+    if (publicApisInCache) {
+      return publicApisInCache;
+    }
+
+    const appId = WORKSPACE_VARIABLE.APP_ID.toString();
+
+    const queryResult = await this.crudService.query({
+      appid: appId,
+      schema: '_core_generated_apis'
+    }, {
+      selects: ['table_name', 'action'],
+    }, {
+      and: [
+        { enable: 'true', },
+        { authentication: 'NO_AUTH' }
+      ]
+    }) as any[];
+
+    const publicApiSet = new Set(queryResult.map(
+      (element) => PolicyModel.getKeyCachePublicAPI(element.table_name, element.action))
+    );
+
+    this.nodeCache.set(
+      AUTH_CACHE_KEY.PUBLIC_APIs,
+      publicApiSet
+    );
+
+    return publicApiSet;
+  }
 }

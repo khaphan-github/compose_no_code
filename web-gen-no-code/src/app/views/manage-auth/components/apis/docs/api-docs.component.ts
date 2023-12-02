@@ -8,7 +8,7 @@ import { DisplayCodeBuilder } from './display-code-builder';
   templateUrl: './update-api.component.html',
   styleUrls: ['./update-api.component.css']
 })
-export class UpdateApiComponent implements OnInit {
+export class ApiDocsComponent implements OnInit {
   @Input() api!: GeneratedAPI;
   private activeModal = inject(NgbActiveModal);
   code = 'console.log("hello")';
