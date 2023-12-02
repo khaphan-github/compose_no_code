@@ -6,7 +6,6 @@
     <c-col xs>
       <c-card class="mb-4">
         <c-card-header>
-
         </c-card-header>
         <c-card-body>
           <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
@@ -18,8 +17,8 @@
                 <th class="text-center">
                   <!-- <svg cIcon name="cilCaretBottom"></svg> -->
                 </th>
-                <th>Phạm vi</th>
                 <th>Đường dẫn</th>
+                <th>Phạm vi</th>
                 <th class="text-left">Bảng</th>
                 <th>Lịch sử thay đổi</th>
                 <th class="text-center">Trạng thái</th>
@@ -27,18 +26,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer;" (click)="this.onUpdate(api)">
+              <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer;">
                 <td class="text-center">
                   {{ i + 1 }}
                 </td>
+
                 <td>
-                  <c-badge *ngIf="api.authentication == 'NEED_AUTH'" color="dark" shape="rounded-pill"><svg cIcon
-                      name="cilLockLocked" size="sm" title="l"></svg>Private</c-badge>
-                  <c-badge *ngIf="api.authentication !== 'NEED_AUTH'" color="success" shape="rounded-pill"><svg cIcon
-                      name="cilCheck" size="sm" title="l"></svg>Public</c-badge>
-                </td>
-                <td>
-                  <div><strong>...{{ api.api_path }}</strong></div>
+                  <div><strong>{{ api.api_path }}</strong> </div>
                   <div class="small text-medium-emphasis text-nowrap">
                     <span>
                       Phương thức: <strong>{{ api.http_method }}</strong> | Hành động: <strong>{{
@@ -46,6 +40,12 @@
                       <!-- {{ api.state }} | Registered: {{ api.registered }} -->
                     </span>
                   </div>
+                </td>
+                <td>
+                  <c-badge *ngIf="api.authentication == 'NEED_AUTH'" color="dark" shape="rounded-pill"><svg cIcon
+                      name="cilLockLocked" size="sm" title="l"></svg>Private</c-badge>
+                  <c-badge *ngIf="api.authentication !== 'NEED_AUTH'" color="success" shape="rounded-pill"><svg cIcon
+                      name="cilCheck" size="sm" title="l"></svg>Public</c-badge>
                 </td>
                 <td class="text-left">
                   <div class="small text-medium-emphasis">Schema: public</div>
@@ -65,9 +65,15 @@
                   <c-badge *ngIf="!api.enable" color="dark" shape="rounded-pill">Dừng hoạt động</c-badge>
                 </td>
                 <td class="text-center" (click)="this.onViewDetail(api)">
-                  <button cButton class="p-0" color="transparent">
-                    <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
-                  </button>
+                  <c-dropdown alignment="end" variant="btn-group">
+                    <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+                      <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+                    </button>
+                    <ul cDropdownMenu>
+                      <li (click)="this.onViewDocs(api)"><a cDropdownItem>Xem hướng dẫn</a></li>
+                      <li><a cDropdownItem>Cập nhật thông tin</a></li>
+                    </ul>
+                  </c-dropdown>
                 </td>
               </tr>
             </tbody>

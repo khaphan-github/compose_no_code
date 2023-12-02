@@ -1,8 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
-import { SResponse } from 'src/app/core/config/http-client/response-base';
-import { Role } from '../../../interfaces/roles/role.interface';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { EVENT } from '../../../event/const';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

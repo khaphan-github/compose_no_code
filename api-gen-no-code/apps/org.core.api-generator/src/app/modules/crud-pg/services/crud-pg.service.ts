@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { QueryParamDataDto, RequestParamDataDto } from "../controller/query-filter.dto";
-import { ConditionObject } from "../../../core/pgsql/pg.relationaldb.query-builder";
+import { ConditionDto, QueryParamDataDto, RequestParamDataDto } from "../controller/query-filter.dto";
+import { ConditionObject, JoinTable } from "../../../core/pgsql/pg.relationaldb.query-builder";
 import { GetDataQuery } from "../queries/get-by-conditions.query";
 import { DeleteDataCommand } from "../commands/delete.command";
 import { CreateDataCommand } from "../commands/create..command";
@@ -48,13 +48,14 @@ export class CrudService {
     requestParamDataDto: RequestParamDataDto,
     queryParamDataDto: QueryParamDataDto,
     conditions: ConditionObject,
+    joinTable?: JoinTable[],
   ) {
     const { appid, schema } = requestParamDataDto;
     const appInfo = await this.getApplicationInfo(appid)
     const tableInfo = await this.queryBus.execute(new GetSchemaStructureQuery(appInfo, appid, schema));
 
     return this.queryBus.execute(
-      new GetDataQuery(appInfo, tableInfo, requestParamDataDto, queryParamDataDto, conditions)
+      new GetDataQuery(appInfo, tableInfo, requestParamDataDto, queryParamDataDto, conditions, joinTable)
     );
   }
 

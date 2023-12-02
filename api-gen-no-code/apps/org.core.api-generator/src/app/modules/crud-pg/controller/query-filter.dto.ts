@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString, } from 'class-validator';
-import { SortType } from '../../../core/pgsql/pg.relationaldb.query-builder';
+import { ConditionObject, JoinTable, SortType } from '../../../core/pgsql/pg.relationaldb.query-builder';
 
 export class RequestParamDataDto {
   @ApiProperty({
@@ -68,4 +68,42 @@ export class QueryParamDataDto {
   })
   @IsOptional()
   cahing?: boolean;
+}
+
+
+export class ConditionDto {
+  @IsOptional()
+  @ApiProperty({
+    description: 'Điều kiện để truy vấn trên một bảng',
+    example: {
+      "or": [
+        {
+          "and": [
+            { "auth": "isAuth" },
+            { "method": "POST" }
+          ]
+        },
+        {
+          "or": [
+            { "method": "POST" },
+            { "method": "GET" }
+          ]
+        }
+      ]
+
+    },
+  })
+  condition?: ConditionObject;
+
+  @IsOptional()
+  @ApiProperty({
+    description: 'Điều kiện join bảng ',
+    example: {
+      withTableName: 'product', // Table name
+      mainColumnKey: 'id',
+      childColumnKey: 'id',
+      selectColumns: ['id', 'name'],
+    },
+  })
+  joinTables?: JoinTable[];
 }

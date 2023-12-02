@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { QueryParamDataDto, RequestParamDataDto } from './query-filter.dto';
+import { ConditionDto, QueryParamDataDto, RequestParamDataDto } from './query-filter.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { ConditionObject } from '../../../core/pgsql/pg.relationaldb.query-builder';
 import { CrudService } from '../services/crud-pg.service';
@@ -17,22 +17,7 @@ export class CrudController {
   @ApiBody({
     schema: {
       example: {
-        condition: {
-          "or": [
-            {
-              "and": [
-                { "auth": "isAuth" },
-                { "method": "POST" }
-              ]
-            },
-            {
-              "or": [
-                { "method": "POST" },
-                { "method": "GET" }
-              ]
-            }
-          ]
-        }
+
       }
     }
   })
@@ -41,10 +26,10 @@ export class CrudController {
   async query(
     @Param() requestParamDataDto: RequestParamDataDto,
     @Query() queryParamDataDto: QueryParamDataDto,
-    @Body() conditions?: ConditionObject
+    @Body() conditions?: ConditionDto
   ) {
     try {
-      const queryResult = await this.service.query(requestParamDataDto, queryParamDataDto, conditions);
+      const queryResult = await this.service.query(requestParamDataDto, queryParamDataDto, conditions.condition, conditions.joinTables);
       return new ResponseBase(200, 'Query success', queryResult);
     } catch (error) {
       throw new HttpException(new ErrorBase(error), HttpStatus.OK);

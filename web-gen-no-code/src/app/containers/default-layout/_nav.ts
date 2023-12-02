@@ -35,15 +35,15 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-puzzle' },
     badge: {
       color: 'success',
-      text: 'UPDATE-LATER'
+      text: 'UPDATING'
     }
   },{
     name: 'Health Check',
-    url: '/manage-api/database',
+    url: '/manage-api/health-check',
     iconComponent: { name: 'cil-speedometer' },
     badge: {
       color: 'success',
-      text: 'process'
+      text: 'UPDATING'
     }
   },
 ];

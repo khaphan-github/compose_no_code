@@ -3,7 +3,7 @@ import { DbQueryDomain } from '../../../core/db.query.domain';
 import { Logger } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { QueryParamDataDto, RequestParamDataDto } from '../controller/query-filter.dto';
-import { ConditionObject, QueryBuilderResult, RelationalDBQueryBuilder } from '../../../core/pgsql/pg.relationaldb.query-builder';
+import { ConditionObject, JoinTable, QueryBuilderResult, RelationalDBQueryBuilder } from '../../../core/pgsql/pg.relationaldb.query-builder';
 import { InvalidColumnOfTableError } from '../errors/invalid-table-colums.error';
 import { ApplicationModel } from '../../../core/models/application.model';
 import { CanNotExecuteQueryError } from '../errors/can-not-execute-query.error';
@@ -15,7 +15,8 @@ export class GetDataQuery {
     public readonly tableInfo: object[],
     public readonly requestParamDataDto: RequestParamDataDto,
     public readonly queryParamDataDto: QueryParamDataDto,
-    public readonly conditions: ConditionObject,
+    public readonly conditions?: ConditionObject,
+    public readonly joinTable?: JoinTable[],
   ) { }
 }
 @QueryHandler(GetDataQuery)
@@ -35,7 +36,7 @@ export class GetDataQueryHandler
   }
 
   async execute(query: GetDataQuery): Promise<object> {
-    const { appInfo, requestParamDataDto, queryParamDataDto, conditions, tableInfo } = query;
+    const { appInfo, requestParamDataDto, queryParamDataDto, conditions, tableInfo, joinTable } = query;
 
     const { appid, schema } = requestParamDataDto;
     const { orderby, page, selects, size, sort } = queryParamDataDto;
@@ -57,8 +58,10 @@ export class GetDataQueryHandler
           size: size,
           sort: sort,
         },
-        selects
+        selects,
+        joinTable,
       );
+      console.log(getDataScript);
     } catch (error) {
       return Promise.reject(new InvalidColumnOfTableError(appid, schema, error.message));
     }

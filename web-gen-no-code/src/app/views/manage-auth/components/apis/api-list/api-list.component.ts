@@ -4,7 +4,7 @@ import { SResponse } from 'src/app/core/config/http-client/response-base';
 import { GeneratedAPI } from '../../../interfaces/response/generated-api.interface';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UpdateApiComponent } from '../update-api/update-api.component';
+import { UpdateApiComponent } from '../docs/update-api.component';
 import { EVENT } from '../../../event/const';
 
 @Component({
@@ -25,7 +25,7 @@ export class ApiListComponent implements OnInit {
     this.list$ = this.service.apiList();
   }
 
-  onUpdate(api: GeneratedAPI) {
+  onViewDocs(api: GeneratedAPI) {
     const updateModal = this.modal.open(UpdateApiComponent, {
       backdrop: 'static',
       keyboard: false,

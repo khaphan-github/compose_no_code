@@ -125,4 +125,7 @@ export class ManageApiService {
 
   // #region worksspace
   // #region connect to manage:
+
+  // #region generator
+  // #endregion generator
 }

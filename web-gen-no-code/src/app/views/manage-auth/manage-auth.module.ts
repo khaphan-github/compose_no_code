@@ -19,9 +19,10 @@ import { IconModule } from '@coreui/icons-angular';
 import { NotFoundComponent } from '../shared/not-found/not-found.component';
 import { UpdateAccountComponent } from './components/account/update-account/update-account.component';
 import { ApiListComponent } from './components/apis/api-list/api-list.component';
-import { UpdateApiComponent } from './components/apis/update-api/update-api.component';
+import { UpdateApiComponent } from './components/apis/docs/update-api.component';
 import { CreateAccountComponent } from './components/account/create/setting.component';
 import { HighlightModule } from 'ngx-highlightjs';
+import { ExecuteScriptComponent } from './components/database/execute-script/execute-script.component';
 
 const UI_MODULES = [
   IconModule,
@@ -59,6 +60,9 @@ const MODULE_COMPONENTS = [
   CreateRoleComponent,
   UpdateRoleComponent,
   DecentralizeComponent,
+
+  // Database.
+  ExecuteScriptComponent,
 ]
 
 @NgModule({
@@ -82,6 +86,10 @@ const MODULE_COMPONENTS = [
         path: 'role',
         component: RoleListComponent
       },
+      {
+        path: 'database',
+        component: ExecuteScriptComponent,
+      }
     ]),
   ],
   providers: [ManageApiService],

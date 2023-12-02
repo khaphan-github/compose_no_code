@@ -72,32 +72,35 @@ export class GeneratedApiModel {
     const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role'];
     for (let index = 0; index < finalResult.length; index++) {
       const element = finalResult[index] as { table_name: string, column_names: string[] };
-      if(whiteList.includes(element.table_name)) {
+      if (whiteList.includes(element.table_name)) {
         continue;
       }
 
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET, ));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET,));
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.POST, ));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.POST,));
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.PUT, ));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.PUT,));
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.DELETE, ));
+      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.DELETE,));
       id += 1;
     }
 
+    // Register
+    // Register, Login api
     return apis;
+  }
+  convertArrayToObject(columnNames: string[], exampleData: object | string | number) {
+    return columnNames.reduce((result, columnName) => {
+      result[columnName] = exampleData;
+      return result;
+    }, {});
   }
 
   getApiConfig = (index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod) => {
     const apiRecord = {};
-    function convertArrayToObject(columnNames: string[], exampleData: object | string | number) {
-      return columnNames.reduce((result, columnName) => {
-        result[columnName] = exampleData;
-        return result;
-      }, {});
-    }
-    const requestBody = convertArrayToObject(columns, `put_your_data_`);
+
+    const requestBody = this.convertArrayToObject(columns, `put_your_data_`);
 
     const tableName = table ?? '';
     const apiPath = `/${tableName}`;
@@ -162,6 +165,28 @@ export class GeneratedApiModel {
         apiRecord[ACTION] = ApiAction.DELETE;
         break;
     }
+    return { ...apiRecord, id: index };
+  }
+
+  createDocsLoginAPI(index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod) {
+    const apiRecord = {};
+    const requestBody = {
+      username: 'put_your_username',
+      password: 'put_your_password',
+    }
+
+    const { ACTION, API_PATH, APP_ID, AUTHENTICATION, CREATED_AT, ENABLE, HEADERS, HTTP_METHOD,
+      REQUEST_BODY, RESPONSE_ATTRIBUTES, TABLE_NAME, UPDATED_AT, REQUEST_PARAMS } = EGeneratedApisTableColumns;
+
+    apiRecord[APP_ID] = appId;
+    apiRecord[TABLE_NAME] = 'http://hostname/api/v1/login';
+    apiRecord[API_PATH] = '';
+    apiRecord[REQUEST_PARAMS] = {};
+
+    apiRecord[HTTP_METHOD] = RestFulMethod.POST;
+    apiRecord[ACTION] = ApiAction.INSERT;
+    apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
+    apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
     return { ...apiRecord, id: index };
   }
 }

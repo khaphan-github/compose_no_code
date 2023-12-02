@@ -24,6 +24,15 @@ export type QueryBuilderResult = {
   params: Array<unknown>;
 }
 
+
+// Relationship
+export interface JoinTable {
+  withTableName: string, // Table name
+  mainColumnKey: string,
+  childColumnKey: string,
+  selectColumns: string[],
+}
+
 export class RelationalDBQueryBuilder {
   constructor(
     private table?: string,
@@ -69,7 +78,7 @@ export class RelationalDBQueryBuilder {
     }
 
     const queryString = `
-     INSERT INTO ${this.table} (${columns.join(', ')}) 
+     INSERT INTO ${this.table} (${columns.join(', ')})
      VALUES (${placeholders})
      RETURNING ${returningQuery};
     `;
@@ -109,7 +118,7 @@ export class RelationalDBQueryBuilder {
     }
 
     const queryString = `
-    INSERT INTO ${this.table} (${availableColums.join(', ')}) 
+    INSERT INTO ${this.table} (${availableColums.join(', ')})
     VALUES ${placeholdersValue.join(`,`)}
     ${returningQuery};
    `;
@@ -151,13 +160,48 @@ export class RelationalDBQueryBuilder {
     return result
   }
 
-  getByQuery = (types?: SelectQueryType, selected?: string[],): QueryBuilderResult => {
+  getByQuery = (types?: SelectQueryType, selected?: string[], joinTable?: JoinTable[]): QueryBuilderResult => {
+    let joinTableQuery = '';
+
+    if (joinTable && joinTable.length !== 0) {
+      // TODO: Validate columns
+      for (let index = 0; index < joinTable.length; index++) {
+        const element = joinTable[index];
+        joinTableQuery += `
+          JOIN ${element.withTableName} ON ${this.table}.${element.mainColumnKey} = ${element.withTableName}.${element.childColumnKey}
+        `
+      }
+    }
+
     let selectedQuery = '*';
 
     if (!_.isNil(selected)) {
       this.validateColumns(selected);
-      selectedQuery = selected.join(', ');
+      const buildSelectValue: string[] = [];
+
+      // Nếu có select luôn
+      if (joinTable && joinTable.length != 0) {
+        for (let index = 0; index < joinTable.length; index++) {
+          const element = joinTable[index];
+          if (joinTable && element?.selectColumns?.length !== 0) {
+
+            for (let index = 0; index < element?.selectColumns?.length; index++) {
+              buildSelectValue.push(`${element?.withTableName}.${element?.selectColumns[index]}`)
+            }
+          }
+        }
+
+        for (let index = 0; index < selected.length; index++) {
+          const element = selected[index];
+          buildSelectValue.push(`${this.table}.${element}`)
+        }
+
+        selectedQuery = buildSelectValue.join(', ');
+      } else {
+        selectedQuery = selected.join(', ');
+      }
     }
+
     const defaultQuery = `
       SELECT ${selectedQuery}
       FROM ${this.table}
@@ -191,9 +235,9 @@ export class RelationalDBQueryBuilder {
       const sizeQuery = size ? ` LIMIT ${+size} ` : '';
       const pageQuery = page ? ` OFFSET ${+page} ` : '';
 
-
       const queryString = `
         ${defaultQuery}
+        ${joinTableQuery}
         ${whereQuery}
         ${orderByQuery}
         ${sizeQuery}
@@ -240,7 +284,7 @@ export class RelationalDBQueryBuilder {
   getSchemaInfo = (tableName: string): QueryBuilderResult => {
     const queryString = `
       SELECT *
-      FROM information_schema.columns 
+      FROM information_schema.columns
       WHERE table_name LIKE $1
     `;
     return {
