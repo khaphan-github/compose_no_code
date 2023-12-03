@@ -30,7 +30,7 @@ export interface JoinTable {
   withTableName: string, // Table name
   mainColumnKey: string,
   childColumnKey: string,
-  selectColumns: string[],
+  selectColumns: string[], // In this column ? with col need to select
 }
 
 export class RelationalDBQueryBuilder {
@@ -131,7 +131,7 @@ export class RelationalDBQueryBuilder {
   }
 
   // should update by id
-  update = (idColumnName: string, idColumnValue: unknown, data: object): QueryBuilderResult => {
+  update = (idColumnName: string, idColumnValue: unknown, data: object, returning?: string[]): QueryBuilderResult => {
     if (_.isEmpty(data)) {
       throw new Error(`Error when update data id: ${idColumnValue}, data shoud not be empty!`);
     }
@@ -145,12 +145,16 @@ export class RelationalDBQueryBuilder {
     const attributeUpdateQuery = queryParams.join(', ');
 
     values.push(idColumnValue);
-
+    let returningQuery = '';
+    if (returning && returning?.length > 0) {
+      this.validateColumns(returning);
+      returningQuery = `RETURNING ${returning.join(', ')}`;
+    }
     const queryString = `
       UPDATE ${this.table}
       SET ${attributeUpdateQuery}
       WHERE ${idColumnName} = $${values.length}
-      RETURNING *;
+      ${returningQuery};
     `;
 
     const result: QueryBuilderResult = {
@@ -160,7 +164,8 @@ export class RelationalDBQueryBuilder {
     return result
   }
 
-  getByQuery = (types?: SelectQueryType, selected?: string[], joinTable?: JoinTable[]): QueryBuilderResult => {
+  // Need to check
+  getByQuery = (types?: SelectQueryType, selected?: string[], joinTable?: JoinTable[], returning?: string[]): QueryBuilderResult => {
     let joinTableQuery = '';
 
     if (joinTable && joinTable.length !== 0) {
@@ -168,7 +173,8 @@ export class RelationalDBQueryBuilder {
       for (let index = 0; index < joinTable.length; index++) {
         const element = joinTable[index];
         joinTableQuery += `
-          JOIN ${element.withTableName} ON ${this.table}.${element.mainColumnKey} = ${element.withTableName}.${element.childColumnKey}
+          JOIN ${element.withTableName}
+          ON ${this.table}.${element.mainColumnKey} = ${element.withTableName}.${element.childColumnKey}
         `
       }
     }
@@ -186,7 +192,7 @@ export class RelationalDBQueryBuilder {
           if (joinTable && element?.selectColumns?.length !== 0) {
 
             for (let index = 0; index < element?.selectColumns?.length; index++) {
-              buildSelectValue.push(`${element?.withTableName}.${element?.selectColumns[index]}`)
+              buildSelectValue.push(`${element?.withTableName}.${element?.selectColumns[index]} AS ${element?.withTableName}_${element?.selectColumns[index]}`)
             }
           }
         }
@@ -241,7 +247,8 @@ export class RelationalDBQueryBuilder {
         ${whereQuery}
         ${orderByQuery}
         ${sizeQuery}
-        ${pageQuery};
+        ${pageQuery}
+        ;
       `;
 
       return {

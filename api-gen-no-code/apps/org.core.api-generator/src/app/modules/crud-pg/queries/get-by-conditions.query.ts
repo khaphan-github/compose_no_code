@@ -17,6 +17,7 @@ export class GetDataQuery {
     public readonly queryParamDataDto: QueryParamDataDto,
     public readonly conditions?: ConditionObject,
     public readonly joinTable?: JoinTable[],
+    public readonly returning?: string[],
   ) { }
 }
 @QueryHandler(GetDataQuery)
@@ -36,7 +37,7 @@ export class GetDataQueryHandler
   }
 
   async execute(query: GetDataQuery): Promise<object> {
-    const { appInfo, requestParamDataDto, queryParamDataDto, conditions, tableInfo, joinTable } = query;
+    const { appInfo, requestParamDataDto, queryParamDataDto, conditions, tableInfo, joinTable, returning } = query;
 
     const { appid, schema } = requestParamDataDto;
     const { orderby, page, selects, size, sort } = queryParamDataDto;
@@ -60,8 +61,8 @@ export class GetDataQueryHandler
         },
         selects,
         joinTable,
+        returning,
       );
-      console.log(getDataScript);
     } catch (error) {
       return Promise.reject(new InvalidColumnOfTableError(appid, schema, error.message));
     }

@@ -16,12 +16,42 @@
         </div>
       </c-col>
       <c-col [md]="12">
-        <label cLabel for="isActive"><strong>2. Trạng thái hoạt động</strong></label>
+        <label cLabel for="isActive"><strong>2. Trạng thái hoạt động:</strong></label>
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" id="isActive" formControlName="isActive">
           <label class="form-check-label" for="isActive">
             {{this.updateApiForm.get('isActive')?.value == true ? 'Đang hoạt động': 'Dừng hoạt động'}}</label>
         </div>
+      </c-col>
+
+      <c-col [md]="12">
+        <label cLabel for="colums"><strong>2. Cài đặt các trường dữ liệu:</strong></label>
+        <p>Vui lòng chọn ít nhất một trường để hiển thị</p>
+        <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+
+          <thead cTableColor="light">
+            <tr>
+              <th class="text-center">
+                <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+              </th>
+              <th>Tên cột</th>
+              <th class="text-center">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let column of this.api?.api_authorized?.columns; index as i"  (click)="this.onClickRow(column)" style="cursor: pointer;">
+              <td class="text-center">
+                {{ i + 1 }}
+              </td>
+              <td>
+                <div><strong>{{ column?.columnName ?? '_' }}</strong> </div>
+              </td>
+              <td class="text-center">
+                <c-badge *ngIf="this.checkBoxHelper.checkedThisItem(column)" color="info">Hiện</c-badge>
+                <c-badge *ngIf="!this.checkBoxHelper.checkedThisItem(column)" color="dark">Ẩn</c-badge>
+              </td>
+          </tbody>
+        </table>
       </c-col>
     </div>
   </form>

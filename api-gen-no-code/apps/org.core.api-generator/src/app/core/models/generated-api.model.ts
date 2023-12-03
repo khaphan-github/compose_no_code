@@ -106,7 +106,7 @@ export class GeneratedApiModel {
     const apiPath = `/${tableName}`;
 
     const { ACTION, API_PATH, APP_ID, AUTHENTICATION, CREATED_AT, ENABLE, HEADERS, HTTP_METHOD,
-      REQUEST_BODY, RESPONSE_ATTRIBUTES, TABLE_NAME, UPDATED_AT, REQUEST_PARAMS } = EGeneratedApisTableColumns;
+      REQUEST_BODY, RESPONSE_ATTRIBUTES, TABLE_NAME, UPDATED_AT, REQUEST_PARAMS, API_AUTHORIZED } = EGeneratedApisTableColumns;
 
     apiRecord[APP_ID] = appId;
     apiRecord[TABLE_NAME] = tableName;
@@ -122,6 +122,10 @@ export class GeneratedApiModel {
     apiRecord[REQUEST_BODY] = JSON.stringify({});
     apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify({});
 
+    apiRecord[API_AUTHORIZED] = JSON.stringify({
+      columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {}}})
+    });
+
     switch (typeApi) {
       case RestFulMethod.GET:
         apiRecord[API_PATH] = `${apiPath}/query`;
@@ -134,7 +138,7 @@ export class GeneratedApiModel {
         };
         apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
-        apiRecord[HTTP_METHOD] = RestFulMethod.GET;
+        apiRecord[HTTP_METHOD] = RestFulMethod.POST;
         apiRecord[ACTION] = ApiAction.QUERY;
 
         break;
@@ -168,6 +172,8 @@ export class GeneratedApiModel {
     return { ...apiRecord, id: index };
   }
 
+
+  // TODO: Lafm dock api
   createDocsLoginAPI(index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod) {
     const apiRecord = {};
     const requestBody = {

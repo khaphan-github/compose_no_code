@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { ConditionDto, QueryParamDataDto, RequestParamDataDto } from "../controller/query-filter.dto";
+import { QueryParamDataDto, RequestParamDataDto } from "../controller/query-filter.dto";
 import { ConditionObject, JoinTable } from "../../../core/pgsql/pg.relationaldb.query-builder";
 import { GetDataQuery } from "../queries/get-by-conditions.query";
 import { DeleteDataCommand } from "../commands/delete.command";
@@ -11,6 +11,7 @@ import { GetWorkspaceConnectionQuery } from "../../generator/queries/get-workspa
 import { GetAppInfoByAppId } from "../queries/get-app-info-by-app-id.query";
 import { ApplicationModel } from "../../../core/models/application.model";
 import { RunScriptCommand } from "../../generator/commands/run-script-command";
+import { WORKSPACE_VARIABLE } from "../../shared/variables/workspace.variable";
 
 @Injectable()
 export class CrudService {
@@ -44,6 +45,29 @@ export class CrudService {
     return this.commandBus.execute(new DeleteDataCommand(appInfo, tableInfo, appId, schema, id, column));
   }
 
+
+  // TODO: Get available column should response each api
+  public async getColumnsToResonseEachAPI(table: string, action: string) {
+    // Hanlde logic \;
+    const appId = WORKSPACE_VARIABLE.APP_ID.toString();
+
+    const queryResult = await this.query({
+      appid: appId,
+      schema: '_core_generated_apis'
+    }, {
+      selects: ['table_name', 'action', 'api_authorized'],
+    }, {
+      and: [
+        { 'table_name': table },
+        { 'action': action },
+      ]
+    }) as any[];
+
+    console.log(JSON.stringify(queryResult[0]?.api_authorized?.columns));
+
+    return queryResult[0]?.api_authorized?.columns;
+  }
+
   async query(
     requestParamDataDto: RequestParamDataDto,
     queryParamDataDto: QueryParamDataDto,
@@ -54,10 +78,13 @@ export class CrudService {
     const appInfo = await this.getApplicationInfo(appid)
     const tableInfo = await this.queryBus.execute(new GetSchemaStructureQuery(appInfo, appid, schema));
 
+    // const returningQueryByTable = await this.getColumnsToResonseEachAPI(schema, 'QUERY');
+
     return this.queryBus.execute(
-      new GetDataQuery(appInfo, tableInfo, requestParamDataDto, queryParamDataDto, conditions, joinTable)
+      new GetDataQuery(appInfo, tableInfo, requestParamDataDto, queryParamDataDto, conditions, joinTable, [])
     );
   }
+
 
   // Additional:
   async countAll(appId: string, schema: string) {
@@ -79,5 +106,7 @@ export class CrudService {
       `)
     );
   }
+
+  // TODO: Get returning each data/
 
 }
