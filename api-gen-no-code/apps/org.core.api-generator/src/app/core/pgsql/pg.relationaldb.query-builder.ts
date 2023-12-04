@@ -111,7 +111,7 @@ export class RelationalDBQueryBuilder {
       valueArray = valueArray.concat(values);
     })
 
-    let returningQuery = 'RETURNING *';
+    let returningQuery = 'RETURNING true AS success';
     if (returning && returning?.length > 0) {
       this.validateColumns(returning);
       returningQuery = `RETURNING ${returning.join(', ')}`;
@@ -165,7 +165,27 @@ export class RelationalDBQueryBuilder {
   }
 
   // Need to check
-  getByQuery = (types?: SelectQueryType, selected?: string[], joinTable?: JoinTable[], returning?: string[]): QueryBuilderResult => {
+  getByQuery = (
+    types?: SelectQueryType,
+    selected?: string[],
+    joinTable?: JoinTable[],
+    returning?: string[]
+  ): QueryBuilderResult => {
+    // Trường hợp không có join bảng mà vừa có selected và returing;
+    // select ['id', 'name', 'password']
+    // returning: ['id', 'name', 'description']
+    /// result : ['id', 'name'];
+    let selectedQuery =  '*';
+
+    let columnsNeedToSelect: string[] = [];
+    if (selected?.length !== 0 && returning?.length !== 0) {
+      columnsNeedToSelect = selected?.filter(item => returning?.includes(item)) ?? [];
+    }
+
+    if(columnsNeedToSelect?.length !== 0) {
+      selectedQuery = columnsNeedToSelect?.join(',');
+    }
+    console.log(selectedQuery);
     let joinTableQuery = '';
 
     if (joinTable && joinTable.length !== 0) {
@@ -179,34 +199,33 @@ export class RelationalDBQueryBuilder {
       }
     }
 
-    let selectedQuery = '*';
+    // if (!_.isNil(selected)) {
+    //   this.validateColumns(selected);
 
-    if (!_.isNil(selected)) {
-      this.validateColumns(selected);
-      const buildSelectValue: string[] = [];
+    //   const buildSelectValue: string[] = [];
 
-      // Nếu có select luôn
-      if (joinTable && joinTable.length != 0) {
-        for (let index = 0; index < joinTable.length; index++) {
-          const element = joinTable[index];
-          if (joinTable && element?.selectColumns?.length !== 0) {
+    //   // Nếu có select luôn
+    //   if (joinTable && joinTable.length != 0) {
+    //     for (let index = 0; index < joinTable.length; index++) {
+    //       const element = joinTable[index];
+    //       if (joinTable && element?.selectColumns?.length !== 0) {
 
-            for (let index = 0; index < element?.selectColumns?.length; index++) {
-              buildSelectValue.push(`${element?.withTableName}.${element?.selectColumns[index]} AS ${element?.withTableName}_${element?.selectColumns[index]}`)
-            }
-          }
-        }
+    //         for (let index = 0; index < element?.selectColumns?.length; index++) {
+    //           buildSelectValue.push(`${element?.withTableName}.${element?.selectColumns[index]} AS ${element?.withTableName}_${element?.selectColumns[index]}`)
+    //         }
+    //       }
+    //     }
 
-        for (let index = 0; index < selected.length; index++) {
-          const element = selected[index];
-          buildSelectValue.push(`${this.table}.${element}`)
-        }
+    //     for (let index = 0; index < selected.length; index++) {
+    //       const element = selected[index];
+    //       buildSelectValue.push(`${this.table}.${element}`)
+    //     }
 
-        selectedQuery = buildSelectValue.join(', ');
-      } else {
-        selectedQuery = selected.join(', ');
-      }
-    }
+    //     selectedQuery = buildSelectValue.join(', ');
+    //   } else {
+    //     selectedQuery = selected.join(', ');
+    //   }
+    // }
 
     const defaultQuery = `
       SELECT ${selectedQuery}

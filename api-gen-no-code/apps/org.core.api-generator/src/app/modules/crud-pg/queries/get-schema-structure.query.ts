@@ -49,7 +49,7 @@ export class GetSchemaStructureQueryHandler
     }
 
     const { queryString, params } = this.relationalDBQueryBuilder.getByQuery(
-      { conditions: { 'table_name': tableName } }, ['column_name']
+      { conditions: { 'table_name': tableName } }, ['column_name'], null, ['column_name']
     );
 
     let typeormDataSource: DataSource;
@@ -57,12 +57,15 @@ export class GetSchemaStructureQueryHandler
     try {
       typeormDataSource = await new DataSource(appInfo.database_config).initialize();
       const queryResult = await typeormDataSource.query(queryString, params);
+
       if (!queryResult || queryResult?.length == 0) {
         await typeormDataSource?.destroy();
         return Promise.reject(new NotFoundAppByIdError(appid, schema));
       }
+
       this.nodeCache.set(cacheKey, queryResult);
       await typeormDataSource?.destroy();
+
       return Promise.resolve(queryResult);
     } catch (error) {
       await typeormDataSource?.destroy();

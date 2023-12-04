@@ -58,13 +58,16 @@ export class AuthService {
     }
     try {
       const publicApiSet = await this.getPublicApis() as Set<string>;
+
       const tableName = PolicyModel.extractTableName(request);
+
       const key = PolicyModel.getKeyCachePublicAPI(tableName, PolicyModel.getActionFromRequest(request));
+
       const right = publicApiSet.has(key) ?? false;
       this.logger.log(`Current request ${right ? 'have' : 'do not have'} role: ${key}`);
       return right;
     } catch (error) {
-      this.logger.error(`Error: isRequestRequireResourceInWhiteList ${error.message}`)
+      this.logger.error(`Error: isRequestRequireResourceInWhiteList ${error}`)
       return false;
     }
   }

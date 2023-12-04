@@ -18,6 +18,7 @@ export class UpdateDataCommand {
     public readonly id: string | number,
     public readonly idColumn: string,
     public readonly data: Partial<{ [key: string]: object }>,
+    public readonly returing?: string[],
   ) { }
 }
 @CommandHandler(UpdateDataCommand)
@@ -35,7 +36,7 @@ export class UpdateDataCommandHandler
     this.relationalDBQueryBuilder = new RelationalDBQueryBuilder();
   }
   async execute(command: UpdateDataCommand) {
-    const { appId, data, id, idColumn, appInfo, schema, tableInfo } = command;
+    const { appId, data, id, idColumn, appInfo, schema, tableInfo, returing } = command;
 
     const validColumns = this.dbQueryDomain.getTableColumnNameArray(tableInfo, 'column_name');
     const tableName = this.dbQueryDomain.getTableName(appId, schema);
@@ -46,7 +47,7 @@ export class UpdateDataCommandHandler
     let query: string;
     let queryParam: unknown[];
     try {
-      const { queryString, params } = this.relationalDBQueryBuilder.update(idColumn, id, data);
+      const { queryString, params } = this.relationalDBQueryBuilder.update(idColumn, id, data, returing);
       query = queryString;
       queryParam = params;
     } catch (error) {

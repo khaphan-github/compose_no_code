@@ -22,6 +22,7 @@ export class CreateDataCommand {
     public readonly appId: string,
     public readonly schema: string,
     public readonly data: Array<Partial<{ [key: string]: object }>>,
+    public readonly returning?: string[],
   ) { }
 }
 @CommandHandler(CreateDataCommand)
@@ -68,7 +69,7 @@ export class CreateDataCommandHandler
     // Prepare insert query builder
     let insertQuery: QueryBuilderResult;
     try {
-      insertQuery = this.queryBuilderTableInsert.insertMany(data);
+      insertQuery = this.queryBuilderTableInsert.insertMany(data, command.returning);
     } catch (error) {
       return Promise.reject(new InvalidColumnOfTableError(appId, schema, error.message));
     }
@@ -79,6 +80,7 @@ export class CreateDataCommandHandler
       workspaceDataSource = await new DataSource(appInfo.database_config).initialize();
       const queryResult = await workspaceDataSource.query(insertQuery.queryString, insertQuery.params);
       await workspaceDataSource?.destroy();
+
       this.eventBus.publish(new ExecutedSQLQueryEvent(CreateDataCommandHandler.name, insertQuery, queryResult))
       return Promise.resolve(queryResult);
     } catch (error) {
