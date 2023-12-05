@@ -2,16 +2,18 @@
 <c-callout color="primary">
   <p>Các thông tin cần biết khi cấu hình các APIs:</p>
   <ul>
-    <li>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) sẽ gồm các
-      api có sẵn trong hệ thống với tiền tố <strong>_core</strong>.</li>
+    <li>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) .</li>
     <li>
-      Bạn có thể cài đặt các cấu hình như: <strong>kích hoạt, thay đổi phạm vi sử dụng, giới hạn các trường trả về.</strong>
+      Bạn có thể cài đặt các cấu hình như: <strong>kích hoạt, thay đổi phạm vi sử dụng, giới hạn các
+        trường trả về.</strong>
     </li>
     <li>
-      Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng cho ứng dụng Front-End.
+      Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng cho
+      ứng dụng Front-End.
     </li>
     <li>
-      Xem chi tiết hướng dẫn tại <a href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
+      Xem chi tiết hướng dẫn tại <a
+        href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
     </li>
   </ul>
 </c-callout>
@@ -34,9 +36,90 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td class="text-center">
+          {{ 1 }}
+        </td>
+        <td>
+          <div><strong>{{ '/api/v1/login' }}</strong> </div>
+          <div class="small text-medium-emphasis text-nowrap">
+            <span>
+              Phương thức: <strong>{{ 'POST' }}</strong> | Hành động: <strong>{{ 'QUERY'}}</strong>
+              <!-- {{ api.state }} | Registered: {{ api.registered }} -->
+            </span>
+          </div>
+        </td>
+        <td>
+          <c-badge color="success" shape="rounded-pill"><svg cIcon name="cilCheck" size="sm"
+              title="l"></svg>Public</c-badge>
+        </td>
+        <td class="text-left">
+          <div class="small text-medium-emphasis">Schema: public</div>
+          <div class="fw-semibold text-nowrap">public.{{ '_core_account' }}</div>
+        </td>
+        <td>
+          <div class="small text-medium-emphasis">Cập nhật lần cuối</div>
+          <div class="fw-semibold text-nowrap">_</div>
+        </td>
+        <td class="text-center">
+          <c-badge color="success" shape="rounded-pill">Đang hoạt động</c-badge>
+        </td>
+        <td class="text-center">
+          <c-dropdown alignment="end" variant="btn-group">
+            <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+              <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+            </button>
+            <ul cDropdownMenu>
+              <li><a cDropdownItem>Xem hướng dẫn</a></li>
+              <li><a cDropdownItem>Cập nhật thông tin</a></li>
+            </ul>
+          </c-dropdown>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center">
+          {{ 2 }}
+        </td>
+        <td>
+          <div><strong>{{ '/api/v1/register' }}</strong> </div>
+          <div class="small text-medium-emphasis text-nowrap">
+            <span>
+              Phương thức: <strong>{{ 'POST' }}</strong> | Hành động: <strong>{{ 'INSERT'}}</strong>
+              <!-- {{ api.state }} | Registered: {{ api.registered }} -->
+            </span>
+          </div>
+        </td>
+        <td>
+          <c-badge color="success" shape="rounded-pill"><svg cIcon name="cilCheck" size="sm"
+              title="l"></svg>Public</c-badge>
+        </td>
+        <td class="text-left">
+          <div class="small text-medium-emphasis">Schema: public</div>
+          <div class="fw-semibold text-nowrap">public.{{ '_core_account' }}</div>
+        </td>
+        <td>
+          <div class="small text-medium-emphasis">Cập nhật lần cuối</div>
+          <div class="fw-semibold text-nowrap">_</div>
+        </td>
+        <td class="text-center">
+          <c-badge color="success" shape="rounded-pill">Đang hoạt động</c-badge>
+        </td>
+        <td class="text-center">
+          <c-dropdown alignment="end" variant="btn-group">
+            <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+              <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+            </button>
+            <ul cDropdownMenu>
+              <li><a cDropdownItem>Xem hướng dẫn</a></li>
+              <li><a cDropdownItem>Cập nhật thông tin</a></li>
+            </ul>
+          </c-dropdown>
+        </td>
+      </tr>
+
       <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer;">
         <td class="text-center">
-          {{ i + 1 }}
+          {{ i + 1 + 2 }}
         </td>
 
         <td>

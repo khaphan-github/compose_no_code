@@ -47,11 +47,14 @@ export class ManageApiService {
     return this.httpClient.post<SResponse<Array<GeneratedAPI>>>(apiPathBuilder('/_core_generated_apis/query'), {});
   }
 
-  updateApi = (id: number, scope: string, enable: boolean, displayColumns: any[]) => {
+  updateApi = (id: number, scope: string, enable: boolean, displayColumns: any[], modifyColumns: any[]) => {
     const requestBody = {
       authentication: scope == 'public' ? 'NO_AUTH' : 'NEED_AUTH',
       enable: enable,
-      api_authorized: { columns: displayColumns }
+      api_authorized: {
+        columns: displayColumns,
+        modify: modifyColumns
+      }
     }
     return this.httpClient.put<SResponse<GeneratedAPI>>(apiPathBuilder(`/_core_generated_apis/${id}?id_column=id`), requestBody);
 
@@ -145,7 +148,7 @@ export class ManageApiService {
     return this.httpClient.post<SResponse<Array<any>>>(
       apiPathBuilder('/_core_applications/query'),
       {
-    }, {
+      }, {
       params: params
     });
   }

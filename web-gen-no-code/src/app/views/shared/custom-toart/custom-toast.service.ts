@@ -17,7 +17,7 @@ export class CustomToastService extends SharedState<TToast> {
   }
 
   override setState(state: TToast | null): void {
-    super.setState({ ...state, show: true} as TToast);
+    super.setState(state);
     super.pushStateToSubscriber();
   }
 }

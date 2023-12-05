@@ -51,6 +51,7 @@ export class ApiListComponent implements OnInit {
   onUpdateApi(api: GeneratedAPI) {
     const updateModal = this.modal.open(UpdateApiComponent, {
       backdrop: 'static',
+      size: 'lg',
       keyboard: false,
     });
 

@@ -24,11 +24,10 @@
         </div>
       </c-col>
 
-      <c-col [md]="12">
-        <label cLabel for="colums"><strong>2. Cài đặt các trường dữ liệu:</strong></label>
-        <p>Vui lòng chọn ít nhất một trường để hiển thị</p>
+      <c-col [md]="this.api?.api_authorized?.columns && this.api?.api_authorized?.modify ? 6:12"
+        *ngIf="this.api?.api_authorized?.columns">
+        <label cLabel for="colums"><strong>3. Cài đặt các trường hiển thị:</strong></label>
         <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
-
           <thead cTableColor="light">
             <tr>
               <th class="text-center">
@@ -39,7 +38,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let column of this.api?.api_authorized?.columns; index as i"  (click)="this.onClickRow(column)" style="cursor: pointer;">
+            <tr *ngFor="let column of this.api?.api_authorized?.columns; index as i" (click)="this.onClickRow(column)"
+              style="cursor: pointer;">
               <td class="text-center">
                 {{ i + 1 }}
               </td>
@@ -49,6 +49,35 @@
               <td class="text-center">
                 <c-badge *ngIf="this.checkBoxHelper.checkedThisItem(column)" color="info">Hiện</c-badge>
                 <c-badge *ngIf="!this.checkBoxHelper.checkedThisItem(column)" color="dark">Ẩn</c-badge>
+              </td>
+          </tbody>
+        </table>
+      </c-col>
+
+      <c-col [md]="this.api?.api_authorized?.columns && this.api?.api_authorized?.modify ? 6:12">
+        <label cLabel for="colums"><strong>4. Cài đặt các trường cho phép sửa đỗi:</strong></label>
+        <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead cTableColor="light">
+            <tr>
+              <th class="text-center">
+                <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+              </th>
+              <th>Tên cột</th>
+              <th class="text-center">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let column of this.api?.api_authorized?.modify; index as i"
+              (click)="this.onClickModifyRow(column)" style="cursor: pointer;">
+              <td class="text-center">
+                {{ i + 1 }}
+              </td>
+              <td>
+                <div><strong>{{ column?.columnName ?? '_' }}</strong> </div>
+              </td>
+              <td class="text-center">
+                <c-badge *ngIf="this.allowModifyColumns.checkedThisItem(column)" color="info">Cho phép</c-badge>
+                <c-badge *ngIf="!this.allowModifyColumns.checkedThisItem(column)" color="dark">Không cho phép</c-badge>
               </td>
           </tbody>
         </table>

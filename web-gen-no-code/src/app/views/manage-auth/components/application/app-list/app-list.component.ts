@@ -39,12 +39,12 @@ export class AppListComponent implements OnInit {
     this.service.executeGenerator(formData).subscribe({
       next: (response) => {
         if (response.status == 200) {
-          this.notify.setState({ title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'success' });
+          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'light' });
         }
       },
 
       error: (err) => {
-        this.notify.setState({ title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
+        this.notify.setState({ show: true, title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
       },
     })
   }
@@ -55,13 +55,13 @@ export class AppListComponent implements OnInit {
     this.service.executeScriptAgain(formData).subscribe({
       next: (response) => {
         if (response.status == 200) {
-          this.notify.setState({ title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'success' });
+          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'light' });
           this.route.navigate(['manage-api/apis'])
         }
       },
 
       error: (err) => {
-        this.notify.setState({ title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
+        this.notify.setState({ show: true, title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
       },
     })
   }

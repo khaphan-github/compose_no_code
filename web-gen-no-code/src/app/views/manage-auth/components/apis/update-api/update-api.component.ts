@@ -20,11 +20,17 @@ export class UpdateApiComponent implements OnInit {
 
   updateApiForm!: FormGroup;
   public checkBoxHelper = new ComponentCheckBoxHelper<{ columnName: string, active: boolean, metadata: any }>('columnName');
+  public allowModifyColumns = new ComponentCheckBoxHelper<{ columnName: string, active: boolean, metadata: any }>('columnName');
+
   constructor() { }
 
   ngOnInit() {
     _.forEach(this.api?.api_authorized?.columns, (value) => {
       this.checkBoxHelper.handleOneChecked(value?.active, value);
+    });
+
+    _.forEach(this.api?.api_authorized?.modify, (value) => {
+      this.allowModifyColumns.handleOneChecked(value?.active, value);
     });
 
     this.updateApiForm = this.fb.group({
@@ -40,7 +46,11 @@ export class UpdateApiComponent implements OnInit {
       return { ...el, active: this.checkBoxHelper.checkedThisItem(el) };
     })
 
-    this.service.updateApi(this.api.id, accessScope, isActive, columns).subscribe({
+    const modifyColumns = this.api?.api_authorized?.modify?.map((el: any) => {
+      return { ...el, active: this.allowModifyColumns.checkedThisItem(el) };
+    })
+
+    this.service.updateApi(this.api.id, accessScope, isActive, columns, modifyColumns).subscribe({
       next: (value) => {
         if (value.status == 200) {
           this.activeModal.close(EVENT.CREATE_SUCCESS);
@@ -55,5 +65,9 @@ export class UpdateApiComponent implements OnInit {
 
   onClickRow(column: any) {
     this.checkBoxHelper.handleOneChecked(!this.checkBoxHelper.selectedItems.has(column.columnName), column);
+  }
+
+  onClickModifyRow(column: any) {
+    this.allowModifyColumns.handleOneChecked(!this.allowModifyColumns.selectedItems.has(column.columnName), column);
   }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ProgressModule, ToastModule } from '@coreui/angular';
 import { CustomToastService, TToast } from './custom-toast.service';
 import { IconModule } from '@coreui/icons-angular';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -10,9 +11,16 @@ import { IconModule } from '@coreui/icons-angular';
   templateUrl: './custom-toart.component.html',
   styleUrls: ['./custom-toart.component.scss']
 })
-export class CustomToartComponent implements OnInit {
+export class CustomToartComponent implements OnInit, OnDestroy {
   private customService = inject(CustomToastService);
+  private readonly destroy$$ = new Subject<void>();
+
   constructor() { }
+
+  ngOnDestroy(): void {
+    this.destroy$$.next();
+    this.destroy$$.complete();
+  }
 
   position = 'top-end';
   visible = false;
@@ -21,7 +29,7 @@ export class CustomToartComponent implements OnInit {
   public config!: TToast | null;
 
   ngOnInit() {
-    this.customService.getState().subscribe({
+    this.customService.getState().pipe(takeUntil(this.destroy$$)).subscribe({
       next: (value) => {
         this.config = value;
         this.visible = value?.show ?? false;

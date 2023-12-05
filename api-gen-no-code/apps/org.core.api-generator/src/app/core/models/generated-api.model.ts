@@ -73,9 +73,9 @@ export class GeneratedApiModel {
 
     for (let index = 0; index < finalResult.length; index++) {
       const element = finalResult[index] as { table_name: string, column_names: string[] };
-      // if (whiteList.includes(element.table_name)) {
-      //   continue;
-      // }
+      if (whiteList.includes(element.table_name)) {
+        continue;
+      }
 
       apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET,));
       id += 1;
@@ -87,7 +87,6 @@ export class GeneratedApiModel {
       id += 1;
     }
 
-    // Register
     // Register, Login api
     return apis;
   }
@@ -123,10 +122,6 @@ export class GeneratedApiModel {
     apiRecord[REQUEST_BODY] = JSON.stringify({});
     apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify({});
 
-    apiRecord[API_AUTHORIZED] = JSON.stringify({
-      columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {}}})
-    });
-
     switch (typeApi) {
       case RestFulMethod.GET:
         apiRecord[API_PATH] = `${apiPath}/query`;
@@ -141,6 +136,9 @@ export class GeneratedApiModel {
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
         apiRecord[HTTP_METHOD] = RestFulMethod.POST;
         apiRecord[ACTION] = ApiAction.QUERY;
+        apiRecord[API_AUTHORIZED] = JSON.stringify({
+          columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+        });
 
         break;
       case RestFulMethod.POST:
@@ -151,7 +149,10 @@ export class GeneratedApiModel {
         apiRecord[ACTION] = ApiAction.INSERT;
         apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
-
+        apiRecord[API_AUTHORIZED] = JSON.stringify({
+          columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+          modify: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+        });
         break;
       case RestFulMethod.PUT:
         apiRecord[API_PATH] = `${apiPath}/:id`;
@@ -161,39 +162,19 @@ export class GeneratedApiModel {
         apiRecord[ACTION] = ApiAction.UPDATE;
         apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
-
+        apiRecord[API_AUTHORIZED] = JSON.stringify({
+          columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+          modify: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+        });
         break;
       case RestFulMethod.DELETE:
         apiRecord[API_PATH] = `${apiPath}/:id`;
         apiRecord[REQUEST_PARAMS] = {};
         apiRecord[HTTP_METHOD] = RestFulMethod.DELETE;
         apiRecord[ACTION] = ApiAction.DELETE;
+        apiRecord[API_AUTHORIZED] = JSON.stringify({});
         break;
     }
-    return { ...apiRecord, id: index };
-  }
-
-
-  // TODO: Lafm dock api
-  createDocsLoginAPI(index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod) {
-    const apiRecord = {};
-    const requestBody = {
-      username: 'put_your_username',
-      password: 'put_your_password',
-    }
-
-    const { ACTION, API_PATH, APP_ID, AUTHENTICATION, CREATED_AT, ENABLE, HEADERS, HTTP_METHOD,
-      REQUEST_BODY, RESPONSE_ATTRIBUTES, TABLE_NAME, UPDATED_AT, REQUEST_PARAMS } = EGeneratedApisTableColumns;
-
-    apiRecord[APP_ID] = appId;
-    apiRecord[TABLE_NAME] = 'http://hostname/api/v1/login';
-    apiRecord[API_PATH] = '';
-    apiRecord[REQUEST_PARAMS] = {};
-
-    apiRecord[HTTP_METHOD] = RestFulMethod.POST;
-    apiRecord[ACTION] = ApiAction.INSERT;
-    apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
-    apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
     return { ...apiRecord, id: index };
   }
 }
