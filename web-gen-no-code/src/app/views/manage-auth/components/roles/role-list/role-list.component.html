@@ -1,5 +1,14 @@
 <h2 id="getting-started">Danh sách nhóm quyền trong hệ thống</h2>
-<p>Nhóm quyền bao gồm các quyền mạc định, bạn không thể sửa đổi các quyền mạc định này.</p>
+<c-callout color="primary">
+  <p>Bạn nên tạo các nhóm quyền phù hợp với hệ thống:</p>
+  <ul>
+    <li>Mạc định các quyền khi tạo sẽ được kích hoạt</li>
+    <li>Sau khi tạo các quyền thành công bạn cần khai báo các APIs phù hợp với nhóm quyền bạn đã tạo
+    </li>
+    <li>Lưu ý: Bạn nên tạo một <strong>Quyền mạc định khi tạo tạo tài khoản</strong> - hệ thống sẽ tự
+      gán quyền đó vào tài khoản được tạo</li>
+  </ul>
+</c-callout>
 
 <div>
   <c-row class="fade show">
@@ -37,7 +46,8 @@
                 </td>
                 <td (click)="this.onUpdate(role)">
                   <div><strong>{{ role.display_name }} </strong>
-                    <c-badge *ngIf="role?.metadata?.defaultWhenRegister" color="dark" shape="rounded-pill">Mạc định khi tạo tài
+                    <c-badge *ngIf="role?.metadata?.defaultWhenRegister" color="dark" shape="rounded-pill">Mạc định
+                      khi tạo tài
                       khoản</c-badge>
                   </div>
                   <div class="small text-medium-emphasis">Mô tả: {{role.description}}</div>

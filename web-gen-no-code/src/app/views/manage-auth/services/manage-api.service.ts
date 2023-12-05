@@ -129,5 +129,25 @@ export class ManageApiService {
   // #region connect to manage:
 
   // #region generator
+  executeGenerator = (sqlScript: string) => {
+    return this.httpClient.post<SResponse<any>>(`${getHostName()}/api/v1/generator/execute-script`, { script: sqlScript });
+  }
+
+  executeScriptAgain = (sqlScript: string) => {
+    return this.httpClient.post<SResponse<any>>(`${getHostName()}/api/v1/generator/execute-script-again`, { script: sqlScript });
+  }
+
+  getExecutedScript = () => {
+    const params = {
+      // Điền các thuộc tính bạn muốn lấy tại đây - mạc định lấy hết những cột có trong bảng
+      selects: ["create_db_script", "id"],
+    };
+    return this.httpClient.post<SResponse<Array<any>>>(
+      apiPathBuilder('/_core_applications/query'),
+      {
+    }, {
+      params: params
+    });
+  }
   // #endregion generator
 }

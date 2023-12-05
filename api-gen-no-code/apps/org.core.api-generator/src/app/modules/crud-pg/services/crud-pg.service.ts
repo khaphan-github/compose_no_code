@@ -67,7 +67,14 @@ export class CrudService {
     const returningQueryByTable = await this.getColumnsToResonseEachAPI(schema, 'INSERT');
 
     return this.commandBus.execute(
-      new CreateDataCommand(appInfo, tableInfo, appId, schema, data, returningQueryByTable)
+      new CreateDataCommand(
+        appInfo,
+        tableInfo,
+        appId,
+        schema,
+        data,
+        returningQueryByTable
+      )
     );
   }
 
@@ -106,19 +113,19 @@ export class CrudService {
     const appInfo = await this.getApplicationInfo(appid)
     const tableInfo = await this.queryBus.execute(new GetSchemaStructureQuery(appInfo, appid, schema));
 
-    // Trường hợp có join table
-    let returingQuery = [];
-    if (joinTable && joinTable.length !== 0) {
-      const tableNameJoinTable = joinTable?.map((table) => table.withTableName);
-      for (const tableName of tableNameJoinTable) {
-        returingQuery = await this.getColumnsToResonseEachAPI(tableName, 'QUERY');
-        console.log(returingQuery);
-      }
-    } else {
-      // trường hợp không có join bảng
-      returingQuery = await this.getColumnsToResonseEachAPI(schema, 'QUERY');
-      console.log(`Call this funciton: ${returingQuery}`)
-    }
+    // // Trường hợp có join table
+    // let returingQuery = [];
+    // if (joinTable && joinTable.length !== 0) {
+    //   const tableNameJoinTable = joinTable?.map((table) => table.withTableName);
+    //   for (const tableName of tableNameJoinTable) {
+    //     returingQuery = await this.getColumnsToResonseEachAPI(tableName, 'QUERY');
+    //     console.log(returingQuery);
+    //   }
+    // } else {
+    //   // trường hợp không có join bảng
+    //   returingQuery = await this.getColumnsToResonseEachAPI(schema, 'QUERY');
+    //   console.log(`Call this funciton: ${returingQuery}`)
+    // }
 
     return this.queryBus.execute(
       new GetDataQuery(
@@ -128,7 +135,7 @@ export class CrudService {
         queryParamDataDto,
         conditions,
         joinTable,
-        returingQuery
+        // returingQuery
       )
     );
   }

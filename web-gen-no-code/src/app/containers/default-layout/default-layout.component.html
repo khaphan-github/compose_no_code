@@ -1,37 +1,21 @@
 <!--sidebar-->
-<c-sidebar
-  #sidebar="cSidebar"
-  class="d-print-none sidebar sidebar-fixed"
-  id="sidebar"
-  visible
->
-  <c-sidebar-brand
-    [brandFull]="{
+<c-sidebar #sidebar="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar" visible>
+  <c-sidebar-brand [brandFull]="{
       src: 'assets/img/brand/coreui-angular.svg',
       width: 200,
       height: 46,
       alt: 'CoreUI Logo'
-    }"
-    [brandNarrow]="{
+    }" [brandNarrow]="{
       src: 'assets/img/brand/coreui-signet-white.svg',
       width: 46,
       height: 46,
       alt: 'CoreUI Logo'
-    }"
-    routerLink="./"
-  />
+    }" routerLink="./" />
 
   <ng-scrollbar pointerEventsMethod="scrollbar">
-    <c-sidebar-nav
-      [navItems]="navItems"
-      dropdownMode="close"
-    />
+    <c-sidebar-nav [navItems]="navItems" dropdownMode="close" />
   </ng-scrollbar>
-  <c-sidebar-toggler
-    *ngIf="!sidebar.narrow"
-    toggle="unfoldable"
-    cSidebarToggle="sidebar"
-  />
+  <c-sidebar-toggler *ngIf="!sidebar.narrow" toggle="unfoldable" cSidebarToggle="sidebar" />
 </c-sidebar>
 
 <!--main-->
@@ -40,6 +24,8 @@
   <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar" />
   <!--app-body-->
   <div class="body flex-grow-1 px-3">
+    <ngx-custom-toart></ngx-custom-toart>
+    <!-- Push toart -->
     <c-container breakpoint="lg" class="h-auto">
       <router-outlet />
     </c-container>

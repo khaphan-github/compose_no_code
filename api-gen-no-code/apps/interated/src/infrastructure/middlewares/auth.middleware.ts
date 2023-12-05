@@ -12,11 +12,6 @@ export class AuthenticateMiddleware implements NestMiddleware {
   ) { }
 
   async use(req: Request, res: Response, next: NextFunction) {
-    // Kiểm tra request try cập vô có phải public hay không. nếu có thì pass all
-    if(await this.authService.isRequestRequireResourceInWhiteList(req)) {
-      req['is_white_list'] = true;
-      return next();
-    }
 
     // Case request with secret key.
     const secretKey = req.header('X-Secretkey');
@@ -28,6 +23,12 @@ export class AuthenticateMiddleware implements NestMiddleware {
         }, 401)
       }
       req['auth_with_config_mode'] = true;
+      return next();
+    }
+
+    // Kiểm tra request try cập vô có phải public hay không. nếu có thì pass all
+    if (await this.authService.isRequestRequireResourceInWhiteList(req)) {
+      req['is_white_list'] = true;
       return next();
     }
 

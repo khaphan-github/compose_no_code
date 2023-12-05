@@ -58,7 +58,8 @@ export class ExecuteScriptCommandHandler
       return Promise.reject(new CanNotExecuteQueryError(appId, '', error.message));
     }
 
-    const executeScriptTransaction = script.script;
+    const executeScriptTransaction = `
+    ${script.script}`;
 
     let executeGenrateDBResult: unknown;
     try {

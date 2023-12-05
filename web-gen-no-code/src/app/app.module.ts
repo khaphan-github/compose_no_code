@@ -35,6 +35,7 @@ import {
   SidebarModule,
   SpinnerModule,
   TabsModule,
+  ToastModule,
   UtilitiesModule
 } from '@coreui/angular';
 
@@ -44,6 +45,7 @@ import { HttpClientInterceptor } from './core/web-api/interceptor';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { CustomToartComponent } from './views/shared/custom-toart/custom-toart.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -53,6 +55,7 @@ const APP_CONTAINERS = [
 
 const INTERATED_MODULE = [
   ManageAuthModule,
+  CustomToartComponent,
 ]
 
 @NgModule({

@@ -1,7 +1,6 @@
 import { INavData } from '@coreui/angular';
 
-export const navItems: INavData[] = [
-  {
+export const navItems: INavData[] = [{
     name: 'Dashboard',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
@@ -15,9 +14,9 @@ export const navItems: INavData[] = [
     name: 'Quản lý hệ thống'
   },
   {
-    name: 'Tài khoản',
-    url: '/manage-api/account',
-    iconComponent: { name: 'cil-drop' }
+    name: 'Chuyển đỗi',
+    url: '/manage-api/app',
+    iconComponent: { name: 'cil-puzzle' },
   },
   {
     name: 'APIs',
@@ -30,20 +29,17 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-spreadsheet' }
   },
   {
-    name: 'Database',
-    url: '/manage-api/database',
-    iconComponent: { name: 'cil-puzzle' },
+    name: 'Tài khoản',
+    url: '/manage-api/account',
+    iconComponent: { name: 'cil-people' }
+  },
+  {
+    name: 'Bot',
+    url: '/manage-api/bot',
+    iconComponent: { name: 'cil-lightbulb' },
     badge: {
-      color: 'success',
-      text: 'UPDATING'
-    }
-  },{
-    name: 'Health Check',
-    url: '/manage-api/health-check',
-    iconComponent: { name: 'cil-speedometer' },
-    badge: {
-      color: 'success',
-      text: 'UPDATING'
+      color: 'info',
+      text: 'Updating'
     }
   },
 ];

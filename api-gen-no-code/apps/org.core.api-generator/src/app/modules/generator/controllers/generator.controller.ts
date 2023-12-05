@@ -7,13 +7,24 @@ import { ErrorBase, ResponseBase } from '../../../infrastructure/format/response
 import { QueryParamDataDto } from '../../crud-pg/controller/query-filter.dto';
 import { CreateApplicationDto } from '../dto/create-app.dto';
 import { SQLTransformerDto } from './mll.query.dto';
+import { SQLToAPIService } from '../services/sql-to-api.service';
 
 @ApiTags('Api Generator')
 @Controller('generator')
 export class GeneratorController {
   constructor(
     private readonly service: GeneratorService,
+    private readonly sql: SQLToAPIService,
   ) { }
+
+  @Post('execute-script')
+  async executeScript(@Body() exe: ExecuteScriptDto) {
+    return new ResponseBase(200, 'Execute script successs', await this.sql.executeScript(exe.script));
+  }
+  @Post('execute-script-again')
+  async executeScriptAgain(@Body() exe: ExecuteScriptDto) {
+    return new ResponseBase(200, 'Execute script successs', await this.sql.executeScriptAgain(exe.script));
+  }
 
   @Get('app/:appid/schema')
   async getSchemasByAppId(

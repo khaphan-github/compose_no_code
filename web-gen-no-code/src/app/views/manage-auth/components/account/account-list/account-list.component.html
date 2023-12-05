@@ -1,6 +1,14 @@
 <h2 id="getting-started">Danh sách Tài khoản trong hệ thống</h2>
-<p>Danh sách tài khoản này bao gồm các tài khoản người dùng đăng ký và tài khoản được người quản trị
-  tạo - lưu ý khi tương tác</p>
+<c-callout color="primary">
+  <p>Danh sách tài khoản này bao gồm các tài khoản người dùng đăng ký và tài khoản được người quản trị
+    tạo:</p>
+  <ul>
+    <li>Bạn có thể kích hoạt và phân quyền cho tài khoản tại đây</li>
+    <li>Nên cân nhắc khi phân quyền quản trị cho các tài khoản người dùng đăng ký - tùy nghiệp vụ mà hệ
+      thống bạn cần</li>
+  </ul>
+</c-callout>
+
 <div>
   <c-row class="fade show">
     <c-col xs>
@@ -34,7 +42,8 @@
                 </td>
                 <td>
                   <div><strong>{{ account.username }}</strong>
-                    <c-badge *ngIf="account.id == this.newAccountId" color="info" size="sm" shape="rounded-pill">NEW</c-badge>
+                    <c-badge *ngIf="account.id == this.newAccountId" color="info" size="sm"
+                      shape="rounded-pill">NEW</c-badge>
                   </div>
                   <div class="small text-medium-emphasis text-nowrap">
                   </div>

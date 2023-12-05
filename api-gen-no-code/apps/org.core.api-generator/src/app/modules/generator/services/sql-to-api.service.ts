@@ -10,6 +10,7 @@ import { CrudService } from "../../crud-pg/services/crud-pg.service";
 import { GetCreateAuthTableScriptQuery } from "../queries/sql-to-api/get-asserts-auth-script.query";
 import { RunScriptCommand } from "../commands/run-script-command";
 import { GetWorkspaceConnectionQuery } from "../queries/get-workspace-connection.query";
+import { GetInitCoreTableScriptQuery } from "../queries/sql-to-api/get-asserts-core-table.query";
 
 @Injectable()
 export class SQLToAPIService implements OnApplicationBootstrap {
@@ -20,16 +21,32 @@ export class SQLToAPIService implements OnApplicationBootstrap {
     private readonly crudService: CrudService,
   ) { }
 
-  onApplicationBootstrap() {
-    this.executeScriptFromSqlFile();
+  async onApplicationBootstrap() {
+    // Init all nessarray tableL
+    // const [connection, script] = await Promise.all([
+    //   this.queryBus.execute(new GetWorkspaceConnectionQuery()),
+    //   this.queryBus.execute(new GetInitCoreTableScriptQuery()),
+    // ]);
+    // const executeResult = await this.commandBus.execute(
+    //   new ExecuteScriptCommand(
+    //     connection,
+    //     WORKSPACE_VARIABLE.APP_ID,
+    //     WORKSPACE_VARIABLE.OWNER_ID,
+    //     { script: script }
+    //   )
+    // );
+
+    // console.log(executeResult);
+    // this.logger.debug(`Init core table success!!!`);
+
+    // this.executeScriptFromSqlFile();
   }
 
   //#region api to sql
   executeScriptFromSqlFile = async () => {
     try {
-      const [connection, script, authscript] = await Promise.all([
+      const [connection, authscript] = await Promise.all([
         this.queryBus.execute(new GetWorkspaceConnectionQuery()),
-        this.queryBus.execute(new GetSQLScriptQuery()),
         this.queryBus.execute(new GetCreateAuthTableScriptQuery()),
       ]);
 
@@ -77,23 +94,66 @@ export class SQLToAPIService implements OnApplicationBootstrap {
         )
       );
 
-      const executeResult = await this.commandBus.execute(
-        new ExecuteScriptCommand(
-          connection,
-          WORKSPACE_VARIABLE.APP_ID,
-          WORKSPACE_VARIABLE.OWNER_ID,
-          { script: script }
-        )
-      );
-
-      this.logger.debug(`Execute script success success!`);
-      if (executeResult) {
-        this.logger.log(`GENNERATE API SUCCESS`);
-      }
     } catch (error) {
-      //
       console.error(error);
     }
   }
   //#endregion api to sql
+
+  async executeScript(script: string) {
+    await this.executeScriptFromSqlFile();
+    const connection = await this.queryBus.execute(new GetWorkspaceConnectionQuery());
+    this.logger.log(`Generate core table success!`);
+
+    const executeResult = await this.commandBus.execute(
+      new ExecuteScriptCommand(
+        connection,
+        WORKSPACE_VARIABLE.APP_ID,
+        WORKSPACE_VARIABLE.OWNER_ID,
+        { script: script }
+      )
+    );
+
+    this.logger.log(`Execute user script success!`);
+    return executeResult;
+  }
+
+  async executeScriptAgain(script: string) {
+    const connection = await this.queryBus.execute(new GetWorkspaceConnectionQuery());
+    this.logger.log(`Generate core table success!`);
+
+    await this.commandBus.execute(
+      new RunScriptCommand(
+        connection,
+        `
+          DO $$
+          DECLARE
+              r RECORD;
+              whiteList TEXT[] := ARRAY['_core_workspace_config', '_core_applications'];
+          BEGIN
+              FOR r IN
+                (
+                  SELECT table_name
+                  FROM information_schema.tables
+                  WHERE table_schema = current_schema()
+                )
+              LOOP
+                  -- Check if the table is not in the whiteList before dropping
+                  IF r.table_name = ANY(whiteList) THEN
+                      CONTINUE;
+                  END IF;
+
+                  EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.table_name) || ' CASCADE';
+              END LOOP;
+          END $$;
+
+        `
+      )
+    );
+
+    await this.executeScript(script);
+    return {
+      success: true
+    };
+  }
 }

@@ -175,8 +175,7 @@ export class RelationalDBQueryBuilder {
     // select ['id', 'name', 'password']
     // returning: ['id', 'name', 'description']
     /// result : ['id', 'name'];
-    let selectedQuery =  '*';
-
+    let selectedQuery =  selected?.join(', ') ?? '*';
     let columnsNeedToSelect: string[] = [];
     if (selected?.length !== 0 && returning?.length !== 0) {
       columnsNeedToSelect = selected?.filter(item => returning?.includes(item)) ?? [];
@@ -185,7 +184,7 @@ export class RelationalDBQueryBuilder {
     if(columnsNeedToSelect?.length !== 0) {
       selectedQuery = columnsNeedToSelect?.join(',');
     }
-    console.log(selectedQuery);
+
     let joinTableQuery = '';
 
     if (joinTable && joinTable.length !== 0) {

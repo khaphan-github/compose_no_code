@@ -70,11 +70,12 @@ export class GeneratedApiModel {
 
     let id = 1;
     const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role'];
+
     for (let index = 0; index < finalResult.length; index++) {
       const element = finalResult[index] as { table_name: string, column_names: string[] };
-      if (whiteList.includes(element.table_name)) {
-        continue;
-      }
+      // if (whiteList.includes(element.table_name)) {
+      //   continue;
+      // }
 
       apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET,));
       id += 1;

@@ -6,6 +6,7 @@ export class PolicyModel {
   public static readonly API_WHITE_LIST = [
     '/api/v1/login',
     '/api/v1/register',
+    '/api/v1/generator',
   ];
 
   private account!: any;

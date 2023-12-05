@@ -8,6 +8,7 @@ import { GetSchemaInfoByAppIdQueryHandler } from "./get_schema_info.query";
 import { GetSQLConnectionQueryHandler } from "./sql-to-api/get-asserts-sql-connections.query";
 import { GetSQLScriptQueryHandler } from "./sql-to-api/get-asserts-sql-script.query";
 import { GetCreateAuthTableScriptQueryHandler } from "./sql-to-api/get-asserts-auth-script.query";
+import { GetInitCoreTableScriptQueryHandler } from "./sql-to-api/get-asserts-core-table.query";
 
 export const QueryHandlers = [
   GetSchemaInfoByAppIdQueryHandler,
@@ -23,4 +24,5 @@ export const SQLToAPIQueryHandlers = [
   GetSQLConnectionQueryHandler,
   GetSQLScriptQueryHandler,
   GetCreateAuthTableScriptQueryHandler,
+  GetInitCoreTableScriptQueryHandler,
 ]

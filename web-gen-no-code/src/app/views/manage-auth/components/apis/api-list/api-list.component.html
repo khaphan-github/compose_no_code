@@ -1,88 +1,92 @@
 <h2 id="getting-started">Danh sách API trong hệ thống</h2>
-<p>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) sẽ không gồm các
-  bảng có sẵn trong hệ thống </p>
+<c-callout color="primary">
+  <p>Các thông tin cần biết khi cấu hình các APIs:</p>
+  <ul>
+    <li>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) sẽ gồm các
+      api có sẵn trong hệ thống với tiền tố <strong>_core</strong>.</li>
+    <li>
+      Bạn có thể cài đặt các cấu hình như: <strong>kích hoạt, thay đổi phạm vi sử dụng, giới hạn các trường trả về.</strong>
+    </li>
+    <li>
+      Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng cho ứng dụng Front-End.
+    </li>
+    <li>
+      Xem chi tiết hướng dẫn tại <a href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
+    </li>
+  </ul>
+</c-callout>
 <div>
-  <c-row class="fade show">
-    <c-col xs>
-      <c-card class="mb-4">
-        <c-card-header>
-        </c-card-header>
-        <c-card-body>
-          <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
-            [striped]="true" align="middle" cTable class="mb-0 border">
-            <app-not-found *ngIf="viewModel.status !== 200"></app-not-found>
+  <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
+    [striped]="true" align="middle" cTable class="mb-0 border">
+    <app-not-found *ngIf="viewModel.status !== 200 || viewModel.data.length === 0 "></app-not-found>
 
-            <thead cTableColor="light" *ngIf="viewModel.status === 200">
-              <tr>
-                <th class="text-center">
-                  <!-- <svg cIcon name="cilCaretBottom"></svg> -->
-                </th>
-                <th>Đường dẫn</th>
-                <th>Phạm vi</th>
-                <th class="text-left">Bảng</th>
-                <th>Lịch sử thay đổi</th>
-                <th class="text-center">Trạng thái</th>
-                <th class="text-center"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer;">
-                <td class="text-center">
-                  {{ i + 1 }}
-                </td>
+    <thead cTableColor="light" *ngIf="viewModel.status === 200 && viewModel.data.length !== 0 ">
+      <tr>
+        <th class="text-center">
+          <!-- <svg cIcon name="cilCaretBottom"></svg> -->
+        </th>
+        <th>Đường dẫn</th>
+        <th>Phạm vi</th>
+        <th class="text-left">Bảng</th>
+        <th>Lịch sử thay đổi</th>
+        <th class="text-center">Trạng thái</th>
+        <th class="text-center"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer;">
+        <td class="text-center">
+          {{ i + 1 }}
+        </td>
 
-                <td>
-                  <div><strong>{{ api.api_path }}</strong> </div>
-                  <div class="small text-medium-emphasis text-nowrap">
-                    <span>
-                      Phương thức: <strong>{{ api.http_method }}</strong> | Hành động: <strong>{{
-                        api.action}}</strong>
-                      <!-- {{ api.state }} | Registered: {{ api.registered }} -->
-                    </span>
-                  </div>
-                </td>
-                <td>
-                  <c-badge *ngIf="api.authentication == 'NEED_AUTH'" color="dark" shape="rounded-pill"><svg cIcon
-                      name="cilLockLocked" size="sm" title="l"></svg>Private</c-badge>
-                  <c-badge *ngIf="api.authentication !== 'NEED_AUTH'" color="success" shape="rounded-pill"><svg cIcon
-                      name="cilCheck" size="sm" title="l"></svg>Public</c-badge>
-                </td>
-                <td class="text-left">
-                  <div class="small text-medium-emphasis">Schema: public</div>
-                  <div class="fw-semibold text-nowrap">public.{{ api.table_name }}</div>
-                </td>
-                <!-- <td>
-                  <div class="small text-medium-emphasis">Ngày tạo</div>
-                  <div class="fw-semibold text-nowrap">{{ api.created_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
-                </td> -->
+        <td>
+          <div><strong>{{ api.api_path }}</strong> </div>
+          <div class="small text-medium-emphasis text-nowrap">
+            <span>
+              Phương thức: <strong>{{ api.http_method }}</strong> | Hành động: <strong>{{
+                api.action}}</strong>
+              <!-- {{ api.state }} | Registered: {{ api.registered }} -->
+            </span>
+          </div>
+        </td>
+        <td>
+          <c-badge *ngIf="api.authentication == 'NEED_AUTH'" color="dark" shape="rounded-pill"><svg cIcon
+              name="cilLockLocked" size="sm" title="l"></svg>Private</c-badge>
+          <c-badge *ngIf="api.authentication !== 'NEED_AUTH'" color="success" shape="rounded-pill"><svg cIcon
+              name="cilCheck" size="sm" title="l"></svg>Public</c-badge>
+        </td>
+        <td class="text-left">
+          <div class="small text-medium-emphasis">Schema: public</div>
+          <div class="fw-semibold text-nowrap">public.{{ api.table_name }}</div>
+        </td>
+        <!-- <td>
+        <div class="small text-medium-emphasis">Ngày tạo</div>
+        <div class="fw-semibold text-nowrap">{{ api.created_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
+      </td> -->
 
-                <td>
-                  <div class="small text-medium-emphasis">Cập nhật lần cuối</div>
-                  <div class="fw-semibold text-nowrap">{{ api.updated_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
-                </td>
-                <td class="text-center">
-                  <c-badge *ngIf="api.enable" color="success" shape="rounded-pill">Đang hoạt động</c-badge>
-                  <c-badge *ngIf="!api.enable" color="dark" shape="rounded-pill">Dừng hoạt động</c-badge>
-                </td>
-                <td class="text-center">
-                  <c-dropdown alignment="end" variant="btn-group">
-                    <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
-                      <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
-                    </button>
-                    <ul cDropdownMenu>
-                      <li (click)="this.onViewDocs(api)"><a cDropdownItem>Xem hướng dẫn</a></li>
-                      <li  (click)="this.onUpdateApi(api)"><a cDropdownItem>Cập nhật thông tin</a></li>
-                    </ul>
-                  </c-dropdown>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <ng-template #showNotFoundContent>
-            <app-waiting-to-load [show]="true"></app-waiting-to-load>
-          </ng-template>
-        </c-card-body>
-      </c-card>
-    </c-col>
-  </c-row>
+        <td>
+          <div class="small text-medium-emphasis">Cập nhật lần cuối</div>
+          <div class="fw-semibold text-nowrap">{{ api.updated_at | date:"hh:mm MM/dd/yyyy" : "UTC" }}</div>
+        </td>
+        <td class="text-center">
+          <c-badge *ngIf="api.enable" color="success" shape="rounded-pill">Đang hoạt động</c-badge>
+          <c-badge *ngIf="!api.enable" color="dark" shape="rounded-pill">Dừng hoạt động</c-badge>
+        </td>
+        <td class="text-center">
+          <c-dropdown alignment="end" variant="btn-group">
+            <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+              <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+            </button>
+            <ul cDropdownMenu>
+              <li (click)="this.onViewDocs(api)"><a cDropdownItem>Xem hướng dẫn</a></li>
+              <li (click)="this.onUpdateApi(api)"><a cDropdownItem>Cập nhật thông tin</a></li>
+            </ul>
+          </c-dropdown>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #showNotFoundContent>
+    <app-waiting-to-load [show]="true"></app-waiting-to-load>
+  </ng-template>
 </div>

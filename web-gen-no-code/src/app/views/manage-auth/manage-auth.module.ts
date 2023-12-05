@@ -6,7 +6,7 @@ import { ManageApiService } from './services/manage-api.service';
 import { RouterModule } from '@angular/router';
 import { AccountListComponent } from './components/account/account-list/account-list.component';
 import { PolicyListComponent } from './components/policy/policy-list/policy-list.component';
-import { BadgeModule, ButtonModule, CardModule, DropdownModule, FormCheckComponent, FormModule, GridModule, ModalModule, TableModule } from '@coreui/angular';
+import { AlertModule, BadgeModule, ButtonModule, CalloutModule, CardModule, DropdownModule, FormCheckComponent, FormModule, GridModule, ModalModule, TableModule } from '@coreui/angular';
 import { RoleListComponent } from './components/roles/role-list/role-list.component';
 import { WaitingToLoadComponent } from '../shared/waiting-to-load/waiting-to-load.component';
 import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
@@ -24,6 +24,7 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { ExecuteScriptComponent } from './components/database/execute-script/execute-script.component';
 import { ApiDocsComponent } from './components/apis/docs/api-docs.component';
 import { UpdateApiComponent } from './components/apis/update-api/update-api.component';
+import { AppListComponent } from './components/application/app-list/app-list.component';
 
 const UI_MODULES = [
   IconModule,
@@ -39,12 +40,16 @@ const UI_MODULES = [
 
   NotFoundComponent,
   WaitingToLoadComponent,
+  AlertModule,
+  CalloutModule,
 
   HighlightModule,
 ]
 
 const MODULE_COMPONENTS = [
   ManageAuthComponent,
+
+  AppListComponent,
 
   ApiListComponent,
   ApiDocsComponent,
@@ -91,6 +96,10 @@ const MODULE_COMPONENTS = [
       {
         path: 'database',
         component: ExecuteScriptComponent,
+      },
+      {
+        path: 'app',
+        component: AppListComponent,
       }
     ]),
   ],
