@@ -43,6 +43,7 @@ export class CreateDataCommandHandler
 
   async execute(command: CreateDataCommand) {
     const { appInfo, appId, schema, data, tableInfo } = command;
+    this.logger.log(JSON.stringify({appId,schema,data,tableInfo}));
 
     if (!appInfo) {
       return Promise.reject(new NotFoundAppByIdError(appId, 'CreateDataCommandHandler not found application info'));

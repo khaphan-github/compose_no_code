@@ -25,8 +25,8 @@ export class CrudService {
   // Lấy những cột có thể hiển thị
   public async getColumnsToResonseEachAPI(table: string, action: string) {
     const cacheKey = `available_columns_with_action_${action}_in_table_${table}`;
-    const columnsInCache = this.nodeCache.get(cacheKey);
-    if (columnsInCache) { return columnsInCache };
+    // const columnsInCache = this.nodeCache.get(cacheKey);
+    // if (columnsInCache) { return columnsInCache };
 
     const appid = WORKSPACE_VARIABLE.APP_ID.toString();
 
@@ -65,7 +65,6 @@ export class CrudService {
     const appInfo = await this.getApplicationInfo(appId)
     const tableInfo = await this.queryBus.execute(new GetSchemaStructureQuery(appInfo, appId, schema));
     const returningQueryByTable = await this.getColumnsToResonseEachAPI(schema, 'INSERT');
-
     return this.commandBus.execute(
       new CreateDataCommand(
         appInfo,

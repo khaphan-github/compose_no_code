@@ -10,7 +10,7 @@ export class ResponseBase {
   constructor(status: number, message: string, data?: object) {
     this.id = uuidv4();
     this.timestamp = new Date();
-    this.apiVersion = '2.0';
+    this.apiVersion = '1.0.1';
     this.status = status;
     this.message = message;
     this.data = data;

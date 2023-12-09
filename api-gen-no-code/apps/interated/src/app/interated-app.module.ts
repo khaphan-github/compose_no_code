@@ -11,7 +11,8 @@ import { ValidateInputMiddleware } from '../infrastructure/middlewares/validate-
 import { CrudModule } from 'apps/org.core.api-generator/src/app/modules/crud-pg/crud.module';
 import { ManageApiModule } from 'apps/org.core.api-generator/src/app/modules/manage/manage-api.module';
 import { AuthModule } from 'apps/org.core.api-generator/src/app/modules/auth/auth.module';
-import { JwtModule } from '@nestjs/jwt';
+import { LightWeightModule } from 'apps/org.core.api-generator/src/app/modules/light-weight-module/light-weight.module';
+
 import { PolicyMiddleware } from '../infrastructure/middlewares/policy.middleware';
 
 @Module({
@@ -21,6 +22,7 @@ import { PolicyMiddleware } from '../infrastructure/middlewares/policy.middlewar
     CrudModule,
     ManageApiModule,
     AuthModule,
+    LightWeightModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -29,11 +31,11 @@ export class InteratedAppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
-        AuthenticateMiddleware,
-        AuthorizationMiddleware,
-        PolicyMiddleware,
-        CustomizeInputMiddleware,
-        ValidateInputMiddleware
+        // AuthenticateMiddleware,
+        // AuthorizationMiddleware,
+        // PolicyMiddleware,
+        // CustomizeInputMiddleware,
+        // ValidateInputMiddleware
       )
       .forRoutes('*');
   }

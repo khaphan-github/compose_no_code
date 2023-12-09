@@ -151,7 +151,6 @@ export class GeneratedApiModel {
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
         apiRecord[API_AUTHORIZED] = JSON.stringify({
           columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
-          modify: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
         });
         break;
       case RestFulMethod.PUT:
