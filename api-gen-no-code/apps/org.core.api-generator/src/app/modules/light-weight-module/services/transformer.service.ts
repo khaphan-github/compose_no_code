@@ -12,6 +12,9 @@ export class TransformerSerivce {
   async transform(question: string) {
     const script = await this.repository.getSqlScript();
     const queryString = await this.proxy.transform(script, question);
-    return this.repository.executeQuery(queryString.data);
+    return {
+      result: await this.repository.executeQuery(queryString.data),
+      queryString: queryString.data
+    }
   }
 }

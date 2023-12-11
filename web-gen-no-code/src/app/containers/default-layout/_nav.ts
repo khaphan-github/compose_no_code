@@ -40,12 +40,12 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-people' }
   },
   {
-    name: 'Bot',
+    name: 'Bot SQL',
     url: '/manage-api/bot',
     iconComponent: { name: 'cil-lightbulb' },
     badge: {
-      color: 'info',
-      text: 'Updating'
+      color: 'success',
+      text: 'New'
     }
   },
 ];

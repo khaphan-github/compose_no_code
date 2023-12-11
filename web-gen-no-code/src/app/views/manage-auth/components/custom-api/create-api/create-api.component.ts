@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { ExampleRequestAttributeComponent } from '../example-request-attribute/example-request-attribute.component';
 import { EVENT } from '../../../event/const';
 import { CustomToastService, TToast } from 'src/app/views/shared/custom-toart/custom-toast.service';
+import { ICreateAPI } from '../../../interfaces/api/create-api.interface';
 
 @Component({
   selector: 'ngx-create-api',
@@ -12,6 +13,7 @@ import { CustomToastService, TToast } from 'src/app/views/shared/custom-toart/cu
   styleUrls: ['./create-api.component.scss']
 })
 export class CreateApiComponent implements OnInit {
+  @Input() queryString!: string;
   private readonly service = inject(ManageApiService);
   private readonly activeModal = inject(NgbActiveModal);
   private readonly modal = inject(NgbModal);
@@ -42,9 +44,9 @@ export class CreateApiComponent implements OnInit {
       httpMethod: ['POST', Validators.required],
       desc: [''],
       domain: ['', Validators.required],
-      isActive: [false],
+      isActive: [true],
       accessScope: ['public', Validators.required],
-      query: [''],
+      query: [this.queryString ? this.queryString : ''],
       availableField: [''],
     });
   }
@@ -58,7 +60,7 @@ export class CreateApiComponent implements OnInit {
         }
 
         // Lỗi cơ sở dữ liệu
-        if(value.status == 613) {
+        if (value.status == 613) {
           this.alert.setState({ title: 'Lỗi khi thêm mới API', desc: value.message, color: 'warning', show: true });
         }
       },

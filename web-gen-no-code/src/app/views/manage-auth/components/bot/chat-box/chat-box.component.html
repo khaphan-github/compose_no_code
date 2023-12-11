@@ -22,9 +22,11 @@
 <c-card>
   <span class="m-3" *ngIf="outputMessage && !this.waitingToLoad">
     Kết quả mà tôi tìm thấy là:
+    <c-badge color="success" style="cursor: pointer;" *ngIf="!this.isError" (click)="onSaveToApi()">Lưu thành API</c-badge>
     <pre><code [highlight]="outputMessage"></code></pre>
   </span>
-  <div *ngIf="this.waitingToLoad" class="fade show" style="text-align: center; padding-top: calc(100vh / 10); height: 25vh">
+  <div *ngIf="this.waitingToLoad" class="fade show"
+    style="text-align: center; padding-top: calc(100vh / 10); height: 25vh">
     <i class="spinner-grow spinner-grow-sm"></i>
     <span class="m-1">Hệ thống truy vấn dữ liệu theo yêu cầu - vui lòng chờ trong giây lát...</span>
   </div>
