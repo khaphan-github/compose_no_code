@@ -11,6 +11,8 @@ import { IUpdateRole } from '../interfaces/roles/update-role.interface';
 import { Account } from '../interfaces/account/account.interface';
 import { IUpdateAccount } from '../interfaces/account/update-account.interface';
 import { ICreateAccount, ICreateAccountResponse } from '../interfaces/account/create-account.interface';
+import { ICreateAPI, IUpdateCustomAPI } from '../interfaces/api/create-api.interface';
+import { ICustomAPI } from '../interfaces/custom-api/custom-api.interface';
 @Injectable()
 export class ManageApiService {
   constructor(
@@ -47,6 +49,51 @@ export class ManageApiService {
     return this.httpClient.post<SResponse<Array<GeneratedAPI>>>(apiPathBuilder('/_core_generated_apis/query'), {});
   }
 
+  createApi(createApi: ICreateAPI) {
+    const mapAvailableFields = (arrayFields: Array<string>) => {
+      if (arrayFields) {
+        return JSON.stringify(arrayFields?.map((el, index) => {
+          return { columnName: el, index: index }
+        }));
+      }
+      return JSON.stringify({});
+    }
+    const requestBody = [{
+      authentication: createApi.accessScope == 'public' ? 'NO_AUTH' : 'NEED_AUTH',
+      enable: createApi.isActive,
+      availablecolumns: mapAvailableFields(createApi.availableField),
+      action: 'CUSTOM',
+      http_method: createApi.httpMethod,
+      api_path: createApi.domain,
+      querystring: createApi.query,
+    }];
+    return this.httpClient.post<SResponse<any>>(apiPathBuilder(`/_core_custom_api`), requestBody);
+  }
+
+  updateCustomApi(updateApi: IUpdateCustomAPI) {
+        const mapAvailableFields = (arrayFields: Array<string>) => {
+      if (arrayFields) {
+        return JSON.stringify(arrayFields?.map((el, index) => {
+          return { columnName: el, index: index }
+        }));
+      }
+      return JSON.stringify({});
+    };
+
+    const requestBody = {
+      authentication: updateApi.accessScope == 'public' ? 'NO_AUTH' : 'NEED_AUTH',
+      enable: updateApi.isActive,
+      availablecolumns: mapAvailableFields(updateApi.availableField),
+      action: 'CUSTOM',
+      http_method: updateApi.httpMethod,
+      api_path: updateApi.domain,
+      querystring: updateApi.query,
+      id: updateApi.id,
+    };
+
+    return this.httpClient.put<SResponse<any>>(apiPathBuilder(`/_core_custom_api/${updateApi.id}?id_column=id`), requestBody);
+  }
+
   updateApi = (id: number, scope: string, enable: boolean, displayColumns: any[], modifyColumns: any[]) => {
     const requestBody = {
       authentication: scope == 'public' ? 'NO_AUTH' : 'NEED_AUTH',
@@ -57,7 +104,14 @@ export class ManageApiService {
       }
     }
     return this.httpClient.put<SResponse<GeneratedAPI>>(apiPathBuilder(`/_core_generated_apis/${id}?id_column=id`), requestBody);
+  }
 
+  customApiList() {
+    return this.httpClient.post<SResponse<Array<ICustomAPI>>>(apiPathBuilder(`/_core_custom_api/query`), {});
+  }
+
+  deleteCustomApi(id: string | number) {
+    return this.httpClient.delete<SResponse<any>>(apiPathBuilder(`/_core_custom_api/${id}?id_column=id`), {});
   }
 
   // #endregion apisvs

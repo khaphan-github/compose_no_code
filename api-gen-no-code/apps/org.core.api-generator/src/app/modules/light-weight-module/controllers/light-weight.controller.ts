@@ -1,15 +1,17 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UseInterceptors } from '@nestjs/common';
-import { LightWeightService } from './services/light-weight.service';
+import { LightWeightService } from '../services/light-weight.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseBase, ErrorBase } from '../../infrastructure/format/response.base';
-import { LoggingInterceptor } from './interceptor/logging.interceptor';
-import { CustomQueryDto } from './dto/custom-query.dto';
-import { TablePermissionInterceptor } from './interceptor/table-permission.interceptor';
+import { ResponseBase, ErrorBase } from '../../../infrastructure/format/response.base';
+import { LoggingInterceptor } from '../interceptor/logging.interceptor';
+import { CustomQueryDto } from '../dto/custom-query.dto';
+import { TablePermissionInterceptor } from '../interceptor/table-permission.interceptor';
+import { JoinQueryDto } from '../dto/custom-join.dto';
+import { IJoinQuery } from '../interfaces/query-builder.interface';
 
 @Controller('schema/:schema')
 @ApiTags('CRUD light weight operator')
-@UseInterceptors(new LoggingInterceptor())
-@UseInterceptors(new TablePermissionInterceptor())
+@UseInterceptors(LoggingInterceptor)
+@UseInterceptors(TablePermissionInterceptor)
 
 export class LightWeightController {
   constructor(private readonly service: LightWeightService) { }
@@ -23,6 +25,20 @@ export class LightWeightController {
       const queryResult = await this.service.query({ ...query, from: schema });
       return new ResponseBase(200, `Query data from table ${schema} success`, queryResult);
     } catch (error) {
+      throw new HttpException(new ErrorBase(error), HttpStatus.OK);
+    }
+  }
+
+  @Post('join')
+  async join(
+    @Param('schema') schema: string,
+    @Body() join: JoinQueryDto
+  ) {
+    try {
+      const queryResult = await this.service.join({ ...join, from: schema } as IJoinQuery);
+      return new ResponseBase(200, `Query data from table ${schema} success`, queryResult);
+    } catch (error) {
+      console.log(error);
       throw new HttpException(new ErrorBase(error), HttpStatus.OK);
     }
   }
@@ -77,7 +93,7 @@ export class LightWeightController {
   ) {
     try {
       const findOneResult = await this.service.findById(schema, fields, idColumn, id);
-      if(findOneResult) {
+      if (findOneResult) {
         return new ResponseBase(200, `Found record with id ${id} at ${schema}`, findOneResult);
       }
       return new ResponseBase(404, `Not found record with id ${id} at ${schema}`, findOneResult);

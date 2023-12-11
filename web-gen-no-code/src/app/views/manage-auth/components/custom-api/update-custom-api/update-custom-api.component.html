@@ -1,0 +1,61 @@
+<c-modal-header>
+  <h5 cModalTitle>Thêm mới API</h5>
+</c-modal-header>
+<c-modal-body>
+  <form [formGroup]="apiForm" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <c-col [md]="12">
+        <label cLabel for="accessScope"><strong>1. Thông tin API:</strong></label>
+        <div class="row">
+          <c-col [md]="4">
+            <label class="form-check-label" for="api_path">Phương thức HTTP:</label>
+            <select formControlName="httpMethod" aria-label="Default select example" cSelect class="mb-3">
+              <option value="POST">POST</option>
+            </select>
+          </c-col>
+          <c-col [md]="8">
+            <div class="form-check">
+              <label class="form-check-label" for="api_path">Domain:
+                <i>http://host/api/custom-query/dang_ky_tai_khoan</i> </label>
+              <input formControlName="domain" cFormControl type="text" id="api_path" placeholder="/dang_ky_tai_khoan">
+            </div>
+          </c-col>
+        </div>
+        <div class="form-check form-switch">
+          <input formControlName="isActive" class="form-check-input" type="checkbox" id="isActive">
+          <label class="form-check-label" for="isActive">
+            {{ this.apiForm.get('isActive')?.value ? 'Kích hoạt' : 'Chưa kích hoạt' }}
+          </label>
+        </div>
+      </c-col>
+      <c-col [md]="12">
+        <label cLabel for="accessScope"><strong>2. Phạm vi truy cập:</strong></label>
+        <div class="form-check">
+          <input formControlName="accessScope" class="form-check-input" type="radio" id="public" value="public">
+          <label class="form-check-label" for="public">Public <i>(Không cần đăng nhập vẫn truy cập được)</i></label>
+        </div>
+        <div class="form-check">
+          <input formControlName="accessScope" class="form-check-input" type="radio" id="private" value="private">
+          <label class="form-check-label" for="private">Private <i>(Cần đăng nhập mới truy cập được)</i></label>
+        </div>
+      </c-col>
+
+      <c-col [md]="12">
+        <label cLabel for="accessScope"><strong>3. Truy vấn cơ sở dữ liệu (PostgreSQL) <a href="">Xem hướng
+              dẫn</a>:</strong></label>
+        <textarea formControlName="query" cFormControl id="exampleFormControlTextarea1" rows="6"></textarea>
+      </c-col>
+
+      <c-col [md]="12">
+        <label cLabel><strong>4. Các trường dữ liệu ứng với truy vấn: <span (click)="this.onViewExample()">Xem mẫu request</span></strong></label>
+        <ngx-input-field (formValueChange)="onChangeField($event)" [currentFields]="this.apiForm.get('availableField')?.value ?? []"></ngx-input-field>
+      </c-col>
+    </div>
+  </form>
+</c-modal-body>
+
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Thoát</button>
+  <button cButton color="primary" type="submit" (click)="onSubmit()">Lưu
+    thay đổi</button>
+</c-modal-footer>

@@ -1,0 +1,23 @@
+<!-- dynamic-form.component.html -->
+<div class="row">
+  <c-col [md]="8">
+    <label cLabel> Lưu ý số lượng thuộc tính phải bằng với số lượng params:</label>
+    <form [formGroup]="dynamicForm">
+      <div>
+        <div *ngFor="let controlName of dynamicForm.controls | keyvalue; let i = index">
+          <label cLabel [for]="controlName.key">Thuộc tính thứ {{ i + 1 }}:</label>
+          <div class="row">
+            <c-input-group>
+              <input sizing="sm" type="text" cFormControl ngxReplaceSpace [formControlName]="controlName.key"
+                [id]="controlName.key" />
+              <button size="sm" cButton color="secondary" type="button" (click)="this.removeControl(controlName.key)">
+                <svg cIcon name="cilTrash"></svg></button>
+            </c-input-group>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button cButton size="sm" class="mt-2" color="primary" type="submit" [disabled]="this.dynamicForm.invalid"
+      (click)="addField()">Thêm thuộc tính</button>
+  </c-col>
+</div>

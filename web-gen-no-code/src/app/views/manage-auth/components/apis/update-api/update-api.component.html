@@ -24,7 +24,7 @@
         </div>
       </c-col>
 
-      <c-col [md]="this.api?.api_authorized?.columns && this.api?.api_authorized?.modify ? 6:12"
+      <c-col [md]="this.api.api_authorized.columns && this.api.api_authorized?.modify ? 6:12"
         *ngIf="this.api?.api_authorized?.columns">
         <label cLabel for="colums"><strong>3. Cài đặt các trường hiển thị:</strong></label>
         <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
@@ -54,7 +54,7 @@
         </table>
       </c-col>
 
-      <c-col [md]="this.api?.api_authorized?.columns && this.api?.api_authorized?.modify ? 6:12" *ngIf="this.api?.api_authorized?.modify">
+      <c-col [md]="this.api.api_authorized.columns && this.api.api_authorized.modify ? 6:12" *ngIf="this.api.api_authorized.modify">
         <label cLabel for="colums"><strong>4. Cài đặt các trường cho phép sửa đỗi:</strong></label>
         <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
           <thead cTableColor="light">

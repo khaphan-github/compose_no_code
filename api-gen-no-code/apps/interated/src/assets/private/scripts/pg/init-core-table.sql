@@ -66,3 +66,19 @@ CREATE TABLE
         created_at timestamp(0) without time zone DEFAULT NOW(),
         updated_at timestamp(0) without time zone DEFAULT NOW()
     );
+
+CREATE TABLE
+    IF NOT EXISTS _core_custom_api (
+        id SERIAL PRIMARY KEY,
+        action VARCHAR(155),
+        api_path VARCHAR(155),
+        http_method VARCHAR(10),
+        authentication VARCHAR(155),
+        availableColumns JSONB,
+        metadata JSONB,
+        queryString VARCHAR(512),
+        enable BOOLEAN,
+        created_at timestamp(0) without time zone DEFAULT NOW(),
+        updated_at timestamp(0) without time zone DEFAULT NOW()
+    );
+

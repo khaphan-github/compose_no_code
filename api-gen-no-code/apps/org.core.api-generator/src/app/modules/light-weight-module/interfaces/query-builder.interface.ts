@@ -33,3 +33,28 @@ export type QueryBuilderResult = {
   queryString: string;
   params: Array<unknown>;
 }
+
+export interface IJoinQuery {
+  fields: Array<{ table: string, fields: Array<string> }>;
+  from: string;
+  joins: Array<IJoinOperator>;
+  aggregation?: Aggregation[];
+  where?: Where[];
+  groupBy?: string[];
+  orderBy?: string[];
+  limit?: number;
+  offset?: number;
+}
+
+// Join
+export interface IJoinOperator {
+  operator: 'left' | 'right' | 'inner' | string,
+  from: string
+  to: string
+  condition: {
+    fromField: string,
+    toField: string,
+    operator: '=' | string
+  }
+}
+

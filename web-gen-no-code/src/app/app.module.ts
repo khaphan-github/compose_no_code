@@ -46,6 +46,7 @@ import { AppService } from './app.service';
 import { Router } from '@angular/router';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { CustomToartComponent } from './views/shared/custom-toart/custom-toart.component';
+import { QueryParamKeyMapDirective } from './views/shared/directive/query-param-key-map.directive';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,

@@ -25,6 +25,11 @@ import { ExecuteScriptComponent } from './components/database/execute-script/exe
 import { ApiDocsComponent } from './components/apis/docs/api-docs.component';
 import { UpdateApiComponent } from './components/apis/update-api/update-api.component';
 import { AppListComponent } from './components/application/app-list/app-list.component';
+import { CreateApiComponent } from './components/custom-api/create-api/create-api.component';
+import { QueryParamKeyMapDirective } from '../shared/directive/query-param-key-map.directive';
+import { InputFieldComponent } from './components/custom-api/input-field/input-field.component';
+import { CustomApiListComponent } from './components/custom-api/custom-api-list/custom-api-list.component';
+import { UpdateCustomApiComponent } from './components/custom-api/update-custom-api/update-custom-api.component';
 
 const UI_MODULES = [
   IconModule,
@@ -44,16 +49,25 @@ const UI_MODULES = [
   CalloutModule,
 
   HighlightModule,
+
+  InputFieldComponent,
 ]
 
 const MODULE_COMPONENTS = [
+  QueryParamKeyMapDirective,
   ManageAuthComponent,
+
+  // Custom api
+  CustomApiListComponent,
+  UpdateCustomApiComponent,
 
   AppListComponent,
 
   ApiListComponent,
   ApiDocsComponent,
   UpdateApiComponent,
+  CreateApiComponent,
+
   CreateAccountComponent,
 
   AccountListComponent,
@@ -84,6 +98,10 @@ const MODULE_COMPONENTS = [
       {
         path: 'apis',
         component: ApiListComponent
+      },
+      {
+        path: 'custom-api',
+        component: CustomApiListComponent,
       },
       {
         path: 'account',

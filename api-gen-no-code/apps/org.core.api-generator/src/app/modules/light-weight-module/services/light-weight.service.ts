@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CustomQueryBuilder } from '../models/light-weight.model';
-import { LightWeightRepository } from '../light-weight.repository';
-import { ICustomQuery } from '../interfaces/query-builder.interface';
+import { LightWeightRepository } from '../repository/light-weight.repository';
+import { ICustomQuery, IJoinQuery } from '../interfaces/query-builder.interface';
+import _ from 'lodash';
 
 @Injectable()
 export class LightWeightService {
@@ -31,6 +32,13 @@ export class LightWeightService {
     return this.repository.executeQuery(query);
   }
 
+  join(j: IJoinQuery) {
+    const queryBuilder = new CustomQueryBuilder();
+    const query = queryBuilder.joinQuery(j);
+    return this.repository.executeQuery(query.sql, query.params);
+  }
+
+  // SQL injection err
   findById(tableName: string, fields: string[], idColumnsName: string, idValue: string) {
     const queryBuilder = new CustomQueryBuilder();
     const query = queryBuilder.query({
@@ -38,9 +46,23 @@ export class LightWeightService {
       from: tableName,
       where: [
         { field: idColumnsName, operator: '=', value: idValue, }
-      ],
-      limit: 1,
+      ]
     });
-    return this.repository.executeQuery(query)[0];
+    return this.repository.executeQuery(query);
+  }
+
+  // Featurre
+  async executeCustomApi(path: string, data: object) {
+    const customApiInfo = await this.repository.getQueryByPath(path);
+    if(!customApiInfo[0]) {
+      return null;
+    }
+    const script = customApiInfo[0]?.querystring;
+    const param = _.sortBy(customApiInfo[0]?.availablecolumns, ['index']);
+    if (!_.isEmpty(data) && data != null) {
+      return this.repository.executeQuery(script, param.map((param) => data[param]));
+    }
+    return this.repository.executeQuery(script);
+
   }
 }

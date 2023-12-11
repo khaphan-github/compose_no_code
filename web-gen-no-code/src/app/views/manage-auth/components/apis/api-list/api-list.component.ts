@@ -44,10 +44,6 @@ export class ApiListComponent implements OnInit {
     })
   }
 
-  onSetting() {
-
-  }
-
   onUpdateApi(api: GeneratedAPI) {
     const updateModal = this.modal.open(UpdateApiComponent, {
       backdrop: 'static',
@@ -65,4 +61,5 @@ export class ApiListComponent implements OnInit {
       },
     })
   }
+
 }

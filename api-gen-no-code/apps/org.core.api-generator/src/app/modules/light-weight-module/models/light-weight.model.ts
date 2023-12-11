@@ -1,7 +1,8 @@
-import { select } from "json-sql-utility"
+// https://github.com/ppiyush13/json-sql-utility
+import { select } from "json-sql-utility";
 
 import _ from "lodash";
-import { ICustomQuery, QueryBuilderResult } from "../interfaces/query-builder.interface";
+import { ICustomQuery, IJoinQuery, QueryBuilderResult, Where } from "../interfaces/query-builder.interface";
 
 export class CustomQueryBuilder {
   constructor(private table?: string,) {
@@ -119,6 +120,62 @@ export class CustomQueryBuilder {
   }
 
   query(object: ICustomQuery) {
-    return select(object);
+    return select({
+      ...object
+    });
+  }
+
+  joinQuery(query: IJoinQuery): { sql: string, params: any[] } {
+    const selectFields = query.fields.map((table) => table.fields.map((field) => `${table.table}.${field} AS ${table.table}_${field}`)).flat().join(', ');
+    const fromClause = `FROM ${query.from}`;
+
+    const joinClauses = query.joins.map((join) => {
+      const joinType = join.operator.toUpperCase();
+      const onClause = `${join.from}.${join.condition.fromField} ${join.condition.operator} ${join.to}.${join.condition.toField}`;
+      return `${joinType} JOIN ${join.to} ON ${onClause}`;
+    }).join(' ');
+
+    const aggregationClause = query.aggregation ? query.aggregation.map(agg => `${agg.fn}(${agg.args}) AS ${agg.alias}`).join(', ') : '';
+
+    const { whereClause, queryParams } = this.buildWhereClause(query.where);
+
+    const groupByClause = query.groupBy ? `GROUP BY ${query.groupBy.join(', ')}` : '';
+
+    const orderByClause = query.orderBy ? `ORDER BY ${query.orderBy.join(', ')}` : '';
+
+    const limitClause = +query.limit >= 0 ? `LIMIT $${queryParams.length + 1}` : '';
+    queryParams.push(query.limit);
+    const offsetClause = +query.offset >= 0 ? `OFFSET $${queryParams.length + 1}` : '';
+    queryParams.push(query.offset);
+
+    const sqlQuery = `
+    SELECT
+      ${aggregationClause ? aggregationClause + ',' : ''}
+      ${selectFields}
+      ${fromClause}
+      ${joinClauses}
+      ${whereClause ? `WHERE ${whereClause}` : ''}
+      ${groupByClause}
+      ${orderByClause}
+      ${limitClause}
+      ${offsetClause};`;
+
+    return { sql: sqlQuery, params: queryParams };
+  }
+
+  private buildWhereClause(conditions: Where[]): { whereClause: string, queryParams: any[] } {
+    const queryParams: any[] = [];
+    const whereClause = conditions.map(condition => {
+      if (condition.conditions) {
+        const { whereClause, queryParams: innerParams } = this.buildWhereClause(condition.conditions);
+        queryParams.push(...innerParams);
+        return `${whereClause}`;
+      } else {
+        queryParams.push(condition.value);
+        return `${condition.field} ${condition.operator} $${queryParams.length}`;
+      }
+    }).join(` ${conditions[0].operator.toUpperCase()} `);
+
+    return { whereClause, queryParams };
   }
 }
