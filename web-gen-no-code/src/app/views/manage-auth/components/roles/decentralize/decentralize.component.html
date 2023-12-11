@@ -2,54 +2,135 @@
   <h5 cModalTitle>Khai báo API cho nhóm quyền <strong>{{role.display_name}}</strong>({{role.description}})</h5>
 </c-modal-header>
 <c-modal-body>
-  <p>Bạn có thể cấp quyền sử dụng cho nhóm quyền tại đây:</p>
-  <div style="max-height: 500px; overflow: auto;">
-    <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
-      [striped]="true" align="middle" cTable class="mb-0 border">
-      <thead cTableColor="light">
-        <tr>
-          <th class="text-center">
-          </th>
-          <th>Thông tin</th>
-          <th class="text-center">Trạng thái
-            <c-dropdown alignment="end" variant="btn-group">
-              <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
-                <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
-              </button>
-              <ul cDropdownMenu>
-                <li (click)="this.activeAll(viewModel.data, true)"><a cDropdownItem>Kích hoạt tất cả</a></li>
-                <li (click)="this.activeAll(viewModel.data, false)"><a cDropdownItem>Hũy kích hoạt tất cả</a></li>
-              </ul>
-            </c-dropdown>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer; " (click)="onClickRow(api)">
-          <td class="text-center">
-            {{ i + 1 }}
-          </td>
-          <td>
-            <div><strong>API: ...{{ api.api_path }}</strong></div>
-            <div class="small text-medium-emphasis text-nowrap">
-              <span>
-                Phương thức: <strong>{{ api.http_method }}</strong> | Hành động: <strong>{{
-                  api.action}}</strong> | Bảng: <strong>public.{{ api.table_name }}</strong>
-                <!-- {{ api.state }} | Registered: {{ api.registered }} -->
-              </span>
-            </div>
-          </td>
-          <td class="text-center">
-            <c-badge *ngIf="this.checkBoxHelper.checkedThisItem(api)" color="success">Đang kích hoạt</c-badge>
-            <c-badge *ngIf="!this.checkBoxHelper.checkedThisItem(api)" color="dark">Chưa kích hoạt</c-badge>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #showNotFoundContent>
-      <app-waiting-to-load [show]="true"></app-waiting-to-load>
-    </ng-template>
-  </div>
+  <c-row>
+    <c-col [md]="6">
+      <h5>1. Danh sách các API được tạo từ cơ sở dữ liệu</h5>
+      <div style="max-height: 500px; overflow: auto;">
+        <table *ngIf="this.list$ | async as viewModel; else showNotFoundContent" [hover]="true" [responsive]="true"
+          [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead cTableColor="light">
+            <tr>
+              <th class="text-center">
+              </th>
+              <th>Thông tin ({{viewModel.data.length}} Apis)</th>
+              <th class="text-center">Trạng thái
+                <c-dropdown alignment="end" variant="btn-group">
+                  <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+                    <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+                  </button>
+                  <ul cDropdownMenu>
+                    <li (click)="this.activeAll(viewModel.data, true)"><a cDropdownItem>Kích hoạt tất cả</a></li>
+                    <li (click)="this.activeAll(viewModel.data, false)"><a cDropdownItem>Hũy kích hoạt tất cả</a>
+                    </li>
+                  </ul>
+                </c-dropdown>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer; " (click)="onClickRow(api)">
+              <td class="text-center">
+                {{ i + 1 }}
+              </td>
+              <td>
+                <div>
+                  <strong>
+                    <c-badge *ngIf="api.authentication == 'NEED_AUTH'" color="dark" shape="rounded-pill"><svg cIcon
+                        name="cilLockLocked" size="sm" title="l"></svg>Private</c-badge>
+                    <c-badge *ngIf="api.authentication !== 'NEED_AUTH'" color="success" shape="rounded-pill"><svg cIcon
+                        name="cilCheck" size="sm" title="l"></svg>Public</c-badge>
+
+                    API: <span class="small text-medium-emphasis text-nowrap">{{ api.http_method }}</span> {{
+                    api.api_path }}
+                  </strong>
+                </div>
+                <div class="small text-medium-emphasis text-nowrap">
+                  <span>
+                    Truy cập vào bảng:
+                    <strong>public.{{ api.table_name }}</strong>
+                  </span>
+                </div>
+              </td>
+              <td class="text-center">
+                <c-badge *ngIf="this.generatedCheckBoxHelper.checkedThisItem(api)" color="success">Đang kích
+                  hoạt</c-badge>
+                <c-badge *ngIf="!this.generatedCheckBoxHelper.checkedThisItem(api)" color="dark">Chưa kích
+                  hoạt</c-badge>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #showNotFoundContent>
+          <app-waiting-to-load [show]="true"></app-waiting-to-load>
+        </ng-template>
+      </div>
+    </c-col>
+    <c-col [md]="6">
+      <h5>2. Danh sách các API tùy chỉnh</h5>
+      <div style="max-height: 500px; overflow: auto;">
+        <table *ngIf="this.customApiList$ | async as viewModel; else showNotFoundContent" [hover]="true"
+          [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead cTableColor="light">
+            <tr>
+              <th class="text-center">
+              </th>
+              <th>Thông tin ({{viewModel.data.length}} Apis)</th>
+              <th class="text-center">Trạng thái
+                <c-dropdown alignment="end" variant="btn-group">
+                  <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+                    <svg cIcon class="text-high-emphasis" name="cilOptions"></svg>
+                  </button>
+                  <ul cDropdownMenu>
+                    <li (click)="this.activeCustomApiAll(viewModel.data, true)"><a cDropdownItem>Kích hoạt tất
+                        cả</a></li>
+                    <li (click)="this.activeCustomApiAll(viewModel.data, false)"><a cDropdownItem>Hũy kích hoạt tất
+                        cả</a>
+                    </li>
+                  </ul>
+                </c-dropdown>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let api of viewModel.data; index as i" style="cursor: pointer; "
+              (click)="onClickCustomApiRow(api)">
+              <td class="text-center">
+                {{ i + 1 }}
+              </td>
+              <td>
+                <div>
+                  <strong>
+                    <c-badge *ngIf="api.authentication == 'NEED_AUTH'" color="dark" shape="rounded-pill"><svg cIcon
+                        name="cilLockLocked" size="sm" title="l"></svg>Private</c-badge>
+                    <c-badge *ngIf="api.authentication !== 'NEED_AUTH'" color="success" shape="rounded-pill"><svg cIcon
+                        name="cilCheck" size="sm" title="l"></svg>Public</c-badge>
+                    API: <span class="small text-medium-emphasis text-nowrap">{{ api.http_method }}</span> {{
+                    api.api_path }}
+                  </strong>
+
+                </div>
+                <div class="small text-medium-emphasis text-nowrap">
+                  <span>
+                    <pre><code [highlight]="api.querystring"></code></pre>
+                  </span>
+                </div>
+              </td>
+              <td class="text-center">
+                <c-badge *ngIf="this.customApiCheckBoxhelper.checkedThisItem(api)" color="success">Đang kích
+                  hoạt</c-badge>
+                <c-badge *ngIf="!this.customApiCheckBoxhelper.checkedThisItem(api)" color="dark">Chưa kích
+                  hoạt</c-badge>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #showNotFoundContent>
+          <app-waiting-to-load [show]="true"></app-waiting-to-load>
+        </ng-template>
+      </div>
+    </c-col>
+  </c-row>
+
 </c-modal-body>
 <c-modal-footer>
   <button cButton color="secondary" (click)="onClose()">Thoát</button>

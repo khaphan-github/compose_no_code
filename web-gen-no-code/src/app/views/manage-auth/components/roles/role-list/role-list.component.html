@@ -54,7 +54,7 @@
                 </td>
                 <td class="text-center" (click)="this.onUpdate(role)">
                   <strong>
-                    {{ this.role?.metadata?.apis?.length ?? 0}}
+                    {{ this.role?.metadata?.apis?.length + this.role?.metadata?.customApis?.length ?? 0}}
                   </strong>
                 </td>
                 <!-- <td (click)="this.onUpdate(role)">

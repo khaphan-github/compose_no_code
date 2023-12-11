@@ -49,6 +49,7 @@ export class ManageApiService {
     return this.httpClient.post<SResponse<Array<GeneratedAPI>>>(apiPathBuilder('/_core_generated_apis/query'), {});
   }
 
+  // Create custom api
   createApi(createApi: ICreateAPI) {
     const mapAvailableFields = (arrayFields: Array<string>) => {
       if (arrayFields) {
@@ -63,6 +64,9 @@ export class ManageApiService {
       enable: createApi.isActive,
       availablecolumns: mapAvailableFields(createApi.availableField),
       action: 'CUSTOM',
+      metadata: JSON.stringify({
+        desc: createApi.desc
+      }),
       http_method: createApi.httpMethod,
       api_path: createApi.domain,
       querystring: createApi.query,
@@ -71,7 +75,7 @@ export class ManageApiService {
   }
 
   updateCustomApi(updateApi: IUpdateCustomAPI) {
-        const mapAvailableFields = (arrayFields: Array<string>) => {
+    const mapAvailableFields = (arrayFields: Array<string>) => {
       if (arrayFields) {
         return JSON.stringify(arrayFields?.map((el, index) => {
           return { columnName: el, index: index }
@@ -85,6 +89,9 @@ export class ManageApiService {
       enable: updateApi.isActive,
       availablecolumns: mapAvailableFields(updateApi.availableField),
       action: 'CUSTOM',
+      metadata: JSON.stringify({
+        desc: updateApi.desc
+      }),
       http_method: updateApi.httpMethod,
       api_path: updateApi.domain,
       querystring: updateApi.query,

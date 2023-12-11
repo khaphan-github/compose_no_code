@@ -31,11 +31,11 @@ export class InteratedAppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
-        // AuthenticateMiddleware,
-        // AuthorizationMiddleware,
-        // PolicyMiddleware,
-        // CustomizeInputMiddleware,
-        // ValidateInputMiddleware
+        AuthenticateMiddleware,
+        AuthorizationMiddleware,
+        PolicyMiddleware,
+        CustomizeInputMiddleware,
+        ValidateInputMiddleware
       )
       .forRoutes('*');
   }

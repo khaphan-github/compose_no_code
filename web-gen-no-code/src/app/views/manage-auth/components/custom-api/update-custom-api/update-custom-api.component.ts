@@ -27,8 +27,6 @@ export class UpdateCustomApiComponent implements OnInit {
     this.activeModal.close();
   }
 
-
-
   onChangeField(event: any) {
     const newValue = Object.keys(event);
     this.apiForm.patchValue({
@@ -46,6 +44,7 @@ export class UpdateCustomApiComponent implements OnInit {
     this.apiForm = this.fb.group({
       httpMethod: [this.customApi.http_method, Validators.required],
       domain: [this.customApi.api_path, Validators.required],
+      desc: [this.customApi.metadata?.desc, ],
       isActive: [this.customApi.enable],
       accessScope: [this.customApi.authentication == 'NO_AUTH' ? 'public' : 'private', Validators.required],
       query: [this.customApi.querystring],

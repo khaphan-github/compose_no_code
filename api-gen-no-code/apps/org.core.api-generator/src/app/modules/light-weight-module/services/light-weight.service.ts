@@ -55,12 +55,13 @@ export class LightWeightService {
   async executeCustomApi(path: string, data: object) {
     const customApiInfo = await this.repository.getQueryByPath(path);
     if(!customApiInfo[0]) {
-      return null;
+      throw new Error(`Api not found or disabled`);
     }
     const script = customApiInfo[0]?.querystring;
     const param = _.sortBy(customApiInfo[0]?.availablecolumns, ['index']);
     if (!_.isEmpty(data) && data != null) {
-      return this.repository.executeQuery(script, param.map((param) => data[param]));
+      const params = param.map((param) => data[param.columnName]);
+      return this.repository.executeQuery(script, params);
     }
     return this.repository.executeQuery(script);
 

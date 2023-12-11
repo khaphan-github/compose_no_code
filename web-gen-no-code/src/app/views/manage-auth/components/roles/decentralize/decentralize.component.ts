@@ -9,6 +9,7 @@ import { Role } from '../../../interfaces/roles/role.interface';
 import { IUpdateRole } from '../../../interfaces/roles/update-role.interface';
 import { EVENT } from '../../../event/const';
 import * as _ from 'lodash';
+import { ICustomAPI } from '../../../interfaces/custom-api/custom-api.interface';
 
 @Component({
   selector: 'app-decentralize',
@@ -20,31 +21,48 @@ export class DecentralizeComponent implements OnInit {
 
   private activeModal = inject(NgbActiveModal);
   private service = inject(ManageApiService);
-  public list$!: Observable<SResponse<Array<GeneratedAPI>>>;
 
-  public checkBoxHelper = new ComponentCheckBoxHelper<GeneratedAPI>('id');
+  public list$!: Observable<SResponse<Array<GeneratedAPI>>>;
+  public customApiList$!: Observable<SResponse<Array<ICustomAPI>>>;
+
+  public generatedCheckBoxHelper = new ComponentCheckBoxHelper<GeneratedAPI>('id');
+  public customApiCheckBoxhelper = new ComponentCheckBoxHelper<ICustomAPI>('id');
 
   constructor() { }
 
   ngOnInit() {
     // Get one;
     _.forEach(this.role.metadata?.apis, (value) => {
-      this.checkBoxHelper.handleOneChecked(true, { id: value });
+      this.generatedCheckBoxHelper.handleOneChecked(true, { id: value });
+    });
+
+    _.forEach(this.role.metadata?.customApis, (value) => {
+      this.customApiCheckBoxhelper.handleOneChecked(true, { id: value });
     });
 
     this.list$ = this.service.apiList();
+    this.customApiList$ = this.service.customApiList();
   }
 
   onClickRow(api: GeneratedAPI) {
-    this.checkBoxHelper.handleOneChecked(!this.checkBoxHelper.selectedItems.has(api.id), api);
+    this.generatedCheckBoxHelper.handleOneChecked(!this.generatedCheckBoxHelper.selectedItems.has(api.id), api);
   }
+
+  onClickCustomApiRow(api: ICustomAPI) {
+    this.customApiCheckBoxhelper.handleOneChecked(!this.customApiCheckBoxhelper.selectedItems.has(api.id), api);
+  }
+
 
   onSubmit() {
     // Handle form submission
     const roleToCreate: IUpdateRole = {
       ...this.role,
-      metadata: JSON.stringify({ apis: this.checkBoxHelper.getArraySelected().map((api) => api.id) }),
+      metadata: JSON.stringify({
+        apis: this.generatedCheckBoxHelper.getArraySelected().map((api) => api.id),
+        customApis: this.customApiCheckBoxhelper.getArraySelected().map((api) => api.id),
+      }),
     };
+
     this.service.updateRole(roleToCreate).subscribe({
       next: (value) => {
         if (value.status == 200) {
@@ -60,7 +78,13 @@ export class DecentralizeComponent implements OnInit {
 
   activeAll(apis: Array<GeneratedAPI>, mode: boolean) {
     _.forEach(apis, (api) => {
-      this.checkBoxHelper.handleOneChecked(mode, api);
+      this.generatedCheckBoxHelper.handleOneChecked(mode, api);
+    })
+  }
+
+  activeCustomApiAll(apis: Array<ICustomAPI>, mode: boolean) {
+    _.forEach(apis, (api) => {
+      this.customApiCheckBoxhelper.handleOneChecked(mode, api);
     })
   }
 }

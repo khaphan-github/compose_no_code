@@ -12,8 +12,8 @@ export class AuthenticateMiddleware implements NestMiddleware {
   ) { }
 
   async use(req: Request, res: Response, next: NextFunction) {
-
     // Case request with secret key.
+
     const secretKey = req.header('X-Secretkey');
     if (secretKey && secretKey?.length !== 0) {
       if (!this.mangageApiService.isValidSecetKey(secretKey)) {

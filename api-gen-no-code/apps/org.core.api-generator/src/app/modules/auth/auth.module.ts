@@ -8,12 +8,14 @@ import { BCryptService } from './bscript.service';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import NodeCache from 'node-cache';
+import { LightWeightModule } from '../light-weight-module/light-weight.module';
 
 @Module({
   imports: [
     GeneratorModule,
     CqrsModule,
     CrudModule,
+    LightWeightModule,
 
     JwtModule.registerAsync({
       imports: [ConfigModule],

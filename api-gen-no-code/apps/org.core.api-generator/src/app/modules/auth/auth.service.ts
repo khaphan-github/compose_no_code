@@ -20,6 +20,7 @@ import { AUTH_CACHE_KEY } from './variables/cache.const';
 import { PolicyModel } from './model/policy.model';
 import { Request } from 'express';
 import _ from 'lodash';
+import { LightWeightRepository } from '../light-weight-module/repository/light-weight.repository';
 
 @Injectable()
 export class AuthService {
@@ -29,6 +30,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly bscriptService: BCryptService,
     private readonly nodeCache: NodeCache,
+    private readonly lightWeightRepo: LightWeightRepository,
   ) { }
 
   private readonly logger = new Logger(AuthService.name);
@@ -52,16 +54,21 @@ export class AuthService {
   }
 
   isRequestRequireResourceInWhiteList = async (request: Request) => {
+    // Kiểm tra white list ở custom api và cả generated api.
     this.logger.verbose(`1. Check is this request contain in white list or public apis`)
     if (_.includes(PolicyModel.API_WHITE_LIST, request.baseUrl)) {
       return true;
     }
     try {
       const publicApiSet = await this.getPublicApis() as Set<string>;
+      let key = '';
+      if (request.baseUrl.includes('api/v1/custom')) {
+        key = PolicyModel.getKeyCachePublicAPI(request.baseUrl.replace('/api/v1/custom/', ''), 'custom');
+      } else {
+        const tableName = PolicyModel.extractTableName(request);
+        key = PolicyModel.getKeyCachePublicAPI(tableName, PolicyModel.getActionFromRequest(request));
+      }
 
-      const tableName = PolicyModel.extractTableName(request);
-
-      const key = PolicyModel.getKeyCachePublicAPI(tableName, PolicyModel.getActionFromRequest(request));
 
       const right = publicApiSet.has(key) ?? false;
       this.logger.log(`Current request ${right ? 'have' : 'do not have'} role: ${key}`);
@@ -89,7 +96,12 @@ export class AuthService {
     }
 
     const tableName = PolicyModel.extractTableName(request);
-    const policyKey = PolicyModel.getKeyCachePolicyAPI(userId, tableName, PolicyModel.getActionFromRequest(request));
+    let policyKey = ''
+    if (request.baseUrl.includes('/api/v1/custom/')) {
+      policyKey = PolicyModel.getKeyCachePolicyAPI(userId, request.baseUrl.replace('/api/v1/custom/', ''), 'custom');
+    } else {
+      policyKey = PolicyModel.getKeyCachePolicyAPI(userId, tableName, PolicyModel.getActionFromRequest(request));
+    }
 
     this.logger.log(`\nUser ${userId} just exec api with role: ${policyKey}`)
 
@@ -193,7 +205,7 @@ export class AuthService {
     // Cache cho từng user;
     const cacheKey = PolicyModel.getKeyCachePolicyByUser(AUTH_CACHE_KEY.POLICY, userId);
     const appId = WORKSPACE_VARIABLE.APP_ID.toString();
-    const [roles, apis, accounts] = await Promise.all([
+    const [roles, apis, accounts, customApi] = await Promise.all([
       this.crudService.query({
         appid: appId,
         schema: '_core_role'
@@ -215,10 +227,12 @@ export class AuthService {
         selects: ['id', 'metadata'] // roleIds
       }, {
         id: userId,
-      })
+      }),
+
+      this.lightWeightRepo.getAllCustomApi(),
     ]);
 
-    const policy = new PolicyModel(roles, apis, accounts).extractToPolicy();
+    const policy = new PolicyModel(roles, apis, accounts, customApi).extractToPolicy();
     this.nodeCache.set(cacheKey, policy);
     return policy;
   }
@@ -246,10 +260,20 @@ export class AuthService {
       ]
     }) as any[];
 
+    const customApiQuery = await this.lightWeightRepo.getPublicCustomApi();
+
+    // Api path as table name and action only post:
+
     const publicApiSet = new Set(queryResult.map(
       (element) => PolicyModel.getKeyCachePublicAPI(element.table_name, element.action))
     );
 
+    for (let index = 0; index < customApiQuery.length; index++) {
+      const element = customApiQuery[index];
+      publicApiSet.add(PolicyModel.getKeyCachePublicAPI(element.api_path, element.action))
+    };
+
+    console.log(publicApiSet);
     this.nodeCache.set(
       AUTH_CACHE_KEY.PUBLIC_APIs,
       publicApiSet
@@ -257,4 +281,6 @@ export class AuthService {
 
     return publicApiSet;
   }
+
+
 }

@@ -1,6 +1,3 @@
-/*
-https://docs.nestjs.com/providers#services
-*/
 
 import { Injectable, Logger } from '@nestjs/common';
 import { DataSource } from 'typeorm';
@@ -28,8 +25,24 @@ export class LightWeightRepository {
   getQueryByPath(path: string) {
     const queryString = `
       SELECT * FROM _core_custom_api
-      WHERE api_path = $1
+      WHERE api_path = $1 AND enable = true;
     `
     return this.dataSource.query(queryString, [path]);
+  }
+
+  getPublicCustomApi() {
+    const queryString = `
+    SELECT * FROM _core_custom_api
+    WHERE authentication = $1 AND enable = $2;
+  `
+    return this.dataSource.query(queryString, ['NO_AUTH', true]);
+  }
+
+  getAllCustomApi() {
+    const queryString = `
+    SELECT * FROM _core_custom_api
+    WHERE enable = $1;
+    `
+    return this.dataSource.query(queryString, [true]);
   }
 }

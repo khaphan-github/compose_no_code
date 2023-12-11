@@ -50,6 +50,11 @@
         <label cLabel><strong>4. Các trường dữ liệu ứng với truy vấn: <span (click)="this.onViewExample()">Xem mẫu request</span></strong></label>
         <ngx-input-field (formValueChange)="onChangeField($event)" [currentFields]="this.apiForm.get('availableField')?.value ?? []"></ngx-input-field>
       </c-col>
+
+      <c-col [md]="12">
+        <label cLabel for="accessScope"><strong>5. Mô tả ngắn (Không bắt buộc):</strong></label>
+        <textarea formControlName="desc" cFormControl id="desc" rows="3"></textarea>
+      </c-col>
     </div>
   </form>
 </c-modal-body>

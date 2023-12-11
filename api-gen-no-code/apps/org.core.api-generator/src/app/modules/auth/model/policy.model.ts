@@ -14,6 +14,7 @@ export class PolicyModel {
     public readonly roles: Array<any>,
     public readonly apis: Array<any>,
     public readonly accountList: Array<any>,
+    public readonly customApi: Array<any>,
   ) {
     this.account = accountList[0];
   }
@@ -23,6 +24,7 @@ export class PolicyModel {
     const uniqueSet = new Set([]); // <-- Nếu user có quyền vô api thì sẽ nằm trong nàuy
     const apiMap = Object.fromEntries(this.apis?.map((api) => [api.id.toString(), api]));
     const roleMap = Object.fromEntries(this.roles?.map((role) => ['_role_' + role.id.toString(), role]));
+    const customApiMap = Object.fromEntries(this.customApi?.map((api) => ['_custom_api_' + api.id.toString(), api]));
 
     const roleIdOfAccount = this.account?.metadata?.roleIds as string[];
 
@@ -38,6 +40,17 @@ export class PolicyModel {
           const setKey = PolicyModel.getKeyCachePolicyAPI(this.account.id, table_name, action);
           uniqueSet.add(setKey);
         }
+
+        // Duyệt custom api
+        const customApis = roleInfo?.metadata?.customApis as any[]; // api
+        customApis?.forEach((element: string) => {
+          const validApi  = customApiMap["_custom_api_" + element];
+          if(validApi) {
+            const { action, api_path } = validApi
+            const setKey = PolicyModel.getKeyCachePolicyAPI(this.account.id, api_path, action);
+            uniqueSet.add(setKey);
+          }
+        });
       }
     }
     return uniqueSet;

@@ -28,7 +28,9 @@ export class CustomApiListComponent implements OnInit {
 
   onUpdateCustomApi(customApi: ICustomAPI) {
     const update = this.modal.open(UpdateCustomApiComponent, {
-
+      backdrop: 'static',
+      size: 'lg',
+      keyboard: false,
     });
 
     update.componentInstance.customApi = customApi;

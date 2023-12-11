@@ -40,6 +40,7 @@ export class CreateApiComponent implements OnInit {
   initializeForm() {
     this.apiForm = this.fb.group({
       httpMethod: ['POST', Validators.required],
+      desc: [''],
       domain: ['', Validators.required],
       isActive: [false],
       accessScope: ['public', Validators.required],

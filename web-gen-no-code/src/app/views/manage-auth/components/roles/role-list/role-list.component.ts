@@ -66,7 +66,7 @@ export class RoleListComponent implements OnInit {
     const des = this.modal.open(DecentralizeComponent, {
       backdrop: 'static',
       keyboard: false,
-      size: 'xl',
+      fullscreen: true,
     });
 
     des.componentInstance.role = role;

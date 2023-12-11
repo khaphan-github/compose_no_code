@@ -25,6 +25,12 @@ import { CustomController } from './controllers/custom-api.controller';
 
     NodeCache,
   ],
-  exports: []
+  exports: [
+    LightWeightService,
+    TablePermissionService,
+
+    LightWeightRepository,
+    LoggingInterceptor,
+  ]
 })
 export class LightWeightModule { }
