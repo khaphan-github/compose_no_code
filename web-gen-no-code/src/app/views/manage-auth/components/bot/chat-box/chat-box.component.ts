@@ -28,6 +28,7 @@ export class ChatBoxComponent implements OnInit {
   onSubmit() {
     // Add your form submission logic here
     if (this.form.valid) {
+      this.isError = false;
       this.form.disable();
       this.waitingToLoad = true;
       this.service.transformer(this.form.get('floatingInput')?.value).subscribe({
@@ -55,5 +56,6 @@ export class ChatBoxComponent implements OnInit {
   onSaveToApi() {
     const createModal = this.modal.open(CreateApiComponent, {});
     createModal.componentInstance.queryString = this.outputData;
+    createModal.componentInstance.desc = this.form.get('floatingInput')?.value;
   }
 }

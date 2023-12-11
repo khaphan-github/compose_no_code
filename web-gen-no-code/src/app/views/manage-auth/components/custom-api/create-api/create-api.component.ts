@@ -14,6 +14,7 @@ import { ICreateAPI } from '../../../interfaces/api/create-api.interface';
 })
 export class CreateApiComponent implements OnInit {
   @Input() queryString!: string;
+  @Input() desc!: string;
   private readonly service = inject(ManageApiService);
   private readonly activeModal = inject(NgbActiveModal);
   private readonly modal = inject(NgbModal);
@@ -42,7 +43,7 @@ export class CreateApiComponent implements OnInit {
   initializeForm() {
     this.apiForm = this.fb.group({
       httpMethod: ['POST', Validators.required],
-      desc: [''],
+      desc: [this.desc ? this.desc : ''],
       domain: ['', Validators.required],
       isActive: [true],
       accessScope: ['public', Validators.required],
