@@ -6,7 +6,6 @@ import { CreateWorkspaceDto } from '../dto/create-workspace.dto';
 import { ErrorBase, ResponseBase } from '../../../infrastructure/format/response.base';
 import { QueryParamDataDto } from '../../crud-pg/controller/query-filter.dto';
 import { CreateApplicationDto } from '../dto/create-app.dto';
-import { SQLTransformerDto } from './mll.query.dto';
 import { SQLToAPIService } from '../services/sql-to-api.service';
 
 @ApiTags('Api Generator')
@@ -126,19 +125,6 @@ export class GeneratorController {
   }
 
 
-  @Post('app/:appid/transformer')
-  @HttpCode(200)
-  async getSQLTransfromer(
-    @Param('appid') appId: number,
-    @Body() sqlTransformerDto: SQLTransformerDto,
-  ) {
-    const ownerID = 'test_owner_id';
-    const result = await this.service.getSQLTransformer(ownerID, appId, sqlTransformerDto);
-    return new ResponseBase(200, 'getSQLTransfromer', {
-      result: result,
-      saveAsAPIPath: `api/v1/app/${appId}/transformer/api`
-    });
-  }
 
   @Get('app/:appid/api/doc')
   @Render('api-doc')

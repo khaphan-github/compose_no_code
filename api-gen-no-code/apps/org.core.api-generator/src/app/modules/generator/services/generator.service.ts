@@ -13,9 +13,6 @@ import { GetWorkspaceConnectionQuery } from "../queries/get-workspace-connection
 import { GetCreatedDbScriptByAppIdQuery } from "../queries/get-app-createdb-script.query";
 import { GetSchemaInfoByAppIdQuery } from "../queries/get_schema_info.query";
 import { GetApisByAppIdQuery } from "../queries/get-apis-by-app-id.query";
-import { SQLTransformerDto } from "../controllers/mll.query.dto";
-import { SQLTransformerProxy } from "../proxy/sql.transformer.proxy";
-import { RunScriptCommand } from "../commands/run-script-command";
 import { ApiGeneratedViewModel } from "../view-model/apis.view.model";
 
 @Injectable()
@@ -23,7 +20,6 @@ export class GeneratorService {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-    private readonly sqltransformer: SQLTransformerProxy
   ) { }
 
   private getWorkspaceConnection() {
@@ -77,24 +73,6 @@ export class GeneratorService {
   async getApisByAppId(appId: number, ownerId: string) {
     const workspaceConnection = await this.getWorkspaceConnection();
     return this.queryBus.execute(new GetApisByAppIdQuery(workspaceConnection, ownerId, appId));
-  }
-
-  async getSQLTransformer(ownerID: string, appId: number, question: SQLTransformerDto) {
-    const workspaceConnection = await this.getWorkspaceConnection();
-
-    const createDbScript = await this.queryBus.execute(
-      new GetCreatedDbScriptByAppIdQuery(workspaceConnection, ownerID, appId)
-    );
-
-    const sugesstionRes = await this.sqltransformer.transform(
-      createDbScript?.create_db_script, question.question
-    );
-
-    const commandResult = this.commandBus.execute(
-      new RunScriptCommand(workspaceConnection, sugesstionRes.data)
-    );
-
-    return commandResult;
   }
 
   async getApiGeneratedHbsView(appId: number, ownerId: string) {

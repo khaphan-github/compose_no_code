@@ -30,6 +30,7 @@ import { QueryParamKeyMapDirective } from '../shared/directive/query-param-key-m
 import { InputFieldComponent } from './components/custom-api/input-field/input-field.component';
 import { CustomApiListComponent } from './components/custom-api/custom-api-list/custom-api-list.component';
 import { UpdateCustomApiComponent } from './components/custom-api/update-custom-api/update-custom-api.component';
+import { ChatBoxComponent } from './components/bot/chat-box/chat-box.component';
 
 const UI_MODULES = [
   IconModule,
@@ -60,6 +61,9 @@ const MODULE_COMPONENTS = [
   // Custom api
   CustomApiListComponent,
   UpdateCustomApiComponent,
+
+  // Chat box
+  ChatBoxComponent,
 
   AppListComponent,
 
@@ -114,6 +118,10 @@ const MODULE_COMPONENTS = [
       {
         path: 'database',
         component: ExecuteScriptComponent,
+      },
+      {
+        path: 'bot',
+        component: ChatBoxComponent,
       },
       {
         path: 'app',

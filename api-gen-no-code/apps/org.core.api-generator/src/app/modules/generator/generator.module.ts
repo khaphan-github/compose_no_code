@@ -9,7 +9,6 @@ import { GeneratorService } from './services/generator.service';
 import { GenerateAPISagas } from './sagas/generate-api.saga';
 import { ExecutedSQLScriptEventHandler } from './events/execute-sql-create-db.event';
 import { HttpModule } from '@nestjs/axios';
-import { SQLTransformerProxy } from './proxy/sql.transformer.proxy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SQLToAPIService } from './services/sql-to-api.service';
 import { FileReaderService } from '../shared/file-reader.service';
@@ -18,33 +17,33 @@ import { ExecutedSQLQueryEventHandler } from '../crud-pg/handlers/executed-query
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-    imports: [
-        CqrsModule,
-        HttpModule,
-        ConfigModule,
-        TypeOrmModule.forFeature(),
-        CrudModule,
-    ],
-    controllers: [
-        GeneratorController,
-    ],
-    providers: [
-        ...CommandHandlers,
-        ...QueryHandlers,
-        ...SQLToAPIQueryHandlers,
+  imports: [
+    CqrsModule,
+    HttpModule,
+    ConfigModule,
+    TypeOrmModule.forFeature(),
+    CrudModule,
+  ],
+  controllers: [
+    GeneratorController,
+  ],
+  providers: [
+    ...CommandHandlers,
+    ...QueryHandlers,
+    ...SQLToAPIQueryHandlers,
 
-        ExecutedSQLQueryEventHandler,
-        JsonIoService,
-        FileReaderService,
+    ExecutedSQLQueryEventHandler,
+    JsonIoService,
+    FileReaderService,
 
-        NodeCache,
-        GeneratorService,
+    NodeCache,
+    GeneratorService,
 
-        GenerateAPISagas,
-        ExecutedSQLScriptEventHandler,
-        SQLTransformerProxy,
-        SQLToAPIService,
-    ],
+    GenerateAPISagas,
+    ExecutedSQLScriptEventHandler,
+    SQLToAPIService,
+  ],
+  exports: [  ]
 
 })
 export class GeneratorModule { }

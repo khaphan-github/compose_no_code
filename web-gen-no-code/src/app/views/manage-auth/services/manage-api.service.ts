@@ -214,4 +214,10 @@ export class ManageApiService {
     });
   }
   // #endregion generator
+
+  transformer(question: string) {
+    return this.httpClient.post<SResponse<any>>(`${getHostName()}/api/v1/transform`, {
+      question: question
+    });
+  }
 }

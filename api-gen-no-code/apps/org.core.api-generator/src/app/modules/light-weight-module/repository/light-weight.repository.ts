@@ -45,4 +45,11 @@ export class LightWeightRepository {
     `
     return this.dataSource.query(queryString, [true]);
   }
+
+  getSqlScript() {
+    const queryString = `
+      SELECT create_db_script FROM _core_applications;
+    `
+    return this.dataSource.query(queryString);
+  }
 }

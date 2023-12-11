@@ -42,7 +42,7 @@ export class AuthService {
   // Nếu có api nào truy cập thuọc điều kiện bên dưới -> Invalid cache cập nhật lại quyền cho đúng
   executeTaskFollowPrivatePolicy(request: Request) {
     // Invalid cache policy
-    const policyTableList = ['_core_account', '_core_role', '_core_generated_apis'];
+    const policyTableList = ['_core_account', '_core_role', '_core_generated_apis', '_core_custom_api'];
     if (
       policyTableList.includes(PolicyModel.extractTableName(request))
       && (request.method !== 'GET' && !request.baseUrl.includes('query'))

@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { SpinnerModule } from '@coreui/angular';
 
 @Component({
   standalone: true,
   imports: [
-    SpinnerModule
+    SpinnerModule,
+    CommonModule,
   ],
   selector: 'app-waiting-to-load',
   templateUrl: './waiting-to-load.component.html',

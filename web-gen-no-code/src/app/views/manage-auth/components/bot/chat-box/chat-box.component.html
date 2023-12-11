@@ -1,0 +1,31 @@
+<h2 id="getting-started">Truy vấn nhanh dữ liệu thông qua BOT(llm)</h2>
+<c-callout color="primary">
+  <p>Các thông tin cần biết khi cấu hình các APIs:</p>
+  <ul>
+    <li>
+      Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng cho
+      ứng dụng Front-End.
+    </li>
+    <li>
+      Xem chi tiết hướng dẫn tại <a
+        href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
+    </li>
+  </ul>
+</c-callout>
+<div [cFormFloating]="true" [formGroup]="form" class="mb-3" (keyup.enter)="onSubmit()">
+  <input cFormControl formControlName="floatingInput" id="floatingInput" placeholder="How many account in my system?"
+    type="email" />
+  <label cLabel for="floatingInput">Đặt câu hỏi về dữ liệu cho Bot nhé! Nhập tiếng anh để có kết quả chính
+    xác hơn</label>
+</div>
+
+<c-card>
+  <span class="m-3" *ngIf="outputMessage && !this.waitingToLoad">
+    Kết quả mà tôi tìm thấy là:
+    <pre><code [highlight]="outputMessage"></code></pre>
+  </span>
+  <div *ngIf="this.waitingToLoad" class="fade show" style="text-align: center; padding-top: calc(100vh / 10); height: 25vh">
+    <i class="spinner-grow spinner-grow-sm"></i>
+    <span class="m-1">Hệ thống truy vấn dữ liệu theo yêu cầu - vui lòng chờ trong giây lát...</span>
+  </div>
+</c-card>
