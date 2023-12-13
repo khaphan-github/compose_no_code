@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpException, HttpStatus, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { TransformerSerivce } from "../services/transformer.service";
 import { SQLTransformerDto } from "../dto/mll.query.dto";
@@ -14,6 +14,16 @@ export class TransformController {
     try {
       const queryResult = await this.service.transform(query.question);
       return new ResponseBase(200, `Run custom api success`, { answer: queryResult });
+    } catch (error) {
+      throw new HttpException(new ErrorBase(error), HttpStatus.OK);
+    }
+  }
+
+  @Get()
+  async getTableName() {
+    try {
+      const queryResult = await this.service.getAllTableName();
+      return new ResponseBase(200, `Get all table name success`, queryResult);
     } catch (error) {
       throw new HttpException(new ErrorBase(error), HttpStatus.OK);
     }

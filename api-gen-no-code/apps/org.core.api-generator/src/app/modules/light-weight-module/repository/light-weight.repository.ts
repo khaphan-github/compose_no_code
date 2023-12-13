@@ -52,4 +52,13 @@ export class LightWeightRepository {
     `
     return this.dataSource.query(queryString);
   }
+
+  getAllTableName() {
+    const queryString = `
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public';
+    `
+    return this.dataSource.query(queryString);
+  }
 }

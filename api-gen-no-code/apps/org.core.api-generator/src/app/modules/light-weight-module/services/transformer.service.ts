@@ -17,4 +17,8 @@ export class TransformerSerivce {
       queryString: queryString.data
     }
   }
+
+  getAllTableName() {
+    return this.repository.getAllTableName()
+  }
 }

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateApiComponent } from '../../custom-api/create-api/create-api.component';
+import { Observable, map } from 'rxjs';
+import { SResponse } from 'src/app/core/config/http-client/response-base';
 
 @Component({
   selector: 'ngx-chat-box',
@@ -10,12 +12,15 @@ import { CreateApiComponent } from '../../custom-api/create-api/create-api.compo
   styleUrls: ['./chat-box.component.scss']
 })
 export class ChatBoxComponent implements OnInit {
+  public readonly service = inject(ManageApiService);
+  private readonly modal = inject(NgbModal);
+
   form!: FormGroup;
   public outputMessage: any;
   public isError: boolean = false;
   public outputData: any;
-  public readonly service = inject(ManageApiService);
-  private readonly modal = inject(NgbModal);
+  public listTableName$!: Observable<SResponse<Array<any>>>;
+
   constructor(private fb: FormBuilder) { }
 
   public waitingToLoad: boolean = false;
@@ -23,6 +28,12 @@ export class ChatBoxComponent implements OnInit {
     this.form = this.fb.group({
       floatingInput: ['', [Validators.required]]
     });
+    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role', '_core_custom_api'];
+
+    this.listTableName$ = this.service.getTableName().pipe(map((res) => {
+      const filterTable = res.data.filter((va) => !whiteList.includes(va.table_name))
+      return { ...res, data: filterTable }
+    }));
   }
 
   onSubmit() {

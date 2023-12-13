@@ -220,4 +220,8 @@ export class ManageApiService {
       question: question
     });
   }
+
+  getTableName() {
+    return this.httpClient.get<SResponse<Array<any>>>(`${getHostName()}/api/v1/transform`);
+  }
 }
