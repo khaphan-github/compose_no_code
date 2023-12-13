@@ -1,0 +1,55 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/web-gen-no-code/dist
+/web-gen-no-code/tmp
+/web-gen-no-code/out-tsc
+/web-gen-no-code/bazel-out
+
+# Node
+/web-gen-no-code/node_modules
+/api-gen-no-code/node_modules
+web-gen-no-code/npm-debug.log
+web-gen-no-code/yarn-error.log
+api-gen-no-code/npm-debug.log
+api-gen-no-code/yarn-error.log
+
+# Compiled output
+/api-gen-no-code/dist
+/api-gen-no-code/tmp
+/api-gen-no-code/out-tsc
+/api-gen-no-code/bazel-out
+# Node
+
+# profiling files
+chrome-profiler-events*.json
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/web-gen-no-code/.angular/cache
+.sass-cache/
+/web-gen-no-code/connect.lock
+/web-gen-no-code/coverage
+/web-gen-no-code/libpeerconnection.log
+testem.log
+/web-gen-no-code/typings
+
+# System files
+.DS_Store
+Thumbs.db
