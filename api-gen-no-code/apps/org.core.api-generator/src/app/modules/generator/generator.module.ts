@@ -15,6 +15,7 @@ import { FileReaderService } from '../shared/file-reader.service';
 import { CrudModule } from '../crud-pg/crud.module';
 import { ExecutedSQLQueryEventHandler } from '../crud-pg/handlers/executed-query.handler';
 import { ConfigModule } from '@nestjs/config';
+import { KafkaProducerService } from '../../infrastructure/proxy/kaffka-producer.service';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ConfigModule } from '@nestjs/config';
     ExecutedSQLQueryEventHandler,
     JsonIoService,
     FileReaderService,
+    KafkaProducerService,
 
     NodeCache,
     GeneratorService,

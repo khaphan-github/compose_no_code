@@ -11,8 +11,6 @@ import { TypeOrmPostgresConfig } from './infrastructure/env/postgres-typeorm.con
 import { ManageApiModule } from './modules/manage/manage-api.module';
 import { AppEnvironmentConfig } from './infrastructure/env/app.env.config';
 import { AuthModule } from './modules/auth/auth.module';
-import { JwtModule } from '@nestjs/jwt';
-
 const FEATUREMODULES = [
   CrudModule,
   GeneratorModule,

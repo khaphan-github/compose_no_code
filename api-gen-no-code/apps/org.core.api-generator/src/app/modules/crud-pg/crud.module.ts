@@ -21,6 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ],
     exports: [
         CrudService,
+
     ]
 })
 export class CrudModule { }

@@ -48,4 +48,13 @@ export const navItems: INavData[] = [
       text: 'New'
     }
   },
+  {
+    name: 'System Logs',
+    url: '/manage-api/logs',
+    iconComponent: { name: 'cil-lightbulb' },
+    badge: {
+      color: 'success',
+      text: 'New'
+    }
+  },
 ];

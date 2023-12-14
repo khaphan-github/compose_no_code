@@ -31,6 +31,7 @@ import { InputFieldComponent } from './components/custom-api/input-field/input-f
 import { CustomApiListComponent } from './components/custom-api/custom-api-list/custom-api-list.component';
 import { UpdateCustomApiComponent } from './components/custom-api/update-custom-api/update-custom-api.component';
 import { ChatBoxComponent } from './components/bot/chat-box/chat-box.component';
+import { LogComponent } from './components/log/log.component';
 
 const UI_MODULES = [
   IconModule,
@@ -88,6 +89,8 @@ const MODULE_COMPONENTS = [
 
   // Database.
   ExecuteScriptComponent,
+
+  LogComponent,
 ]
 
 @NgModule({
@@ -122,6 +125,10 @@ const MODULE_COMPONENTS = [
       {
         path: 'bot',
         component: ChatBoxComponent,
+      },
+      {
+        path: 'logs',
+        component: LogComponent,
       },
       {
         path: 'app',

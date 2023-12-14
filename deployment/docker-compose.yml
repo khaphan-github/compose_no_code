@@ -1,0 +1,138 @@
+version: "3.3"
+services:
+  # Kafka Server & Zookeeper Docker Image
+  kafkaserver:
+    image: "spotify/kafka:latest" 
+    container_name: kafka
+    # Configures docker image to run in bridge mode network
+    hostname: kafkaserver
+    networks:
+      - kafkanet
+    # Make a port available to services outside of Docker
+    ports:
+      - 2181:2181
+      - 9092:9092
+    environment:
+      ADVERTISED_HOST: kafkaserver
+      ADVERTISED_PORT: 9092
+      KAFKA_CREATE_TOPICS: "sit.catalogue.item, uat.catalogue.item"
+  
+  # Elasticsearch Docker Image
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    container_name: elasticsearch
+    # Make a port available to services outside of Docker
+    ports:
+      - 9200:9200
+      - 9300:9300
+    # Configures docker image to run in bridge mode network
+    networks:
+      - kafkanet
+  
+  # Kibana Docker Image
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.0
+    container_name: kibana
+    # Make a port available to services outside of Docker
+    ports:
+      - 5601:5601
+    # It Links kibana container & elasticsearch container to communicate
+    links:
+      - elasticsearch:elasticsearch
+    # Configures docker image to run in bridge mode network
+    networks:
+      - kafkanet
+    # You can control the order of service startup and shutdown with the depends_on option.
+    depends_on: ['elasticsearch']
+  
+  # Logstash Docker Image
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.4.0
+    container_name: logstash
+    # It Links elasticsearch container & kafkaserver container  & logstash container to communicate
+    links:
+      - elasticsearch:elasticsearch
+      - kafkaserver:kafkaserver
+    # Configures docker image to run in bridge mode network
+    networks:
+      - kafkanet
+    # You can control the order of service startup and shutdown with the depends_on option.
+    depends_on: ['elasticsearch', 'kafkaserver']
+    # Mount host volumes into docker containers to supply logstash.config file
+    volumes:
+      - './conf:/usr/share/logstash/pipeline/'
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin@111
+      POSTGRES_PASSWORD: admin@111
+      POSTGRES_DB: maindb
+    ports:
+      - "5432:5432"
+    networks:
+      - main-network
+
+  api:
+    container_name: api
+    image: node:18.16.0
+    depends_on:
+      - postgres
+    command: 
+      - sh 
+      - -c 
+      - "cd /usr/src/api && npm install && npx nx run interated:serve:development"
+    env_file:
+      - ../api-gen-no-code/.env
+    environment:
+      - PATH=/usr/src/api/node_modules/.bin:$PATH
+      - DATABASE_HOST_NAME=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=admin@111
+      - DATABASE_PASSWORD=admin@111
+      - DATABASE_SCHEMA=maindb
+      - DATABASE_TYPE=postgres
+      - SERVER_SECRET_KEY=kqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCS9
+
+    volumes:
+      - ../api-gen-no-code:/usr/src/api
+      - ../api-gen-no-code/node_modules:/usr/src/api/node_modules
+    links:
+      - kafkaserver:kafkaserver
+    ports:
+      - 3000:3000
+
+    networks:
+      - kafkanet
+      - main-network
+
+  web:
+    container_name: web
+    image: node:18.16.0
+    environment:
+      - PATH=/usr/src/web/node_modules/.bin:$PATH
+    command: 
+      - sh 
+      - -c 
+      - "cd /usr/src/web && npm install && ng serve --host 0.0.0.0 --port 4200"
+    volumes:
+      - ../web-gen-no-code:/usr/src/web
+      - ../web-gen-no-code/node_modules:/usr/src/web/node_modules
+    ports:
+      - 4200:4200
+    networks:
+      - main-network
+
+# Use bridge network for all the container, keeping all the container in same network will simplify the communication between the container.
+networks:
+  kafkanet:
+    driver: bridge
+  main-network:
+    driver: overlay
+    attachable: true
+
+# ./bin/elasticsearch-reset-password -u elastic -i --url https://localhost:9200
+# elasticsearch-create-enrollment-token --scope kibana --url https://localhost:9200/
+# docker exec -it a259747181ee sh  kibana-verification-code
