@@ -6,6 +6,8 @@ import { KafkaProducerService } from "../../../infrastructure/proxy/kaffka-produ
 export class ExecutedSQLQueryEventHandler implements IEventHandler<ExecutedSQLQueryEvent> {
   constructor(private readonly kafka: KafkaProducerService) { }
   handle(event: ExecutedSQLQueryEvent) {
-    this.kafka.produceMessage('uat.catalogue.item', JSON.stringify(Object.assign(event, { time: new Date() })));
+    this.kafka.produceMessage(
+      'uat.catalogue.item',
+      JSON.stringify(Object.assign(event, { time: new Date() })));
   }
 }

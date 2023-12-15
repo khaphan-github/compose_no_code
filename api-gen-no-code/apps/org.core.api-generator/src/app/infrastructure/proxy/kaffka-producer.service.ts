@@ -16,12 +16,12 @@ export class KafkaProducerService {
     });
   }
 
-  async produceMessage(topic: string, message: string): Promise<void> {
+  produceMessage(topic: string, message: string) {
     const producerRecord: ProducerRecord = {
       topic,
       messages: [{ value: message }],
     };
     console.log(`Send message to kafka...`)
-    await this.producer.send(producerRecord);
+    return this.producer.send(producerRecord);
   }
 }

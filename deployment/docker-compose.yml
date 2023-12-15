@@ -1,14 +1,25 @@
 version: "3.3"
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    container_name: elasticsearch
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - kafkanet
+
   # Kafka Server & Zookeeper Docker Image
   kafkaserver:
-    image: "spotify/kafka:latest" 
+    image: "spotify/kafka:latest"
     container_name: kafka
-    # Configures docker image to run in bridge mode network
+    restart: always
     hostname: kafkaserver
     networks:
       - kafkanet
-    # Make a port available to services outside of Docker
     ports:
       - 2181:2181
       - 9092:9092
@@ -16,49 +27,29 @@ services:
       ADVERTISED_HOST: kafkaserver
       ADVERTISED_PORT: 9092
       KAFKA_CREATE_TOPICS: "sit.catalogue.item, uat.catalogue.item"
-  
-  # Elasticsearch Docker Image
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
-    container_name: elasticsearch
-    # Make a port available to services outside of Docker
-    ports:
-      - 9200:9200
-      - 9300:9300
-    # Configures docker image to run in bridge mode network
-    networks:
-      - kafkanet
-  
-  # Kibana Docker Image
+
   kibana:
     image: docker.elastic.co/kibana/kibana:6.4.0
     container_name: kibana
-    # Make a port available to services outside of Docker
     ports:
       - 5601:5601
-    # It Links kibana container & elasticsearch container to communicate
+    environment: 
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     links:
       - elasticsearch:elasticsearch
-    # Configures docker image to run in bridge mode network
     networks:
       - kafkanet
-    # You can control the order of service startup and shutdown with the depends_on option.
-    depends_on: ['elasticsearch']
-  
-  # Logstash Docker Image
+    depends_on: [ 'elasticsearch' ]
+
   logstash:
     image: docker.elastic.co/logstash/logstash:6.4.0
     container_name: logstash
-    # It Links elasticsearch container & kafkaserver container  & logstash container to communicate
     links:
       - elasticsearch:elasticsearch
       - kafkaserver:kafkaserver
-    # Configures docker image to run in bridge mode network
     networks:
       - kafkanet
-    # You can control the order of service startup and shutdown with the depends_on option.
-    depends_on: ['elasticsearch', 'kafkaserver']
-    # Mount host volumes into docker containers to supply logstash.config file
+    depends_on: [ 'elasticsearch', 'kafkaserver' ]
     volumes:
       - './conf:/usr/share/logstash/pipeline/'
 
@@ -78,11 +69,12 @@ services:
   api:
     container_name: api
     image: node:18.16.0
+    restart: always
     depends_on:
       - postgres
-    command: 
-      - sh 
-      - -c 
+    command:
+      - sh
+      - -c
       - "cd /usr/src/api && npm install && npx nx run interated:serve:development"
     env_file:
       - ../api-gen-no-code/.env
@@ -111,11 +103,12 @@ services:
   web:
     container_name: web
     image: node:18.16.0
+    restart: always
     environment:
       - PATH=/usr/src/web/node_modules/.bin:$PATH
-    command: 
-      - sh 
-      - -c 
+    command:
+      - sh
+      - -c
       - "cd /usr/src/web && npm install && ng serve --host 0.0.0.0 --port 4200"
     volumes:
       - ../web-gen-no-code:/usr/src/web
@@ -125,14 +118,15 @@ services:
     networks:
       - main-network
 
-# Use bridge network for all the container, keeping all the container in same network will simplify the communication between the container.
 networks:
   kafkanet:
     driver: bridge
   main-network:
-    driver: overlay
-    attachable: true
+    driver: bridge
 
 # ./bin/elasticsearch-reset-password -u elastic -i --url https://localhost:9200
 # elasticsearch-create-enrollment-token --scope kibana --url https://localhost:9200/
 # docker exec -it a259747181ee sh  kibana-verification-code
+
+# grep vm.max_map_count /etc/sysctl.conf
+# sudo sysctl -w vm.max_map_count=262144
