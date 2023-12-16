@@ -99,30 +99,69 @@ services:
     networks:
       - kafkanet
       - main-network
-
-  web:
-    container_name: web
-    image: node:18.16.0
-    restart: always
-    environment:
-      - PATH=/usr/src/web/node_modules/.bin:$PATH
-    command:
-      - sh
-      - -c
-      - "cd /usr/src/web && npm install && ng serve --host 0.0.0.0 --port 4200"
-    volumes:
-      - ../web-gen-no-code:/usr/src/web
-      - ../web-gen-no-code/node_modules:/usr/src/web/node_modules
+  # web:
+  #   container_name: web
+  #   image: node:18.16.0
+  #   restart: always
+  #   environment:
+  #     - PATH=/usr/src/web/node_modules/.bin:$PATH
+  #   command:
+  #     - sh
+  #     - -c
+  #     - "cd /usr/src/web && npm install && ng serve --host 0.0.0.0 --port 4200"
+  #   volumes:
+  #     - ../web-gen-no-code:/usr/src/web
+  #     - ../web-gen-no-code/node_modules:/usr/src/web/node_modules
+  #   ports:
+  #     - 4200:4200
+  #   networks:
+  #     - main-network
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
     ports:
-      - 4200:4200
+      - "9000:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonarqube-db:5432/sonar
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
     networks:
-      - main-network
+      - dev_network
+    depends_on:
+      - sonarqube-db
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - dev_network
+  
+  sonarqube-db:
+    image: postgres:alpine
+    container_name: sonarqube-db
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_DB=sonar
+    networks:
+      - dev_network
+    volumes:
+      - sonarqube-db:/var/lib/postgresql/data
 
 networks:
   kafkanet:
     driver: bridge
   main-network:
     driver: bridge
+  dev_network:
+    driver: bridge
+
+volumes:
+  jenkins_home:
+  sonarqube-db:
 
 # ./bin/elasticsearch-reset-password -u elastic -i --url https://localhost:9200
 # elasticsearch-create-enrollment-token --scope kibana --url https://localhost:9200/
