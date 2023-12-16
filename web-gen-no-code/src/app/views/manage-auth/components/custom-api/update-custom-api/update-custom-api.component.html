@@ -43,12 +43,17 @@
       <c-col [md]="12">
         <label cLabel for="accessScope"><strong>3. Truy vấn cơ sở dữ liệu (PostgreSQL) <a href="">Xem hướng
               dẫn</a>:</strong></label>
-        <textarea formControlName="query" cFormControl id="exampleFormControlTextarea1" rows="6"></textarea>
+        <c-callout color="default">
+          <ngs-code-editor [codeModel]="this.CODE_MODEL" [options]="this.CODE_OPTIONS"
+            (valueChanged)="onCodeChanged($event)"></ngs-code-editor>
+        </c-callout>
       </c-col>
 
       <c-col [md]="12">
-        <label cLabel><strong>4. Các trường dữ liệu ứng với truy vấn: <span (click)="this.onViewExample()">Xem mẫu request</span></strong></label>
-        <ngx-input-field (formValueChange)="onChangeField($event)" [currentFields]="this.apiForm.get('availableField')?.value ?? []"></ngx-input-field>
+        <label cLabel><strong>4. Các trường dữ liệu ứng với truy vấn: <span (click)="this.onViewExample()">Xem
+              mẫu request</span></strong></label>
+        <ngx-input-field (formValueChange)="onChangeField($event)"
+          [currentFields]="this.apiForm.get('availableField')?.value ?? []"></ngx-input-field>
       </c-col>
 
       <c-col [md]="12">

@@ -1,21 +1,15 @@
-<h2 id="getting-started">Danh sách Tài khoản trong hệ thống</h2>
-<c-callout color="primary">
-  <p>Danh sách tài khoản này bao gồm các tài khoản người dùng đăng ký và tài khoản được người quản trị
-    tạo:</p>
-  <ul>
-    <li>Bạn có thể kích hoạt và phân quyền cho tài khoản tại đây</li>
-    <li>Nên cân nhắc khi phân quyền quản trị cho các tài khoản người dùng đăng ký - tùy nghiệp vụ mà hệ
-      thống bạn cần</li>
-  </ul>
-</c-callout>
-
 <div>
   <c-row class="fade show">
     <c-col xs>
       <c-card class="mb-4">
         <c-card-header>
-          <div [align]="'right'">
-            <button cButton color="primary" (click)="this.onCreate()">Thêm tài khoản</button>
+          <div class="row d-flex justify-content-between">
+            <div class="col-md-6">
+              <h4> Danh sách Tài khoản trong hệ thống</h4>
+            </div>
+            <div class="col-auto text-md-right">
+              <button cButton color="primary" (click)="this.onCreate()">Thêm tài khoản</button>
+            </div>
           </div>
         </c-card-header>
         <c-card-body>

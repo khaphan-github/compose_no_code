@@ -161,7 +161,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.1.0", "@angular/common@^16.2.10", "@angular/common@>=16.0.0", "@angular/common@16.2.12":
+"@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.1.0", "@angular/common@^16.2.10", "@angular/common@>=15.2.1", "@angular/common@>=16.0.0", "@angular/common@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/common/-/common-16.2.12.tgz"
   integrity sha512-B+WY/cT2VgEaz9HfJitBmgdk4I333XG/ybC98CMC4Wz8E49T8yzivmmxXB3OD6qvjcOB6ftuicl6WBqLbZNg2w==
@@ -189,7 +189,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.1.0", "@angular/core@^16.2.10", "@angular/core@>=16.0.0", "@angular/core@16.2.12":
+"@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.1.0", "@angular/core@^16.2.10", "@angular/core@>=15.2.1", "@angular/core@>=16.0.0", "@angular/core@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/core/-/core-16.2.12.tgz"
   integrity sha512-GLLlDeke/NjroaLYOks0uyzFVo6HyLl7VOm0K1QpLXnYvW63W9Ql/T3yguRZa7tRkOAeFZ3jw+1wnBD4O8MoUA==
@@ -1505,6 +1505,13 @@
   integrity sha512-mM2yiGnt9o7KZLIFp8K1vjfmVfu7HR3d8dhH5SszfArbgn9DvvQ4P5D5TDGygzyBSzeyZe18p7I8rX8vgA6DKw==
   dependencies:
     tslib "^2.3.0"
+
+"@ngstack/code-editor@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.npmjs.org/@ngstack/code-editor/-/code-editor-5.1.0.tgz"
+  integrity sha512-nFKm0FedsUp0/2HTXOFgMgHrz5bK3yFJk3Zs5UokkINLyBp0IQrkJYTi/Azpm0EexvMPbLwn44MkOvbWh63FAQ==
+  dependencies:
+    tslib "^2.0.0"
 
 "@ngtools/webpack@16.2.10":
   version "16.2.10"

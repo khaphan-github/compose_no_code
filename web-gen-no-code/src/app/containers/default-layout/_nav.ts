@@ -5,10 +5,6 @@ export const navItems: INavData[] = [
     name: 'Dashboard',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
-    badge: {
-      color: 'info',
-      text: 'NEW'
-    }
   },
   {
     title: true,
@@ -17,7 +13,7 @@ export const navItems: INavData[] = [
   {
     name: 'Chuyển đỗi',
     url: '/manage-api/app',
-    iconComponent: { name: 'cil-puzzle' },
+    iconComponent: { name: 'cil-transfer' },
   },
   {
     name: 'APIs',
@@ -27,7 +23,7 @@ export const navItems: INavData[] = [
   {
     name: 'Custom APIs',
     url: '/manage-api/custom-api',
-    iconComponent: { name: 'cil-pencil' }
+    iconComponent: { name: 'cil-settings' }
   },
   {
     name: 'Nhóm quyền',
@@ -43,15 +39,11 @@ export const navItems: INavData[] = [
     name: 'Bot SQL',
     url: '/manage-api/bot',
     iconComponent: { name: 'cil-lightbulb' },
-    badge: {
-      color: 'success',
-      text: 'New'
-    }
   },
   {
     name: 'System Logs',
     url: '/manage-api/logs',
-    iconComponent: { name: 'cil-lightbulb' },
+    iconComponent: { name: 'cil-indent-increase' },
     badge: {
       color: 'success',
       text: 'New'

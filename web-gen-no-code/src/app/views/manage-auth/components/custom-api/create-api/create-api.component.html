@@ -43,7 +43,10 @@
       <c-col [md]="12">
         <label cLabel for="accessScope"><strong>3. Truy vấn cơ sở dữ liệu (PostgreSQL) <a href="">Xem hướng
               dẫn</a>:</strong></label>
-        <textarea formControlName="query" cFormControl id="exampleFormControlTextarea1" rows="6"></textarea>
+        <c-callout color="default">
+          <ngs-code-editor [codeModel]="this.CODE_MODEL" [options]="this.CODE_OPTIONS"
+            (valueChanged)="onCodeChanged($event)"></ngs-code-editor>
+        </c-callout>
       </c-col>
 
       <c-col [md]="12">
@@ -51,8 +54,9 @@
               mẫu request</span></strong></label>
         <ngx-input-field (formValueChange)="onChangeField($event)"></ngx-input-field>
       </c-col>
+
       <c-col [md]="12">
-        <label cLabel for="accessScope"><strong>5. Mô tả ngắn (Không bắt buộc):</strong></label>
+        <label cLabel for="accessScope"><strong>6. Mô tả ngắn (Không bắt buộc):</strong></label>
         <textarea formControlName="desc" cFormControl id="desc" rows="3"></textarea>
       </c-col>
     </div>

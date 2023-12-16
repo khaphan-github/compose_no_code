@@ -1,0 +1,18 @@
+<c-modal-header>
+  <h5 cModalTitle>Mẫu các thuộc tính trong request body:</h5>
+</c-modal-header>
+<c-modal-body>
+</c-modal-body>
+<div class="m-3">
+  <ngs-code-editor
+  [codeModel]="this.CODE_MODEL"
+  [options]="this.CODE_OPTIONS"
+  (valueChanged)="onCodeChanged($event)"
+>
+</ngs-code-editor>
+</div>
+
+<c-modal-footer>
+  <button cButton color="secondary" (click)="onClose()">Quay lại</button>
+  <button cButton color="primary" (click)="onSave()">Lưu thay đỗi</button>
+</c-modal-footer>

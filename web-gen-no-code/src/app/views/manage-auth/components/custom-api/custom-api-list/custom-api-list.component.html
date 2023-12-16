@@ -1,28 +1,15 @@
-<h2 id="getting-started">Danh sách Api tùy chỉnh trong hệ thống</h2>
-<c-callout color="primary">
-  <p>Các thông tin cần biết khi cấu hình các APIs:</p>
-  <ul>
-    <li>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) .</li>
-    <li>
-      Bạn có thể cài đặt các cấu hình như: <strong>kích hoạt, thay đổi phạm vi sử dụng, giới hạn các
-        trường trả về.</strong>
-    </li>
-    <li>
-      Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng cho
-      ứng dụng Front-End.
-    </li>
-    <li>
-      Xem chi tiết hướng dẫn tại <a
-        href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
-    </li>
-  </ul>
-</c-callout>
+
 <c-card>
   <c-card-header>
-    <div [align]="'right'">
-      <button  cButton color="primary" (click)="this.onCreateApi()">
-        <svg cIcon class="text-high" name="cilSave"></svg>
-        Thêm mới API</button>
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-6">
+        <h4> Danh sách Api tùy chỉnh trong hệ thống</h4>
+      </div>
+      <div class="col-auto text-md-right">
+        <button cButton color="primary" (click)="this.onCreateApi()">
+          <svg cIcon class="text-high" name="cilSave"></svg>
+          Thêm mới API</button>
+      </div>
     </div>
   </c-card-header>
   <c-card-body>
@@ -81,6 +68,7 @@
                 <ul cDropdownMenu>
                   <li (click)="this.onDelete(api)"><a cDropdownItem>Xóa vĩnh viễn</a></li>
                   <li (click)="this.onUpdateCustomApi(api)"><a cDropdownItem>Cập nhật thông tin</a></li>
+                  <li (click)="this.overideCode(api)"><a cDropdownItem>Tùy chỉnh code</a></li>
                 </ul>
               </c-dropdown>
             </td>

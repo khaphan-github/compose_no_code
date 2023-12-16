@@ -22,7 +22,15 @@ export class UpdateCustomApiComponent implements OnInit {
 
   private readonly fb = inject(FormBuilder);
   apiForm!: FormGroup;
+  public CODE_MODEL = {
+    language: 'sql',
+    uri: 'main.sql',
+    value: '',
+  }
 
+  public readonly CODE_OPTIONS = {
+    contextmenu: true,
+  }
   onClose() {
     this.activeModal.close();
   }
@@ -44,12 +52,14 @@ export class UpdateCustomApiComponent implements OnInit {
     this.apiForm = this.fb.group({
       httpMethod: [this.customApi.http_method, Validators.required],
       domain: [this.customApi.api_path, Validators.required],
-      desc: [this.customApi.metadata?.desc, ],
+      desc: [this.customApi.metadata?.desc,],
       isActive: [this.customApi.enable],
       accessScope: [this.customApi.authentication == 'NO_AUTH' ? 'public' : 'private', Validators.required],
       query: [this.customApi.querystring],
       availableField: [availableFields],
     });
+
+    this.CODE_MODEL = { ...this.CODE_MODEL, value: this.customApi.querystring };
   }
 
   onSubmit() {
@@ -77,5 +87,9 @@ export class UpdateCustomApiComponent implements OnInit {
       {});
 
     detailRequestAttribute.componentInstance.arrayAttribute = this.apiForm.get('availableField')?.getRawValue();
+  }
+
+  onCodeChanged(value: any) {
+    this.apiForm.get('query')?.setValue(value);
   }
 }

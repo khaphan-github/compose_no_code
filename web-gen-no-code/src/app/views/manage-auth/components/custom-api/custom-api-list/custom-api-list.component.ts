@@ -8,6 +8,7 @@ import { CreateApiComponent } from '../create-api/create-api.component';
 import { EVENT } from '../../../event/const';
 import { CustomToastService } from 'src/app/views/shared/custom-toart/custom-toast.service';
 import { UpdateCustomApiComponent } from '../update-custom-api/update-custom-api.component';
+import { OverideCodeComponent } from '../overide-code/overide-code.component';
 
 @Component({
   selector: 'ngx-custom-api-list',
@@ -73,7 +74,19 @@ export class CustomApiListComponent implements OnInit {
     })
   }
 
-  onDecentralize(customApi: ICustomAPI){
+  onDecentralize(customApi: ICustomAPI) {
+  }
+
+
+  overideCode(customApi: ICustomAPI) {
+    const overideCode = this.modal.open(
+      OverideCodeComponent,
+      {
+        backdrop: 'static',
+        size: 'lg',
+        keyboard: false,
+      }
+    );
   }
 
 }

@@ -26,7 +26,7 @@ services:
     environment:
       ADVERTISED_HOST: kafkaserver
       ADVERTISED_PORT: 9092
-      KAFKA_CREATE_TOPICS: "sit.catalogue.item, uat.catalogue.item"
+      KAFKA_CREATE_TOPICS: "uat.catalogue.item, server.error"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:6.4.0

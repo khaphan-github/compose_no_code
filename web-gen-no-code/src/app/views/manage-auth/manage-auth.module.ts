@@ -32,6 +32,8 @@ import { CustomApiListComponent } from './components/custom-api/custom-api-list/
 import { UpdateCustomApiComponent } from './components/custom-api/update-custom-api/update-custom-api.component';
 import { ChatBoxComponent } from './components/bot/chat-box/chat-box.component';
 import { LogComponent } from './components/log/log.component';
+import { OverideCodeComponent } from './components/custom-api/overide-code/overide-code.component';
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 const UI_MODULES = [
   IconModule,
@@ -62,6 +64,7 @@ const MODULE_COMPONENTS = [
   // Custom api
   CustomApiListComponent,
   UpdateCustomApiComponent,
+  OverideCodeComponent,
 
   // Chat box
   ChatBoxComponent,
@@ -99,6 +102,8 @@ const MODULE_COMPONENTS = [
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+
+    CodeEditorModule.forRoot(),
 
     ...UI_MODULES,
     RouterModule.forChild([

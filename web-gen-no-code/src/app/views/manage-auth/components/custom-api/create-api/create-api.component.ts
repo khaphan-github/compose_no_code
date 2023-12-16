@@ -6,6 +6,7 @@ import { ExampleRequestAttributeComponent } from '../example-request-attribute/e
 import { EVENT } from '../../../event/const';
 import { CustomToastService, TToast } from 'src/app/views/shared/custom-toart/custom-toast.service';
 import { ICreateAPI } from '../../../interfaces/api/create-api.interface';
+import { OverideCodeComponent } from '../overide-code/overide-code.component';
 
 @Component({
   selector: 'ngx-create-api',
@@ -23,6 +24,15 @@ export class CreateApiComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   apiForm!: FormGroup;
 
+  public readonly CODE_MODEL = {
+    language: 'sql',
+    uri: 'main.sql',
+    value: '',
+  }
+
+  public readonly CODE_OPTIONS = {
+    contextmenu: true,
+  }
 
   onClose() {
     this.activeModal.close();
@@ -78,6 +88,11 @@ export class CreateApiComponent implements OnInit {
 
     detailRequestAttribute.componentInstance.arrayAttribute = this.apiForm.get('availableField')?.getRawValue();
   }
+
+  onCodeChanged(value: any) {
+    this.apiForm.get('query')?.setValue(value);
+  }
+
 }
 
 

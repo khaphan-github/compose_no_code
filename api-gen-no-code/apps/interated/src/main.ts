@@ -6,6 +6,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { SwaggerModule } from '@nestjs/swagger';
 import { CONFIG_SWAGGER } from './config/swagger.config';
+import { KafkaProducerService } from 'apps/org.core.api-generator/src/app/infrastructure/proxy/kaffka-producer.service';
+import { HttpExceptionFilter } from './infrastructure/middlewares/error.middleware';
 
 async function bootstrap() {
 
@@ -16,7 +18,9 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, './assets/public/views'));
   app.setViewEngine('hbs');
   // Provider html page to display api docs
-
+  app.useGlobalFilters(new HttpExceptionFilter(
+    app.get(KafkaProducerService)
+  ))
 
   app.enableCors();
   app.useGlobalPipes(
@@ -27,10 +31,10 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
 
-   // Swagger docs config
-   const document = SwaggerModule.createDocument(app, CONFIG_SWAGGER);
-   SwaggerModule.setup('swagger', app, document);
-   // Swagger docs config
+  // Swagger docs config
+  const document = SwaggerModule.createDocument(app, CONFIG_SWAGGER);
+  SwaggerModule.setup('swagger', app, document);
+  // Swagger docs config
 
   await app.listen(port);
 

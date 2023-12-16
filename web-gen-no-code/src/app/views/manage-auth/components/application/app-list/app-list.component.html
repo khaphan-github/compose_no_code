@@ -1,49 +1,28 @@
-<h2 id="getting-started">Chuyển đổi SQL script thành API</h2>
-<c-callout color="primary">
-  <p>Điền truy vấn cơ sở dữ liệu của bạn tại đây để chuyển đổi thành API:</p>
-  <ul>
-    <li>Ứng dụng chỉ hỗ trợ
-      truy vấn PostgreSQL</li>
-    <li>Nếu cấu lệnh tạo cở sở dữ liệu hợp lệ thì các APIs tương ứng sẽ được tạo tại mục "APIs"</li>
-    <li>Nếu bạn muốn chuyển đỗi lại vui lòng thay đỗi truy vấn bên dưới và ấn nút "Chuyển đỗi lại"
-      <strong> <i>(Lưu ý: Dữ liệu và các API đã được tạo sẽ bị xoá)</i></strong>
-    </li>
-  </ul>
-</c-callout>
-
 <div>
-  <c-card class="mb-4">
+  <c-card>
     <c-card-header>
-      <div [align]="'right'">
-        <button *ngIf="!showGenerateAgainButton" cButton color="primary" (click)="this.submitData()"
-          [disabled]="this.exampleFormControl.value == null || this.exampleFormControl.value == ''">
-          <svg cIcon class="text-high" name="cilSave"></svg>
-          Chuyển
-          đổi</button>
+      <div class="row d-flex justify-content-between">
+        <div class="col-md-6">
+          <h4> Chuyển đổi SQL script thành API</h4>
+        </div>
+        <div class="col-auto text-md-right">
+          <button *ngIf="!showGenerateAgainButton" cButton color="primary" (click)="submitData()"
+            [disabled]="exampleFormControl.value == null || exampleFormControl.value == ''">
+            <svg cIcon class="text-high" name="cilSave"></svg>
+            Chuyển đổi
+          </button>
 
-        <button *ngIf="showGenerateAgainButton" cButton color="primary" (click)="this.summitAgain()"
-          [disabled]="this.exampleFormControl.value == null || this.exampleFormControl.value == ''">
-          <svg cIcon class="text-high" name="cilSave"></svg>
-          Chuyển đổi
-          lại</button>
+          <button *ngIf="showGenerateAgainButton" cButton color="primary" (click)="summitAgain()"
+            [disabled]="exampleFormControl.value == null || exampleFormControl.value == ''">
+            <svg cIcon class="text-high" name="cilSave"></svg>
+            Chuyển đổi lại
+          </button>
+        </div>
       </div>
     </c-card-header>
     <c-card-body>
-      <div class="mb-3">
-        <textarea placeholder="-- Ví dụ về câu lệnh tạo bảng trong postgresql
-CREATE TABLE
-  IF NOT EXISTS study_class (
-    id SERIAL PRIMARY KEY,
-    code VARCHAR(255),
-    name VARCHAR(255),
-    session VARCHAR(255),
-    owner_id INT,
-    metadata JSONB,
-    enable BOOLEAN,
-    created_at timestamp(0) without time zone DEFAULT NOW(),
-    updated_at timestamp(0) without time zone DEFAULT NOW()
-);" cFormControl [formControl]="exampleFormControl" id="exampleFormControlTextarea1" rows="20">
-        </textarea>
-      </div>
+      <ngs-code-editor style="height: 450px; max-width: 100px; margin-right: 3px;" [codeModel]="this.CODE_MODEL"
+        [options]="this.CODE_OPTIONS" (valueChanged)="onCodeChanged($event)"></ngs-code-editor>
     </c-card-body>
   </c-card>
+</div>

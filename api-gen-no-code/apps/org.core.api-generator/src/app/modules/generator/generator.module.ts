@@ -45,7 +45,7 @@ import { KafkaProducerService } from '../../infrastructure/proxy/kaffka-producer
     ExecutedSQLScriptEventHandler,
     SQLToAPIService,
   ],
-  exports: [  ]
+  exports: [ KafkaProducerService ]
 
 })
 export class GeneratorModule { }

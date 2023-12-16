@@ -15,19 +15,37 @@ export class AppListComponent implements OnInit {
   private service = inject(ManageApiService);
   private route = inject(Router);
   private notify = inject(CustomToastService)
+  public showDocument = false;
 
   constructor() { }
 
   public showGenerateAgainButton: boolean = false;
+  public CODE_MODEL = {
+    language: 'sql',
+    uri: 'main.sql',
+    value: '',
+  };
+
+  public readonly CODE_OPTIONS = {
+    contextmenu: true,
+  }
+
+  onCodeChanged(value: any) {
+    this.exampleFormControl.setValue(value);
+  }
 
   ngOnInit() {
     this.service.getExecutedScript().subscribe({
       next: (value) => {
         if (value.status == 200) {
           this.exampleFormControl.setValue(value.data[0].create_db_script);
+          this.CODE_MODEL = {
+            ...this.CODE_MODEL,
+            value: value.data[0].create_db_script,
+          }
           this.showGenerateAgainButton = value.data[0].create_db_script !== null;
         } else if (value.status == 611) {
-          // this.notify.setState({ title: 'Lỗi khi lấy truy vấn', desc: value.message, color: 'warning' });
+          this.notify.setState({ title: 'Lỗi khi lấy truy vấn', desc: value.message, color: 'warning' });
         }
       }
     })
@@ -65,4 +83,5 @@ export class AppListComponent implements OnInit {
       },
     })
   }
+
 }

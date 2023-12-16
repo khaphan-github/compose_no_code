@@ -2,8 +2,77 @@
   <c-card-body>
     <h2>Hướng dẫn kỹ thuật (v1.1.2)</h2>
     <p>Chào bạn đến với trang quản trị API, thật may mắn khi bạn đã đến được đây</p>
-    <h5>1. Chuyển đỗi cơ sở dữ liệu thành APIs:</h5>
-    <h5>2. Cách cấu hình tài khoản - nhóm quyền:</h5>
-    <h5>3. Cách cấu hình các api đã được tạo:</h5>
+    <h4>1. Chuyển đỗi cơ sở dữ liệu thành APIs:</h4>
+    <h4>2. Cách cấu hình tài khoản - nhóm quyền:</h4>
+    <h4>3. Cách cấu hình các api đã được tạo:</h4>
+
+    <ul>
+      <li>Ứng dụng chỉ hỗ trợ
+        truy vấn PostgreSQL</li>
+      <li>Nếu cấu lệnh tạo cở sở dữ liệu hợp lệ thì các APIs tương ứng sẽ được tạo tại mục "APIs"</li>
+      <li>Nếu bạn muốn chuyển đỗi lại vui lòng thay đỗi truy vấn bên dưới và ấn nút "Chuyển đỗi lại"
+        <strong> <i>(Lưu ý: Dữ liệu và các API đã được tạo sẽ bị xoá)</i></strong>
+      </li>
+    </ul>
+
+    <h4>4. Danh sách API trong hệ thống</h4>
+    <p>Các thông tin cần biết khi cấu hình các APIs:</p>
+    <ul>
+      <li>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) .</li>
+      <li>
+        Bạn có thể cài đặt các cấu hình như: <strong>kích hoạt, thay đổi phạm vi sử dụng, giới hạn các
+          trường trả về.</strong>
+      </li>
+      <li>
+        Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng
+        cho
+        ứng dụng Front-End.
+      </li>
+      <li>
+        Xem chi tiết hướng dẫn tại <a
+          href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
+      </li>
+    </ul>
+
+    <h4>5. Danh sách Api tùy chỉnh trong hệ thống</h4>
+    <p>Các thông tin cần biết khi cấu hình các APIs:</p>
+    <ul>
+      <li>Danh sách API (Prefix: <strong>http://host/api/v1/app/2024/schema</strong>) .</li>
+      <li>
+        Bạn có thể cài đặt các cấu hình như: <strong>kích hoạt, thay đổi phạm vi sử dụng, giới hạn
+          các
+          trường trả về.</strong>
+      </li>
+      <li>
+        Tài liệu kỹ thuật của từng APIs đã được viết rất chi tiết - bạn có thể tham khảo và sử dụng
+        cho
+        ứng dụng Front-End.
+      </li>
+      <li>
+        Xem chi tiết hướng dẫn tại <a
+          href="https://github.com/khaphan-github/compose_no_code/tree/master/api-gen-no-code">Github</a>
+      </li>
+    </ul>
+
+    <h4>6. Danh sách nhóm quyền trong hệ thống</h4>
+    <p>Bạn nên tạo các nhóm quyền phù hợp với hệ thống:</p>
+    <ul>
+      <li>Mạc định các quyền khi tạo sẽ được kích hoạt</li>
+      <li>Sau khi tạo các quyền thành công bạn cần khai báo các APIs phù hợp với nhóm quyền bạn đã tạo
+      </li>
+      <li>Lưu ý: Bạn nên tạo một <strong>Quyền mạc định khi tạo tạo tài khoản</strong> - hệ thống sẽ tự
+        gán quyền đó vào tài khoản được tạo</li>
+    </ul>
+
+    <h4>7. Danh sách Tài khoản trong hệ thống</h4>
+    <p>Danh sách tài khoản này bao gồm các tài khoản người dùng đăng ký và tài khoản được người quản
+      trị
+      tạo:</p>
+    <ul>
+      <li>Bạn có thể kích hoạt và phân quyền cho tài khoản tại đây</li>
+      <li>Nên cân nhắc khi phân quyền quản trị cho các tài khoản người dùng đăng ký - tùy nghiệp vụ mà
+        hệ
+        thống bạn cần</li>
+    </ul>
   </c-card-body>
 </c-card>

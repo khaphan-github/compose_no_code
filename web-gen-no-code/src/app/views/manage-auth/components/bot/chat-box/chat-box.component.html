@@ -1,25 +1,4 @@
 <h2 id="getting-started">Truy vấn nhanh dữ liệu thông qua BOT(llm)</h2>
-<c-callout color="primary">
-  <div class="mb-3">
-    <label>Các bảng hiện có trong hệ thống:</label>
-    <div class="mr-1 col-md-8" *ngIf="this.listTableName$ | async as viewModel">
-      <c-badge color="dark" style="cursor: pointer; margin: 2px;" *ngFor="let item of viewModel.data">
-        {{ item.table_name }}
-      </c-badge>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label>Một số câu hỏi bạn có thể thử:</label> <br>
-    <c-badge color="info" style="cursor: pointer; margin: 2px;">
-      How many tables are there in my system with the scope of 'public'?
-    </c-badge> <br>
-    <c-badge color="info" style="cursor: pointer; margin: 2px;">
-      How many record are there in table "table name"?
-    </c-badge>
-  </div>
-</c-callout>
-
-
 <div [cFormFloating]="true" [formGroup]="form" class="mb-3" (keyup.enter)="onSubmit()">
   <input cFormControl formControlName="floatingInput" id="floatingInput" placeholder="How many account in my system?"
     type="email" />

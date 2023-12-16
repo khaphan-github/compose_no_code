@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateApiComponent } from '../../custom-api/create-api/create-api.component';
 import { Observable, map } from 'rxjs';
 import { SResponse } from 'src/app/core/config/http-client/response-base';
+import { EVENT } from '../../../event/const';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-chat-box',
@@ -14,6 +16,7 @@ import { SResponse } from 'src/app/core/config/http-client/response-base';
 export class ChatBoxComponent implements OnInit {
   public readonly service = inject(ManageApiService);
   private readonly modal = inject(NgbModal);
+  private readonly routing = inject(Router);
 
   form!: FormGroup;
   public outputMessage: any;
@@ -65,7 +68,19 @@ export class ChatBoxComponent implements OnInit {
   }
 
   onSaveToApi() {
-    const createModal = this.modal.open(CreateApiComponent, {});
+    const createModal = this.modal.open(CreateApiComponent, {
+      size: 'lg',
+      backdrop: 'static',
+      keyboard: false,
+    });
+
+    createModal.closed.subscribe({
+      next: (value) => {
+        if(value == EVENT.CREATE_SUCCESS) {
+          this.routing.navigate(['manage-api/custom-api'])
+        }
+      },
+    })
     createModal.componentInstance.queryString = this.outputData;
     createModal.componentInstance.desc = this.form.get('floatingInput')?.value;
   }

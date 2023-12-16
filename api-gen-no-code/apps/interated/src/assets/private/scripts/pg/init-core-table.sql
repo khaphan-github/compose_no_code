@@ -76,6 +76,7 @@ CREATE TABLE
         authentication VARCHAR(155),
         availableColumns JSONB,
         metadata JSONB,
+        code VARCHAR(512),
         queryString VARCHAR(512),
         enable BOOLEAN,
         created_at timestamp(0) without time zone DEFAULT NOW(),

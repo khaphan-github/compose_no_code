@@ -12,7 +12,7 @@ export class KafkaProducerService {
     }).producer();
 
     this.producer.connect().then(() => {
-      console.log('Connected to Kafka');
+      console.log(`Connected to Kafka ${new Date()}`);
     });
   }
 
@@ -21,7 +21,7 @@ export class KafkaProducerService {
       topic,
       messages: [{ value: message }],
     };
-    console.log(`Send message to kafka...`)
+    console.log(`Send message to kafka... ${new Date()}`)
     return this.producer.send(producerRecord);
   }
 }

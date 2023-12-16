@@ -39,6 +39,9 @@ const FEATUREMODULES = [
     }),
 
   ],
+  exports: [
+    ...FEATUREMODULES
+  ],
   providers: [
     JsonIoService,
     FileReaderService,
