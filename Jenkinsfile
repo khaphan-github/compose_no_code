@@ -5,6 +5,7 @@ pipeline {
         nodejs "node_18.10.0"
     }
     environment {
+      WEB_DOCKER_IMAGE = "low-code/angular16-web"
       DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
     }
     options {
@@ -56,9 +57,10 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
-                        sh 'docker build -t low-code/angular16-web .'
-                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                        sh 'docker push low-code/angular16-web'
+                        docker.build("${WEB_DOCKER_IMAGE}")
+                        docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
+                          docker.image("${WEB_DOCKER_IMAGE}").push()
+                        }
                         echo "Deploy web done"
                     }
                 }
