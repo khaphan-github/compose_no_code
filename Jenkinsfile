@@ -14,6 +14,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 dir('web-gen-no-code') {
+                    echo 'work'
                     sh 'rm -f package-lock.json'
                     sh 'rm -f yarn.lock'
                     sh 'npm install'
