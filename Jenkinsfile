@@ -1,4 +1,4 @@
-# jenkin pipe
+
 pipeline {
     agent any
     tools {
