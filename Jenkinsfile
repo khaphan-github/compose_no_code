@@ -4,6 +4,9 @@ pipeline {
     tools {
         nodejs "node_18.10.0"
     }
+    environment {
+      DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
@@ -44,7 +47,6 @@ pipeline {
                         echo "Build web"
                         sh "npm run build"
                     }
-                  
                 }
             }
         }
@@ -54,10 +56,19 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
+                        sh 'docker build -t low-code/angular16-web .'
+                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        sh 'docker push low-code/angular16-web'
+                        echo "Deploy web done"
                     }
                 }
             }
         }
     }
+    post {
+      always {
+        sh 'docker logout'
+    }
+  }
 }
 
