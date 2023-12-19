@@ -58,6 +58,7 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
+                        sh 'apt install docker'
                         docker.build("${WEB_DOCKER_IMAGE}")
                         docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
                           docker.image("${WEB_DOCKER_IMAGE}").push()
