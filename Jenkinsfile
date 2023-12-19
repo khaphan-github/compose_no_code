@@ -3,7 +3,6 @@ pipeline {
     agent any
     tools {
         nodejs "node_18.10.0"
-        docker 'latest'
     }
     environment {
       WEB_DOCKER_IMAGE = "low-code/angular16-web"
