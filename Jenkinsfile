@@ -7,14 +7,11 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker_auth')
-    }
     stages {
         stage('Clone Repository') {
             steps {
                 dir('web-gen-no-code') {
-                    echo 'execute-pipe-test'
+                    echo 'execute-pipe-test_v1'
                     sh 'rm -f package-lock.json'
                     sh 'rm -f yarn.lock'
                     sh 'npm install'
@@ -57,8 +54,6 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
-                        sh "firebase login --no-localhost"
-                        sh "firebase deploy --only hosting"
                     }
                 }
             }
