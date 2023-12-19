@@ -61,7 +61,7 @@ pipeline {
                         docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
                           docker.image("${WEB_DOCKER_IMAGE}").push()
                         }
-                        echo "Deploy web done"
+                        echo "Deploy web done nice"
                     }
                 }
             }
