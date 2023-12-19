@@ -3,11 +3,11 @@ pipeline {
     agent any
     tools {
         nodejs "node_18.10.0"
-        docker 'docker'
     }
     environment {
       WEB_DOCKER_IMAGE = "low-code/angular16-web"
       DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
+      PATH = "$PATH:/usr/local/bin"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -47,7 +47,7 @@ pipeline {
                 script {
                     dir('web-gen-no-code') {
                         echo "Build web"
-                        sh "npm run build"
+                        // sh "npm run build"
                     }
                 }
             }
