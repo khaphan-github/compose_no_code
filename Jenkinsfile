@@ -61,11 +61,11 @@ pipeline {
                         docker.build("${WEB_DOCKER_IMAGE}")
                         
                         // Tagging the Docker image
-                        def versionTag = "v1.0.0"
+                        def versionTag = "v2.0.0"
                         def dockerImage = docker.image("${WEB_DOCKER_IMAGE}")
                         dockerImage.tag(versionTag)
 
-                        docker.withRegistry('https://index.docker.io/v1/', 'JENKINS_DOCKER_ACCESS_TOKEN') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
                             dockerImage.push()
                         }
                         
