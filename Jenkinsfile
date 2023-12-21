@@ -62,7 +62,7 @@ pipeline {
                         sh 'docker rmi -f 2080600383/low-code-angular16-web'
                         sh 'docker build -t 2080600383/low-code-angular16-web .'
 
-                        sh 'docker login -u $DOCKER_HUB_USERNAME -p $JENKINS_DOCKER_ACCESS_TOKEN'
+                        sh 'docker login -u 2080600383 -p dckr_pat_Ncjn05tI2RuONzqreP4T4tzNv1U'
                         sh 'docker push 2080600383/low-code-angular16-web'
 
                         echo "Deploy web done nice"
