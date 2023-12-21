@@ -7,6 +7,8 @@ pipeline {
     environment {
       WEB_DOCKER_IMAGE = "2080600383/low-code-angular16-web:lastest"
       DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
+      AWS_SSH_KEY_PEM = credentials('AWS_SSH_KEY_PEM')
+
       PATH = "$PATH:/usr/local/bin"
     }
     options {
@@ -65,7 +67,7 @@ pipeline {
             steps {
                 script {
                    dir('web-gen-no-code') {
-                        sshagent(credentials : ['AWS_SSH_KEY_PEM']) {
+                        sshagent(credentials : [${AWS_SSH_KEY_PEM}]) {
                         sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-54-206-41-120.ap-southeast-2.compute.amazonaws.com uptime'
                         sh 'ssh -v ec2-user@ec2-54-206-41-120.ap-southeast-2.compute.amazonaws.com'
                     }
