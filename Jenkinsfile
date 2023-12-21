@@ -60,10 +60,10 @@ pipeline {
                         echo "Deploy web"
 
                         sh 'docker rmi 2080600383/low-code-angular16-web'
-                        sh 'docker build -t 2080600383/low-code-angular16-web:lastest'
+                        sh 'docker build -t 2080600383/low-code-angular16-web'
 
                         sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${JENKINS_DOCKER_ACCESS_TOKEN}'
-                        sh 'docker push 2080600383/low-code-angular16-web:lastest'
+                        sh 'docker push 2080600383/low-code-angular16-web'
 
                         echo "Deploy web done nice"
                     }
