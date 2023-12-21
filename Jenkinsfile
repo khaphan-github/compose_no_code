@@ -59,7 +59,7 @@ pipeline {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
 
-                        sh 'docker rmi 2080600383/low-code-angular16-web:lastest'
+                        sh 'docker rmi 2080600383/low-code-angular16-web'
                         sh 'docker build -t 2080600383/low-code-angular16-web:lastest'
 
                         sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${JENKINS_DOCKER_ACCESS_TOKEN}'
