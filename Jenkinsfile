@@ -5,7 +5,7 @@ pipeline {
         nodejs "node_18.10.0"
     }
     environment {
-      WEB_DOCKER_IMAGE = "low-code/angular16-web"
+      WEB_DOCKER_IMAGE = "2080600383/low-code-angular16-web"
       DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
       PATH = "$PATH:/usr/local/bin"
     }
