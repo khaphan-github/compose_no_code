@@ -47,16 +47,6 @@ pipeline {
                 script {
                     dir('web-gen-no-code') {
                         echo "Build web"
-                        // sh "npm run build"
-                    }
-                }
-            }
-        }
-        
-        stage('Deploy web') {
-            steps {
-                script {
-                   dir('web-gen-no-code') {
                         echo "Deploy web"
 
                         sh 'docker rmi -f 2080600383/low-code-angular16-web'
@@ -66,6 +56,20 @@ pipeline {
                         sh 'docker push 2080600383/low-code-angular16-web'
 
                         echo "Deploy web done nice"
+                    }
+                }
+            }
+        }
+        
+        stage('Deploy web') {
+            steps {
+                script {
+                   dir('web-gen-no-code') {
+                        sshagent(credentials : ['use-the-id-from-credential-generated-by-jenkins']) {
+                        sh 'ssh -o StrictHostKeyChecking=no user@hostname.com uptime'
+                        sh 'ssh -v user@hostname.com'
+                        sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+                    }
                     }
                 }
             }
