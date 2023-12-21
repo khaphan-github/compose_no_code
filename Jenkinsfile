@@ -1,4 +1,4 @@
-// https://medium.com/@gustavo.guss/jenkins-building-docker-image-and-sending-to-registry-64b84ea45ee9
+// https://hackmamba.io/blog/2022/04/running-docker-in-a-jenkins-container/
 pipeline {
     agent any
     tools {
