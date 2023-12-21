@@ -58,13 +58,15 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
+                        docker.image("${WEB_DOCKER_IMAGE}").remove()
                         docker.build("${WEB_DOCKER_IMAGE}")
                         
                         // Tagging the Docker image
                         def versionTag = "v2.0.0"
                         def dockerImage = docker.image("${WEB_DOCKER_IMAGE}")
                         dockerImage.tag(versionTag)
-
+                        // Remove the existing Docker image
+                    
                         docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
                             dockerImage.push()
                         }
