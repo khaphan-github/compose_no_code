@@ -5,7 +5,7 @@ pipeline {
         nodejs "node_18.10.0"
     }
     environment {
-      WEB_DOCKER_IMAGE = "2080600383/low-code-angular16-web"
+      WEB_DOCKER_IMAGE = "2080600383/low-code-angular16-web:lastest"
       DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
       PATH = "$PATH:/usr/local/bin"
     }
@@ -58,19 +58,15 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
-                        docker.image("${WEB_DOCKER_IMAGE}").remove()
-                        docker.build("${WEB_DOCKER_IMAGE}")
-                        
-                        // Tagging the Docker image
-                        def versionTag = "v2.0.0"
-                        def dockerImage = docker.image("${WEB_DOCKER_IMAGE}")
-                        dockerImage.tag(versionTag)
-                        // Remove the existing Docker image
-                    
-                        docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
-                            dockerImage.push()
-                        }
-                        
+
+                        sh 'docker image rm ${DOCKER_IMAGE_NAME}'
+                        sh 'docker build -t ${DOCKER_IMAGE_NAME}'
+
+                        sh 'docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME}'
+
+                        sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${JENKINS_DOCKER_ACCESS_TOKEN}'
+                        sh 'docker push ${DOCKER_IMAGE_NAME}'
+
                         echo "Deploy web done nice"
                     }
                 }
