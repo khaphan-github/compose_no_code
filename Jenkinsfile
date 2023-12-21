@@ -65,7 +65,7 @@ pipeline {
                         def dockerImage = docker.image("${WEB_DOCKER_IMAGE}")
                         dockerImage.tag(versionTag)
 
-                        docker.withRegistry('2080600383', 'JENKINS_DOCKER_ACCESS_TOKEN') {
+                        docker.withRegistry('https://index.docker.io/v1/', 'JENKINS_DOCKER_ACCESS_TOKEN') {
                             dockerImage.push()
                         }
                         
