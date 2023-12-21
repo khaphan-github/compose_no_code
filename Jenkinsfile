@@ -59,9 +59,16 @@ pipeline {
                    dir('web-gen-no-code') {
                         echo "Deploy web"
                         docker.build("${WEB_DOCKER_IMAGE}")
+                        
+                        // Tagging the Docker image
+                        def versionTag = "v1.0.0"
+                        def dockerImage = docker.image("${WEB_DOCKER_IMAGE}")
+                        dockerImage.tag(versionTag)
+
                         docker.withRegistry('https://registry.hub.docker.com', 'JENKINS_DOCKER_ACCESS_TOKEN') {
-                          docker.image("${WEB_DOCKER_IMAGE}").push()
+                            dockerImage.push()
                         }
+                        
                         echo "Deploy web done nice"
                     }
                 }
