@@ -15,18 +15,17 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
     stages {
-        stage('Clone Repository') {
+        stage('Clone and install dependencies') {
             steps {
                 dir('web-gen-no-code') {
-                    echo 'execute-pipe-test_v1'
+                    echo 'Install dependencies web'
                     sh 'rm -f package-lock.json'
                     sh 'rm -f yarn.lock'
                     sh 'npm install'
                 }
-            }
-             steps {
+
                 dir('api-gen-no-code') {
-                    echo 'execute-pipe-test_v1'
+                    echo 'Install dependencies web'
                     sh 'rm -f package-lock.json'
                     sh 'rm -f yarn.lock'
                     sh 'npm install'
@@ -34,25 +33,23 @@ pipeline {
             }
         }
         
-        stage('Unit test web') {
+        stage('Unit testing') {
             steps {
                 script {
-                    // Run SonarQube analysis
                     echo "Unit test web"
                 }
             }
         }
         
-        stage('Interation test web') {
+        stage('Interation testing') {
             steps {
                 script {
-                    // Run SonarQube analysis
                     echo "Interation test web"
                 }
             }
         }
         
-        stage('Build web') {
+        stage('Build docker image') {
             steps {
                 script {
                     dir('web-gen-no-code') {
