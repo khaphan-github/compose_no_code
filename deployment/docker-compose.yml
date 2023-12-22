@@ -85,7 +85,7 @@ services:
       - DATABASE_USERNAME=admin@111
       - DATABASE_PASSWORD=admin@111
       - DATABASE_SCHEMA=maindb
-      - DATABASE_TYPE=postgres
+      - DATABASE_TYPE=c
       - SERVER_SECRET_KEY=kqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCS9
 
     volumes:
