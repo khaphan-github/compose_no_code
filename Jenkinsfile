@@ -4,13 +4,6 @@ pipeline {
     tools {
         nodejs "node_18.10.0"
     }
-    environment {
-      WEB_DOCKER_IMAGE = "2080600383/low-code-angular16-web:lastest"
-      DOCKERHUB_CREDENTIALS = credentials('JENKINS_DOCKER_ACCESS_TOKEN')
-      AWS_SSH_KEY_PEM = credentials('AWS_SSH_KEY_PEM')
-
-      PATH = "$PATH:/usr/local/bin"
-    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
