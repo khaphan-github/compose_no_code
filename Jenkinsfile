@@ -20,7 +20,7 @@ pipeline {
                 }
 
                 dir('api-gen-no-code') {
-                    echo 'Install dependencies web'
+                    echo 'Install dependencies api'
                     sh 'rm -f package-lock.json'
                     sh 'rm -f yarn.lock'
                     sh 'npm install --force'
