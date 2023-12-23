@@ -11,7 +11,13 @@ import { HttpExceptionFilter } from './infrastructure/middlewares/error.middlewa
 
 async function bootstrap() {
 
-  const app = await NestFactory.create<NestExpressApplication>(InteratedAppModule);
+  const app = await NestFactory.create<NestExpressApplication>(InteratedAppModule, {
+    cors: {
+      origin: ['http://13.211.91.77', '*'],
+      methods: ['POST', 'PUT', 'DELETE', 'GET'],
+      credentials: true,
+    }
+  });
 
   // Provider html page to display api docs
   app.useStaticAssets(join(__dirname, './assets/public'));
@@ -22,7 +28,6 @@ async function bootstrap() {
     app.get(KafkaProducerService)
   ))
 
-  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({ transform: true, forbidUnknownValues: true }),
   );

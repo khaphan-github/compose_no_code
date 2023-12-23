@@ -68,34 +68,22 @@ services:
 
   api:
     container_name: api
-    image: node:18.16.0
+    image: 2080600383/low-code-angular16-api
     restart: always
     depends_on:
       - postgres
-    command:
-      - sh
-      - -c
-      - "cd /usr/src/api && npm install && npx nx run interated:serve:development"
-    env_file:
-      - ../api-gen-no-code/.env
     environment:
-      - PATH=/usr/src/api/node_modules/.bin:$PATH
       - DATABASE_HOST_NAME=postgres
       - DATABASE_PORT=5432
       - DATABASE_USERNAME=admin@111
       - DATABASE_PASSWORD=admin@111
       - DATABASE_SCHEMA=maindb
-      - DATABASE_TYPE=c
+      - DATABASE_TYPE=postgres
       - SERVER_SECRET_KEY=kqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCS9
-
-    volumes:
-      - ../api-gen-no-code:/usr/src/api
-      - ../api-gen-no-code/node_modules:/usr/src/api/node_modules
     links:
       - kafkaserver:kafkaserver
     ports:
       - 3000:3000
-
     networks:
       - kafkanet
       - main-network
