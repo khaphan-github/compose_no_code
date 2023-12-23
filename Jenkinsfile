@@ -78,8 +78,9 @@ pipeline {
                 script {
                    dir('web-gen-no-code') {
                         sshagent(credentials : ['AWS_SSH_KEY_PEM']) {
-                            sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-54-206-41-120.ap-southeast-2.compute.amazonaws.com uptime'
-                            sh 'ssh -v ec2-user@ec2-54-206-41-120.ap-southeast-2.compute.amazonaws.com'
+                            sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com uptime'
+                            sh 'ssh -v ec2-user@ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com'
+                            sh 'whoami'
                         }
                     }
                 }
