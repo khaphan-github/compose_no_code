@@ -71,7 +71,7 @@ pipeline {
             steps {
                 script {
                     sshagent(['AWS_EC2_LOW_CODE_PRIVATE_KEY']) {
-                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com docker run -d -p 4200:4200 2080600383/low-code-angular16-web:tagname'
+                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com sudo docker run -d -p 4200:4200 2080600383/low-code-angular16-web:tagname'
                     }
                 }
             }
