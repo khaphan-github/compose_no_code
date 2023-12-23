@@ -17,6 +17,7 @@ pipeline {
     stages {
         stage('Clone and install dependencies') {
             steps {
+                sh 'pwd'
                 dir('web-gen-no-code') {
                     echo 'Install dependencies web'
                     sh 'rm -f package-lock.json'
@@ -77,11 +78,7 @@ pipeline {
             steps {
                 script {
                    dir('web-gen-no-code') {
-                        sshagent(credentials : ['AWS_SSH_KEY_PEM']) {
-                            sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com uptime'
-                            sh 'ssh -v ec2-user@ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com'
-                            sh 'whoami'
-                        }
+                        
                     }
                 }
             }
