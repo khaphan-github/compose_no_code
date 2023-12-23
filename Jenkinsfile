@@ -70,7 +70,7 @@ pipeline {
         stage('Deploy web') {
             steps {
                 script {
-                   sh 'ssh -i "EC2_KEY_PAIR.pem" ec2-user@ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com'
+                   sh 'ssh -i -t "EC2_KEY_PAIR.pem" ec2-user@ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com'
                    sh 'whoami'
                 }
             }
