@@ -13,7 +13,7 @@ RUN npm install --force
 RUN npx nx run-many --target=e2e --all=true --verbose=true
 
 # Copy the rest of the application code
-COPY /dist/apps/interated ./
+COPY ./dist/apps/interated ./
 
 # Expose port 3000 (assuming your application listens on this port)
 EXPOSE 3000
