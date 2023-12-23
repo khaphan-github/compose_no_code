@@ -31,7 +31,6 @@ const FEATUREMODULES = [
     }),
 
 
-
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

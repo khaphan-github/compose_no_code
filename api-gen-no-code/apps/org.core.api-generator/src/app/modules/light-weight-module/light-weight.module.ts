@@ -26,12 +26,9 @@ import { TransformController } from './controllers/transformer.controller';
     LightWeightService,
     TablePermissionService,
     TransformerSerivce,
-
     LightWeightRepository,
     LoggingInterceptor,
-
     NodeCache,
-
     SQLTransformerProxy,
   ],
   exports: [

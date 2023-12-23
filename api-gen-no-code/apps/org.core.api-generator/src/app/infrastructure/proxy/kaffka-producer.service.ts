@@ -21,7 +21,7 @@ export class KafkaProducerService {
       topic,
       messages: [{ value: message }],
     };
-    console.log(`Send message to kafka... ${new Date()}`)
+    console.log(`=> Send message to kafka... ${new Date()}`)
     return this.producer.send(producerRecord);
   }
 }

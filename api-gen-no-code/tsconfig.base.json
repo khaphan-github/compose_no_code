@@ -18,9 +18,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@org.api-generator/generate": [
-        "libs/generate/src/index.ts"
-      ],
       "@org.api-generator/core": [
         "apps/org.core.api-generator/src/app/index.ts"
       ]

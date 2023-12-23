@@ -5,9 +5,9 @@ import { InteratedAppModule } from './app/interated-app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { SwaggerModule } from '@nestjs/swagger';
-import { CONFIG_SWAGGER } from './config/swagger.config';
+import { CONFIG_SWAGGER } from './app/config/swagger.config';
 import { KafkaProducerService } from 'apps/org.core.api-generator/src/app/infrastructure/proxy/kaffka-producer.service';
-import { HttpExceptionFilter } from './infrastructure/middlewares/error.middleware';
+import { HttpExceptionFilter } from './app/middlewares/error.middleware';
 
 async function bootstrap() {
 

@@ -1,25 +1,30 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18.16.0
+# Use a smaller Node.js base image
+FROM node:18.16.0-alpine
 
 # Set the working directory
 WORKDIR /usr/src/api
 
-# Copy package.json and package-lock.json to the working directory
+# Copy only package.json and package-lock.json first to leverage Docker cache
 COPY package*.json ./
 
 # Install app dependencies
+RUN npm install -g nx@latest
 RUN npm install --force
 
-RUN npx nx run-many --target=e2e --all=true --verbose=true
-
 # Copy the rest of the application code
-COPY './dist/apps/interated' ./
+COPY . .
+
+# Run production build
+RUN npx nx run org.core.api-generator:build:production
+
+# Remove development dependencies
+RUN npm prune --production
 
 # Expose port 3000 (assuming your application listens on this port)
-EXPOSE  3000
+EXPOSE 3000
 
 # Define the command to run your app
-CMD ["sh", "-c", "node main.js"]
+CMD ["node", "main.js"]
 
 # Volumes
 VOLUME /usr/src/api/node_modules

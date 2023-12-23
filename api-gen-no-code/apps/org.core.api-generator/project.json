@@ -16,7 +16,9 @@
         "outputPath": "dist/apps/org.core.api-generator",
         "main": "apps/org.core.api-generator/src/main.ts",
         "tsConfig": "apps/org.core.api-generator/tsconfig.app.json",
-        "assets": [],
+        "assets": [
+          "apps/org.core.api-generator/src/assets"
+        ],
         "isolatedConfig": true,
         "webpackConfig": "apps/org.core.api-generator/webpack.config.js"
       },
