@@ -6,13 +6,13 @@ WORKDIR /usr/src/api
 
 # Copy only package.json and package-lock.json first to leverage Docker cache
 COPY package*.json ./
+COPY . .
 
 # Install app dependencies
 RUN npm install -g nx@latest
 RUN npm install --force
 
 # Copy the rest of the application code
-COPY . .
 
 # Run production build
 RUN npx nx run org.core.api-generator:build:production
