@@ -17,9 +17,6 @@ RUN npm install --force
 # Run production build
 RUN npx nx run org.core.api-generator:build:production
 
-# Remove development dependencies
-RUN npm prune --production
-
 # Expose port 3000 (assuming your application listens on this port)
 EXPOSE 3000
 
