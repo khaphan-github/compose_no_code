@@ -7,8 +7,9 @@ WORKDIR /usr/src/api
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+
 # Install app dependencies
-RUN npm install
+RUN npm install --force
 
 # Copy the rest of the application code
 COPY . .
