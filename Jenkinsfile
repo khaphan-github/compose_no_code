@@ -72,9 +72,9 @@ pipeline {
             steps {
                 script {
                     sshagent(['AWS_EC2_LOW_CODE_PRIVATE_KEY']) {
-                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com sudo docker-compose down'
-                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com sudo docker run -d -p 4200:4200 2080600383/low-code-angular16-web:latest'
-                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-13-211-91-77.ap-southeast-2.compute.amazonaws.com sudo docker-compose -f docker_compose.yml up -d'
+                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-52-63-253-44.ap-southeast-2.compute.amazonaws.com  sudo docker-compose down'
+                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-52-63-253-44.ap-southeast-2.compute.amazonaws.com  sudo docker run -d -p 4200:4200 2080600383/low-code-angular16-web:latest'
+                        sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-52-63-253-44.ap-southeast-2.compute.amazonaws.com  sudo docker-compose -f docker_compose.yml up -d'
                     }
                 }
             }
