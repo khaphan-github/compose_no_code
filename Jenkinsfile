@@ -67,8 +67,8 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy web') {
+ 
+        stage('Deploy aws') {
             steps {
                 script {
                     def serverAddress = 'ec2-52-63-253-44.ap-southeast-2.compute.amazonaws.com'
