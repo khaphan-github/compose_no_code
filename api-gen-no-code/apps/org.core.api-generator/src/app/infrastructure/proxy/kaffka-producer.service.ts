@@ -32,15 +32,18 @@ export class KafkaProducerService {
   }
 
   produceMessage(topic: string, message: string) {
-    if (this.shouldConnectedToKaffka) {
-
-      const producerRecord: ProducerRecord = {
-        topic,
-        messages: [{ value: message }],
-      };
-      console.log(`=> Send message to kafka... ${new Date()}`)
-      return this.producer.send(producerRecord);
-    } else {
+    try {
+      if (this.shouldConnectedToKaffka) {
+        const producerRecord: ProducerRecord = {
+          topic,
+          messages: [{ value: message }],
+        };
+        console.log(`=> Send message to kafka... ${new Date()}`)
+        return this.producer.send(producerRecord);
+      } else {
+        console.log(`=> Send message to kafka but not connected yet`);
+      }
+    } catch (error) {
       console.log(`=> Send message to kafka but not connected yet`);
     }
   }
