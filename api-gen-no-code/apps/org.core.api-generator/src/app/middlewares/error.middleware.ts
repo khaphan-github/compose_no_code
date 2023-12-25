@@ -11,7 +11,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
 
-    const errorData = new ResponseBase((exception as any).response.status, 'Found server error', {
+    const errorData = new ResponseBase((exception as any)?.response?.status ?? 500, 'Found server error', {
       timestamp: new Date().toISOString(),
       path: request.baseUrl,
       header: request.headers,
