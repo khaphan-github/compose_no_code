@@ -20,6 +20,9 @@ RUN npx nx run org.core.api-generator:build:production
 # Expose port 3000 (assuming your application listens on this port)
 EXPOSE 3000
 
+# Change the working directory to the specified directory
+WORKDIR /usr/src/api/dist/apps/org.core.api-generator
+
 # Define the command to run your app
 CMD ["node", "main.js"]
 

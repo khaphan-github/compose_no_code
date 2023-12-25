@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Ip } from "@nestjs/common";
-import { ResponseBase } from "apps/org.core.api-generator/src/app/infrastructure/format/response.base";
-import { KafkaProducerService } from "apps/org.core.api-generator/src/app/infrastructure/proxy/kaffka-producer.service";
 import { Request, Response } from 'express';
+import { KafkaProducerService } from "../infrastructure/proxy/kaffka-producer.service";
+import { ResponseBase } from "../infrastructure/format/response.base";
 
 @Catch(Error)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -11,7 +11,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
 
-    const errorData = new ResponseBase(500, 'Found server error', {
+    const errorData = new ResponseBase((exception as any).response.status, 'Found server error', {
       timestamp: new Date().toISOString(),
       path: request.baseUrl,
       header: request.headers,
@@ -24,7 +24,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     this.kafka.produceMessage('server.error', JSON.stringify(errorData));
 
     response
-      .status(500)
+      .status(errorData.status)
       .json(errorData);
   }
 }

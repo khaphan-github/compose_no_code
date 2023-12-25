@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  api:
+    container_name: api
+    image: 2080600383/low-code-angular16-api
+    restart: always
+    environment:
+      - DATABASE_HOST_NAME=john.db.elephantsql.com
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=ntwdedcj
+      - DATABASE_PASSWORD=EGQ9acVRGwG3hjqAhX9koSzN-gUv5B4p
+      - DATABASE_SCHEMA=ntwdedcj
+      - DATABASE_TYPE=postgres
+      - SERVER_SECRET_KEY=kqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCS9
+    ports:
+      - 3000:3000
+    networks:
+      - main-network

@@ -6,18 +6,14 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { SwaggerModule } from '@nestjs/swagger';
 import { CONFIG_SWAGGER } from './app/config/swagger.config';
-import { KafkaProducerService } from 'apps/org.core.api-generator/src/app/infrastructure/proxy/kaffka-producer.service';
 import { HttpExceptionFilter } from './app/middlewares/error.middleware';
+import { KafkaProducerService } from './app/infrastructure/proxy/kaffka-producer.service';
 
 async function bootstrap() {
 
-  const app = await NestFactory.create<NestExpressApplication>(InteratedAppModule, {
-    cors: {
-      origin: ['http://13.211.91.77', '*'],
-      methods: ['POST', 'PUT', 'DELETE', 'GET'],
-      credentials: true,
-    }
-  });
+  const app = await NestFactory.create<NestExpressApplication>(InteratedAppModule);
+
+  app.enableCors();
 
   // Provider html page to display api docs
   app.useStaticAssets(join(__dirname, './assets/public'));
