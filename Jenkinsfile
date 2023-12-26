@@ -75,9 +75,16 @@ pipeline {
             steps {
                 script {
                     def serverAddress = 'ec2-52-63-21-87.ap-southeast-2.compute.amazonaws.com'
+                    def webServerAddress = 'ec2-13-239-113-235.ap-southeast-2.compute.amazonaws.com';
+
                     sshagent(['AWS_EC2_LOW_CODE_PRIVATE_KEY']) {
                         sh "ssh -o StrictHostKeyChecking=no -l ubuntu $serverAddress sudo docker-compose -f docker_compose.yml down"
                         sh "ssh -o StrictHostKeyChecking=no -l ubuntu $serverAddress sudo docker-compose -f docker_compose.yml up -d"
+                    }
+
+                    sshagent(['AWS_EC2_LOW_CODE_PRIVATE_KEY']) {
+                        sh "ssh -o StrictHostKeyChecking=no -l ubuntu $webServerAddress sudo docker pull 2080600383/low-code-angular16-web"
+                        sh "ssh -o StrictHostKeyChecking=no -l ubuntu $webServerAddress sudo docker run -dp 80:4200 2080600383/low-code-angular16-web"
                     }
                 }
             }
