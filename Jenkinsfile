@@ -50,13 +50,13 @@ pipeline {
         stage('Build docker image') {
             steps {
                 script {
-                    sh 'docker login -u 2080600383 -p dckr_pat_Ncjn05tI2RuONzqreP4T4tzNv1U'
+                    sh 'docker login -u 2080600383 -p dd'
 
                     dir('web-gen-no-code') {
                         sh 'docker rmi -f 2080600383/low-code-angular16-web'
                         sh 'docker build -t 2080600383/low-code-angular16-web .'
 
-                        sh 'docker login -u 2080600383 -p dckr_pat_Ncjn05tI2RuONzqreP4T4tzNv1U'
+                        sh 'docker login -u 2080600383 -p dd'
                         sh 'docker push 2080600383/low-code-angular16-web'
                         echo 'Build web done nice'
                     }
