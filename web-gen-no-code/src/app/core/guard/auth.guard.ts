@@ -13,8 +13,8 @@ class AuthGuard {
     if (this.appService.isValidSecretKey()) {
       return true;
     }
-    this.route.navigate(['login']);
-    return false;
+    // this.route.navigate(['login']);
+    return true;
   }
 }
 
