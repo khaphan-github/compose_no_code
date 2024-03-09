@@ -10,8 +10,9 @@ import { HttpExceptionFilter } from './app/middlewares/error.middleware';
 import { KafkaProducerService } from './app/infrastructure/proxy/kaffka-producer.service';
 
 async function bootstrap() {
-
-  const app = await NestFactory.create<NestExpressApplication>(InteratedAppModule);
+  const app = await NestFactory.create<NestExpressApplication>(
+    InteratedAppModule
+  );
 
   app.enableCors();
 
@@ -20,15 +21,13 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, './assets/public/views'));
   app.setViewEngine('hbs');
   // Provider html page to display api docs
-  app.useGlobalFilters(new HttpExceptionFilter(
-    app.get(KafkaProducerService)
-  ))
+  app.useGlobalFilters(new HttpExceptionFilter(app.get(KafkaProducerService)));
 
   app.useGlobalPipes(
-    new ValidationPipe({ transform: true, forbidUnknownValues: true }),
+    new ValidationPipe({ transform: true, forbidUnknownValues: true })
   );
 
-  const globalPrefix = 'api/v1/';
+  const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
 
@@ -38,7 +37,6 @@ async function bootstrap() {
   // Swagger docs config
 
   await app.listen(port);
-
 
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
