@@ -44,9 +44,5 @@ export const navItems: INavData[] = [
     name: 'System Logs',
     url: '/manage-api/logs',
     iconComponent: { name: 'cil-indent-increase' },
-    badge: {
-      color: 'success',
-      text: 'New',
-    },
   },
 ];
