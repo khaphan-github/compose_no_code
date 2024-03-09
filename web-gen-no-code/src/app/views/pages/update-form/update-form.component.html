@@ -1,33 +1,99 @@
-<p>fetch works!</p>
-<!-- fetch.component.html -->
-<div *ngFor="let post of api">
-    <h2>{{ post.id }}</h2>
-    <h1>{{ post.title }}</h1>
+<div class="card">
+  <div class="card-body">
+    <form  >
+      <div class="row">
+        <div *ngFor="let post of api" class="col-3">
+          <!-- Text, Textarea & Number -->
+          <h1>{{ post.title }}</h1>
+          <div
+            class="mb-3"
+            *ngFor="let field of post.fields"
+          >
+            <label for="exampleFormControlInput1" class="form-label">
+              {{ field.displaytext }}
+            </label>
+            <!-- <input
+              [type]="control.type"
+              class="form-control"
+             
+              *ngIf="control.type !== 'textarea'"
+            /> -->
 
-    <div *ngFor="let field of post.fields">
-      <label>{{ field.displaytext }}</label>
-      <div [ngSwitch]="field.type">
-        <input *ngSwitchCase="'input'" type="text"  [required]="!field.allowempty">
-        <!-- <input *ngSwitchCase="'checkbox'" type="checkbox" [required]="!field.allowempty"> -->
-       </div>
-        
-    </div>
-    <button type="submit">submit</button>
-    </div>
+            <div [ngSwitch]="field.type">
+              <input *ngSwitchCase="'input'" type="text" class="form-control" [required]="!field.allowempty">
+              <!-- <input *ngSwitchCase="'checkbox'" type="checkbox" [required]="!field.allowempty"> -->
+             </div>
+            <!-- <textarea
+              class="form-control"
+             
+              *ngIf="control.type === 'textarea'"
+            >
+            </textarea>
+            <span
+              class="error"
+              *ngIf="
+                 
+              "
+            >
+              {{ getErrorMessage(control) }}
+            </span> -->
+          </div>
 
-   <!-- fetch.component.html -->
-<!-- <div *ngIf="form">
-  <h2>{{ form.title }}</h2>
-  <div *ngFor="let field of form.fields">
-    <label>{{ field.displaytext }}</label>
-    <div [ngSwitch]="field.type">
-      <input *ngSwitchCase="'input'" type="text"  [required]="!field.allowempty">
-      <input *ngSwitchCase="'checkbox'" type="checkbox" [required]="!field.allowempty">
-      <select *ngSwitchCase="'select'" [required]="!field.allowempty">
-        <option *ngFor="let option of selectOptions" [value]="option">{{ option }}</option>
-      </select>
-    </div>
+          <!-- Radio Button -->
+          <!-- <div class="mb-3" *ngIf="['radio'].includes(control.type)">
+            <div>
+              <label for="exampleFormControlInput1" class="form-label">
+                {{ control.label }}
+              </label>
+            </div>
+            <div
+              class="form-check form-check-inline"
+              *ngFor="let option of control.options"
+            >
+              <input
+                class="form-check-input"
+                type="radio"
+                [formControlName]="control.name"
+                id="inlineRadio1"
+                [value]="option.value"
+              />
+              <label class="form-check-label" for="inlineRadio1">
+                {{ option.label }}</label
+              >
+            </div>
+          </div> -->
+
+          <!-- Select  -->
+          <!-- <div class="mb-3" *ngIf="['select'].includes(control.type)">
+            <label for="exampleFormControlInput1" class="form-label">
+              {{ control.label }}
+            </label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+               
+            >
+              <option selected>-Select-</option>
+              <option
+                *ngFor="let option of control.options"
+                [value]="option.value"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+            <span
+              class="error"
+              *ngIf="
+                
+              "
+            >
+              
+            </span>
+          </div> -->
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
-</div> -->
-
-<!-- [maxlength]="field.maxlength" [minlength]="field.minlength"  -->
+</div>
