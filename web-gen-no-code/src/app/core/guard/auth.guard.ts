@@ -18,12 +18,13 @@ class AuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
+
     return true;
     if (this.appService.isValidSecretKey()) {
       return true;
     }
-    this.route.navigate(['login']);
-    return false;
+    // this.route.navigate(['login']);
+    return true;
   }
 }
 
