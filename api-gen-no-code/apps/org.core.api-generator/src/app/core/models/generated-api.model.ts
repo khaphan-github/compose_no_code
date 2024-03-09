@@ -14,14 +14,14 @@ export enum EGeneratedApisTableColumns {
   RESPONSE_ATTRIBUTES = 'response_attributes',
   ENABLE = 'enable',
   CREATED_AT = 'created_at',
-  UPDATED_AT = 'updated_at'
+  UPDATED_AT = 'updated_at',
 }
 
 export enum ApiAction {
   INSERT = 'INSERT',
   UPDATE = 'UPDATE',
   DELETE = 'DELETE',
-  QUERY = 'QUERY'
+  QUERY = 'QUERY',
 }
 
 export enum RestFulMethod {
@@ -56,48 +56,108 @@ export interface IGeneratedApi {
 }
 
 export class GeneratedApiModel {
-  extractApisFromTableInfo = (appId: number, secretKey: string, tableInfo: { table_name: string, column_name: string }[]): any => {
+  extractApisFromTableInfo = (
+    appId: number,
+    secretKey: string,
+    tableInfo: { table_name: string; column_name: string }[]
+  ): any => {
     const apis: object[] = [];
 
-    const groupedData = tableInfo.reduce((result, { table_name, column_name }) => {
-      if (!result[table_name]) {
-        result[table_name] = { table_name, column_names: [] };
-      }
-      result[table_name].column_names.push(column_name);
-      return result;
-    }, {});
+    const groupedData = tableInfo.reduce(
+      (result, { table_name, column_name }) => {
+        if (!result[table_name]) {
+          result[table_name] = { table_name, column_names: [] };
+        }
+        result[table_name].column_names.push(column_name);
+        return result;
+      },
+      {}
+    );
     const finalResult = Object.values(groupedData);
 
     let id = 1;
-    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role', '_core_custom_api'];
+    const whiteList = [
+      '_core_workspace_config',
+      '_core_generated_apis',
+      '_core_applications',
+      '_core_account',
+      '_core_role',
+      '_core_custom_api',
+      '_core_dynamic_menu',
+      '_core_dynamic_form',
+    ];
 
     for (let index = 0; index < finalResult.length; index++) {
-      const element = finalResult[index] as { table_name: string, column_names: string[] };
+      const element = finalResult[index] as {
+        table_name: string;
+        column_names: string[];
+      };
       if (whiteList.includes(element.table_name)) {
         continue;
       }
 
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.GET,));
+      apis.push(
+        this.getApiConfig(
+          id,
+          appId,
+          element.table_name,
+          element.column_names,
+          RestFulMethod.GET
+        )
+      );
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.POST,));
+      apis.push(
+        this.getApiConfig(
+          id,
+          appId,
+          element.table_name,
+          element.column_names,
+          RestFulMethod.POST
+        )
+      );
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.PUT,));
+      apis.push(
+        this.getApiConfig(
+          id,
+          appId,
+          element.table_name,
+          element.column_names,
+          RestFulMethod.PUT
+        )
+      );
       id += 1;
-      apis.push(this.getApiConfig(id, appId, element.table_name, element.column_names, RestFulMethod.DELETE,));
+      apis.push(
+        this.getApiConfig(
+          id,
+          appId,
+          element.table_name,
+          element.column_names,
+          RestFulMethod.DELETE
+        )
+      );
       id += 1;
     }
 
     // Register, Login api
     return apis;
-  }
-  convertArrayToObject(columnNames: string[], exampleData: object | string | number) {
+  };
+  convertArrayToObject(
+    columnNames: string[],
+    exampleData: object | string | number
+  ) {
     return columnNames.reduce((result, columnName) => {
       result[columnName] = exampleData;
       return result;
     }, {});
   }
 
-  getApiConfig = (index: number, appId: number, table: string, columns: string[], typeApi: RestFulMethod) => {
+  getApiConfig = (
+    index: number,
+    appId: number,
+    table: string,
+    columns: string[],
+    typeApi: RestFulMethod
+  ) => {
     const apiRecord = {};
 
     const requestBody = this.convertArrayToObject(columns, `put_your_data_`);
@@ -105,14 +165,28 @@ export class GeneratedApiModel {
     const tableName = table ?? '';
     const apiPath = `/${tableName}`;
 
-    const { ACTION, API_PATH, APP_ID, AUTHENTICATION, CREATED_AT, ENABLE, HEADERS, HTTP_METHOD,
-      REQUEST_BODY, RESPONSE_ATTRIBUTES, TABLE_NAME, UPDATED_AT, REQUEST_PARAMS, API_AUTHORIZED } = EGeneratedApisTableColumns;
+    const {
+      ACTION,
+      API_PATH,
+      APP_ID,
+      AUTHENTICATION,
+      CREATED_AT,
+      ENABLE,
+      HEADERS,
+      HTTP_METHOD,
+      REQUEST_BODY,
+      RESPONSE_ATTRIBUTES,
+      TABLE_NAME,
+      UPDATED_AT,
+      REQUEST_PARAMS,
+      API_AUTHORIZED,
+    } = EGeneratedApisTableColumns;
 
     apiRecord[APP_ID] = appId;
     apiRecord[TABLE_NAME] = tableName;
     apiRecord[HEADERS] = JSON.stringify({
       Authenticate: 'eyJhbGciO...',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
     apiRecord[AUTHENTICATION] = Authenticate.NEED_AUTH;
 
@@ -137,7 +211,9 @@ export class GeneratedApiModel {
         apiRecord[HTTP_METHOD] = RestFulMethod.POST;
         apiRecord[ACTION] = ApiAction.QUERY;
         apiRecord[API_AUTHORIZED] = JSON.stringify({
-          columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+          columns: columns.map((col) => {
+            return { columnName: col, active: true, metadata: {} };
+          }),
         });
 
         break;
@@ -150,7 +226,9 @@ export class GeneratedApiModel {
         apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
         apiRecord[API_AUTHORIZED] = JSON.stringify({
-          columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+          columns: columns.map((col) => {
+            return { columnName: col, active: true, metadata: {} };
+          }),
         });
         break;
       case RestFulMethod.PUT:
@@ -162,8 +240,12 @@ export class GeneratedApiModel {
         apiRecord[REQUEST_BODY] = JSON.stringify([requestBody]);
         apiRecord[RESPONSE_ATTRIBUTES] = JSON.stringify([requestBody]);
         apiRecord[API_AUTHORIZED] = JSON.stringify({
-          columns: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
-          modify: columns.map((col) => { return { 'columnName': col, 'active': true, 'metadata': {} } }),
+          columns: columns.map((col) => {
+            return { columnName: col, active: true, metadata: {} };
+          }),
+          modify: columns.map((col) => {
+            return { columnName: col, active: true, metadata: {} };
+          }),
         });
         break;
       case RestFulMethod.DELETE:
@@ -175,6 +257,5 @@ export class GeneratedApiModel {
         break;
     }
     return { ...apiRecord, id: index };
-  }
+  };
 }
-

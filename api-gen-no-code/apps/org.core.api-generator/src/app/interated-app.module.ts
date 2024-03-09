@@ -13,13 +13,14 @@ import { AuthModule } from 'apps/org.core.api-generator/src/app/modules/auth/aut
 
 import { PolicyMiddleware } from './middlewares/policy.middleware';
 import { AppModule } from './app.module';
+import { GeneratorModule } from './modules/generator/generator.module';
 
 @Module({
   imports: [
-    InteratedAppModule,
     CqrsModule,
     CrudModule,
     ManageApiModule,
+    GeneratorModule,
     AuthModule,
     AppModule,
   ],
@@ -29,14 +30,13 @@ import { AppModule } from './app.module';
 export class InteratedAppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(
-        AuthenticateMiddleware,
-        AuthorizationMiddleware,
-        PolicyMiddleware,
-        CustomizeInputMiddleware,
-        ValidateInputMiddleware,
-      )
+      .apply
+      // AuthenticateMiddleware,
+      // AuthorizationMiddleware,
+      // PolicyMiddleware,
+      // CustomizeInputMiddleware,
+      // ValidateInputMiddleware
+      ()
       .forRoutes('*');
   }
-
 }
