@@ -1,16 +1,16 @@
-import { Injectable, Logger, OnApplicationBootstrap } from "@nestjs/common";
-import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { ExecuteScriptCommand } from "../commands/execute-script.command";
+import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { ExecuteScriptCommand } from '../commands/execute-script.command';
 
-import { GetSQLScriptQuery } from "../queries/sql-to-api/get-asserts-sql-script.query";
-import { CreateWorkspaceCommand } from "../commands/create-workspace.command";
-import { CreateApplicationCommand } from "../commands/create-app.command";
-import { WORKSPACE_VARIABLE } from "../../shared/variables/workspace.variable";
-import { CrudService } from "../../crud-pg/services/crud-pg.service";
-import { GetCreateAuthTableScriptQuery } from "../queries/sql-to-api/get-asserts-auth-script.query";
-import { RunScriptCommand } from "../commands/run-script-command";
-import { GetWorkspaceConnectionQuery } from "../queries/get-workspace-connection.query";
-import { GetInitCoreTableScriptQuery } from "../queries/sql-to-api/get-asserts-core-table.query";
+import { GetSQLScriptQuery } from '../queries/sql-to-api/get-asserts-sql-script.query';
+import { CreateWorkspaceCommand } from '../commands/create-workspace.command';
+import { CreateApplicationCommand } from '../commands/create-app.command';
+import { WORKSPACE_VARIABLE } from '../../shared/variables/workspace.variable';
+import { CrudService } from '../../crud-pg/services/crud-pg.service';
+import { GetCreateAuthTableScriptQuery } from '../queries/sql-to-api/get-asserts-auth-script.query';
+import { RunScriptCommand } from '../commands/run-script-command';
+import { GetWorkspaceConnectionQuery } from '../queries/get-workspace-connection.query';
+import { GetInitCoreTableScriptQuery } from '../queries/sql-to-api/get-asserts-core-table.query';
 
 @Injectable()
 export class SQLToAPIService implements OnApplicationBootstrap {
@@ -18,11 +18,11 @@ export class SQLToAPIService implements OnApplicationBootstrap {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-    private readonly crudService: CrudService,
-  ) { }
+    private readonly crudService: CrudService
+  ) {}
 
   async onApplicationBootstrap() {
-    // Init all nessarray tableL
+    // // Init all nessarray tableL
     // const [connection, script] = await Promise.all([
     //   this.queryBus.execute(new GetWorkspaceConnectionQuery()),
     //   this.queryBus.execute(new GetInitCoreTableScriptQuery()),
@@ -35,10 +35,8 @@ export class SQLToAPIService implements OnApplicationBootstrap {
     //     { script: script }
     //   )
     // );
-
     // console.log(executeResult);
-    // this.logger.debug(`Init core table success!!!`);
-
+    // this.logger.debug(`Init core table success! !!`);
     // this.executeScriptFromSqlFile();
   }
 
@@ -64,45 +62,47 @@ export class SQLToAPIService implements OnApplicationBootstrap {
             port: port,
             username: username,
           },
-          WORKSPACE_VARIABLE.WORKSPACE_ID),
+          WORKSPACE_VARIABLE.WORKSPACE_ID
+        )
       );
 
       this.logger.debug(`Found workspace ${WORKSPACE_VARIABLE.WORKSPACE_ID}! `);
 
-      await this.commandBus.execute(new CreateApplicationCommand(
-        connection,
-        WORKSPACE_VARIABLE.OWNER_ID,
-        {
-          appName: WORKSPACE_VARIABLE.APP_NAME,
-          database: type,
-          databaseName: database,
-          host: host,
-          password: password,
-          port: port,
-          useDefaultDb: true,
-          username: username,
-          workspaceId: WORKSPACE_VARIABLE.WORKSPACE_ID,
-        },
-        WORKSPACE_VARIABLE.APP_ID,
-      ));
+      await this.commandBus.execute(
+        new CreateApplicationCommand(
+          connection,
+          WORKSPACE_VARIABLE.OWNER_ID,
+          {
+            appName: WORKSPACE_VARIABLE.APP_NAME,
+            database: type,
+            databaseName: database,
+            host: host,
+            password: password,
+            port: port,
+            useDefaultDb: true,
+            username: username,
+            workspaceId: WORKSPACE_VARIABLE.WORKSPACE_ID,
+          },
+          WORKSPACE_VARIABLE.APP_ID
+        )
+      );
 
       this.logger.debug(`Found application ${WORKSPACE_VARIABLE.APP_ID}!`);
 
       await this.commandBus.execute(
-        new RunScriptCommand(
-          connection, authscript
-        )
+        new RunScriptCommand(connection, authscript)
       );
-
     } catch (error) {
       console.error(error);
     }
-  }
+  };
   //#endregion api to sql
 
   async executeScript(script: string) {
     await this.executeScriptFromSqlFile();
-    const connection = await this.queryBus.execute(new GetWorkspaceConnectionQuery());
+    const connection = await this.queryBus.execute(
+      new GetWorkspaceConnectionQuery()
+    );
     this.logger.log(`Generate core table success!`);
 
     const executeResult = await this.commandBus.execute(
@@ -119,7 +119,9 @@ export class SQLToAPIService implements OnApplicationBootstrap {
   }
 
   async executeScriptAgain(script: string) {
-    const connection = await this.queryBus.execute(new GetWorkspaceConnectionQuery());
+    const connection = await this.queryBus.execute(
+      new GetWorkspaceConnectionQuery()
+    );
     this.logger.log(`Generate core table success!`);
 
     await this.commandBus.execute(
@@ -129,7 +131,7 @@ export class SQLToAPIService implements OnApplicationBootstrap {
           DO $$
           DECLARE
               r RECORD;
-              whiteList TEXT[] := ARRAY['_core_workspace_config', '_core_applications'];
+              whiteList TEXT[] := ARRAY['_core_workspace_config', '_core_applications', '_core_dynamic_form', '_core_dynamic_menu'];
           BEGIN
               FOR r IN
                 (
@@ -153,7 +155,7 @@ export class SQLToAPIService implements OnApplicationBootstrap {
 
     await this.executeScript(script);
     return {
-      success: true
+      success: true,
     };
   }
 }

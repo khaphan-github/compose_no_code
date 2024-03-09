@@ -2,7 +2,10 @@
   "name": "@org.api-generator/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "npx nx run org.core.api-generator:serve:development",
+    "start:debug": "npx nx run org.core.api-generator:serve:development"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/axios": "^3.0.0",
@@ -21,7 +24,6 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "hbs": "^4.2.0",
-    "isolated-vm": "^4.6.0",
     "json-sql-utility": "^1.1.4",
     "kafkajs": "^2.2.4",
     "lodash": "^4.17.21",
@@ -29,9 +31,11 @@
     "node-cache": "^5.1.2",
     "node-sql-parser": "^4.11.0",
     "pg": "^8.11.3",
+    "pg-format": "^1.0.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "slugify": "^1.6.6",
+    "text-case": "^1.0.9",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.17",
     "uuidv4": "^6.2.13"
@@ -53,6 +57,7 @@
     "@types/lodash": "^4.14.198",
     "@types/node": "~18.7.1",
     "@types/pg": "^8.10.2",
+    "@types/pg-format": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "eslint": "~8.46.0",

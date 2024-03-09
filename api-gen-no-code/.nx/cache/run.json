@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx run org.core.api-generator:serve:development",
+    "startTime": "2024-03-08T07:21:06.700Z",
+    "endTime": "2024-03-08T07:21:07.532Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "org.core.api-generator:serve:development",
+      "target": "serve",
+      "projectName": "org.core.api-generator",
+      "hash": "13875843409473540168",
+      "startTime": "2024-03-08T07:21:06.703Z",
+      "endTime": "2024-03-08T07:21:07.531Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}
