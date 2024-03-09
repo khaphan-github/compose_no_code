@@ -1,0 +1,33 @@
+<p>fetch works!</p>
+<!-- fetch.component.html -->
+<div *ngFor="let post of api">
+    <h2>{{ post.id }}</h2>
+    <h1>{{ post.title }}</h1>
+
+    <div *ngFor="let field of post.fields">
+      <label>{{ field.displaytext }}</label>
+      <div [ngSwitch]="field.type">
+        <input *ngSwitchCase="'input'" type="text"  [required]="!field.allowempty">
+        <!-- <input *ngSwitchCase="'checkbox'" type="checkbox" [required]="!field.allowempty"> -->
+       </div>
+        
+    </div>
+    <button type="submit">submit</button>
+    </div>
+
+   <!-- fetch.component.html -->
+<!-- <div *ngIf="form">
+  <h2>{{ form.title }}</h2>
+  <div *ngFor="let field of form.fields">
+    <label>{{ field.displaytext }}</label>
+    <div [ngSwitch]="field.type">
+      <input *ngSwitchCase="'input'" type="text"  [required]="!field.allowempty">
+      <input *ngSwitchCase="'checkbox'" type="checkbox" [required]="!field.allowempty">
+      <select *ngSwitchCase="'select'" [required]="!field.allowempty">
+        <option *ngFor="let option of selectOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+  </div>
+</div> -->
+
+<!-- [maxlength]="field.maxlength" [minlength]="field.minlength"  -->
