@@ -43,7 +43,7 @@ export class DefaultLayoutComponent implements OnInit {
   convertToNavData(jsonData: Array<any>) {
     const newNav = {
       name: 'Form',
-      url: '/manage-api/form',
+      url: 'form',
       iconComponent: { name: 'cil-indent-increase' },
       badge: {
         color: 'success',
@@ -52,7 +52,7 @@ export class DefaultLayoutComponent implements OnInit {
       children: jsonData.map((item: any) => {
         return {
           name: item.displayname,
-          url: '/manage-api' + item.feroute,
+          url: 'form/' + item.id,
           iconComponent: { name: item.icon },
         };
       }),

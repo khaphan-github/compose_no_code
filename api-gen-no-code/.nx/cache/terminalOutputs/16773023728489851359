@@ -1,9 +1,9 @@
 chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
 webpack compiled [1m[32msuccessfully[39m[22m (ffeeb3d90fed0aeb)
-Debugger listening on ws://localhost:9229/22fdd064-b010-4a48-8c55-6ccfcd81b1b1
+Debugger listening on ws://localhost:9229/3c996874-ea69-4923-8972-45b965d9880b
 For help, see: https://nodejs.org/en/docs/inspector
 
-{"level":"WARN","timestamp":"2024-03-09T11:53:40.759Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+{"level":"WARN","timestamp":"2024-03-09T13:02:26.865Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
 
 KafkaJSNonRetriableError: Failed to connect: brokers array is empty
     at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
