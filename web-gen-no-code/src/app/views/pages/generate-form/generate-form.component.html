@@ -1,0 +1,33 @@
+<p>generate-form works!</p>
+<div>
+    <h2>{{ jsonData.title }}</h2>
+    <form cForm >
+        <div *ngFor="let field of jsonData.fields">
+      <label>{{ field.displaytext }}</label>
+     
+      <div [ngSwitch]="field.inputUi">
+        <input *ngSwitchCase="'input'" [name]="field.name" type="text" class="form-control" [required]="!field.required">
+        <div>{{getErrorMessage(field.name)}}</div>
+        </div>
+    </div>
+    <br>
+    <input cButton color="primary" type="submit" value="Submit form">
+    </form>
+  
+</div>
+
+  <!-- <form cForm>
+    <div class="mb-3">
+      <label cLabel for="inputEmail-1">Email address</label>
+      <input cFormControl id="inputEmail-1" type="email">
+      <div cFormText>
+        We'll never share your email with anyone else
+      </div>
+    </div>
+    <div class="mb-3">
+      <label cLabel for="inputPassword-1">Password</label>
+      <input cFormControl id="inputPassword-1" type="password">
+    </div>
+     
+    <input cButton color="primary" type="submit">
+  </form> -->
