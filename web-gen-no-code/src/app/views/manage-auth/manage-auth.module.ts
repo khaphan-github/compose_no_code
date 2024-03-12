@@ -35,6 +35,8 @@ import { LogComponent } from './components/log/log.component';
 import { OverideCodeComponent } from './components/custom-api/overide-code/overide-code.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
 import { GenerateFormComponent } from '../pages/generate-form/generate-form.component';
+import { GenerateTableComponent } from '../pages/generate-table/generate-table.component';
+import { TableComponent } from '../pages/table/table.component';
 
 const UI_MODULES = [
   IconModule,
@@ -93,6 +95,8 @@ const MODULE_COMPONENTS = [
   // Database.
   ExecuteScriptComponent,
   GenerateFormComponent,
+  GenerateTableComponent,
+  TableComponent,
   LogComponent,
 ]
 
@@ -122,6 +126,10 @@ const MODULE_COMPONENTS = [
       {
         path: 'account',
         component: AccountListComponent
+      },
+      {
+        path: 'gentable',
+        component: GenerateTableComponent,
       },
       {
         path: 'role',

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./generate-form.component.scss']
 }) 
 export class GenerateFormComponent implements OnInit {
-
+  currentItem = 'Television';
   inputRequired!: FormGroup;
   jsonData = {
     
@@ -20,15 +20,18 @@ export class GenerateFormComponent implements OnInit {
       { inputUi: 'input', datatype: '', name:"BeginAt",required: false, maxlength: 256, minlength: 0, displaytext: "Begin At" },
       { inputUi: 'input', datatype: '', name:"EndAt",required: false, maxlength: 256, minlength: 0, displaytext: "End At" },
       { inputUi: 'input', datatype: '', name:"Metadata",required: false, maxlength: 256, minlength: 0, displaytext: "Metadata" },
-      { inputUi: 'input', datatype: '', name:"CreateAt", required: false, maxlength: 256, minlength: 0, displaytext: "Create At" }
+      { inputUi: 'input', datatype: '', name:"CreateAt", required: false, maxlength: 256, minlength: 0, displaytext: "Create At" },
+ 
     ]
   };
 
   ngOnInit() {
  
   }
-
-  
+   
+  getValues(val: any){
+    console.log(val)
+  }
   getErrorMessage(fieldName: string): string {
     const field = this.jsonData.fields.find((f) => f.displaytext === fieldName);
     if (field && field.required) {

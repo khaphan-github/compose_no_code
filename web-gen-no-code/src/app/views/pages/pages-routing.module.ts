@@ -5,6 +5,7 @@ import { Page500Component } from './page500/page500.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GenerateFormComponent } from './generate-form/generate-form.component';
+import { GenerateTableComponent } from './generate-table/generate-table.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,13 @@ const routes: Routes = [
     component: GenerateFormComponent,
     data: {
       title: 'genForm'
+    }
+  },
+  {
+    path: 'gentable',
+    component: GenerateTableComponent,
+    data: {
+      title: 'gentable'
     }
   },
   {

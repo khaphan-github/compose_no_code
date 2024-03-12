@@ -26,6 +26,11 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-bookmark' }
   },
   {
+    name: 'Generate Table',
+    url: '/manage-api/gentable',
+    iconComponent: { name: 'cil-bookmark' }
+  },
+  {
     name: 'Custom APIs',
     url: '/manage-api/custom-api',
     iconComponent: { name: 'cil-settings' }
