@@ -8,7 +8,7 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Quản lý hệ thống'
+    name: 'Quản lý hệ thống',
   },
   {
     name: 'Chuyển đỗi',
@@ -18,7 +18,7 @@ export const navItems: INavData[] = [
   {
     name: 'APIs',
     url: '/manage-api/apis',
-    iconComponent: { name: 'cil-pencil' }
+    iconComponent: { name: 'cil-pencil' },
   },
   {
     name: 'Generate Form',
@@ -33,17 +33,17 @@ export const navItems: INavData[] = [
   {
     name: 'Custom APIs',
     url: '/manage-api/custom-api',
-    iconComponent: { name: 'cil-settings' }
+    iconComponent: { name: 'cil-settings' },
   },
   {
     name: 'Nhóm quyền',
     url: '/manage-api/role',
-    iconComponent: { name: 'cil-spreadsheet' }
+    iconComponent: { name: 'cil-spreadsheet' },
   },
   {
     name: 'Tài khoản',
     url: '/manage-api/account',
-    iconComponent: { name: 'cil-people' }
+    iconComponent: { name: 'cil-people' },
   },
   {
     name: 'Bot SQL',
@@ -54,9 +54,5 @@ export const navItems: INavData[] = [
     name: 'System Logs',
     url: '/manage-api/logs',
     iconComponent: { name: 'cil-indent-increase' },
-    badge: {
-      color: 'success',
-      text: 'New'
-    }
   },
 ];

@@ -1,19 +1,18 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Logger } from '@nestjs/common';
-import { DataSource, DataSourceOptions } from "typeorm";
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 export class RunScriptCommand {
   constructor(
     public readonly workspaceConnections: DataSourceOptions,
     public readonly script: string
-  ) { }
+  ) {}
 }
 
 @CommandHandler(RunScriptCommand)
 export class RunScriptCommandHandler
   implements ICommandHandler<RunScriptCommand>
 {
-
   private readonly logger = new Logger(RunScriptCommandHandler.name);
 
   /**LOGIC:
@@ -28,7 +27,9 @@ export class RunScriptCommandHandler
 
     let typeormDataSource: DataSource;
     try {
-      typeormDataSource = await new DataSource(workspaceConnections).initialize();
+      typeormDataSource = await new DataSource(
+        workspaceConnections
+      ).initialize();
       const queryResult = await typeormDataSource.query(script);
       await typeormDataSource?.destroy();
       return queryResult;

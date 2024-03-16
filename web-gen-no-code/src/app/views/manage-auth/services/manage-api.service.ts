@@ -224,4 +224,5 @@ export class ManageApiService {
   getTableName() {
     return this.httpClient.get<SResponse<Array<any>>>(`${getHostName()}/api/v1/transform`);
   }
+
 }

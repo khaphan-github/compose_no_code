@@ -1,0 +1,17 @@
+<c-card>
+  <c-card-header>
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-6">
+        <h4></h4>
+      </div>
+    </div>
+  </c-card-header>
+  <c-card-body>
+    {{ this.formData | json }}
+    <div>
+      <ng-template #showNotFoundContent>
+        <app-waiting-to-load [show]="true"></app-waiting-to-load>
+      </ng-template>
+    </div>
+  </c-card-body>
+</c-card>

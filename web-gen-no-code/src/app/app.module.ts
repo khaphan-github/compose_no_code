@@ -47,7 +47,10 @@ import { Router } from '@angular/router';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { CustomToartComponent } from './views/shared/custom-toart/custom-toart.component';
 import { QueryParamKeyMapDirective } from './views/shared/directive/query-param-key-map.directive';
- import { GenerateFormComponent } from './views/pages/generate-form/generate-form.component';
+
+import { GenerateFormComponent } from './views/pages/generate-form/generate-form.component';
+import { RenderFormModule } from './views/render-form/render-form.module';
+
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -58,7 +61,8 @@ const APP_CONTAINERS = [
 const INTERATED_MODULE = [
   ManageAuthModule,
   CustomToartComponent,
-]
+  RenderFormModule,
+];
 
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS, ],

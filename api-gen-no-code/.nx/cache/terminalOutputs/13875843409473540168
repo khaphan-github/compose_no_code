@@ -1,0 +1,117 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 253 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (643009879872ec61)
+[1m[31mDebugger attached.[39m[22m
+[1m[31m[39m[22m
+[1m[31m{"level":"WARN","timestamp":"2024-03-08T07:22:30.957Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}[39m[22m
+[1m[31m[39m[22m
+[1m[31mKafkaJSNonRetriableError: Failed to connect: brokers array is empty[39m[22m
+[1m[31m    at validateBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)[39m[22m
+[1m[31m    at getBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)[39m[22m
+[1m[31m    at Object.build (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)[39m[22m
+[1m[31m    at BrokerPool.createSeedBroker (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)[39m[22m
+[1m[31m    at BrokerPool.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)[39m[22m
+[1m[31m    at /workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:107:36[39m[22m
+[1m[31m    at Cluster.<anonymous> (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)[39m[22m
+[1m[31m    at Cluster.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:146:32)[39m[22m
+[1m[31m    at Object.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/producer/index.js:219:21)[39m[22m
+[1m[31m    at new KafkaProducerService (/workspaces/compose_no_code/api-gen-no-code/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {[39m[22m
+[1m[31m  retriable: false,[39m[22m
+[1m[31m  helpUrl: undefined,[39m[22m
+[1m[31m  [cause]: undefined[39m[22m
+[1m[31m}[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 99306  - [39m[31m03/08/2024, 7:22:37 AM [31m  ERROR[39m[31m [38;5;3m[EventBus] [39m[31m[31mCommand handler which execution was triggered by Saga has thrown an unhandled exception.[39m[31m[39m[22m
+[1m[31m[31m[Nest] 99306  - [39m[31m03/08/2024, 7:22:37 AM [31m  ERROR[39m[31m [38;5;3m[EventBus] [39m[31m[31mQueryFailedError: duplicate key value violates unique constraint "_core_generated_apis_pkey"[39m[31m[39m[22m
+[1m[31m[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 253 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/app.controller.ts:[32m[1m10:5[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'l'.
+  [0m [90m  8 |[39m   [33m@[39m[33mGet[39m([32m''[39m)[0m
+  [0m [90m  9 |[39m   tes() {[0m
+  [0m[31m[1m>[22m[39m[90m 10 |[39m     l[0m
+  [0m [90m    |[39m     [31m[1m^[22m[39m[0m
+  [0m [90m 11 |[39m     [36mreturn[39m [32m`OKE`[39m[33m;[39m[0m
+  [0m [90m 12 |[39m   }[0m
+  [0m [90m 13 |[39m }[0m
+
+webpack compiled with [1m[31m1 error[39m[22m (ec5f557806d45e5f)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 253 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (60cd251a8ea59ace)
+[1m[31mDebugger attached.[39m[22m
+[1m[31m[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 253 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (74fd44af32380ec5)
+[1m[31mDebugger attached.[39m[22m
+[1m[31m[39m[22m
+[1m[31m{"level":"WARN","timestamp":"2024-03-08T07:26:09.837Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}[39m[22m
+[1m[31m[39m[22m
+[1m[31mKafkaJSNonRetriableError: Failed to connect: brokers array is empty[39m[22m
+[1m[31m    at validateBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)[39m[22m
+[1m[31m    at getBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)[39m[22m
+[1m[31m    at Object.build (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)[39m[22m
+[1m[31m    at BrokerPool.createSeedBroker (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)[39m[22m
+[1m[31m    at BrokerPool.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)[39m[22m
+[1m[31m    at /workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:107:36[39m[22m
+[1m[31m    at Cluster.<anonymous> (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)[39m[22m
+[1m[31m    at Cluster.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:146:32)[39m[22m
+[1m[31m    at Object.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/producer/index.js:219:21)[39m[22m
+[1m[31m    at new KafkaProducerService (/workspaces/compose_no_code/api-gen-no-code/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {[39m[22m
+[1m[31m  retriable: false,[39m[22m
+[1m[31m  helpUrl: undefined,[39m[22m
+[1m[31m  [cause]: undefined[39m[22m
+[1m[31m}[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 115591  - [39m[31m03/08/2024, 7:26:16 AM [31m  ERROR[39m[31m [38;5;3m[EventBus] [39m[31m[31mCommand handler which execution was triggered by Saga has thrown an unhandled exception.[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 115591  - [39m[31m03/08/2024, 7:26:16 AM [31m  ERROR[39m[31m [38;5;3m[EventBus] [39m[31m[31mQueryFailedError: duplicate key value violates unique constraint "_core_generated_apis_pkey"[39m[31m[39m[22m
+[1m[31m[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 253 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ee5e9243cb2447b2)
+[1m[31mDebugger attached.[39m[22m
+[1m[31m[39m[22m
+[1m[31m{"level":"WARN","timestamp":"2024-03-08T07:26:27.063Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}[39m[22m
+[1m[31m[39m[22m
+[1m[31mKafkaJSNonRetriableError: Failed to connect: brokers array is empty[39m[22m
+[1m[31m    at validateBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)[39m[22m
+[1m[31m    at getBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)[39m[22m
+[1m[31m    at Object.build (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)[39m[22m
+[1m[31m    at BrokerPool.createSeedBroker (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)[39m[22m
+[1m[31m    at BrokerPool.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)[39m[22m
+[1m[31m    at /workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:107:36[39m[22m
+[1m[31m    at Cluster.<anonymous> (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)[39m[22m
+[1m[31m    at Cluster.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:146:32)[39m[22m
+[1m[31m    at Object.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/producer/index.js:219:21)[39m[22m
+[1m[31m    at new KafkaProducerService (/workspaces/compose_no_code/api-gen-no-code/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {[39m[22m
+[1m[31m  retriable: false,[39m[22m
+[1m[31m  helpUrl: undefined,[39m[22m
+[1m[31m  [cause]: undefined[39m[22m
+[1m[31m}[39m[22m
+[1m[31m[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 253 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (a80b8023689e94e0)
+[1m[31mDebugger attached.[39m[22m
+[1m[31m[39m[22m
+[1m[31m{"level":"WARN","timestamp":"2024-03-08T07:26:30.331Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}[39m[22m
+[1m[31m[39m[22m
+[1m[31mKafkaJSNonRetriableError: Failed to connect: brokers array is empty[39m[22m
+[1m[31m    at validateBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)[39m[22m
+[1m[31m    at getBrokers (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)[39m[22m
+[1m[31m    at Object.build (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)[39m[22m
+[1m[31m    at BrokerPool.createSeedBroker (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)[39m[22m
+[1m[31m    at BrokerPool.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)[39m[22m
+[1m[31m    at /workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:107:36[39m[22m
+[1m[31m    at Cluster.<anonymous> (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)[39m[22m
+[1m[31m    at Cluster.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/cluster/index.js:146:32)[39m[22m
+[1m[31m    at Object.connect (/workspaces/compose_no_code/api-gen-no-code/node_modules/kafkajs/src/producer/index.js:219:21)[39m[22m
+[1m[31m    at new KafkaProducerService (/workspaces/compose_no_code/api-gen-no-code/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {[39m[22m
+[1m[31m  retriable: false,[39m[22m
+[1m[31m  helpUrl: undefined,[39m[22m
+[1m[31m  [cause]: undefined[39m[22m
+[1m[31m}[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 117248  - [39m[31m03/08/2024, 7:26:37 AM [31m  ERROR[39m[31m [38;5;3m[EventBus] [39m[31m[31mCommand handler which execution was triggered by Saga has thrown an unhandled exception.[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 117248  - [39m[31m03/08/2024, 7:26:37 AM [31m  ERROR[39m[31m [38;5;3m[EventBus] [39m[31m[31mQueryFailedError: duplicate key value violates unique constraint "_core_generated_apis_pkey"[39m[31m[39m[22m
+[1m[31m[39m[22m

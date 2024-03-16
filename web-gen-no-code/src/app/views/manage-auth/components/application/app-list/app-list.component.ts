@@ -3,21 +3,22 @@ import { FormControl } from '@angular/forms';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { CustomToastService } from 'src/app/views/shared/custom-toart/custom-toast.service';
 import { Router } from '@angular/router';
-
+import { ApiGenratedEvent } from '../../../../../event/api-genrated.event';
 @Component({
   selector: 'app-app-list',
   templateUrl: './app-list.component.html',
-  styleUrls: ['./app-list.component.css']
+  styleUrls: ['./app-list.component.css'],
 })
 export class AppListComponent implements OnInit {
   exampleFormControl: FormControl = new FormControl();
 
   private service = inject(ManageApiService);
   private route = inject(Router);
-  private notify = inject(CustomToastService)
+  private notify = inject(CustomToastService);
+  private apiGeneratedEvent = inject(ApiGenratedEvent);
   public showDocument = false;
 
-  constructor() { }
+  constructor() {}
 
   public showGenerateAgainButton: boolean = false;
   public CODE_MODEL = {
@@ -28,7 +29,7 @@ export class AppListComponent implements OnInit {
 
   public readonly CODE_OPTIONS = {
     contextmenu: true,
-  }
+  };
 
   onCodeChanged(value: any) {
     this.exampleFormControl.setValue(value);
@@ -42,13 +43,18 @@ export class AppListComponent implements OnInit {
           this.CODE_MODEL = {
             ...this.CODE_MODEL,
             value: value.data[0].create_db_script,
-          }
-          this.showGenerateAgainButton = value.data[0].create_db_script !== null;
+          };
+          this.showGenerateAgainButton =
+            value.data[0].create_db_script !== null;
         } else if (value.status == 611) {
-          this.notify.setState({ title: 'Lỗi khi lấy truy vấn', desc: value.message, color: 'warning' });
+          this.notify.setState({
+            title: 'Lỗi khi lấy truy vấn',
+            desc: value.message,
+            color: 'warning',
+          });
         }
-      }
-    })
+      },
+    });
   }
 
   submitData() {
@@ -57,14 +63,24 @@ export class AppListComponent implements OnInit {
     this.service.executeGenerator(formData).subscribe({
       next: (response) => {
         if (response.status == 200) {
-          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'light' });
+          this.notify.setState({
+            show: true,
+            title: 'Chuyển đỗi thành công',
+            desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`,
+            color: 'light',
+          });
         }
       },
 
       error: (err) => {
-        this.notify.setState({ show: true, title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
+        this.notify.setState({
+          show: true,
+          title: 'Chuyển đổi xảy ra lỗi',
+          desc: err.error.message,
+          color: 'warning',
+        });
       },
-    })
+    });
   }
 
   summitAgain() {
@@ -73,15 +89,25 @@ export class AppListComponent implements OnInit {
     this.service.executeScriptAgain(formData).subscribe({
       next: (response) => {
         if (response.status == 200) {
-          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'light' });
-          this.route.navigate(['manage-api/apis'])
+          this.notify.setState({
+            show: true,
+            title: 'Chuyển đỗi thành công',
+            desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`,
+            color: 'light',
+          });
+          this.route.navigate(['manage-api/apis']);
+          this.apiGeneratedEvent.setState({});
         }
       },
 
       error: (err) => {
-        this.notify.setState({ show: true, title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
+        this.notify.setState({
+          show: true,
+          title: 'Chuyển đổi xảy ra lỗi',
+          desc: err.error.message,
+          color: 'warning',
+        });
       },
-    })
+    });
   }
-
 }
