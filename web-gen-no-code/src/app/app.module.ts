@@ -1,6 +1,11 @@
 import { ManageAuthModule } from './views/manage-auth/manage-auth.module';
 import { NgModule, OnInit, inject } from '@angular/core';
-import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  LocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +19,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Import containers
-import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
+import {
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+} from './containers';
 
 import {
   AvatarModule,
@@ -36,7 +45,7 @@ import {
   SpinnerModule,
   TabsModule,
   ToastModule,
-  UtilitiesModule
+  UtilitiesModule,
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -46,16 +55,12 @@ import { AppService } from './app.service';
 import { Router } from '@angular/router';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { CustomToartComponent } from './views/shared/custom-toart/custom-toart.component';
-import { QueryParamKeyMapDirective } from './views/shared/directive/query-param-key-map.directive';
-
-import { GenerateFormComponent } from './views/pages/generate-form/generate-form.component';
 import { RenderFormModule } from './views/render-form/render-form.module';
-
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
 ];
 
 const INTERATED_MODULE = [
@@ -65,7 +70,7 @@ const INTERATED_MODULE = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ],
+  declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
     CommonModule,
     FormsModule,
@@ -96,12 +101,12 @@ const INTERATED_MODULE = [
     CardModule,
     SpinnerModule,
     NgScrollbarModule,
-    ...INTERATED_MODULE
+    ...INTERATED_MODULE,
   ],
   providers: [
     {
       provide: LocationStrategy,
-      useClass: HashLocationStrategy
+      useClass: HashLocationStrategy,
     },
     {
       provide: HTTP_INTERCEPTORS,
@@ -111,14 +116,14 @@ const INTERATED_MODULE = [
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
-        fullLibraryLoader: () => import('highlight.js')
-      }
+        fullLibraryLoader: () => import('highlight.js'),
+      },
     },
 
     IconSetService,
-    Title
+    Title,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule implements OnInit {
   private appService = inject(AppService);

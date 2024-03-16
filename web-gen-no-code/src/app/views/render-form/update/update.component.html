@@ -1,0 +1,31 @@
+<c-modal-header>
+  <h5 cModalTitle>UPDATE</h5>
+</c-modal-header>
+<c-modal-body>
+  <form cForm [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of this.formInfo.fields">
+      <label *ngIf="field.fieldId !== 'id'" cLabel>{{
+        field.displayText
+      }}</label>
+      <input
+        cFormControl
+        [type]="field.inputUI"
+        [placeholder]="field.displayText"
+        [formControlName]="field.fieldId"
+        *ngIf="field.fieldId !== 'id'"
+      />
+    </div>
+  </form>
+</c-modal-body>
+<c-modal-footer>
+  <button cButton color="secondary" (click)="this.activeModel.close(false)">
+    Thoát
+  </button>
+  <button cButton color="warning" (click)="this.onDelete()">
+    Xóa vĩnh viễn
+  </button>
+
+  <button cButton color="primary" type="submit" (click)="this.onSubmit()">
+    Lưu thay đổi
+  </button>
+</c-modal-footer>

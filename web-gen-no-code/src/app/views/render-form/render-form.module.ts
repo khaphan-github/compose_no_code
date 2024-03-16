@@ -14,12 +14,18 @@ import {
   FormModule,
   AlertModule,
   CalloutModule,
+  PaginationModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { HighlightModule } from 'ngx-highlightjs';
 import { InputFieldComponent } from '../manage-auth/components/custom-api/input-field/input-field.component';
 import { NotFoundComponent } from '../shared/not-found/not-found.component';
 import { WaitingToLoadComponent } from '../shared/waiting-to-load/waiting-to-load.component';
+import { GenerateFormComponent } from './generate-form/generate-form.component';
+import { TableComponent } from './table/table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GenerateTableComponent } from './generate-table/generate-table.component';
+import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 const UI_MODULES = [
   IconModule,
   CardModule,
@@ -40,6 +46,10 @@ const UI_MODULES = [
   HighlightModule,
 
   InputFieldComponent,
+  TableModule,
+  FormsModule,
+  ReactiveFormsModule,
+  PaginationModule,
 ];
 const routes: Routes = [
   {
@@ -51,7 +61,17 @@ const routes: Routes = [
 export const RenderFormRoutes = RouterModule.forChild(routes);
 
 @NgModule({
-  imports: [CommonModule, ...UI_MODULES, RenderFormRoutes],
-  declarations: [RenderFormComponent],
+  imports: [
+    CommonModule,
+    DynamicTableComponent,
+    ...UI_MODULES,
+    RenderFormRoutes,
+  ],
+  declarations: [
+    RenderFormComponent,
+    GenerateFormComponent,
+    TableComponent,
+    GenerateTableComponent,
+  ],
 })
 export class RenderFormModule {}

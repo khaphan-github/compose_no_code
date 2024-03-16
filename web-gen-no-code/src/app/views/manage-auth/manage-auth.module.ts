@@ -6,7 +6,19 @@ import { ManageApiService } from './services/manage-api.service';
 import { RouterModule } from '@angular/router';
 import { AccountListComponent } from './components/account/account-list/account-list.component';
 import { PolicyListComponent } from './components/policy/policy-list/policy-list.component';
-import { AlertModule, BadgeModule, ButtonModule, CalloutModule, CardModule, DropdownModule, FormCheckComponent, FormModule, GridModule, ModalModule, TableModule } from '@coreui/angular';
+import {
+  AlertModule,
+  BadgeModule,
+  ButtonModule,
+  CalloutModule,
+  CardModule,
+  DropdownModule,
+  FormCheckComponent,
+  FormModule,
+  GridModule,
+  ModalModule,
+  TableModule,
+} from '@coreui/angular';
 import { RoleListComponent } from './components/roles/role-list/role-list.component';
 import { WaitingToLoadComponent } from '../shared/waiting-to-load/waiting-to-load.component';
 import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
@@ -34,9 +46,6 @@ import { ChatBoxComponent } from './components/bot/chat-box/chat-box.component';
 import { LogComponent } from './components/log/log.component';
 import { OverideCodeComponent } from './components/custom-api/overide-code/overide-code.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
-import { GenerateFormComponent } from '../pages/generate-form/generate-form.component';
-import { GenerateTableComponent } from '../pages/generate-table/generate-table.component';
-import { TableComponent } from '../pages/table/table.component';
 
 const UI_MODULES = [
   IconModule,
@@ -58,7 +67,7 @@ const UI_MODULES = [
   HighlightModule,
 
   InputFieldComponent,
-]
+];
 
 const MODULE_COMPONENTS = [
   QueryParamKeyMapDirective,
@@ -91,14 +100,11 @@ const MODULE_COMPONENTS = [
   CreateRoleComponent,
   UpdateRoleComponent,
   DecentralizeComponent,
- 
+
   // Database.
   ExecuteScriptComponent,
-  GenerateFormComponent,
-  GenerateTableComponent,
-  TableComponent,
   LogComponent,
-]
+];
 
 @NgModule({
   imports: [
@@ -113,11 +119,7 @@ const MODULE_COMPONENTS = [
     RouterModule.forChild([
       {
         path: 'apis',
-        component: ApiListComponent
-      },
-      {
-        path: 'genform',
-        component: GenerateFormComponent
+        component: ApiListComponent,
       },
       {
         path: 'custom-api',
@@ -125,15 +127,11 @@ const MODULE_COMPONENTS = [
       },
       {
         path: 'account',
-        component: AccountListComponent
-      },
-      {
-        path: 'gentable',
-        component: GenerateTableComponent,
+        component: AccountListComponent,
       },
       {
         path: 'role',
-        component: RoleListComponent
+        component: RoleListComponent,
       },
       {
         path: 'database',
@@ -150,10 +148,10 @@ const MODULE_COMPONENTS = [
       {
         path: 'app',
         component: AppListComponent,
-      }
+      },
     ]),
   ],
   providers: [ManageApiService],
-  declarations: [...MODULE_COMPONENTS]
+  declarations: [...MODULE_COMPONENTS],
 })
-export class ManageAuthModule { }
+export class ManageAuthModule {}

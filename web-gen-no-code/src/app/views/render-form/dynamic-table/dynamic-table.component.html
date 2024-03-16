@@ -1,0 +1,12 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let key of getObjectKeys(inputData[0])">{{ key }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of inputData" (click)="this.onClick.emit(item)">
+      <td *ngFor="let key of getObjectKeys(item)">{{ item[key] | json }}</td>
+    </tr>
+  </tbody>
+</table>
