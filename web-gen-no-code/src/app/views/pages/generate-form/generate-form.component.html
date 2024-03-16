@@ -1,0 +1,18 @@
+<p>generate-form works!</p>
+<div>
+    <h2>{{ jsonData.title }}</h2>
+    <form cForm #genForm="ngForm" (ngSubmit)="getValues(genForm.value)">
+        <div *ngFor="let field of jsonData.fields">
+      <label>{{ field.displaytext }}</label>
+     
+      <div [ngSwitch]="field.inputUi">
+        <input *ngSwitchCase="'input'" ngModel [name]="field.name" type="text" class="form-control" [required]="!field.required">
+        <div>{{getErrorMessage(field.name)}}</div>
+        </div>
+    </div>
+    <br>
+    <input cButton color="primary" type="submit" value="Submit form">
+    </form>
+  
+</div>
+   

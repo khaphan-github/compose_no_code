@@ -1,0 +1,61 @@
+<table cTable hover>
+  <thead>
+    <tr>
+      <th *ngFor="let column of tableStructure.columns">{{ column.label }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of tableData">
+      <td *ngFor="let column of tableStructure.columns">
+        {{ row[column.field] }}
+      </td>
+      <td>
+        <button
+          cButton
+          color="success"
+          style="margin-right: 10px"
+          (click)="toggleLiveDemo()"
+          (click)="updateData(row.id)"
+        >
+          Update
+        </button>
+        <button cButton color="danger" (click)="deleteData(row.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<c-modal
+  id="liveDemoModal"
+  [visible]="visible"
+  (visibleChange)="handleLiveDemoChange($event)"
+>
+<form #genForm="ngForm" (ngSubmit)="getValues(genForm)">
+  <c-modal-header>
+    <h5 cModalTitle>Update</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <h2>{{ tableStructure.tableName }}</h2>
+    <div *ngIf="selectedRow">
+      <div *ngFor="let key of getObjectKeys(selectedRow)">
+        <label>{{ key }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name={{key}}
+          [(ngModel)]="selectedRow[key]"
+        />
+      </div>
+    </div>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">
+      Close
+    </button>
+    <input cButton color="primary" type="submit" value="Submit form" />
+  </c-modal-footer>
+</form>
+</c-modal>

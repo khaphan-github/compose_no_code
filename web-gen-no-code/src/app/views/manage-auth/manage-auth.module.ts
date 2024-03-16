@@ -34,6 +34,9 @@ import { ChatBoxComponent } from './components/bot/chat-box/chat-box.component';
 import { LogComponent } from './components/log/log.component';
 import { OverideCodeComponent } from './components/custom-api/overide-code/overide-code.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import { GenerateFormComponent } from '../pages/generate-form/generate-form.component';
+import { GenerateTableComponent } from '../pages/generate-table/generate-table.component';
+import { TableComponent } from '../pages/table/table.component';
 
 const UI_MODULES = [
   IconModule,
@@ -77,7 +80,6 @@ const MODULE_COMPONENTS = [
   CreateApiComponent,
 
   CreateAccountComponent,
-
   AccountListComponent,
   UpdateAccountComponent,
 
@@ -89,10 +91,12 @@ const MODULE_COMPONENTS = [
   CreateRoleComponent,
   UpdateRoleComponent,
   DecentralizeComponent,
-
+ 
   // Database.
   ExecuteScriptComponent,
-
+  GenerateFormComponent,
+  GenerateTableComponent,
+  TableComponent,
   LogComponent,
 ]
 
@@ -112,12 +116,20 @@ const MODULE_COMPONENTS = [
         component: ApiListComponent
       },
       {
+        path: 'genform',
+        component: GenerateFormComponent
+      },
+      {
         path: 'custom-api',
         component: CustomApiListComponent,
       },
       {
         path: 'account',
         component: AccountListComponent
+      },
+      {
+        path: 'gentable',
+        component: GenerateTableComponent,
       },
       {
         path: 'role',
