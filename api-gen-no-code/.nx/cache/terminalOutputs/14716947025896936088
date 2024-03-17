@@ -1,0 +1,23 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ef0bc2a4ea8d1c91)
+Debugger listening on ws://localhost:9229/7d3143f2-498a-478a-b594-cccce71884e1
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-17T14:34:15.210Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
