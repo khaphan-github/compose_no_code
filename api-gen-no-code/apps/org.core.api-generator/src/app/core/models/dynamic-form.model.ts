@@ -17,6 +17,7 @@ export class DynamicFormModel extends DynamicModel {
   public id!: number;
   public action!: string; // CREATE - UPDATE - DELETE
   public title!: string; // Display table of string;
+  public tableName!: string; // Display table of string;
   public fields!: Array<DynamicFormField>;
   public status!: boolean;
   public metadata!: object;
@@ -39,10 +40,11 @@ export class DynamicFormModel extends DynamicModel {
               field.minLength = 0;
               field.required = false;
               field.inputUI = 'input';
+              field.fieldId = col.columnName;
               return field;
             })
           ) ?? null,
-        metadata: {},
+        metadata: JSON.stringify({ table_name: element.table_name }),
       };
     }
   }

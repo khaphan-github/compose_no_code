@@ -4,8 +4,7 @@ import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { GenerateFormComponent } from './generate-form/generate-form.component';
-import { GenerateTableComponent } from './generate-table/generate-table.component';
+import { GenerateFormComponent } from '../render-form/generate-form/generate-form.component';
 
 const routes: Routes = [
   {
@@ -27,13 +26,6 @@ const routes: Routes = [
     component: GenerateFormComponent,
     data: {
       title: 'genForm'
-    }
-  },
-  {
-    path: 'gentable',
-    component: GenerateTableComponent,
-    data: {
-      title: 'gentable'
     }
   },
   {
