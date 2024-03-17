@@ -1,4 +1,4 @@
-import { DataSourceOptions } from "typeorm";
+import { DataSourceOptions } from 'typeorm';
 
 export enum EWorkspaceColumns {
   ID = 'id',
@@ -9,7 +9,6 @@ export enum EWorkspaceColumns {
   CREATED_AT = 'created_at',
   UPDATED_AT = 'updated_at',
 }
-
 
 export class WorkspaceModel {
   id: number;

@@ -12,17 +12,17 @@ import { HttpClient } from '@angular/common/http';
 export class TableComponent implements OnInit {
   inputRequired!: FormGroup;
   @Input() tableStructure: any;
-  @Input() tableData: any[]=[];
-   public visible = false;
+  @Input() tableData: any[] = [];
+  public visible = false;
 
   toggleLiveDemo() {
     this.visible = !this.visible;
   }
 
- handleLiveDemoChange(event: any) {
-  this.visible = event;
-}
- constructor(private http: HttpClient, private router: Router) {}
+  handleLiveDemoChange(event: any) {
+    this.visible = event;
+  }
+  constructor(private http: HttpClient, private router: Router) {}
   @Input() item = '';
   ngOnInit() {}
 
@@ -31,20 +31,20 @@ export class TableComponent implements OnInit {
     const editedValues = Object.assign({}, this.selectedRow, genForm.value);
     console.log(editedValues);
     this.visible = !this.visible;
-    this.router.navigateByUrl('/manage-api/gentable', { skipLocationChange: true }).then(() => {
-      this.router.navigate([this.router.url]);
-    });
+    this.router
+      .navigateByUrl('/manage-api/gentable', { skipLocationChange: true })
+      .then(() => {
+        this.router.navigate([this.router.url]);
+      });
   }
-  
-  
+
   selectedRow: any = {};
   updateData(id: number) {
-    const row = this.tableData.find(item => item.id === id);
+    const row = this.tableData.find((item) => item.id === id);
     if (row) {
       console.log(row);
       this.selectedRow = row;
-
-     } else {
+    } else {
       console.log('Dòng không tồn tại.');
     }
   }
@@ -52,10 +52,6 @@ export class TableComponent implements OnInit {
     return Object.keys(obj);
   }
   deleteData(id: number) {
-  
-      console.log(id);
-    
+    console.log(id);
   }
-
-  
 }

@@ -211,7 +211,7 @@
       },
       {
         "file": "apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts",
-        "hash": "10954598294517977258",
+        "hash": "2102318849800787670",
         "deps": [
           "npm:text-case"
         ]
@@ -233,7 +233,7 @@
       },
       {
         "file": "apps/org.core.api-generator/src/app/core/models/workspace.model.ts",
-        "hash": "13367783949349076110",
+        "hash": "10136065716671694437",
         "deps": [
           "npm:typeorm"
         ]

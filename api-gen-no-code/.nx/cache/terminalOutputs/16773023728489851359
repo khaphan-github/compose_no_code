@@ -1,9 +1,9 @@
 chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
 webpack compiled [1m[32msuccessfully[39m[22m (ffeeb3d90fed0aeb)
-Debugger listening on ws://localhost:9229/3c996874-ea69-4923-8972-45b965d9880b
+Debugger listening on ws://localhost:9229/89a96a75-87f5-4925-9fab-dde28fac5a0a
 For help, see: https://nodejs.org/en/docs/inspector
 
-{"level":"WARN","timestamp":"2024-03-09T13:02:26.865Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+{"level":"WARN","timestamp":"2024-03-16T12:59:13.375Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
 
 KafkaJSNonRetriableError: Failed to connect: brokers array is empty
     at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
@@ -21,3 +21,241 @@ KafkaJSNonRetriableError: Failed to connect: brokers array is empty
   [cause]: undefined
 }
 
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m31:70[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(31,71)
+      TS1127: [1m[31mInvalid[39m[22m[1m character.[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (8823af4aed54cf6c)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m31:70[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(31,71)
+      TS1127: [1m[31mInvalid[39m[22m[1m character.[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (8823af4aed54cf6c)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m18:22[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (18:22)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                 title: (0, text_case_1.capitalCase)(element.action + '_' + element.table_name),
+|                 table: fields,
+>                 JSON, : .stringify(parseColums.columns?.map((col) => {
+|                     const field = new DynamicFormField();
+|                     field.datatype = '';[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m33:22-23[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(33,23)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:14-15[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,15)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:33:17[39m[22m
+[1mTS2663: Cannot find name 'fields'. [1m[32mDid you mean the instance member 'this.fields'?[39m[22m[1m
+    31 |         title: capitalCase(element.action + '_' + element.table_name),
+    32 |         table: 
+  > 33 |                 fields:
+       |                 ^^^^^^
+    34 |           JSON.stringify(
+    35 |             parseColums.columns?.map((col) => {
+    36 |               const field = new DynamicFormField();[39m[22m
+
+webpack compiled with [1m[31m4 errors[39m[22m (caaec3bde7a80e2b)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m18:22[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (18:22)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                 title: (0, text_case_1.capitalCase)(element.action + '_' + element.table_name),
+|                 table: fields,
+>                 JSON, : .stringify(parseColums.columns?.map((col) => {
+|                     const field = new DynamicFormField();
+|                     field.datatype = '';[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:22-23[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,23)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m35:14-15[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(35,15)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:20:10[39m[22m
+[1mTS2300: [1m[31mDuplicate[39m[22m[1m identifier 'title'.
+    18 |   public action!: string; // CREATE - UPDATE - DELETE
+    19 |   public title!: string; // Display table of string;
+  > 20 |   public title!: string; // Display table of string;
+       |          ^^^^^
+    21 |   public fields!: Array<DynamicFormField>;
+    22 |   public status!: boolean;
+    23 |   public metadata!: object;[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:34:17[39m[22m
+[1mTS2663: Cannot find name 'fields'. [1m[32mDid you mean the instance member 'this.fields'?[39m[22m[1m
+    32 |         title: capitalCase(element.action + '_' + element.table_name),
+    33 |         table:
+  > 34 |                 fields:
+       |                 ^^^^^^
+    35 |           JSON.stringify(
+    36 |             parseColums.columns?.map((col) => {
+    37 |               const field = new DynamicFormField();[39m[22m
+
+webpack compiled with [1m[31m5 errors[39m[22m (09cb28bf7c79ce56)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m18:22[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (18:22)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                 title: (0, text_case_1.capitalCase)(element.action + '_' + element.table_name),
+|                 table: fields,
+>                 JSON, : .stringify(parseColums.columns?.map((col) => {
+|                     const field = new DynamicFormField();
+|                     field.datatype = '';[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:22-23[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,23)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m35:14-15[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(35,15)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:34:17[39m[22m
+[1mTS2663: Cannot find name 'fields'. [1m[32mDid you mean the instance member 'this.fields'?[39m[22m[1m
+    32 |         title: capitalCase(element.action + '_' + element.table_name),
+    33 |         table:
+  > 34 |                 fields:
+       |                 ^^^^^^
+    35 |           JSON.stringify(
+    36 |             parseColums.columns?.map((col) => {
+    37 |               const field = new DynamicFormField();[39m[22m
+
+webpack compiled with [1m[31m4 errors[39m[22m (1e26c4c705d808bd)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m18:22[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (18:22)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                 title: (0, text_case_1.capitalCase)(element.action + '_' + element.table_name),
+|                 table: tableName,
+>                 JSON, : .stringify(parseColums.columns?.map((col) => {
+|                     const field = new DynamicFormField();
+|                     field.datatype = '';[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:25-26[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,26)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m35:14-15[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(35,15)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:34:17[39m[22m
+[1mTS2663: Cannot find name 'tableName'. [1m[32mDid you mean the instance member 'this.tableName'?[39m[22m[1m
+    32 |         title: capitalCase(element.action + '_' + element.table_name),
+    33 |         table:
+  > 34 |                 tableName:
+       |                 ^^^^^^^^^
+    35 |           JSON.stringify(
+    36 |             parseColums.columns?.map((col) => {
+    37 |               const field = new DynamicFormField();[39m[22m
+
+webpack compiled with [1m[31m4 errors[39m[22m (1b83eb5a317a59ab)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m17:43[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (17:43)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                 action: element.action,
+|                 title: (0, text_case_1.capitalCase)(element.action + '_' + element.table_name),
+>                 table: tableName, element, : .table_name,
+|                 JSON, : .stringify(parseColums.columns?.map((col) => {
+|                     const field = new DynamicFormField();[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:25-26[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,26)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:34-35[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,35)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m35:14-15[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(35,15)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:34:17[39m[22m
+[1mTS2663: Cannot find name 'tableName'. [1m[32mDid you mean the instance member 'this.tableName'?[39m[22m[1m
+    32 |         title: capitalCase(element.action + '_' + element.table_name),
+    33 |         table:
+  > 34 |                 tableName: element.table_name,
+       |                 ^^^^^^^^^
+    35 |           JSON.stringify(
+    36 |             parseColums.columns?.map((col) => {
+    37 |               const field = new DynamicFormField();[39m[22m
+
+webpack compiled with [1m[31m5 errors[39m[22m (84a226ba4da3da73)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m18:22[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (18:22)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                 title: (0, text_case_1.capitalCase)(element.action + '_' + element.table_name),
+|                 tableName: element.table_name,
+>                 JSON, : .stringify(parseColums.columns?.map((col) => {
+|                     const field = new DynamicFormField();
+|                     field.datatype = '';[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m34:14-15[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(34,15)
+      TS1005: ',' expected.[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (5d91715e7bb1628b)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (d9863f17a25c24a6)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (d9863f17a25c24a6)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (d9863f17a25c24a6)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (d9863f17a25c24a6)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (d9863f17a25c24a6)
+Build failed, waiting for changes to restart...

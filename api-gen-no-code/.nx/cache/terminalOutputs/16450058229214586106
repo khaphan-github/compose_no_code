@@ -1,0 +1,501 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (fd0072f539c5eaf8)
+Debugger listening on ws://localhost:9229/24208516-025f-4723-89e6-a6c4c2d7a2c4
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T14:35:23.311Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+[31m[Nest] 109  - [39m03/16/2024, 2:35:56 PM [31m  ERROR[39m [38;5;3m[CreateDynamicFormCommandHandler] [39m[31mQueryFailedError: INSERT has more expressions than target columns[39m
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (30485e2586cf1e3b)
+Debugger listening on ws://localhost:9229/3887b3b6-5ca0-40da-9db2-ffaacc3ac1ba
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T14:36:27.736Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (e48b46757a1d3bc0)
+Debugger listening on ws://localhost:9229/30614ae3-b604-4216-a4f4-323f9fe4da1c
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T14:36:31.506Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m47:6-7[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(47,7)
+      TS1135: Argument expression expected.[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (6e58a6a05767fac5)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (f6a19d1e66173ff1)
+Debugger listening on ws://localhost:9229/3625ab1c-792b-4562-b72e-71143eaac528
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T14:36:40.698Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m46:43-44[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(46,44)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:46:34[39m[22m
+[1mTS2304: Cannot find name 'table_name'.
+    44 |             })
+    45 |           ) ?? null,
+  > 46 |         metadata: JSON.stringify(table_name: ),
+       |                                  ^^^^^^^^^^
+    47 |       };
+    48 |     }
+    49 |   }[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (0f7de089030a5135)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m46:43-44[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(46,44)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:46:34[39m[22m
+[1mTS2304: Cannot find name 'table_name'.
+    44 |             })
+    45 |           ) ?? null,
+  > 46 |         metadata: JSON.stringify(table_name: element.table_name),
+       |                                  ^^^^^^^^^^
+    47 |       };
+    48 |     }
+    49 |   }[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (53f133899450ec9f)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m46:43-44[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(46,44)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:46:34[39m[22m
+[1mTS2304: Cannot find name 'table_name'.
+    44 |             })
+    45 |           ) ?? null,
+  > 46 |         metadata: JSON.stringify(table_name: element.table_name),
+       |                                  ^^^^^^^^^^
+    47 |       };
+    48 |     }
+    49 |   }[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (53f133899450ec9f)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m46:43-44[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(46,44)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:46:34[39m[22m
+[1mTS2304: Cannot find name 'table_name'.
+    44 |             })
+    45 |           ) ?? null,
+  > 46 |         metadata: JSON.stringify(table_name: element.table_name),
+       |                                  ^^^^^^^^^^
+    47 |       };
+    48 |     }
+    49 |   }[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (53f133899450ec9f)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m46:43-44[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(46,44)
+      TS1005: ',' expected.[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:46:34[39m[22m
+[1mTS2304: Cannot find name 'table_name'.
+    44 |             })
+    45 |           ) ?? null,
+  > 46 |         metadata: JSON.stringify(table_name: element.table_name),
+       |                                  ^^^^^^^^^^
+    47 |       };
+    48 |     }
+    49 |   }[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (53f133899450ec9f)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m46:64-65[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(46,65)
+      TS1005: ',' expected.[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (1ac0d58b82004103)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (8335f8c117b7a2c1)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (8335f8c117b7a2c1)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (8335f8c117b7a2c1)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (8335f8c117b7a2c1)
+Debugger listening on ws://localhost:9229/47af2c00-6976-429e-80b6-06614b0cf156
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T14:38:07.827Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:43:15[39m[22m
+[1mTS2304: Cannot find name 'key'.
+    41 |               field.[1m[33mrequired[39m[22m[1m = false;
+    42 |               field.inputUI = 'input';
+  > 43 |               key
+       |               ^^^
+    44 |               return field;
+    45 |             })
+    46 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (ac9348ac595ebd2a)
+Debugger listening on ws://localhost:9229/87037fb4-49a1-46f9-8367-8b6bbb40388e
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T15:20:27.805Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:43:15[39m[22m
+[1mTS2304: Cannot find name 'k'.
+    41 |               field.[1m[33mrequired[39m[22m[1m = false;
+    42 |               field.inputUI = 'input';
+  > 43 |               k
+       |               ^
+    44 |               return field;
+    45 |             })
+    46 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (261ddf7a0b937623)
+Debugger listening on ws://localhost:9229/6a75e4c0-a572-4fba-a6b6-eb001f397656
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T15:20:29.664Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:14:15[39m[22m
+[1mTS2304: Cannot find name 's'.
+    12 |   public inputUI!: string; // input.check box, select, readio button.
+    13 |   public metadata!: object;
+  > 14 |   public key: s
+       |               ^
+    15 | }
+    16 |
+    17 | export class DynamicFormModel extends DynamicModel {[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:44:15[39m[22m
+[1mTS2304: Cannot find name 'k'.
+    42 |               field.[1m[33mrequired[39m[22m[1m = false;
+    43 |               field.inputUI = 'input';
+  > 44 |               k
+       |               ^
+    45 |               return field;
+    46 |             })
+    47 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (4118cc6c20398c8d)
+Debugger listening on ws://localhost:9229/d340261d-0b50-4864-b874-8c437aedea4c
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T15:20:35.824Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:44:15[39m[22m
+[1mTS2304: Cannot find name 'k'.
+    42 |               field.[1m[33mrequired[39m[22m[1m = false;
+    43 |               field.inputUI = 'input';
+  > 44 |               k
+       |               ^
+    45 |               return field;
+    46 |             })
+    47 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (4d769fd8075936a2)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:43:15[39m[22m
+[1mTS2304: Cannot find name 'k'.
+    41 |               field.[1m[33mrequired[39m[22m[1m = false;
+    42 |               field.inputUI = 'input';
+  > 43 |               k
+       |               ^
+    44 |               return field;
+    45 |             })
+    46 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (01633a3143a74b9d)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:43:21[39m[22m
+[1mTS2339: Property 'i' does not exist on type 'DynamicFormField'.
+    41 |               field.[1m[33mrequired[39m[22m[1m = false;
+    42 |               field.inputUI = 'input';
+  > 43 |               field.i
+       |                     ^
+    44 |               return field;
+    45 |             })
+    46 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (e2b6d9e3b7c6d055)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (284775c82e44683b)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m26:20[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (26:20)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                     field.inputUI = 'input';
+|                     field.fieldId =
+>                     ;
+|                     return field;
+|                 })) ?? null,[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m44:14-20[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(44,15)
+      TS1109: Expression expected.[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (3659a4e0657f17fd)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m26:20[39m[22m
+[1mModule parse [1m[31mfailed[39m[22m[1m: [1m[31mUnexpected[39m[22m[1m token (26:20)
+File was processed with these loaders:
+ * ../../node_modules/ts-loader/index.js
+You may need an additional loader to handle the result of these loaders.
+|                     field.inputUI = 'input';
+|                     field.fieldId =
+>                     ;
+|                     return field;
+|                 })) ?? null,[39m[22m
+
+[1m[31mERROR[39m[22m in [1m/usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts[39m[22m
+[1m./src/app/core/models/dynamic-form.model.ts[39m[22m [1m[32m44:14-20[39m[22m
+[1m[tsl] [1m[31mERROR[39m[22m[1m in /usr/src/api/apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts(44,15)
+      TS1109: Expression expected.[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (252a10bd40c06a64)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/org.core.api-generator/src/app/core/models/dynamic-form.model.ts:43:31[39m[22m
+[1mTS2304: Cannot find name 'ol'.
+    41 |               field.[1m[33mrequired[39m[22m[1m = false;
+    42 |               field.inputUI = 'input';
+  > 43 |               field.fieldId = ol.columnName;
+       |                               ^^
+    44 |               return field;
+    45 |             })
+    46 |           ) ?? null,[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (ac8d48388866f4f2)
+Debugger listening on ws://localhost:9229/640df090-ab74-439b-b088-88efe63c07bc
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T15:20:55.619Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ef62fd87bcc8142c)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ef62fd87bcc8142c)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ef62fd87bcc8142c)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ef62fd87bcc8142c)
+Build failed, waiting for changes to restart...
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 254 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (28341d330f5a1418)
+Debugger listening on ws://localhost:9229/963913bb-2587-411b-afb2-dec6b70ee273
+For help, see: https://nodejs.org/en/docs/inspector
+
+{"level":"WARN","timestamp":"2024-03-16T15:21:18.571Z","logger":"kafkajs","message":"KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\""}
+
+KafkaJSNonRetriableError: Failed to connect: brokers array is empty
+    at validateBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:53:15)
+    at getBrokers (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:83:5)
+    at Object.build (/usr/src/api/node_modules/kafkajs/src/cluster/connectionPoolBuilder.js:91:28)
+    at BrokerPool.createSeedBroker (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:70:61)
+    at BrokerPool.connect (/usr/src/api/node_modules/kafkajs/src/cluster/brokerPool.js:88:18)
+    at /usr/src/api/node_modules/kafkajs/src/cluster/index.js:107:36
+    at Cluster.<anonymous> (/usr/src/api/node_modules/kafkajs/src/utils/sharedPromiseTo.js:14:17)
+    at Cluster.connect (/usr/src/api/node_modules/kafkajs/src/cluster/index.js:146:32)
+    at Object.connect (/usr/src/api/node_modules/kafkajs/src/producer/index.js:219:21)
+    at new KafkaProducerService (/usr/src/api/dist/apps/org.core.api-generator/webpack:/src/app/infrastructure/proxy/kaffka-producer.service.ts:24:10) {
+  retriable: false,
+  helpUrl: undefined,
+  [cause]: undefined
+}
+
