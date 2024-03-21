@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+  AlertModule,
   BadgeModule,
   ButtonModule,
   CardModule,
@@ -52,6 +53,7 @@ export interface DynamicField {
     FormModule,
     ReactiveFormsModule,
     FormsModule,
+    AlertModule,
   ],
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -61,7 +63,9 @@ export class CreateComponent implements OnInit {
   @Input() formInfo!: any;
   @Output() onSummit = new EventEmitter<any>();
   dynamicForm!: FormGroup;
-  error!: string;
+
+  error: boolean = false;
+
   constructor(
     private httpClient: HttpClient,
     private fb: FormBuilder,
@@ -82,6 +86,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.error = false;
     const body: any[] = [this.dynamicForm.value];
 
     this.httpClient
@@ -97,7 +102,7 @@ export class CreateComponent implements OnInit {
           }
         },
         error: (err: any) => {
-          this.error = err;
+          this.error = true;
         },
       });
   }

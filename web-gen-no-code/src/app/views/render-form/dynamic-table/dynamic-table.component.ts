@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TableModule } from '@coreui/angular';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TableModule],
   selector: 'app-dynamic-table',
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.css'],

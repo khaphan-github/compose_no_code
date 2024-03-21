@@ -2,8 +2,16 @@
   <h5 cModalTitle>{{ formInfo.title }}</h5>
 </c-modal-header>
 <c-modal-body>
-  {{ this.error | json }}
-  <form cForm [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+  <c-alert color="danger" *ngIf="error"
+    >Đã có lỗi xảy ra khi lưu thông tin, vui lòng kiểm tra lại các trường dữ
+    liệu và thử lại</c-alert
+  >
+  <form
+    *ngIf="this.dynamicForm"
+    cForm
+    [formGroup]="dynamicForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div *ngFor="let field of this.formInfo.fields">
       <label *ngIf="field.fieldId !== 'id'" cLabel>{{
         field.displayText

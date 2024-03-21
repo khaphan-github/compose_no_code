@@ -70,6 +70,7 @@ export class AppListComponent implements OnInit {
             color: 'light',
           });
         }
+        this.apiGeneratedEvent.setState({ fetchData: true });
       },
 
       error: (err) => {
@@ -95,8 +96,7 @@ export class AppListComponent implements OnInit {
             desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`,
             color: 'light',
           });
-          this.route.navigate(['manage-api/apis']);
-          this.apiGeneratedEvent.setState({});
+          this.apiGeneratedEvent.setState({ fetchData: true });
         }
       },
 

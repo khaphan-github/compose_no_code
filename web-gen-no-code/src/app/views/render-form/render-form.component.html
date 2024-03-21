@@ -2,11 +2,11 @@
   <c-card-header>
     <div class="row d-flex justify-content-between">
       <div class="col-md-6">
-        <h4>{{ this.formData.title }}</h4>
+        <h4>{{ this.formData?.title }}</h4>
       </div>
       <div class="col-auto">
         <button cButton color="primary" (click)="onCreate()">
-          {{ this.formData.title }}
+          {{ this.formData?.title }}
         </button>
       </div>
     </div>
@@ -16,10 +16,16 @@
       [formInfo]="this.formData"
       (onSummit)="onSummit($event)"
     ></app-generate-form> -->
+
     <app-dynamic-table
+      *ngIf="this.tableData.length !== 0"
       [inputData]="this.tableData"
       (onClick)="update($event)"
     ></app-dynamic-table>
+
+    <c-alert color="danger" *ngIf="this.tableData.length == 0"
+      >Không tìm lấy dữ liệu</c-alert
+    >
 
     <c-pagination align="end" aria-label="Page navigation example">
       <li cPageItem [disabled]="this.currentPage == 1">

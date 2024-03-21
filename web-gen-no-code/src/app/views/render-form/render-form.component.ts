@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, Subject, switchMap } from 'rxjs';
+import { Observable, Subject, map, switchMap } from 'rxjs';
 import { apiPathBuilder } from 'src/app/core/config/http-client/helper';
 import { SResponse } from 'src/app/core/config/http-client/response-base';
 import { UpdateComponent } from './update/update.component';
@@ -29,40 +29,32 @@ export class RenderFormComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-    this.loadData$
+    this.r.params
       .pipe(
-        switchMap((value) => {
-          return this.getData(value.table_name, value.currentPage, 10, '');
+        switchMap((params: Params) => {
+          const formID = params['id'];
+          return this.httpClient
+            .post<SResponse<Array<any>>>(
+              apiPathBuilder('/_core_dynamic_form/query'),
+              {}
+            )
+            .pipe(
+              map((res) => {
+                this.formData = res.data.find((v) => v.id == formID);
+                return this.formData;
+              }),
+              switchMap((form) => {
+                console.log(form);
+                return this.getData(form.metadata.table_name, 1, 10, '');
+              })
+            );
         })
       )
       .subscribe({
         next: (value) => {
           this.tableData = value.data;
         },
-        error: (err) => {
-          this.tableData = [];
-        },
       });
-
-    this.r.paramMap.subscribe((params) => {
-      // TODO: Get form info by
-      const formID = params.get('id');
-      this.httpClient
-        .post<SResponse<Array<any>>>(
-          apiPathBuilder('/_core_dynamic_form/query'),
-          {}
-        )
-        .subscribe({
-          next: (value) => {
-            this.formData = value.data.find((v) => v.id == formID);
-            this.loadNewData();
-          },
-        });
-    });
-  }
-
-  onSummit($event: any) {
-    console.log($event);
   }
 
   getData(tableName: string, page: number, size: number, search: string) {
@@ -87,7 +79,9 @@ export class RenderFormComponent implements OnInit {
   };
 
   update($event: any) {
-    const modalRef = this.modal.open(UpdateComponent);
+    const modalRef = this.modal.open(UpdateComponent, {
+      size: 'lg',
+    });
     modalRef.componentInstance.item = $event;
     modalRef.componentInstance.tableName = this.formData.metadata.table_name;
     modalRef.componentInstance.formInfo = this.formData;
@@ -101,7 +95,9 @@ export class RenderFormComponent implements OnInit {
   }
 
   onCreate() {
-    const modalRef = this.modal.open(CreateComponent);
+    const modalRef = this.modal.open(CreateComponent, {
+      size: 'lg',
+    });
     modalRef.componentInstance.formInfo = this.formData;
     modalRef.closed.subscribe({
       next: (value) => {
@@ -113,9 +109,19 @@ export class RenderFormComponent implements OnInit {
   }
 
   loadNewData() {
-    this.loadData$.next({
-      table_name: this.formData.metadata.table_name,
-      currentPage: this.currentPage,
+    this.getData(
+      this.formData.metadata.table_name,
+      this.currentPage,
+      10,
+      ''
+    ).subscribe({
+      next: (value) => {
+        this.tableData = value.data;
+      },
+      error: (err) => {
+        console.log(err);
+        this.tableData = [];
+      },
     });
   }
 }

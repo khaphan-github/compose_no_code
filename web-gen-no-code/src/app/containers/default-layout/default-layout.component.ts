@@ -6,6 +6,7 @@ import { apiPathBuilder } from 'src/app/core/config/http-client/helper';
 import { navItems } from './_nav';
 import { ConnectedToServerEvent } from 'src/app/views/manage-auth/event/connected-to-server.event';
 import { ApiGenratedEvent } from 'src/app/event/api-genrated.event';
+import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,18 +17,10 @@ export class DefaultLayoutComponent implements OnInit {
   public navItems = navItems;
 
   private apiGeneratedEvent = inject(ApiGenratedEvent);
+  destroy$$ = new Subject<void>();
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.apiGeneratedEvent.getState().subscribe({
-      next: (value) => {
-        this.navItems = navItems;
-        this.fetchNavData();
-      },
-    });
-  }
-
-  fetchNavData(): void {
     this.httpClient
       .post<SResponse<Array<any>>>(
         apiPathBuilder('/_core_dynamic_menu/query'),
@@ -38,8 +31,29 @@ export class DefaultLayoutComponent implements OnInit {
           this.convertToNavData(value.data);
         },
       });
-  }
+    // Error when create this table slow. 2 giay lay 1 lam.
 
+    this.apiGeneratedEvent
+      .getState()
+      .pipe(
+        tap((va) => {
+          console.log(va);
+        }),
+        takeUntil(this.destroy$$),
+        delay(4000),
+        switchMap(() =>
+          this.httpClient.post<SResponse<Array<any>>>(
+            apiPathBuilder('/_core_dynamic_menu/query'),
+            {}
+          )
+        )
+      )
+      .subscribe({
+        next: (value) => {
+          this.convertToNavData(value.data);
+        },
+      });
+  }
   convertToNavData(jsonData: Array<any>) {
     const newNav = {
       name: 'Form',
@@ -58,6 +72,6 @@ export class DefaultLayoutComponent implements OnInit {
       }),
     };
 
-    this.navItems = [...this.navItems, newNav];
+    this.navItems = [...navItems, newNav];
   }
 }

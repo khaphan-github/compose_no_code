@@ -17,6 +17,7 @@ import {
   ModalModule,
   FormCheckComponent,
   FormModule,
+  AlertModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -40,6 +41,7 @@ import { SResponse } from 'src/app/core/config/http-client/response-base';
     FormModule,
     ReactiveFormsModule,
     FormModule,
+    AlertModule,
   ],
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -51,7 +53,7 @@ export class UpdateComponent implements OnInit {
   @Input() formInfo: any;
 
   dynamicForm!: FormGroup;
-
+  error: boolean = false;
   constructor(
     private httpClient: HttpClient,
     private fb: FormBuilder,
@@ -70,6 +72,8 @@ export class UpdateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.error = false;
+
     this.httpClient
       .put<SResponse<Array<any>>>(
         apiPathBuilder(
@@ -83,8 +87,9 @@ export class UpdateComponent implements OnInit {
             this.activeModel.close(true);
           }
         },
-        error: (err: any) => {
-          console.log(err);
+        error: (err) => {
+          console.error(err);
+          this.error = true;
         },
       });
   }
@@ -92,6 +97,8 @@ export class UpdateComponent implements OnInit {
   onClose() {}
 
   onDelete() {
+    this.error = false;
+
     this.httpClient
       .delete<SResponse<any>>(
         apiPathBuilder(`/${this.tableName}/${this.item.id}?id_column=id`)
@@ -100,6 +107,21 @@ export class UpdateComponent implements OnInit {
         next: (value) => {
           this.activeModel.close(true);
         },
+        error: (err) => {
+          console.error(err);
+          this.visible = false;
+          this.error = true;
+        },
       });
+  }
+
+  public visible = false;
+
+  toggleLiveDemo() {
+    this.visible = !this.visible;
+  }
+
+  handleLiveDemoChange(event: any) {
+    this.visible = event;
   }
 }
