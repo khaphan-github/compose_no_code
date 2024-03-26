@@ -68,78 +68,6 @@
   },
   "nxJsonPlugins": [],
   "projectFileMap": {
-    "org.core.api-generator-e2e": [
-      {
-        "file": "apps/org.core.api-generator-e2e/.eslintrc.json",
-        "hash": "2295303304320410742"
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/jest.config.ts",
-        "hash": "17233870900224654726"
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/project.json",
-        "hash": "5547710388184136318"
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/delete_a_resource.spec.ts",
-        "hash": "11930333944243809897",
-        "deps": [
-          "npm:axios"
-        ]
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/endpoint.spec.ts",
-        "hash": "5420211093265111836",
-        "deps": [
-          "npm:axios"
-        ]
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/insert_a_resource.spec.ts",
-        "hash": "11692082415315376046",
-        "deps": [
-          "npm:axios"
-        ]
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/query_resource.spec.ts",
-        "hash": "14749351478182273354",
-        "deps": [
-          "npm:axios"
-        ]
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/update_a_resource.spec.ts",
-        "hash": "16039857176228809702",
-        "deps": [
-          "npm:axios"
-        ]
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/support/global-setup.ts",
-        "hash": "14688124112638150235"
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/support/global-teardown.ts",
-        "hash": "10856769668484651558"
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/src/support/test-setup.ts",
-        "hash": "10984585515912236441",
-        "deps": [
-          "npm:axios"
-        ]
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/tsconfig.json",
-        "hash": "15443990093475294480"
-      },
-      {
-        "file": "apps/org.core.api-generator-e2e/tsconfig.spec.json",
-        "hash": "12853316614334170304"
-      }
-    ],
     "org.core.api-generator": [
       {
         "file": "apps/org.core.api-generator/.eslintrc.json",
@@ -1161,6 +1089,78 @@
         "deps": [
           "npm:@nx/webpack"
         ]
+      }
+    ],
+    "org.core.api-generator-e2e": [
+      {
+        "file": "apps/org.core.api-generator-e2e/.eslintrc.json",
+        "hash": "2295303304320410742"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/jest.config.ts",
+        "hash": "17233870900224654726"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/project.json",
+        "hash": "5547710388184136318"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/delete_a_resource.spec.ts",
+        "hash": "11930333944243809897",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/endpoint.spec.ts",
+        "hash": "5420211093265111836",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/insert_a_resource.spec.ts",
+        "hash": "11692082415315376046",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/query_resource.spec.ts",
+        "hash": "14749351478182273354",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/update_a_resource.spec.ts",
+        "hash": "16039857176228809702",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/support/global-setup.ts",
+        "hash": "14688124112638150235"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/support/global-teardown.ts",
+        "hash": "10856769668484651558"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/support/test-setup.ts",
+        "hash": "10984585515912236441",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/tsconfig.json",
+        "hash": "15443990093475294480"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/tsconfig.spec.json",
+        "hash": "12853316614334170304"
       }
     ]
   }
