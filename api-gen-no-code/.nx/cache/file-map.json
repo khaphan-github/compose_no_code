@@ -1,0 +1,1167 @@
+{
+  "version": "6.0",
+  "nxVersion": "16.8.1",
+  "deps": {
+    "@nestjs/axios": "^3.0.0",
+    "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^3.1.1",
+    "@nestjs/core": "^10.0.2",
+    "@nestjs/cqrs": "^10.2.5",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/passport": "^10.0.2",
+    "@nestjs/platform-express": "^10.0.2",
+    "@nestjs/serve-static": "^4.0.0",
+    "@nestjs/swagger": "^7.1.12",
+    "@nestjs/typeorm": "^10.0.0",
+    "axios": "^1.5.1",
+    "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "hbs": "^4.2.0",
+    "isolated-vm": "^4.6.0",
+    "json-sql-utility": "^1.1.4",
+    "kafkajs": "^2.2.4",
+    "lodash": "^4.17.21",
+    "mysql2": "^3.6.1",
+    "node-cache": "^5.1.2",
+    "node-sql-parser": "^4.11.0",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.0",
+    "slugify": "^1.6.6",
+    "tslib": "^2.3.0",
+    "typeorm": "^0.3.17",
+    "uuidv4": "^6.2.13",
+    "@nestjs/schematics": "^10.0.1",
+    "@nestjs/testing": "^10.0.2",
+    "@nx/angular": "^17.0.2",
+    "@nx/eslint-plugin": "16.8.1",
+    "@nx/jest": "16.8.1",
+    "@nx/js": "16.8.1",
+    "@nx/linter": "16.8.1",
+    "@nx/nest": "^16.8.1",
+    "@nx/node": "16.8.1",
+    "@nx/webpack": "16.8.1",
+    "@nx/workspace": "16.8.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.198",
+    "@types/node": "~18.7.1",
+    "@types/pg": "^8.10.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "~8.46.0",
+    "eslint-config-prettier": "8.1.0",
+    "jest": "^29.4.1",
+    "jest-environment-node": "^29.4.1",
+    "nx": "16.8.1",
+    "nx-cloud": "latest",
+    "prettier": "^2.6.2",
+    "ts-jest": "^29.1.0",
+    "ts-node": "10.9.1",
+    "typescript": "~5.1.3"
+  },
+  "pathMappings": {
+    "@org.api-generator/core": [
+      "apps/org.core.api-generator/src/app/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "projectFileMap": {
+    "org.core.api-generator-e2e": [
+      {
+        "file": "apps/org.core.api-generator-e2e/.eslintrc.json",
+        "hash": "2295303304320410742"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/jest.config.ts",
+        "hash": "17233870900224654726"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/project.json",
+        "hash": "5547710388184136318"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/delete_a_resource.spec.ts",
+        "hash": "11930333944243809897",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/endpoint.spec.ts",
+        "hash": "5420211093265111836",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/insert_a_resource.spec.ts",
+        "hash": "11692082415315376046",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/query_resource.spec.ts",
+        "hash": "14749351478182273354",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/org.core.api-generator/update_a_resource.spec.ts",
+        "hash": "16039857176228809702",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/support/global-setup.ts",
+        "hash": "14688124112638150235"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/support/global-teardown.ts",
+        "hash": "10856769668484651558"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/src/support/test-setup.ts",
+        "hash": "10984585515912236441",
+        "deps": [
+          "npm:axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/tsconfig.json",
+        "hash": "15443990093475294480"
+      },
+      {
+        "file": "apps/org.core.api-generator-e2e/tsconfig.spec.json",
+        "hash": "12853316614334170304"
+      }
+    ],
+    "org.core.api-generator": [
+      {
+        "file": "apps/org.core.api-generator/.eslintrc.json",
+        "hash": "2295303304320410742"
+      },
+      {
+        "file": "apps/org.core.api-generator/jest.config.ts",
+        "hash": "16301086564733773839"
+      },
+      {
+        "file": "apps/org.core.api-generator/project.json",
+        "hash": "5914873575400212416"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/app.controller.spec.ts",
+        "hash": "9499997688052526633",
+        "deps": [
+          "npm:@nestjs/testing"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/app.controller.ts",
+        "hash": "15100694374486985857",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:isolated-vm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/app.module.ts",
+        "hash": "1903762126121563006",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/config",
+          "npm:@nestjs/typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/app.service.ts",
+        "hash": "12672112980610327021",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:@nestjs/config"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/config/swagger.config.ts",
+        "hash": "6199309614588517895",
+        "deps": [
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/db.query.domain.ts",
+        "hash": "3919645105712435925",
+        "deps": [
+          "npm:lodash",
+          "npm:node-sql-parser"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/models/application.model.ts",
+        "hash": "9704955951551976050",
+        "deps": [
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/models/dynamic-menu.model.ts",
+        "hash": "1408022692869643134",
+        "deps": [
+          "npm:text-case"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/models/dynamic.abtract.model.ts",
+        "hash": "8242065295643152927"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/models/generated-api.model.ts",
+        "hash": "12897252810177185177"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/models/workspace.model.ts",
+        "hash": "13367783949349076110",
+        "deps": [
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/mssql/scripts/create-app-table.sql",
+        "hash": "3442270081438047560"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/mssql/scripts/create-generated-api-table.sql",
+        "hash": "15835889705072858074"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/mssql/scripts/create-workspace-table.sql",
+        "hash": "1896331305671589559"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/mysql/scripts/create-app-table.sql",
+        "hash": "3442270081438047560"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/mysql/scripts/create-generated-api-table.sql",
+        "hash": "15835889705072858074"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/mysql/scripts/create-workspace-table.sql",
+        "hash": "1896331305671589559"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/pgsql/pg.relationaldb.query-builder.ts",
+        "hash": "5685004037992038439",
+        "deps": [
+          "npm:lodash"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/variables/application-table.variables.ts",
+        "hash": "3247661598783418227"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/variables/generated-api-table.variables.ts",
+        "hash": "2518394825724649856"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/core/variables/workspace-table.variables.ts",
+        "hash": "5442749039225958715"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/infrastructure/env/app.env.config.ts",
+        "hash": "10181464872141687467",
+        "deps": [
+          "npm:@nestjs/config"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/infrastructure/env/postgres-typeorm.config.ts",
+        "hash": "12132532708580343359",
+        "deps": [
+          "npm:@nestjs/typeorm",
+          "npm:@nestjs/config"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/infrastructure/env/relational-db.config.ts",
+        "hash": "155440017986177661",
+        "deps": [
+          "npm:@nestjs/config"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/infrastructure/format/response.base.ts",
+        "hash": "32564590110183210",
+        "deps": [
+          "npm:uuid"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/infrastructure/format/status-code.ts",
+        "hash": "14519439815046476404"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/infrastructure/proxy/kaffka-producer.service.ts",
+        "hash": "7989959753052366468",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:kafkajs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/interated-app.module.ts",
+        "hash": "13875686969606641354",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/lib/utils/check-array-object-match-key.ts",
+        "hash": "349193608759835069"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/lib/utils/math-random.ts",
+        "hash": "8360787543065089672"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/auth.middleware.ts",
+        "hash": "14676502454525797741",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/authorization.middleware.ts",
+        "hash": "6852600165463411166",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/customize-input.middleware.ts",
+        "hash": "11888053764067969237",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/error.middleware.ts",
+        "hash": "2784643706424412301",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/middlewares.variable.ts",
+        "hash": "15859506457594425046"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/policy.middleware.ts",
+        "hash": "17604705768079520939",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/middlewares/validate-input.middleware.ts",
+        "hash": "18285033885110043864",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/README.md",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/auth.controller.ts",
+        "hash": "16662594851923229100",
+        "deps": [
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/auth.module.ts",
+        "hash": "13051140821779790790",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/jwt",
+          "npm:@nestjs/config",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/auth.service.ts",
+        "hash": "17858247860409001936",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/config",
+          "npm:@nestjs/jwt",
+          "npm:uuid",
+          "npm:node-cache",
+          "npm:express",
+          "npm:lodash"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/bscript.service.ts",
+        "hash": "4818069367194688513",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:bcrypt"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/dtos/auth.dto.ts",
+        "hash": "5356872235325392794",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/dtos/register.dto.ts",
+        "hash": "789093497438425880",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/errors/login..error.ts",
+        "hash": "684595433362663246"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/interfaces/register.interface.ts",
+        "hash": "17157212427161669703"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/interfaces/user-login.interface.ts",
+        "hash": "6567862987653361961"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/model/policy.model.ts",
+        "hash": "7191723499972965415",
+        "deps": [
+          "npm:express"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/auth/variables/cache.const.ts",
+        "hash": "15335731169905810372"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/commands/create..command.ts",
+        "hash": "1842909646727183810",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:lodash"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/commands/delete.command.ts",
+        "hash": "3105005776595180820",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/commands/index.ts",
+        "hash": "11638252257920446944"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/commands/update.command.ts",
+        "hash": "4999696310414935918",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/controller/crud.controller.ts",
+        "hash": "9066815542870886602",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/controller/query-filter.dto.ts",
+        "hash": "15412423959534437791",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/crud.module.ts",
+        "hash": "10739755576814910162",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:node-cache",
+          "npm:@nestjs/typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/can-not-delete-result.error.ts",
+        "hash": "15758704450167398351"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/can-not-execute-query.error.ts",
+        "hash": "14544887615393014007"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/can-not-get-app-info.error.ts",
+        "hash": "15402402147837797550"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/can-not-insert-new-record.errror.ts",
+        "hash": "17612411867900526142"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/can-not-update-result.error.ts",
+        "hash": "11286312500707071526"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/data-insert-not-have-have-key.error.ts",
+        "hash": "10772726850528232844"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/default.error.ts",
+        "hash": "2431473491675821318"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/empty-record-when-insert.error.ts",
+        "hash": "12020953662388411646"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/invalid-format.error.ts",
+        "hash": "11501260801654212950"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/invalid-table-colums.error.ts",
+        "hash": "17671800449849757684"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/errors/not-found-app-by-id.error.ts",
+        "hash": "6624305476105184331"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/events/executed-query.event.ts",
+        "hash": "1585350467155474494"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/handlers/executed-query.handler.ts",
+        "hash": "382928135199357363",
+        "deps": [
+          "npm:@nestjs/cqrs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/queries/get-app-info-by-app-id.query.ts",
+        "hash": "10816174204073295150",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/queries/get-by-conditions.query.ts",
+        "hash": "15784708495912477794",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/queries/get-schema-structure.query.ts",
+        "hash": "8007883943464709411",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:@nestjs/common",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/queries/index.ts",
+        "hash": "13260367350719848508"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/crud-pg/services/crud-pg.service.ts",
+        "hash": "8221111156090429743",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/create-apis-task.command.ts",
+        "hash": "2601304476906565490",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm",
+          "npm:node-sql-parser"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/create-app.command.ts",
+        "hash": "10205071889361621049",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/create-dynamic-menu-command.ts",
+        "hash": "3866498025741347521",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm",
+          "npm:node-sql-parser",
+          "npm:pg-format"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/create-workspace.command.ts",
+        "hash": "12757693145273877798",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/execute-script.command.ts",
+        "hash": "418445035619665967",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:@nestjs/common",
+          "npm:lodash",
+          "npm:node-sql-parser"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/index.ts",
+        "hash": "7902590048815748500"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/run-script-command.ts",
+        "hash": "835812947311035829",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/commands/update-app.command.ts",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/controllers/generator.controller.ts",
+        "hash": "16068803002548766571",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/dto/create-app.dto.ts",
+        "hash": "5737135093380834933",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/dto/create-workspace.dto.ts",
+        "hash": "17391478200860399700",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/dto/script.dto.ts",
+        "hash": "3477889434660192448",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/events/execute-sql-create-db-UI.ts",
+        "hash": "13175777549203537989",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:node-sql-parser",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/events/execute-sql-create-db.event.ts",
+        "hash": "16367392328628406952",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:node-sql-parser",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/events/generated-api.event.ts",
+        "hash": "7710415614339721618",
+        "deps": [
+          "npm:node-sql-parser",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/generator.module.ts",
+        "hash": "1690969589044229180",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:node-cache",
+          "npm:@nestjs/axios",
+          "npm:@nestjs/typeorm",
+          "npm:@nestjs/config"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get-apis-by-app-id.query.ts",
+        "hash": "2243772340639795000",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:@nestjs/common",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get-app-by-workspace-id.query.ts",
+        "hash": "6993850323682775393",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get-app-createdb-script.query.ts",
+        "hash": "12110827758223960140",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get-avaiable-table-by-appId.query.ts",
+        "hash": "10273365407628714293",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get-workspace-connection.query.ts",
+        "hash": "17276945781493875661",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:lodash",
+          "npm:node-cache",
+          "npm:@nestjs/config",
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get-workspace.query.ts",
+        "hash": "1652065184970045127",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/get_schema_info.query.ts",
+        "hash": "9511751306430409108",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/index.ts",
+        "hash": "4953503997413307092"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/sql-to-api/get-asserts-auth-script.query.ts",
+        "hash": "7513580390923668517",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/sql-to-api/get-asserts-core-table.query.ts",
+        "hash": "4248557626569167121",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/sql-to-api/get-asserts-sql-connections.query.ts",
+        "hash": "8407994896388257057",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:typeorm",
+          "npm:lodash",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/queries/sql-to-api/get-asserts-sql-script.query.ts",
+        "hash": "15326369299152617238",
+        "deps": [
+          "npm:@nestjs/cqrs",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/sagas/generate-api.saga.ts",
+        "hash": "14701289877710127324",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs",
+          "npm:rxjs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/services/generator.service.ts",
+        "hash": "7247992025231752300",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/services/sql-to-api.service.ts",
+        "hash": "16100836254609033628",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/generator/view-model/apis.view.model.ts",
+        "hash": "8185384619082293544",
+        "deps": [
+          "npm:lodash"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/controllers/custom-api.controller.ts",
+        "hash": "12449359212802734474",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/controllers/light-weight.controller.ts",
+        "hash": "15399819771374482595",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/controllers/transformer.controller.ts",
+        "hash": "14875387167678831520",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/dto/custom-join.dto.ts",
+        "hash": "12232213353080322385",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/dto/custom-query.dto.ts",
+        "hash": "7823487914462575103",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/dto/mll.query.dto.ts",
+        "hash": "12289292180838413445",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/interceptor/logging.interceptor.ts",
+        "hash": "15358384532677051264",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:rxjs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/interceptor/table-permission.interceptor.ts",
+        "hash": "13260088249955367054",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:http",
+          "npm:rxjs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/interfaces/query-builder.interface.ts",
+        "hash": "3990545495684384031"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/interfaces/table-info.interface.ts",
+        "hash": "5304950685453399968"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/light-weight.module.ts",
+        "hash": "8883104849151336503",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/typeorm",
+          "npm:node-cache",
+          "npm:@nestjs/axios"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/models/light-weight.model.ts",
+        "hash": "18298631033642254635",
+        "deps": [
+          "npm:json-sql-utility",
+          "npm:lodash"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/proxy/sql.transformer.proxy.ts",
+        "hash": "6032631123596096446",
+        "deps": [
+          "npm:@nestjs/axios",
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/repository/light-weight.repository.ts",
+        "hash": "16694081938608714083",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:typeorm"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/services/light-weight.service.ts",
+        "hash": "17205013649055623160",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:lodash"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/services/table-permission.service.ts",
+        "hash": "1395550331572072641",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:node-cache"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/services/transformer.service.ts",
+        "hash": "3471178178276130901",
+        "deps": [
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/light-weight-module/utils/extract-data-from-req.util.ts",
+        "hash": "16911976596507755530",
+        "deps": [
+          "npm:http"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/manage/controllers/manage-api.controller.ts",
+        "hash": "7582044979897056135",
+        "deps": [
+          "npm:@nestjs/common"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/manage/dto/connect-to-server.dto.ts",
+        "hash": "14628326136906763619",
+        "deps": [
+          "npm:@nestjs/swagger",
+          "npm:class-validator"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/manage/manage-api.module.ts",
+        "hash": "11551939401076095358",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/cqrs"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/manage/pg/queries/get-databse-info.query.ts",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/manage/services/manage-api.service.ts",
+        "hash": "2931940219288341201",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/config"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/shared/errors/can-not-init-data-source.error.ts",
+        "hash": "9815420195050863005"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/shared/errors/null-attribute.error.ts",
+        "hash": "1777266532884757403"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/shared/errors/workspace-connection-empty.error.ts",
+        "hash": "14838930516403316195"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/shared/file-reader.service.ts",
+        "hash": "9803674276753148406",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:fs",
+          "npm:path"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/shared/json.io.service.ts",
+        "hash": "10104141729023906201",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:fs",
+          "npm:path"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/src/app/modules/shared/variables/workspace.variable.ts",
+        "hash": "15435934472740142723"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/database.sql",
+        "hash": "13639411308970406722"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/private/scripts/pg/create-app-table.sql",
+        "hash": "3442270081438047560"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/private/scripts/pg/create-auth-tables.sql",
+        "hash": "17134489894814937787"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/private/scripts/pg/create-generated-api-table.sql",
+        "hash": "8526394403255543643"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/private/scripts/pg/create-workspace-table.sql",
+        "hash": "3078147570373058763"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/private/scripts/pg/init-core-table.sql",
+        "hash": "433594987270861629"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/assets/public/views/api-doc.hbs",
+        "hash": "10358667320164524320"
+      },
+      {
+        "file": "apps/org.core.api-generator/src/main.ts",
+        "hash": "13598816102930722684",
+        "deps": [
+          "npm:@nestjs/common",
+          "npm:@nestjs/core",
+          "npm:@nestjs/platform-express",
+          "npm:path",
+          "npm:@nestjs/swagger"
+        ]
+      },
+      {
+        "file": "apps/org.core.api-generator/tsconfig.app.json",
+        "hash": "12849182667216748965"
+      },
+      {
+        "file": "apps/org.core.api-generator/tsconfig.json",
+        "hash": "3490524966360018312"
+      },
+      {
+        "file": "apps/org.core.api-generator/tsconfig.spec.json",
+        "hash": "11550347367511341917"
+      },
+      {
+        "file": "apps/org.core.api-generator/webpack.config.js",
+        "hash": "12759027257167031159",
+        "deps": [
+          "npm:@nx/webpack"
+        ]
+      }
+    ]
+  }
+}
