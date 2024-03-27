@@ -1,0 +1,47 @@
+<c-modal-header>
+  <h5 cModalTitle>{{ tableStructure.tableName }}</h5>
+</c-modal-header>
+<c-modal-body>
+  <form>
+    <div *ngFor="let field of tableStructure.columns">
+      <ng-container *ngIf="field.field === 'id' && tableData[0].id === 1">
+        <label>{{ field.label }}</label>
+        <div>
+          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
+        </div>
+      </ng-container>
+      <ng-container *ngIf="field.field === 'name' && tableData[0].id === 1">
+        <label>{{ field.label }}</label>
+        <div>
+          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
+        </div>
+      </ng-container>
+      <ng-container *ngIf="field.field === 'email' && tableData[0].id === 1">
+        <label>{{ field.label }}</label>
+        <div>
+          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
+        </div>
+      </ng-container>
+      <ng-container *ngIf="field.field === 'address' && tableData[0].id === 1">
+        <label>{{ field.label }}</label>
+        <div>
+          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
+        </div>
+      </ng-container>
+      <ng-container *ngIf="field.field !== 'id' && field.field !== 'name' && field.field !== 'email' && field.field !== 'address'">
+        <label>{{ field.label }}</label>
+        <div>
+          <input [name]="field.field" type="text" class="form-control">
+        </div>
+      </ng-container>
+    </div>
+    <br>
+     
+  </form>
+</c-modal-body>
+<c-modal-footer>
+  <button cButton color="secondary"  >Thoát</button>
+  <button cButton color="primary" type="submit"  >
+    Lưu thay đổi
+  </button>
+</c-modal-footer>

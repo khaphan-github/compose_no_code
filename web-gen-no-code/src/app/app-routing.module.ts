@@ -25,12 +25,23 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
       },
       {
         path: 'manage-api',
         loadChildren: () =>
-          import('./views/manage-auth/manage-auth.module').then((m) => m.ManageAuthModule)
+          import('./views/manage-auth/manage-auth.module').then(
+            (m) => m.ManageAuthModule
+          ),
+      },
+      {
+        path: 'form',
+        loadChildren: () =>
+          import('./views/render-form/render-form.module').then(
+            (m) => m.RenderFormModule
+          ),
       },
     ]
   },
