@@ -4,8 +4,9 @@ import { Observable, map } from 'rxjs';
 import { TaskGenerateAPIsCommand } from '../commands/create-apis-task.command';
 import { ExecutedSQLScriptEvent } from '../events/execute-sql-create-db.event';
 import { ExecutedSQLByUIEvent } from '../events/execute-sql-create-db-UI';
-import { GeneratedApiEvent } from '../events/generated-api.event';
 import { CreateDynamicMenuCommand } from '../commands/create-dynamic-menu-command';
+import { GeneratedApiEvent } from '../events/generated-api.event';
+import { CreateDynamicFormCommand } from '../commands/create-dynamic-form.command';
 
 @Injectable()
 export class GenerateAPISagas {
@@ -16,7 +17,7 @@ export class GenerateAPISagas {
   }
 
   @Saga()
-  executeSQLSCriptCreateDB = (
+  executeSQLSCriptCreateDBThenGenerateAPI = (
     events$: Observable<unknown>
   ): Observable<ICommand> => {
     return events$.pipe(
@@ -29,6 +30,19 @@ export class GenerateAPISagas {
           event.appId,
           event.tableInfo
         );
+      })
+    );
+  };
+
+  @Saga()
+  executeSQLSCriptCreateDBThenCreateDynamicForm = (
+    events$: Observable<unknown>
+  ): Observable<ICommand> => {
+    return events$.pipe(
+      ofType(GeneratedApiEvent),
+      map((event) => {
+        this.logger.log(`executeSQLSCriptCreateDBThenCreateDynamicTable`);
+        return new CreateDynamicFormCommand(event.args, event.apis);
       })
     );
   };
