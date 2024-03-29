@@ -14,7 +14,18 @@
       </div>
     </div>
   </c-card-header>
- 
+  <table cTable hover>
+    <thead>
+      <tr>
+        <th *ngFor="let column of tableStructure.columns">{{ column.label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData">
+        <td *ngFor="let column of tableStructure.columns">{{ row[column.field] }}</td>
+      </tr>
+    </tbody>
+  </table>
 </c-card>
 
 <!-- <app-table></app-table> -->
