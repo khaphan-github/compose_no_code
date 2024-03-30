@@ -53,7 +53,7 @@ const UI_MODULES = [
 ];
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: RenderFormComponent,
   },
 ];
