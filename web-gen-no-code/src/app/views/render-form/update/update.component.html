@@ -1,47 +1,51 @@
+<c-modal
+  id="liveDemoModal"
+  [visible]="visible"
+  (visibleChange)="handleLiveDemoChange($event)"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Xác nhận xóa</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body
+    >Dữ liệu sau khi xóa sẽ không thể khôi phục, bạn có chắt chắn muốn
+    xóa</c-modal-body
+  >
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">Thoát</button>
+    <button cButton color="primary" (click)="this.onDelete()">OK</button>
+  </c-modal-footer>
+</c-modal>
+
 <c-modal-header>
-  <h5 cModalTitle>{{ tableStructure.tableName }}</h5>
+  <h5 cModalTitle>Cập nhật</h5>
 </c-modal-header>
 <c-modal-body>
-  <form>
-    <div *ngFor="let field of tableStructure.columns">
-      <ng-container *ngIf="field.field === 'id' && tableData[0].id === 1">
-        <label>{{ field.label }}</label>
-        <div>
-          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
-        </div>
-      </ng-container>
-      <ng-container *ngIf="field.field === 'name' && tableData[0].id === 1">
-        <label>{{ field.label }}</label>
-        <div>
-          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
-        </div>
-      </ng-container>
-      <ng-container *ngIf="field.field === 'email' && tableData[0].id === 1">
-        <label>{{ field.label }}</label>
-        <div>
-          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
-        </div>
-      </ng-container>
-      <ng-container *ngIf="field.field === 'address' && tableData[0].id === 1">
-        <label>{{ field.label }}</label>
-        <div>
-          <input [name]="field.field" type="text" class="form-control" [value]="tableData[0][field.field]">
-        </div>
-      </ng-container>
-      <ng-container *ngIf="field.field !== 'id' && field.field !== 'name' && field.field !== 'email' && field.field !== 'address'">
-        <label>{{ field.label }}</label>
-        <div>
-          <input [name]="field.field" type="text" class="form-control">
-        </div>
-      </ng-container>
+  <c-alert color="danger" *ngIf="error">Đã có lỗi xảy ra khi lưu thông tin, vui lòng kiểm tra lại các trường dữ liệu và thử lại</c-alert>
+  <form cForm [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of this.formInfo.fields">
+      <label  cLabel>{{
+        field.displayText
+      }}</label>
+      <input
+        cFormControl
+        [type]="field.inputUI"
+        [placeholder]="field.displayText"
+        [formControlName]="field.fieldId"
+        
+      />
     </div>
-    <br>
-     
   </form>
 </c-modal-body>
 <c-modal-footer>
-  <button cButton color="secondary"  >Thoát</button>
-  <button cButton color="primary" type="submit"  >
+  <button cButton color="secondary" (click)="this.activeModel.close(false)">
+    Thoát
+  </button>
+  <button cButton color="warning" (click)="toggleLiveDemo(); this.error = false">
+    Xóa vĩnh viễn
+  </button>
+
+  <button cButton color="primary" type="submit" (click)="this.onSubmit()">
     Lưu thay đổi
   </button>
 </c-modal-footer>

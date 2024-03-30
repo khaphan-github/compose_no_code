@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import {
+  FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import {
   CardModule,
@@ -17,6 +20,9 @@ import {
   AlertModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { apiPathBuilder } from 'src/app/core/config/http-client/helper';
+import { SResponse } from 'src/app/core/config/http-client/response-base';
  
 
 @Component({
@@ -42,31 +48,80 @@ import { IconModule } from '@coreui/icons-angular';
   styleUrls: ['./update.component.css'],
 })
 export class UpdateComponent implements OnInit {
-  inputRequired!: FormGroup;
-  
-   
-   
-  @Input() item = '';
-  ngOnInit() {}
+  @Input() item: any;
+  @Input() tableName!: string;
+  @Input() formInfo: any;
 
-  getValues(val: any) {
-    console.log(val);
+  dynamicForm!: FormGroup;
+  error: boolean = false;
+  constructor(
+    private httpClient: HttpClient,
+    private fb: FormBuilder,
+    public activeModel: NgbActiveModal
+  ) {}
+
+  ngOnInit() {
+    const formControls: any = {};
+    this.formInfo.fields.forEach((field: any) => {
+      formControls[field.fieldId] = [
+        this.item[field.fieldId],
+        field.required ? Validators.required : null,
+      ];
+    });
+    this.dynamicForm = this.fb.group(formControls);
   }
-  tableStructure = {
-    tableName:"Account",
-    columns: [
-      { field: 'id', label: 'ID' },
-      { field: 'name', label: 'Name' },
-      { field: 'email', label: 'Email' },
-      { field: 'address', label: 'Address' }
 
-    ]
-  };
+  onSubmit() {
+    this.error = false;
 
-  tableData = [
-    { id: 1, name: 'loc1', email: 'loc1@example.com' ,address:"home1"},
-    { id: 2, name: 'loc2', email: 'loc2@example.com' ,address:"home2"},
-    { id: 3, name: 'loc3', email: 'loc3@example.com' ,address:"home3"},
-    
-  ];
+    this.httpClient
+      .put<SResponse<Array<any>>>(
+        apiPathBuilder(
+          `/${this.formInfo.metadata.table_name}/${this.item.id}?id_column=id`
+        ),
+        this.dynamicForm.value
+      )
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            this.activeModel.close();
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.error = true;
+        },
+      });
+  }
+
+  onClose() {}
+
+  onDelete() {
+    this.error = false;
+
+    this.httpClient
+      .delete<SResponse<any>>(
+        apiPathBuilder(`/${this.tableName}/${this.item.id}?id_column=id`)
+      )
+      .subscribe({
+        next: (value) => {
+          this.activeModel.close(true);
+        },
+        error: (err) => {
+          console.error(err);
+          this.visible = false;
+          this.error = true;
+        },
+      });
+  }
+
+  public visible = false;
+
+  toggleLiveDemo() {
+    this.visible = !this.visible;
+  }
+
+  handleLiveDemoChange(event: any) {
+    this.visible = event;
+  }
 }

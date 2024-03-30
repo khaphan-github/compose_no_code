@@ -34,14 +34,7 @@ const routes: Routes = [
           import('./views/manage-auth/manage-auth.module').then(
             (m) => m.ManageAuthModule
           ),
-      },
-      {
-        path: 'form',
-        loadChildren: () =>
-          import('./views/render-form/render-form.module').then(
-            (m) => m.RenderFormModule
-          ),
-      },
+      } 
     ]
   },
   {
