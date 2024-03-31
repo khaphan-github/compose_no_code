@@ -41,7 +41,7 @@ const routes: Routes = [
           import('./views/render-form/render-form.module').then(
             (m) => m.RenderFormModule
           ),
-      },
+      }, 
     ]
   },
   {

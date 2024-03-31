@@ -22,6 +22,7 @@ import { InputFieldComponent } from '../manage-auth/components/custom-api/input-
 import { NotFoundComponent } from '../shared/not-found/not-found.component';
 import { WaitingToLoadComponent } from '../shared/waiting-to-load/waiting-to-load.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
  
 const UI_MODULES = [
   IconModule,
@@ -51,7 +52,7 @@ const UI_MODULES = [
 ];
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: RenderFormComponent,
   },
 ];
@@ -61,12 +62,12 @@ export const RenderFormRoutes = RouterModule.forChild(routes);
 @NgModule({
   imports: [
     CommonModule,
+    DynamicTableComponent,
      ...UI_MODULES,
     RenderFormRoutes,
   ],
   declarations: [
     RenderFormComponent,
- 
   ],
 })
 export class RenderFormModule {}

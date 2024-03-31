@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateComponent } from './update/update.component';
 import { CreateComponent } from './create/create.component';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subject, switchMap, map } from 'rxjs';
+import { apiPathBuilder } from 'src/app/core/config/http-client/helper';
+import { SResponse } from 'src/app/core/config/http-client/response-base';
 interface TableRow {
   id: number;
   name: string;
@@ -20,40 +25,107 @@ interface TableColumn {
 })
 export class RenderFormComponent implements OnInit {
   constructor(
+    private r: ActivatedRoute,
+    private httpClient: HttpClient,
     private modal: NgbModal
   ) {}
 
+  public formData: any;
+  public tableData: any[] = [];
+
+  public currentPage = 1;
+
+  loadData$ = new Subject<any>();
+  loading = false;
+
   ngOnInit() {
-     
+    this.r.params
+      .pipe(
+        switchMap((params: Params) => {
+          const formID = params['id'];
+          return this.httpClient
+            .post<SResponse<Array<any>>>(
+              apiPathBuilder('/_core_dynamic_form/query'),
+              {}
+            )
+            .pipe(
+              map((res) => {
+                this.formData = res.data.find((v) => v.id == formID);
+                return this.formData;
+              }),
+              switchMap((form) => {
+                console.log(form);
+                return this.getData(form.metadata.table_name, 1, 10, '');
+              })
+            );
+        })
+      )
+      .subscribe({
+        next: (value) => {
+          this.tableData = value.data;
+        },
+      });
   }
- 
-  update( ) {
+
+  getData(tableName: string, page: number, size: number, search: string) {
+    return this.httpClient.post<SResponse<Array<any>>>(
+      apiPathBuilder(`/${tableName}/query?page=${page}&size=${size}`),
+      {}
+    );
+  }
+
+  changePage = (isNext: boolean) => {
+    if (isNext) {
+      this.currentPage += 1;
+    } else {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      } else {
+        this.currentPage = 1;
+      }
+    }
+
+    this.loadNewData();
+  };
+
+  update($event: any) {
     const modalRef = this.modal.open(UpdateComponent, {
       size: 'lg',
     });
-     
+    modalRef.componentInstance.item = $event;
+    modalRef.componentInstance.tableName = this.formData.metadata.table_name;
+    modalRef.componentInstance.formInfo = this.formData;
+ 
   }
 
   onCreate() {
     const modalRef = this.modal.open(CreateComponent, {
       size: 'lg',
     });
-  
+    modalRef.componentInstance.formInfo = this.formData;
+    modalRef.closed.subscribe({
+      next: (value) => {
+        if (value) {
+          this.loadNewData();
+        }
+      },
+    });
   }
-  tableStructure = {
-    tableName: "Account",
-    columns: [
-      { field: 'id', label: 'ID' },
-      { field: 'name', label: 'Name' },
-      { field: 'email', label: 'Email' },
-      { field: 'address', label: 'Address' }
-    ] as TableColumn[]
-  };
 
-  tableData: TableRow[] = [
-    { id: 1, name: 'loc1', email: 'loc1@gmail.com', address: "home1" },
-    { id: 2, name: 'loc2', email: 'loc2@gmail.com', address: "home2" },
-    { id: 3, name: 'loc3', email: 'loc3@gmail.com', address: "home3" }
-  ];
-  
+  loadNewData() {
+    this.getData(
+      this.formData.metadata.table_name,
+      this.currentPage,
+      10,
+      ''
+    ).subscribe({
+      next: (value) => {
+        this.tableData = value.data;
+      },
+      error: (err) => {
+        console.log(err);
+        this.tableData = [];
+      },
+    });
+  }
 }

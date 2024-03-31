@@ -23,23 +23,23 @@ export class SQLToAPIService implements OnApplicationBootstrap {
 
   async onApplicationBootstrap() {
     // Init all nessarray tableL
-    // const [connection, script] = await Promise.all([
-    //   this.queryBus.execute(new GetWorkspaceConnectionQuery()),
-    //   this.queryBus.execute(new GetInitCoreTableScriptQuery()),
-    // ]);
-    // const executeResult = await this.commandBus.execute(
-    //   new ExecuteScriptCommand(
-    //     connection,
-    //     WORKSPACE_VARIABLE.APP_ID,
-    //     WORKSPACE_VARIABLE.OWNER_ID,
-    //     { script: script }
-    //   )
-    // );
+    const [connection, script] = await Promise.all([
+      this.queryBus.execute(new GetWorkspaceConnectionQuery()),
+      this.queryBus.execute(new GetInitCoreTableScriptQuery()),
+    ]);
+    const executeResult = await this.commandBus.execute(
+      new ExecuteScriptCommand(
+        connection,
+        WORKSPACE_VARIABLE.APP_ID,
+        WORKSPACE_VARIABLE.OWNER_ID,
+        { script: script }
+      )
+    );
 
-    // console.log(executeResult);
-    // this.logger.debug(`Init core table success!!!`);
+    console.log(executeResult);
+    this.logger.debug(`Init core table success!!!`);
 
-    // this.executeScriptFromSqlFile();
+    this.executeScriptFromSqlFile();
   }
 
   //#region api to sql

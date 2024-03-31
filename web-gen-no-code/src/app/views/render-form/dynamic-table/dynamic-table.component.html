@@ -1,0 +1,25 @@
+<table
+  class="table"
+  cTable
+  [hover]="true"
+  [responsive]="true"
+  [striped]="true"
+  align="middle"
+  cTable
+  class="mb-0 border"
+>
+  <thead cTableColor="light">
+    <tr>
+      <th *ngFor="let key of getObjectKeys(inputData[0])">{{ key }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      style="cursor: pointer"
+      *ngFor="let item of inputData"
+      (click)="this.onClick.emit(item)"
+    >
+      <td *ngFor="let key of getObjectKeys(item)">{{ item[key] }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -18,7 +18,7 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  NgForm,
+ 
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -60,29 +60,66 @@ export interface DynamicField {
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent implements OnInit {
-  currentItem = 'Television';
-  inputRequired!: FormGroup;
-  jsonData = {
-    
-    title: 'Generate',
-    fields: [
-       { inputUi: 'input', datatype: '', name:"Id", required: false, maxlength: 256, minlength: 0, displaytext: " ID" },
-      { inputUi: 'input', datatype: '', name:"name",required: false, maxlength: 256, minlength: 0, displaytext: "Name" },
-      { inputUi: 'input', datatype: '', name:"Email",required: false, maxlength: 256, minlength: 0, displaytext: "Email" },
-      { inputUi: 'input', datatype: '', name:"Address",required: false, maxlength: 256, minlength: 0, displaytext: "Address" },
-  
-    ]
-  };
+  @Input() formInfo!: any;
+  @Output() onSummit = new EventEmitter<any>();
+  dynamicForm!: FormGroup;
+
+  error: boolean = false;
+
+  constructor(
+    private httpClient: HttpClient,
+    private fb: FormBuilder,
+    private activeModel: NgbActiveModal
+  ) {}
 
   ngOnInit() {
- 
+    const formControls: any = {};
+    this.formInfo.fields.forEach((field: any) => {
+      if (field.fieldId !== 'id') {
+        formControls[field.fieldId] = [
+          '',
+          field.required ? Validators.required : null,
+        ];
+      }
+    });
+    this.dynamicForm = this.fb.group(formControls);
   }
-   
-  getValues(val: any){
-    console.log(val)
+
+  onSubmit() {
+    this.error = false;
+    const body: any[] = [this.dynamicForm.value];
+
+    this.httpClient
+      .post<SResponse<Array<any>>>(
+        apiPathBuilder(`/${this.formInfo.metadata.table_name}`),
+        body
+      )
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            // Close then load list
+            this.activeModel.close(true);
+          }
+        },
+        error: (err: any) => {
+          this.error = true;
+        },
+      });
   }
+
+  onClose() {
+    this.activeModel.close();
+  }
+
+  // OonSUmit
+  getValues(val: any) {
+    this.onSummit.emit(val);
+  }
+
   getErrorMessage(fieldName: string): string {
-    const field = this.jsonData.fields.find((f) => f.displaytext === fieldName);
+    const field = this.formInfo.fields.find(
+      (f: any) => f.displaytext === fieldName
+    );
     if (field && field.required) {
       return `${field.displaytext} là trường bắt buộc`;
     }
