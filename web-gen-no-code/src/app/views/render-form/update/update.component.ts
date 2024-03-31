@@ -84,7 +84,7 @@ export class UpdateComponent implements OnInit {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.activeModel.close();
+            this.activeModel.close(true);
           }
         },
         error: (err) => {

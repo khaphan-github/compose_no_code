@@ -108,7 +108,7 @@ export class CreateComponent implements OnInit {
   }
 
   onClose() {
-    this.activeModel.close();
+    this.activeModel.close(false);
   }
 
   // OonSUmit
