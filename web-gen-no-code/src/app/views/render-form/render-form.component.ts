@@ -95,7 +95,13 @@ export class RenderFormComponent implements OnInit {
     modalRef.componentInstance.item = $event;
     modalRef.componentInstance.tableName = this.formData.metadata.table_name;
     modalRef.componentInstance.formInfo = this.formData;
- 
+    modalRef.closed.subscribe({
+      next: (value) => {
+        if (value) {
+          this.loadNewData();
+        }
+      },
+    });
   }
 
   onCreate() {
