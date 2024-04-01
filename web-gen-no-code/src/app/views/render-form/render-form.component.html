@@ -1,4 +1,4 @@
-<c-card>
+<c-card *ngIf="this.formData">
   <c-card-header>
     <div class="row d-flex justify-content-between">
       <div class="col-md-6">
@@ -27,15 +27,16 @@
       >Không tìm lấy dữ liệu</c-alert
     >
 
-    <c-pagination align="end" aria-label="Page navigation example">
+    <br />
+    <c-pagination align="center" aria-label="Page navigation example">
       <li cPageItem [disabled]="this.currentPage == 1">
-        <a cPageLink (click)="this.changePage(false)"><<<</a>
+        <a cPageLink (click)="this.changePage(false)"><<</a>
       </li>
       <li cPageItem>
         <a cPageLink>{{ this.currentPage }}</a>
       </li>
       <li cPageItem [disabled]="this.tableData.length == 0">
-        <a cPageLink (click)="this.changePage(true)">>>></a>
+        <a cPageLink (click)="this.changePage(true)">>></a>
       </li>
     </c-pagination>
 
@@ -48,3 +49,9 @@
 </c-card>
 
 <!-- <app-table></app-table> -->
+<c-card *ngIf="!this.formData">
+  <button cButton color="primary">
+    <svg cIcon class="text-high" name="cilSave"></svg>
+    Làm mới dữ liệu
+  </button>
+</c-card>

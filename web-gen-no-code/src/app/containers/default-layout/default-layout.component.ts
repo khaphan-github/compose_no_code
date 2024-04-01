@@ -7,6 +7,7 @@ import { navItems } from './_nav';
 import { ConnectedToServerEvent } from 'src/app/views/manage-auth/event/connected-to-server.event';
 import { ApiGenratedEvent } from 'src/event/api-genrated.event';
 import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs';
+import { CustomToastService } from 'src/app/views/shared/custom-toart/custom-toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class DefaultLayoutComponent implements OnInit {
 
   private apiGeneratedEvent = inject(ApiGenratedEvent);
   destroy$$ = new Subject<void>();
-  constructor(private httpClient: HttpClient) {}
+  private notify = inject(CustomToastService)
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.httpClient
@@ -66,7 +68,7 @@ export class DefaultLayoutComponent implements OnInit {
       children: jsonData.map((item: any) => {
         return {
           name: item.displayname,
-          url: 'form/' + item.id,
+          url: 'form/' + item.feroute,
           iconComponent: { name: item.icon },
         };
       }),
