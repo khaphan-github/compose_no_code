@@ -53,8 +53,6 @@ export class DefaultLayoutComponent implements OnInit {
       .subscribe({
         next: (value) => {
           this.convertToNavData(value.data);
-          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Đã tạo bảng dữ liệu thành công - bạn có thể truy cập menu form để thao tác`, color: 'light' });
-
         },
       });
   }
