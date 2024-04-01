@@ -175,13 +175,13 @@ export class RelationalDBQueryBuilder {
     // select ['id', 'name', 'password']
     // returning: ['id', 'name', 'description']
     /// result : ['id', 'name'];
-    let selectedQuery =  selected?.join(', ') ?? '*';
+    let selectedQuery = selected?.join(', ') ?? '*';
     let columnsNeedToSelect: string[] = [];
     if (selected?.length !== 0 && returning?.length !== 0) {
       columnsNeedToSelect = selected?.filter(item => returning?.includes(item)) ?? [];
     }
 
-    if(columnsNeedToSelect?.length !== 0) {
+    if (columnsNeedToSelect?.length !== 0) {
       selectedQuery = columnsNeedToSelect?.join(',');
     }
 
@@ -257,7 +257,7 @@ export class RelationalDBQueryBuilder {
         throw new Error(`Size should be greater than 0`);
       }
       const sizeQuery = size ? ` LIMIT ${+size} ` : '';
-      const pageQuery = page ? ` OFFSET ${+page} ` : '';
+      const pageQuery = page ? ` OFFSET ${page ? (+page - 1) * size : 0} ` : '';
 
       const queryString = `
         ${defaultQuery}

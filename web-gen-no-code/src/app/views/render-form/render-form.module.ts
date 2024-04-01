@@ -23,7 +23,8 @@ import { NotFoundComponent } from '../shared/not-found/not-found.component';
 import { WaitingToLoadComponent } from '../shared/waiting-to-load/waiting-to-load.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
- 
+import { CopyToClipboardDirective } from './directive/copy.directive';
+
 const UI_MODULES = [
   IconModule,
   CardModule,
@@ -65,6 +66,7 @@ export const RenderFormRoutes = RouterModule.forChild(routes);
     DynamicTableComponent,
      ...UI_MODULES,
     RenderFormRoutes,
+    CopyToClipboardDirective,
   ],
   declarations: [
     RenderFormComponent,
