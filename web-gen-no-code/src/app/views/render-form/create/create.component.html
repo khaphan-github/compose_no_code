@@ -13,15 +13,15 @@
     (ngSubmit)="onSubmit()"
   >
     <div *ngFor="let field of this.formInfo.fields">
-      <label   cLabel>{{
+      <label *ngIf="field.fieldId !== 'id'" cLabel>{{
         field.displayText
       }}</label>
       <input
+        *ngIf="field.fieldId !== 'id'"
         cFormControl
         [type]="field.inputUI"
         [placeholder]="field.displayText"
         [formControlName]="field.fieldId"
-         
       />
     </div>
   </form>

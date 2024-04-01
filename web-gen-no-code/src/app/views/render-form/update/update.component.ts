@@ -23,7 +23,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { apiPathBuilder } from 'src/app/core/config/http-client/helper';
 import { SResponse } from 'src/app/core/config/http-client/response-base';
- 
+
 
 @Component({
   standalone: true,
@@ -58,16 +58,23 @@ export class UpdateComponent implements OnInit {
     private httpClient: HttpClient,
     private fb: FormBuilder,
     public activeModel: NgbActiveModal
-  ) {}
+  ) { }
 
   ngOnInit() {
-    const formControls: any = {};
+    const formControls: { [key: string]: any } = {};
+
     this.formInfo.fields.forEach((field: any) => {
-      formControls[field.fieldId] = [
-        this.item[field.fieldId],
-        field.required ? Validators.required : null,
-      ];
+      // Check if the fieldId is 'id'
+      const disabled = field.fieldId === 'id';
+
+      // Set up validators
+      const validators = field.required ? [Validators.required] : null;
+
+      // Set up the form control with the appropriate initial value and validators
+      formControls[field.fieldId] = [{ value: this.item[field.fieldId], disabled }, validators];
     });
+
+    // Create the dynamic form using the form controls
     this.dynamicForm = this.fb.group(formControls);
   }
 
@@ -94,7 +101,7 @@ export class UpdateComponent implements OnInit {
       });
   }
 
-  onClose() {}
+  onClose() { }
 
   onDelete() {
     this.error = false;
