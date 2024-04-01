@@ -15,7 +15,7 @@ export class CreateDynamicMenuCommand implements ICommand {
       tableInfo: AST | AST[];
     },
     public readonly apis: Array<any>
-  ) {}
+  ) { }
 }
 
 @CommandHandler(CreateDynamicMenuCommand)
@@ -44,7 +44,7 @@ export class CreateDynamicMenuCommandHandler
 
       const nestedArray = new Array<any>();
       for (let index = 0; index < apis.length; index++) {
-        if (apis[index].action == ApiAction.INSERT)
+        if (apis[index].action == ApiAction.INSERT) {
           nestedArray.push([
             ...Object.values(
               new DynamicMenuModel().convertFromGeneratedAPI(
@@ -52,6 +52,7 @@ export class CreateDynamicMenuCommandHandler
               )
             ),
           ]);
+        }
       }
 
       const queryString = `

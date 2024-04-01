@@ -1,4 +1,4 @@
-<c-card>
+<c-card *ngIf="this.formData">
   <c-card-header>
     <div class="row d-flex justify-content-between">
       <div class="col-md-6">
@@ -48,3 +48,9 @@
 </c-card>
 
 <!-- <app-table></app-table> -->
+<c-card *ngIf="!this.formData">
+  <button cButton color="primary">
+    <svg cIcon class="text-high" name="cilSave"></svg>
+    Làm mới dữ liệu
+  </button>
+</c-card>

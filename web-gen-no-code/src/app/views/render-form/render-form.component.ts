@@ -4,7 +4,7 @@ import { UpdateComponent } from './update/update.component';
 import { CreateComponent } from './create/create.component';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subject, switchMap, map } from 'rxjs';
+import { Subject, switchMap, map, EMPTY } from 'rxjs';
 import { apiPathBuilder } from 'src/app/core/config/http-client/helper';
 import { SResponse } from 'src/app/core/config/http-client/response-base';
 interface TableRow {
@@ -28,7 +28,7 @@ export class RenderFormComponent implements OnInit {
     private r: ActivatedRoute,
     private httpClient: HttpClient,
     private modal: NgbModal
-  ) {}
+  ) { }
 
   public formData: any;
   public tableData: any[] = [];
@@ -43,21 +43,19 @@ export class RenderFormComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => {
           const formID = params['id'];
+          const condition = {
+            id: formID
+          }
           return this.httpClient
             .post<SResponse<Array<any>>>(
               apiPathBuilder('/_core_dynamic_form/query'),
-              {}
+             { condition: condition }
             )
-            .pipe(
-              map((res) => {
-                this.formData = res.data.find((v) => v.id == formID);
-                return this.formData;
-              }),
-              switchMap((form) => {
-                console.log(form);
-                return this.getData(form.metadata.table_name, 1, 10, '');
-              })
-            );
+        }),
+        switchMap((form) => {
+          const foundForm = form.data[0];
+          this.formData = foundForm
+          return this.getData(foundForm.metadata.table_name, 1, 10, '');
         })
       )
       .subscribe({
