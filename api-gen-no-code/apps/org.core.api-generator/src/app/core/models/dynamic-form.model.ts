@@ -1,4 +1,4 @@
-import { capitalCase, pascalCase } from 'text-case';
+import { capitalCase, paramCase, pascalCase } from 'text-case';
 import { DynamicModel } from './dynamic.abtract.model';
 import { ApiAction } from './generated-api.model';
 
@@ -28,7 +28,7 @@ export class DynamicFormModel extends DynamicModel {
     if (element.action == ApiAction.INSERT) {
       const parseColums = JSON.parse(element?.api_authorized);
       return {
-        action: element.action,
+        action: paramCase(element.table_name),
         title: capitalCase(element.action + '_' + element.table_name),
         fields:
           JSON.stringify(

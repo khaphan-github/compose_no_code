@@ -42,14 +42,14 @@ export class RenderFormComponent implements OnInit {
     this.r.params
       .pipe(
         switchMap((params: Params) => {
-          const formID = params['id'];
+          const action = params['id'];
           const condition = {
-            id: formID
+            action: action
           }
           return this.httpClient
             .post<SResponse<Array<any>>>(
               apiPathBuilder('/_core_dynamic_form/query'),
-             { condition: condition }
+              { condition: condition }
             )
         }),
         switchMap((form) => {

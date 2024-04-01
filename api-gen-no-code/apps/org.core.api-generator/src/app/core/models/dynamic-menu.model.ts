@@ -15,7 +15,7 @@ export class DynamicMenuModel extends DynamicModel {
   convertFromGeneratedAPI(element: object | any) {
     const menu = new DynamicMenuModel();
     menu.displayName = capitalCase(element.table_name);
-    menu.feRoute = '/form/' + paramCase(element.table_name);
+    menu.feRoute = paramCase(element.table_name);
     menu.icon = '';
     menu.metadata = {};
     return menu;

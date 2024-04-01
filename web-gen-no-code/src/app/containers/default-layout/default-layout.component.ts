@@ -70,7 +70,7 @@ export class DefaultLayoutComponent implements OnInit {
       children: jsonData.map((item: any) => {
         return {
           name: item.displayname,
-          url: 'form/' + item.id,
+          url: 'form/' + item.feroute,
           iconComponent: { name: item.icon },
         };
       }),
