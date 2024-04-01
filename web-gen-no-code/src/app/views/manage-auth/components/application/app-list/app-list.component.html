@@ -3,26 +3,44 @@
     <c-card-header>
       <div class="row d-flex justify-content-between">
         <div class="col-md-6">
-          <h4> Chuyển đổi SQL script thành API</h4>
+          <h4>Chuyển đổi SQL script thành API</h4>
         </div>
         <div class="col-auto text-md-right">
-          <button *ngIf="!showGenerateAgainButton" cButton color="primary" (click)="submitData()"
-            [disabled]="exampleFormControl.value == null || exampleFormControl.value == ''">
+          <button
+            *ngIf="!showGenerateAgainButton"
+            cButton
+            color="primary"
+            (click)="submitData()"
+            [disabled]="
+              exampleFormControl.value == null || exampleFormControl.value == ''
+            "
+          >
             <svg cIcon class="text-high" name="cilSave"></svg>
-            Chuyển đổi
+            {{ showSpinner ? "Đang xử lý" : "Chuyển đổi" }}
           </button>
 
-          <button *ngIf="showGenerateAgainButton" cButton color="primary" (click)="summitAgain()"
-            [disabled]="exampleFormControl.value == null || exampleFormControl.value == ''">
+          <button
+            *ngIf="showGenerateAgainButton"
+            cButton
+            color="primary"
+            (click)="summitAgain()"
+            [disabled]="
+              exampleFormControl.value == null || exampleFormControl.value == ''
+            "
+          >
             <svg cIcon class="text-high" name="cilSave"></svg>
-            Chuyển đổi lại
+            {{ showSpinner ? "Đang xử lý" : "Chuyển đổi" }}
           </button>
         </div>
       </div>
     </c-card-header>
     <c-card-body>
-      <ngs-code-editor style="height: 450px; max-width: 100px; margin-right: 3px;" [codeModel]="this.CODE_MODEL"
-        [options]="this.CODE_OPTIONS" (valueChanged)="onCodeChanged($event)"></ngs-code-editor>
+      <ngs-code-editor
+        style="height: 450px; max-width: 100px; margin-right: 3px"
+        [codeModel]="this.CODE_MODEL"
+        [options]="this.CODE_OPTIONS"
+        (valueChanged)="onCodeChanged($event)"
+      ></ngs-code-editor>
     </c-card-body>
   </c-card>
 </div>

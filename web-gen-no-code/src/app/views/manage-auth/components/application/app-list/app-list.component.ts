@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ManageApiService } from '../../../services/manage-api.service';
 import { CustomToastService } from 'src/app/views/shared/custom-toart/custom-toast.service';
 import { Router } from '@angular/router';
+import { ApiGenratedEvent } from 'src/event/api-genrated.event';
 
 @Component({
   selector: 'app-app-list',
@@ -15,7 +16,11 @@ export class AppListComponent implements OnInit {
   private service = inject(ManageApiService);
   private route = inject(Router);
   private notify = inject(CustomToastService)
+
+  private apiGeneratedEvent = inject(ApiGenratedEvent);
+
   public showDocument = false;
+  showSpinner = false;
 
   constructor() { }
 
@@ -52,33 +57,48 @@ export class AppListComponent implements OnInit {
   }
 
   submitData() {
+    this.showSpinner = true;
     const formData = this.exampleFormControl.value;
 
     this.service.executeGenerator(formData).subscribe({
       next: (response) => {
         if (response.status == 200) {
-          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'light' });
+          this.apiGeneratedEvent.setState({ fetchData: true });
         }
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 4000);
       },
 
       error: (err) => {
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 4000);
         this.notify.setState({ show: true, title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
       },
     })
   }
 
   summitAgain() {
+    this.showSpinner = true;
+
     const formData = this.exampleFormControl.value;
 
     this.service.executeScriptAgain(formData).subscribe({
       next: (response) => {
         if (response.status == 200) {
-          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Bạn có thể chuyển truy cập mục APIs để xem các API đã tạo`, color: 'light' });
-          this.route.navigate(['manage-api/apis'])
+          this.apiGeneratedEvent.setState({ fetchData: true });
         }
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 4000);
+
       },
 
       error: (err) => {
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 4000);
         this.notify.setState({ show: true, title: 'Chuyển đổi xảy ra lỗi', desc: err.error.message, color: 'warning' });
       },
     })

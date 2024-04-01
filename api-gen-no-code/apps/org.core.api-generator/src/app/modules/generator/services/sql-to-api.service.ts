@@ -129,7 +129,7 @@ export class SQLToAPIService implements OnApplicationBootstrap {
           DO $$
           DECLARE
               r RECORD;
-              whiteList TEXT[] := ARRAY['_core_workspace_config', '_core_applications'];
+              whiteList TEXT[] := ARRAY['_core_workspace_config', '_core_applications' ,'_core_dynamic_menu', '_core_dynamic_form'];
           BEGIN
               FOR r IN
                 (

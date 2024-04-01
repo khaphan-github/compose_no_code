@@ -7,6 +7,7 @@ import { navItems } from './_nav';
 import { ConnectedToServerEvent } from 'src/app/views/manage-auth/event/connected-to-server.event';
 import { ApiGenratedEvent } from 'src/event/api-genrated.event';
 import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs';
+import { CustomToastService } from 'src/app/views/shared/custom-toart/custom-toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class DefaultLayoutComponent implements OnInit {
 
   private apiGeneratedEvent = inject(ApiGenratedEvent);
   destroy$$ = new Subject<void>();
-  constructor(private httpClient: HttpClient) {}
+  private notify = inject(CustomToastService)
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.httpClient
@@ -51,6 +53,8 @@ export class DefaultLayoutComponent implements OnInit {
       .subscribe({
         next: (value) => {
           this.convertToNavData(value.data);
+          this.notify.setState({ show: true, title: 'Chuyển đỗi thành công', desc: `Đã tạo bảng dữ liệu thành công - bạn có thể truy cập menu form để thao tác`, color: 'light' });
+
         },
       });
   }
