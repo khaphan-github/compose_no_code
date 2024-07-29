@@ -83,3 +83,10 @@ CREATE TABLE
         updated_at timestamp(0) without time zone DEFAULT NOW()
     );
 
+CREATE TABLE IF NOT EXISTS _core_dynamic_menu (
+    id SERIAL PRIMARY KEY, displayName VARCHAR(155), feRoute VARCHAR(155), icon VARCHAR(155), parentId INT, metadata JSONB, created_at timestamp(0) without time zone DEFAULT NOW(), updated_at timestamp(0) without time zone DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS _core_dynamic_form (
+    id SERIAL PRIMARY KEY, action VARCHAR(155), title VARCHAR(155), fields JSONB, metadata JSONB, created_at timestamp(0) without time zone DEFAULT NOW(), updated_at timestamp(0) without time zone DEFAULT NOW()
+);

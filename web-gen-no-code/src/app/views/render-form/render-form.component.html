@@ -1,0 +1,57 @@
+<c-card *ngIf="this.formData">
+  <c-card-header>
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-6">
+        <h4>{{ this.formData?.title }}</h4>
+      </div>
+      <div class="col-auto">
+        <button cButton color="primary" (click)="onCreate()">
+          {{ this.formData?.title }}
+        </button>
+      </div>
+    </div>
+  </c-card-header>
+  <c-card-body>
+    <!-- <app-generate-form
+      [formInfo]="this.formData"
+      (onSummit)="onSummit($event)"
+    ></app-generate-form> -->
+
+    <app-dynamic-table
+      *ngIf="this.tableData.length !== 0"
+      [inputData]="this.tableData"
+      (onClick)="update($event)"
+    ></app-dynamic-table>
+
+    <c-alert color="danger" *ngIf="this.tableData.length == 0"
+      >Không tìm lấy dữ liệu</c-alert
+    >
+
+    <br />
+    <c-pagination align="center" aria-label="Page navigation example">
+      <li cPageItem [disabled]="this.currentPage == 1">
+        <a cPageLink (click)="this.changePage(false)"><<</a>
+      </li>
+      <li cPageItem>
+        <a cPageLink>{{ this.currentPage }}</a>
+      </li>
+      <li cPageItem [disabled]="this.tableData.length == 0">
+        <a cPageLink (click)="this.changePage(true)">>></a>
+      </li>
+    </c-pagination>
+
+    <div>
+      <ng-template #showNotFoundContent>
+        <app-waiting-to-load [show]="true"></app-waiting-to-load>
+      </ng-template>
+    </div>
+  </c-card-body>
+</c-card>
+
+<!-- <app-table></app-table> -->
+<c-card *ngIf="!this.formData">
+  <button cButton color="primary">
+    <svg cIcon class="text-high" name="cilSave"></svg>
+    Làm mới dữ liệu
+  </button>
+</c-card>

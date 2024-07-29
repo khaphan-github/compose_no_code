@@ -69,7 +69,7 @@ export class GeneratedApiModel {
     const finalResult = Object.values(groupedData);
 
     let id = 1;
-    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role', '_core_custom_api'];
+    const whiteList = ['_core_workspace_config', '_core_generated_apis', '_core_applications', '_core_account', '_core_role', '_core_custom_api', '_core_dynamic_menu', '_core_dynamic_form'];
 
     for (let index = 0; index < finalResult.length; index++) {
       const element = finalResult[index] as { table_name: string, column_names: string[] };

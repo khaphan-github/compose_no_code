@@ -1,0 +1,36 @@
+<table
+  class="table"
+  cTable
+  [hover]="true"
+  [responsive]="true"
+  [striped]="true"
+  align="middle"
+  cTable
+  class="mb-0 border"
+>
+  <thead cTableColor="light">
+    <tr>
+      <th>#</th>
+      <th *ngFor="let key of getObjectKeys(inputData[0])">{{ key }}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+
+  <tbody>
+    <tr
+      style="cursor: pointer"
+      *ngFor="let item of inputData; let i = index"
+      [appCopyToClipboard]="item | json"
+    >
+      <td>{{ i + 1 }}.</td>
+      <td *ngFor="let key of getObjectKeys(item)">
+        {{ item[key] }}
+        <!-- Edit icon -->
+      </td>
+      <td (click)="this.onClick.emit(item)" style="cursor: pointer">
+        <svg cIcon class="text-high" name="cilPencil"></svg>
+      </td>
+    </tr>
+  </tbody>
+</table>
